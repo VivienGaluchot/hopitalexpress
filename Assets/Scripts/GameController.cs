@@ -54,20 +54,6 @@ public class GameController : MonoBehaviour {
 			isPlaying = true;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Joystick3Button7) && !Players.ContainsKey(3)) {
-			GameObject newPlayer = Instantiate(Player);
-			newPlayer.GetComponent<PlayerController>().Initialize(3, this, playerSpeed);
-			Players.Add(3, newPlayer);
-			isPlaying = true;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Joystick4Button7) && !Players.ContainsKey(4)) {
-			GameObject newPlayer = Instantiate(Player);
-			newPlayer.GetComponent<PlayerController>().Initialize(4, this, playerSpeed);
-			Players.Add(4, newPlayer);
-			isPlaying = true;
-		}
-
 		if (isPlaying) {
 			if (elapsedTime > spawnRate) {
 				GameObject emptySeat = null;

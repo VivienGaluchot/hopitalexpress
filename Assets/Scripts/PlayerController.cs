@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (Input.GetButtonDown("Fire1")) {
+		if (Input.GetButtonDown("Fire" + id)) {
 			// Are we already holding something?
 			switch(heldType) {
 				case HeldTypes.patient:
@@ -238,7 +238,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientToBed() {
-		Debug.Log(bedTarget);
 		if (bedTarget != null && bedTarget.GetComponent<Machine>().ReceiveHold(HeldGO)) {
 			HeldGO.transform.parent = null;
 			HeldGO.transform.position = bedTarget.transform.position;

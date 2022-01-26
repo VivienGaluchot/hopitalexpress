@@ -8,7 +8,6 @@ public class PatientController : MonoBehaviour {
 
 	[SerializeField] private Sprite happySprite;
 	[SerializeField] private Sprite deadSprite;
-	[SerializeField] private GameObject[] Diseases;
 	private Disease myDisease;
 	private SpriteRenderer sr;
 
@@ -16,16 +15,16 @@ public class PatientController : MonoBehaviour {
 	public bool isCured { get; private set; }
 
 	private void Start() {
-		sr = GetComponent<SpriteRenderer>();
-		GameObject newDisease = Instantiate(Diseases[Random.Range(0, Diseases.Length)], transform);
-		myDisease = newDisease.GetComponent<Disease>();
-		myDisease.Initialize(this);
-		sr.sprite = myDisease.sickFace;
 		isCured = false;
 
+		sr = GetComponent<SpriteRenderer>();
 		needDisplayer = transform.GetChild(0).gameObject;
 		needSr = needDisplayer.transform.GetChild(0).GetComponent<SpriteRenderer>();
 		needDisplayer.SetActive(false);
+
+		myDisease = new Disease(this);
+
+		sr.sprite = myDisease.sickFace;
 	}
 
     public void Initialize(GameController parent) {

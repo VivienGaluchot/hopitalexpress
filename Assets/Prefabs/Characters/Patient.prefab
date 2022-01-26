@@ -305,3 +305,4 @@ MonoBehaviour:
   Diseases:
   - {fileID: 7027494052716371377, guid: b2a0e1d84bcae314f96798d9e6fc35ea, type: 3}
   - {fileID: 4034278327956027748, guid: 17b15d6f2fe57ee43836b969e57c645c, type: 3}
+  - {fileID: 3838901030357983905, guid: b82ef03f33b74e848928f31d9d68508b, type: 3}

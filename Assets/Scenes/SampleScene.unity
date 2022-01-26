@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 6128085529885911858, guid: 0dc551755e02e594497f1e11bbb93652, type: 3}
-  playerSpeed: 2
+  playerSpeed: 4
   WelcomeSeats:
   - {fileID: 1303698541}
   - {fileID: 1868736531}
