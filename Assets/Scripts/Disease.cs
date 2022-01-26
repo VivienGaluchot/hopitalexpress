@@ -10,6 +10,8 @@ public class Disease : MonoBehaviour {
 	public Sprite sickFace;
 	public float lifespan;
 
+	
+
 	public string[] Steps;
 	private int currentStep;
 
