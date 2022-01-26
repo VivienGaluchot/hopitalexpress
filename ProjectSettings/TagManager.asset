@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Patient
+  - Seat
+  - Item
+  - Container
+  - Trash
+  - Exit
   layers:
   - Default
   - TransparentFX
