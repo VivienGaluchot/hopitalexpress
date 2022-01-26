@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Container : MonoBehaviour {
 
-    public GameObject item;
+	public GameObject item;
 
-    private void Start() {
-        // Display item
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-    }
+	private void Start() {
+		// Display item
+		transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+	}
 
-    public GameObject GiveItem() {
-        return Instantiate(item);
-    }
+	public GameObject GiveItem() {
+		return Instantiate(item);
+	}
 
 }

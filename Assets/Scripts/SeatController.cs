@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SeatController : MonoBehaviour {
 
-	public GameObject goHeld { get; private set; }
+	public GameObject goHeld { get; protected set; }
 
-	public bool isHolding { get; private set; }
+	public bool isHolding { get; protected set; }
 
-	public bool ReceiveHold(GameObject target) {
+	public virtual bool ReceiveHold(GameObject target) {
 		if(!isHolding) {
 			goHeld = target;
 			isHolding = true;
@@ -19,7 +19,7 @@ public class SeatController : MonoBehaviour {
 		return false;
 	}
 
-	public GameObject GiveHold() {
+	public virtual GameObject GiveHold() {
 		if(isHolding) {
 			GameObject returnGO = goHeld;
 			goHeld = null;

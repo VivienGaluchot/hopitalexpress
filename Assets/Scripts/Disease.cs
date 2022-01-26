@@ -39,6 +39,13 @@ public class Disease : MonoBehaviour {
 		}
 	}
 
+	public Sprite GetNeedSprite() {
+        string path = "Sprites/Medoc/" + Steps[currentStep];
+		Sprite needSprite = Resources.Load<Sprite>(path);
+
+		return needSprite;
+    }
+
 	public void TakeItem(string item) {
 		if (!isOver) {
 			if(Steps[currentStep] == item) {
@@ -47,7 +54,9 @@ public class Disease : MonoBehaviour {
 					// it was the last step, patient cured!
 					isOver = true;
 					patient.DiseaseCured();
-				}
+				} else {
+					patient.DisplayNextNeed();
+                }
 			}
         }
 	}
