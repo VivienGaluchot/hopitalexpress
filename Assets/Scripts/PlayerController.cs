@@ -23,14 +23,20 @@ public class PlayerController : MonoBehaviour {
 
 	private HeldTypes heldType;
 
-	private bool isGathering;
+	enum Actions {
+		nothing,
+		gathering,
+		crafting
+    }
+	private Actions action;
+	private CraftingTable craftTable;
 	private Container containerGathered;
 
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
 		gc = parent;
 		speed = _speed;
-		isGathering = false;
+		action = Actions.nothing;
 		rb2D = GetComponent<Rigidbody2D>();
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();
@@ -40,10 +46,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(isGathering && Input.GetButtonUp("Fire" + id)) {
+		if(action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
 			// Button released, we stop gathering
-			isGathering = false;
+			action = Actions.nothing;
 			containerGathered.StopGatherItem();
+		}
+
+		if(action == Actions.crafting && Input.GetButtonUp("Fire" + id)) {
+			action = Actions.nothing;
+			craftTable.StopCraftItem();
 		}
 
 
@@ -78,8 +89,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if(!isGathering) {
-			// Can only move if not gathering
+		if(action == Actions.nothing) {
+			// Can only move if doing nothing
 			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
 
 			Vector2 input = new Vector2(horiz, vert);
@@ -156,12 +167,16 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryTakeItemFromCraft() {
 		if(craftingTableTarget != null) {
-			GameObject newItem = craftingTableTarget.GetComponent<CraftingTable>().GiveItem();
-			if(newItem != null) {
-				HoldMyBeer(newItem);
-				heldType = HeldTypes.item;
-
+			var craftAnswer = craftingTableTarget.GetComponent<CraftingTable>().StartCraftingItem(this);
+			if(craftAnswer.craftedItem != null) {
+				ReceiveItemFromContainer(craftAnswer.craftedItem);
 				return true;
+            } else {
+				if(craftAnswer.isCrafting) {
+					action = Actions.crafting;
+					craftTable = craftingTableTarget.GetComponent<CraftingTable>();
+					return true;
+                }
             }
         }
 
@@ -193,11 +208,12 @@ public class PlayerController : MonoBehaviour {
 
 				return true;
 			} else {
-				isGathering = containerAnswer.gathering;
-				if (isGathering)
+				if (containerAnswer.gathering) {
+					action = Actions.gathering;
 					containerGathered = container.GetComponent<Container>();
 
-				return isGathering;
+					return true;
+				}
 			}
 		}
 
@@ -205,7 +221,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void ReceiveItemFromContainer(GameObject item) {
-		isGathering = false;
+		action = Actions.nothing;
 		Destroy(HeldGO);
 		HoldMyBeer(item);
 		heldType = HeldTypes.item;

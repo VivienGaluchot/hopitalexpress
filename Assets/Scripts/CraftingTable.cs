@@ -4,28 +4,72 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+public enum Items {
+	BluePill,
+	GreenPill,
+	EmptySyringe,
+	RedSyringe,
+	YellowSyringe
+}
+
 public class CraftingTable : MonoBehaviour {
 
 	public SpriteRenderer[] ItemsSR;
 	public Image TimeBar;
 
-	private Dictionary<string, int> items;
+	private Dictionary<Items, int> items;
+
+	private readonly struct CraftingRecipe {
+		public CraftingRecipe(Items result, float craftingTime, Dictionary<Items, int> ingredients) {
+			_result = result;
+			_craftingTime = craftingTime;
+			_ingredients = ingredients;
+        }
+
+		public readonly Items _result;
+		public readonly float _craftingTime;
+		public readonly Dictionary<Items, int> _ingredients;
+    }
 
 	// Store craft recipes
-	public static Dictionary<string, Dictionary<string, int>> Recipes = new Dictionary<string, Dictionary<string, int>>() {
-		{ "BluePill", new Dictionary<string, int>() { { "GreenPill", 2 } } },
-		{ "GreenPill", new Dictionary<string, int>() { { "BluePill", 1 }, { "EmptySyringe", 1} } }
+	private static CraftingRecipe[] Recipes = new CraftingRecipe[2] {
+		new CraftingRecipe(Items.BluePill, 3f, new Dictionary<Items, int>() { { Items.GreenPill, 2 } }),
+		new CraftingRecipe(Items.GreenPill, 5f, new Dictionary<Items, int>() { { Items.BluePill, 1 }, {Items.EmptySyringe, 2 } }),
 	};
 
 	private string path;
 	private int counter;
 
+	private PlayerController target;
+	private bool isCrafting;
+	private float elapsedTime;
+	private CraftingRecipe craftedItem;
+
 	private void Start() {
 		TimeBar.transform.parent.gameObject.SetActive(false);
 		counter = 0;
 		path = "Prefabs/Treatments/Items/";
-		items = new Dictionary<string, int>();
+		items = new Dictionary<Items, int>();
+		isCrafting = false;
 	}
+
+    private void Update() {
+		if (isCrafting) {
+			elapsedTime += Time.deltaTime;
+			TimeBar.fillAmount = elapsedTime / craftedItem._craftingTime;
+			if(elapsedTime > craftedItem._craftingTime) {
+				ClearTable();
+				TimeBar.transform.parent.gameObject.SetActive(false);
+				isCrafting = false;
+				target.ReceiveItemFromContainer(Instantiate(Resources.Load<GameObject>(path + craftedItem._result)));
+			}
+		}
+	}
+
+	public void StopCraftItem() {
+		TimeBar.transform.parent.gameObject.SetActive(false);
+		isCrafting = false;
+    }
 
 	public bool ReceiveItem(GameObject item) {
 		if(counter < ItemsSR.Length) {
@@ -34,10 +78,11 @@ public class CraftingTable : MonoBehaviour {
 			if(ic != null) {
 				// Display sprite and store item
 				ItemsSR[counter++].sprite = item.GetComponent<SpriteRenderer>().sprite;
-				if (items.ContainsKey(ic.itemName))
-					items[ic.itemName]++;
+				Items parsedItem = (Items)Enum.Parse(typeof(Items), ic.itemName);
+				if (items.ContainsKey(parsedItem))
+					items[parsedItem]++;
 				else
-					items.Add(ic.itemName, 1);
+					items.Add(parsedItem, 1);
 
 				return true;
 			}
@@ -46,14 +91,13 @@ public class CraftingTable : MonoBehaviour {
 		return false;
 	}
 
-	public GameObject GiveItem() {
+	public (GameObject craftedItem, bool isCrafting) StartCraftingItem(PlayerController player) {
 		// Iterate over the recipes to find one who match our current items
 		bool craftableFound = false;
-		string craftName = "";
-		foreach (KeyValuePair<string, Dictionary<string, int>> recipe in Recipes) {
+		foreach (CraftingRecipe recipe in Recipes) {
 			craftableFound = true;
 			// We say it's good, then if we find a problem we say it's not good
-			foreach(KeyValuePair<string, int> ingredient in recipe.Value) {
+			foreach (KeyValuePair<Items, int> ingredient in recipe._ingredients) {
 				if (!items.ContainsKey(ingredient.Key)) {
 					craftableFound = false;
 					break;
@@ -64,23 +108,23 @@ public class CraftingTable : MonoBehaviour {
 			}
 
 			// We found a recipe where we have everything
-			if(craftableFound) {
+			if (craftableFound) {
 				// But do we have too much?
-				foreach(KeyValuePair<string, int> item in items) {
+				foreach (KeyValuePair<Items, int> item in items) {
 					// Check if we have an ingredient in recipe named like our item
-					if(!recipe.Value.ContainsKey(item.Key)) {
+					if (!recipe._ingredients.ContainsKey(item.Key)) {
 						craftableFound = false;
 						break;
 						// Check if this ingredients need the same amount that we have
-                    } else if (recipe.Value[item.Key] != item.Value) {
+					} else if (recipe._ingredients[item.Key] != item.Value) {
 						craftableFound = false;
 						break;
-                    }
-                }
-				if(craftableFound) {
+					}
+				}
+				if (craftableFound) {
 					// If we're here, then we have exactly what we need
-					// We remember the name of the item to craft and we exit the loop victorious
-					craftName = recipe.Key;
+					// We remember the item to craft and we exit the loop victorious
+					craftedItem = recipe;
 					break;
 				}
 			}
@@ -88,21 +132,29 @@ public class CraftingTable : MonoBehaviour {
 
 		// We found a craft ! Let's do it
 		if (craftableFound) {
-			ClearTable();
+			if (craftedItem._craftingTime == 0) {
+				return (Instantiate(Resources.Load<GameObject>(path + craftedItem._result)), true);
+			} else {
+				if (player == null)
+					return (null, false);
 
-			return Instantiate(Resources.Load<GameObject>(path + craftName));
+				target = player;
+				elapsedTime = 0f;
+
+				TimeBar.transform.parent.gameObject.SetActive(true);
+				TimeBar.fillAmount = elapsedTime / craftedItem._craftingTime;
+				isCrafting = true;
+				return (null, true);
+            }
 		}
 
 		// We can't craft anything, but it's full, so we clear it
-		if(counter == ItemsSR.Length) {
+		if (counter == ItemsSR.Length) {
 			ClearTable();
 		}
 
-		// We could empty it no matter what maybe
-
-		return null;
+		return (null, false);
 	}
-
 	private void ClearTable() {
 		foreach (SpriteRenderer sr in ItemsSR)
 			sr.sprite = null;

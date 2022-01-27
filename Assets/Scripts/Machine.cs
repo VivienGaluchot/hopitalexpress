@@ -8,7 +8,7 @@ public class Machine : SeatController {
     public string machineName;
 	public Image TimeBar;
 
-	private float elapsedtime, neededTime;
+	private float elapsedTime, neededTime;
 	private bool isWorking;
 
     protected override void Start() {
@@ -19,13 +19,13 @@ public class Machine : SeatController {
 
     private void Update() {
         if(isWorking) {
-			elapsedtime += Time.deltaTime;
-			TimeBar.fillAmount = elapsedtime / neededTime;
-			if(elapsedtime > neededTime) {
+			elapsedTime += Time.deltaTime;
+			TimeBar.fillAmount = elapsedTime / neededTime;
+			if(elapsedTime > neededTime) {
 				// Our job here is done, tell the patient
 				isWorking = false;
 				TimeBar.transform.parent.gameObject.SetActive(false);
-				goHeld.GetComponent<PatientController>().MachineDone(machineName, elapsedtime);
+				goHeld.GetComponent<PatientController>().MachineDone(machineName, elapsedTime);
 			}
         }
     }
@@ -39,7 +39,7 @@ public class Machine : SeatController {
 			if(patientAnswer.isNeeded) {
 				// Machine is needed, activate it and set up time (and timebar)
 				TimeBar.transform.parent.gameObject.SetActive(true);
-				elapsedtime = 0f;
+				elapsedTime = 0f;
 				isWorking = true;
 				neededTime = patientAnswer.time;
             }
