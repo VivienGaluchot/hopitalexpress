@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rb2D;
 
 	private List<GameObject> seatTargets, itemTargets, patientTargets, containerTargets;
-	private GameObject trashTarget, exitTarget, bedTarget;
+	private GameObject trashTarget, exitTarget, machineTarget;
 	private GameObject HeldGO;
 
 	enum HeldTypes {
@@ -23,10 +23,14 @@ public class PlayerController : MonoBehaviour {
 
 	private HeldTypes heldType;
 
+	private bool isGathering;
+	private Container containerGathered;
+
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
 		gc = parent;
 		speed = _speed;
+		isGathering = false;
 		rb2D = GetComponent<Rigidbody2D>();
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();
@@ -36,25 +40,32 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
+		if(isGathering && Input.GetButtonUp("Fire" + id)) {
+			// Button released, we stop gathering
+			isGathering = false;
+			containerGathered.StopGatherItem();
+		}
+
 		if (Input.GetButtonDown("Fire" + id)) {
 			// Are we already holding something?
 			switch(heldType) {
 				case HeldTypes.patient:
 					// We are holding a patient, we try to put him somewhere
 					if(!TryPutPatientToExit())
-						if(!TryPutPatientToBed())
+						if(!TryPutPatientToMachine())
 							if(!TryPutPatientOnSeat())
 								TryPutInTrash();
 					break;
 				case HeldTypes.item:
 					// We try to give the item, if we can't, then drop it
 					if(!TryGiveItemToPatient())
-						if(!TryPutInTrash())
-							TryDropItem();
+						if(!TryTakeFromContainer(true))
+							if(!TryPutInTrash())
+								TryDropItem();
 					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
-					if(!TryTakePatientFromBed())
+					if(!TryTakePatientFromMachine())
 						if(!TryTakePatientFromSeat())
 							if(!TryTakeItem())
 								TryTakeFromContainer();
@@ -64,35 +75,38 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
-		Vector3 m_Input = new Vector3(horiz, vert, 0);
-		
-		// y'a p'têt un moyen plus joli de faire ça XD
-		if(vert == 0) {
-			if (horiz > 0)
-				transform.rotation = Quaternion.Euler(0, 0, 90);
-			else if (horiz < 0)
-				transform.rotation = Quaternion.Euler(0, 0, -90);
-		} else if (horiz == 0) {
-			if(vert > 0)
-				transform.rotation = Quaternion.Euler(0, 0, 180);
-			else if (vert < 0)
-				transform.rotation = Quaternion.Euler(0, 0, 0);
-		} else {
-			// limit diagonal speed
-			horiz /= 1.414f;
-			vert /= 1.414f;
-			if (horiz > 0 && vert > 0)
-				transform.rotation = Quaternion.Euler(0, 0, 135);
-			else if (horiz > 0 && vert < 0)
-				transform.rotation = Quaternion.Euler(0, 0, 45);
-			else if (horiz < 0 && vert < 0)
-				transform.rotation = Quaternion.Euler(0, 0, -45);
-			else if (horiz < 0 && vert > 0)
-				transform.rotation = Quaternion.Euler(0, 0, -135);
-		}
+		if(!isGathering) {
+			// Can only move if not gathering
+			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
+			Vector3 m_Input = new Vector3(horiz, vert, 0);
 
-		rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
+			// y'a p'têt un moyen plus joli de faire ça XD
+			if (vert == 0) {
+				if (horiz > 0)
+					transform.rotation = Quaternion.Euler(0, 0, 90);
+				else if (horiz < 0)
+					transform.rotation = Quaternion.Euler(0, 0, -90);
+			} else if (horiz == 0) {
+				if (vert > 0)
+					transform.rotation = Quaternion.Euler(0, 0, 180);
+				else if (vert < 0)
+					transform.rotation = Quaternion.Euler(0, 0, 0);
+			} else {
+				// limit diagonal speed
+				horiz /= 1.414f;
+				vert /= 1.414f;
+				if (horiz > 0 && vert > 0)
+					transform.rotation = Quaternion.Euler(0, 0, 135);
+				else if (horiz > 0 && vert < 0)
+					transform.rotation = Quaternion.Euler(0, 0, 45);
+				else if (horiz < 0 && vert < 0)
+					transform.rotation = Quaternion.Euler(0, 0, -45);
+				else if (horiz < 0 && vert > 0)
+					transform.rotation = Quaternion.Euler(0, 0, -135);
+			}
+
+			rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
+		}
 	}
 
 	// Sort list items by distance from the player (closer first)
@@ -103,17 +117,6 @@ public class PlayerController : MonoBehaviour {
 			else
 				return 1;
 		});
-	}
-
-	private bool TryTakeFromContainer() {
-		if(containerTargets.Count > 0) {
-			SortListByDistance(containerTargets);
-			HoldMyBeer(containerTargets[0].GetComponent<Container>().GiveItem());
-			heldType = HeldTypes.item;
-			return true;
-		}
-
-		return false;
 	}
 
 	private bool TryTakeItem() {
@@ -151,6 +154,49 @@ public class PlayerController : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	private bool TryTakeFromContainer(bool hasItem = false) {
+		if (containerTargets.Count > 0) {
+			SortListByDistance(containerTargets);
+
+			GameObject container = null;
+			if (hasItem) {
+				ItemController ic = HeldGO.GetComponent<ItemController>();
+				if (ic == null)
+					return false;
+				string itemName = ic.itemName;
+				for (int i = 0; i < containerTargets.Count; i++) {
+					if (containerTargets[i].GetComponent<Container>().askedItemName == itemName) {
+						container = containerTargets[i];
+						break;
+					}
+				}
+			} else
+				container = containerTargets[0];
+
+			var containerAnswer = container.GetComponent<Container>().StartGatherItem(this, HeldGO);
+			if (containerAnswer.givenItem != null) {
+				ReceiveItemFromContainer(containerAnswer.givenItem);
+
+				return true;
+			} else {
+				isGathering = containerAnswer.gathering;
+				if (isGathering)
+					containerGathered = container.GetComponent<Container>();
+
+				return isGathering;
+			}
+		}
+
+		return false;
+	}
+
+	public void ReceiveItemFromContainer(GameObject item) {
+		isGathering = false;
+		Destroy(HeldGO);
+		HoldMyBeer(item);
+		heldType = HeldTypes.item;
 	}
 
 	private bool TryTakePatientFromSeat() {
@@ -224,10 +270,10 @@ public class PlayerController : MonoBehaviour {
 		return false;
 	}
 
-	private bool TryTakePatientFromBed() {
+	private bool TryTakePatientFromMachine() {
 		// Look for a not empty seat in seatTargets
-		if (bedTarget != null && bedTarget.GetComponent<Machine>().isHolding) {
-			HoldMyBeer(bedTarget.GetComponent<Machine>().GiveHold());
+		if (machineTarget != null && machineTarget.GetComponent<Machine>().isHolding) {
+			HoldMyBeer(machineTarget.GetComponent<Machine>().GiveHold());
 			if (HeldGO != null) {
 				heldType = HeldTypes.patient;
 				return true;
@@ -237,12 +283,15 @@ public class PlayerController : MonoBehaviour {
 		return false;
 	}
 
-	private bool TryPutPatientToBed() {
-		if (bedTarget != null && bedTarget.GetComponent<Machine>().ReceiveHold(HeldGO)) {
+	private bool TryPutPatientToMachine() {
+		if (machineTarget != null && machineTarget.GetComponent<Machine>().ReceiveHold(HeldGO)) {
+
+			// WE'D BETTER DO THAT IN THE MACHINE/SEAT
 			HeldGO.transform.parent = null;
-			HeldGO.transform.position = bedTarget.transform.position;
-			HeldGO.transform.rotation = bedTarget.transform.rotation;
+			HeldGO.transform.position = machineTarget.transform.position;
+			HeldGO.transform.rotation = machineTarget.transform.rotation;
 			HeldGO.GetComponent<Rigidbody2D>().simulated = true;
+
 			HeldGO = null;
 			heldType = HeldTypes.none;
 
@@ -253,7 +302,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientToExit() {
-		if (exitTarget != null && HeldGO.GetComponent<PatientController>().isCured) {
+		if (exitTarget != null && HeldGO.GetComponent<PatientController>().state == PatientController.States.cured) {
 			gc.PatientCured(HeldGO.GetComponent<PatientController>());
 			Destroy(HeldGO);
 			HeldGO = null;
@@ -295,8 +344,8 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "Exit") {
 			exitTarget = collision.gameObject;
 		} 
-		if (collision.gameObject.tag == "Bed") {
-			bedTarget = collision.gameObject;
+		if (collision.gameObject.tag == "Machine") {
+			machineTarget = collision.gameObject;
 		}
 	}
 
@@ -313,7 +362,7 @@ public class PlayerController : MonoBehaviour {
 			trashTarget = null;
 		if (exitTarget = collision.gameObject)
 			exitTarget = null;
-		if (bedTarget = collision.gameObject)
-			bedTarget = null;
+		if (machineTarget = collision.gameObject)
+			machineTarget = null;
 	}
 }

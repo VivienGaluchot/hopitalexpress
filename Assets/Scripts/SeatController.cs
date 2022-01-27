@@ -8,7 +8,11 @@ public class SeatController : MonoBehaviour {
 
 	public bool isHolding { get; protected set; }
 
-	public virtual bool ReceiveHold(GameObject target) {
+    protected virtual void Start() {
+		isHolding = false;
+	}
+
+    public virtual bool ReceiveHold(GameObject target) {
 		if(!isHolding) {
 			goHeld = target;
 			isHolding = true;

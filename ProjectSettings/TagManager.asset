@@ -10,7 +10,7 @@ TagManager:
   - Container
   - Trash
   - Exit
-  - Bed
+  - Machine
   layers:
   - Default
   - TransparentFX

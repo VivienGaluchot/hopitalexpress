@@ -1,21 +1,31 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PatientController : MonoBehaviour {
 
 	private GameController gc;
-	private GameObject needDisplayer;
-	private SpriteRenderer needSr;
 
+	[SerializeField] private GameObject needDisplayer;
+	[SerializeField] private SpriteRenderer needSr;
 	[SerializeField] private Sprite happySprite;
 	[SerializeField] private Sprite deadSprite;
+	[SerializeField] private Image TimeBarImage;
+
 	private Disease myDisease;
 	private SpriteRenderer sr;
 
-	private bool isDiagnosticed;
-	public bool isCured { get; private set; }
+	public enum States { 
+		sick,
+		diagnosticed,
+		cured,
+		dead
+	}
+
+	public States state { get; private set; }
+	private float lifetime;
 
 	private void Start() {
-		isCured = false;
+		state = States.sick;
 
 		sr = GetComponent<SpriteRenderer>();
 		needDisplayer = transform.GetChild(0).gameObject;
@@ -23,16 +33,26 @@ public class PatientController : MonoBehaviour {
 		needDisplayer.SetActive(false);
 
 		myDisease = new Disease(this);
+		lifetime = myDisease.myInfos._lifespan;
 
 		sr.sprite = myDisease.sickFace;
 	}
+
+    void Update() {
+        if (state == States.sick || state == States.diagnosticed) {
+            lifetime -= Time.deltaTime;
+			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
+            if (lifetime < 0f)
+                DiseaseLifetimeElapsed();
+        }
+    }
 
     public void Initialize(GameController parent) {
 		gc = parent;
     }
 
     private void Diagnostic() {
-		isDiagnosticed = true;
+		state = States.diagnosticed;
 		needDisplayer.SetActive(true);
 		DisplayNextNeed();
 
@@ -43,26 +63,45 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public void TakeItem(GameObject item) {
-		if(isDiagnosticed) {
+		if(state == States.diagnosticed)
 			myDisease.TakeItem(item.GetComponent<ItemController>().itemName);
-		}
+
 		Destroy(item);
 	}
 
-	public void TryMachine(string machineName) {
-		if (machineName == "Bed")
+	public (bool isNeeded, float time) UseMachine(string machineName) {
+		if (machineName == "Bed" && state == States.sick) {
 			Diagnostic();
+			return (false, 0f);
+		} else {
+			// Check is the machine is needed in the current step
+			// If yes, then return true and time needed
+			var step = myDisease.GetCurrentStep();
+			if (machineName == step.name) {
+				return (true, step.time);
+			}
+		}
+
+		return (false, 0f);
+    }
+
+	// We used the machine during time, tell the disease about it!
+	public void MachineDone(string machineName, float time) {
+		myDisease.UsedMachine(machineName, time);
     }
 
 	public void DiseaseLifetimeElapsed() {
+		TimeBarImage.transform.parent.gameObject.SetActive(false);
 		needDisplayer.SetActive(false);
 		sr.sprite = deadSprite;
+		state = States.dead;
 		gc.PatientDead(this);
 	}
 
 	public void DiseaseCured() {
+		TimeBarImage.transform.parent.gameObject.SetActive(false);
 		needDisplayer.SetActive(false);
-		isCured = true;
+		state = States.cured;
 		sr.sprite = happySprite;
 	}
 
