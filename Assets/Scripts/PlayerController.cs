@@ -81,33 +81,15 @@ public class PlayerController : MonoBehaviour {
 		if(!isGathering) {
 			// Can only move if not gathering
 			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
-			Vector3 m_Input = new Vector3(horiz, vert, 0);
 
-			// y'a p'têt un moyen plus joli de faire ça XD
-			if (vert == 0) {
-				if (horiz > 0)
-					transform.rotation = Quaternion.Euler(0, 0, 90);
-				else if (horiz < 0)
-					transform.rotation = Quaternion.Euler(0, 0, -90);
-			} else if (horiz == 0) {
-				if (vert > 0)
-					transform.rotation = Quaternion.Euler(0, 0, 180);
-				else if (vert < 0)
-					transform.rotation = Quaternion.Euler(0, 0, 0);
-			} else {
-				// limit diagonal speed
-				horiz /= 1.414f;
-				vert /= 1.414f;
-				if (horiz > 0 && vert > 0)
-					transform.rotation = Quaternion.Euler(0, 0, 135);
-				else if (horiz > 0 && vert < 0)
-					transform.rotation = Quaternion.Euler(0, 0, 45);
-				else if (horiz < 0 && vert < 0)
-					transform.rotation = Quaternion.Euler(0, 0, -45);
-				else if (horiz < 0 && vert > 0)
-					transform.rotation = Quaternion.Euler(0, 0, -135);
+			Vector2 input = new Vector2(horiz, vert);
+			float angle = Vector2.SignedAngle(new Vector2(-1, -1), input);
+			angle = angle - (angle + 360) % 90;
+			if (input.sqrMagnitude > (0.1 * 0.1)) {
+				transform.rotation = Quaternion.Euler(0, 0, angle);
 			}
-
+			
+			Vector3 m_Input = new Vector3(horiz, vert, 0);
 			rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
 		}
 	}
