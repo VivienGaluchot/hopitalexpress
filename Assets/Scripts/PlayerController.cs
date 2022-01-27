@@ -257,6 +257,10 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryPutInTrash() {
 		if(trashTarget != null) {
+			PatientController pc = HeldGO.GetComponent<PatientController>();
+			if (pc != null)
+				gc.PatientDead(pc);
+
 			Destroy(HeldGO);
 			HeldGO = null;
 			heldType = HeldTypes.none;
