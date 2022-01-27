@@ -88,16 +88,27 @@ public class CraftingTable : MonoBehaviour {
 
 		// We found a craft ! Let's do it
 		if (craftableFound) {
-			foreach (SpriteRenderer sr in ItemsSR)
-				sr.sprite = null;
-
-			items.Clear();
-			counter = 0;
+			ClearTable();
 
 			return Instantiate(Resources.Load<GameObject>(path + craftName));
 		}
 
+		// We can't craft anything, but it's full, so we clear it
+		if(counter == ItemsSR.Length) {
+			ClearTable();
+		}
+
+		// We could empty it no matter what maybe
+
 		return null;
+	}
+
+	private void ClearTable() {
+		foreach (SpriteRenderer sr in ItemsSR)
+			sr.sprite = null;
+
+		items.Clear();
+		counter = 0;
 	}
 
 }
