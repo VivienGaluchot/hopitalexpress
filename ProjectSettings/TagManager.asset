@@ -11,6 +11,7 @@ TagManager:
   - Trash
   - Exit
   - Machine
+  - CraftingTable
   layers:
   - Default
   - TransparentFX

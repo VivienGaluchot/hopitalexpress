@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rb2D;
 
 	private List<GameObject> seatTargets, itemTargets, patientTargets, containerTargets;
-	private GameObject trashTarget, exitTarget, machineTarget;
+	private GameObject trashTarget, exitTarget, machineTarget, craftingTableTarget;
 	private GameObject HeldGO;
 
 	enum HeldTypes {
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 			containerGathered.StopGatherItem();
 		}
 
+
 		if (Input.GetButtonDown("Fire" + id)) {
 			// Are we already holding something?
 			switch(heldType) {
@@ -60,15 +61,17 @@ public class PlayerController : MonoBehaviour {
 					// We try to give the item, if we can't, then drop it
 					if(!TryGiveItemToPatient())
 						if(!TryTakeFromContainer(true))
-							if(!TryPutInTrash())
-								TryDropItem();
+							if(!TryPutItemInCraft())
+								if(!TryPutInTrash())
+									TryDropItem();
 					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
 					if(!TryTakePatientFromMachine())
 						if(!TryTakePatientFromSeat())
 							if(!TryTakeItem())
-								TryTakeFromContainer();
+								if(!TryTakeItemFromCraft())
+									TryTakeFromContainer();
 					break;
 			}
 		}
@@ -153,6 +156,33 @@ public class PlayerController : MonoBehaviour {
 
 			return true;
 		}
+		return false;
+	}
+
+	private bool TryPutItemInCraft() {
+		if(craftingTableTarget != null) {
+			if(craftingTableTarget.GetComponent<CraftingTable>().ReceiveItem(HeldGO)) {
+				Destroy(HeldGO);
+				heldType = HeldTypes.none;
+
+				return true;
+			}
+        }
+
+		return false;
+	}
+
+	private bool TryTakeItemFromCraft() {
+		if(craftingTableTarget != null) {
+			GameObject newItem = craftingTableTarget.GetComponent<CraftingTable>().GiveItem();
+			if(newItem != null) {
+				HoldMyBeer(newItem);
+				heldType = HeldTypes.item;
+
+				return true;
+            }
+        }
+
 		return false;
 	}
 
@@ -343,12 +373,15 @@ public class PlayerController : MonoBehaviour {
 		} 
 		if (collision.gameObject.tag == "Exit") {
 			exitTarget = collision.gameObject;
-		} 
+		}
 		if (collision.gameObject.tag == "Machine") {
 			machineTarget = collision.gameObject;
 		}
+		if (collision.gameObject.tag == "CraftingTable") {
+			craftingTableTarget = collision.gameObject;
+		}
 	}
-
+	
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (seatTargets.Contains(collision.gameObject))
 			seatTargets.Remove(collision.gameObject);
@@ -364,5 +397,7 @@ public class PlayerController : MonoBehaviour {
 			exitTarget = null;
 		if (machineTarget = collision.gameObject)
 			machineTarget = null;
+		if (craftingTableTarget = collision.gameObject)
+			craftingTableTarget = null;
 	}
 }
