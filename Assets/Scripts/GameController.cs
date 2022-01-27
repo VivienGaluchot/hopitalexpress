@@ -80,7 +80,8 @@ public class GameController : MonoBehaviour {
 		Players.Add(id, newPlayer);
 		isPlaying = true;
 
-		currentSpawnRate = spawnRate / Players.Count;
+		currentSpawnRate = spawnRate / ((Players.Count + 1)/2f);
+		Debug.Log(currentSpawnRate);
 		elapsedTime = currentSpawnRate;
 	}
 
