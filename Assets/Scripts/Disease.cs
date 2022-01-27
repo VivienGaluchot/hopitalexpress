@@ -8,20 +8,22 @@ public class Disease {
 	
 	// A struct to store disease informations
 	public readonly struct Infos {
-		public Infos(string name, float lifespan) {
+		public Infos(string name, float lifespan, int points) {
 			_name = name;
 			_lifespan = lifespan;
+			_points = points;
 		}
 
 		public readonly string _name;
 		public readonly float _lifespan;
+		public readonly int _points;
 	}
 
 	// Store informations about the different diseases possible
 	private static Infos[] Diseases = new Infos[3] {
-		new Infos("Rhume", 300),
-		new Infos("Grippe", 400),
-		new Infos("Covid", 200)
+		new Infos("Rhume", 75f, 50),
+		new Infos("Grippe", 90f, 100),
+		new Infos("Covid", 60f, 200)
 	};
 
 	public Infos myInfos { get; private set; }
@@ -43,8 +45,8 @@ public class Disease {
 	// Maybe add some random in treaments
 	private static Dictionary<string, Step[]> DiseaseSteps = new Dictionary<string, Step[]> {
 		{ "Rhume", new Step[1] { new Step("BluePill", 0) } },
-		{ "Grippe", new Step[2] { new Step("BluePill", 0), new Step("GreenPill", 0) } },
-		{ "Covid", new Step[3] { new Step("PCR", 0), new Step("Scanner", 10), new Step("BluePill", 0) } }
+		{ "Grippe", new Step[2] { new Step("GreenPill", 0), new Step("BluePill", 0) } },
+		{ "Covid", new Step[3] { new Step("PCR", 0), new Step("Scanner", 10), new Step("GreenPill", 0) } }
 	};
 
 	private Step[] Steps;

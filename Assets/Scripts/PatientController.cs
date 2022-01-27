@@ -24,6 +24,8 @@ public class PatientController : MonoBehaviour {
 	public States state { get; private set; }
 	private float lifetime;
 
+	public int patientValue { get; private set; }
+
 	private void Start() {
 		state = States.sick;
 
@@ -34,6 +36,7 @@ public class PatientController : MonoBehaviour {
 
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
+		patientValue = myDisease.myInfos._points;
 
 		sr.sprite = myDisease.sickFace;
 	}

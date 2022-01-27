@@ -13,10 +13,10 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private GameObject Patient;
 	[SerializeField] private float spawnRate;
 
-	private float elapsedTime;
+	private float elapsedTime, currentSpawnRate;
 
 	[SerializeField] private Text scoreText;
-	private int score;
+	private int score, multiplicator;
 	
 	private int counter;
 
@@ -28,34 +28,15 @@ public class GameController : MonoBehaviour {
 		isPlaying = false;
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
+		multiplicator = 1;
 		scoreText.text = "0";
 	}
 
 	private void Update() {
-
-		if (Input.GetKeyDown(KeyCode.Return) && !Players.ContainsKey(0)) {
-			GameObject newPlayer = Instantiate(Player);
-			newPlayer.GetComponent<PlayerController>().Initialize(0, this, playerSpeed);
-			Players.Add(0, newPlayer);
-			isPlaying = true;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Joystick1Button7) && !Players.ContainsKey(1)) {
-			GameObject newPlayer = Instantiate(Player);
-			newPlayer.GetComponent<PlayerController>().Initialize(1, this, playerSpeed);
-			Players.Add(1, newPlayer);
-			isPlaying = true;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Joystick2Button7) && !Players.ContainsKey(2)) {
-			GameObject newPlayer = Instantiate(Player);
-			newPlayer.GetComponent<PlayerController>().Initialize(2, this, playerSpeed);
-			Players.Add(2, newPlayer);
-			isPlaying = true;
-		}
+		CheckNewPlayers();
 
 		if (isPlaying) {
-			if (elapsedTime > spawnRate) {
+			if (elapsedTime > currentSpawnRate) {
 				GameObject emptySeat = null;
 				// Looking for an empty welcome seat
 				for (int i = 0; i < WelcomeSeats.Length; i++) {
@@ -74,7 +55,7 @@ public class GameController : MonoBehaviour {
 						// If a problem occurs, delete the patient
 						Destroy(newPatient);
 					}
-					elapsedTime -= spawnRate;
+					elapsedTime -= currentSpawnRate;
 				}
 
 			} else
@@ -82,13 +63,35 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	private void CheckNewPlayers() {
+		if (Input.GetKeyDown(KeyCode.Return) && !Players.ContainsKey(0))
+			NewPlayer(0);
+
+		if (Input.GetKeyDown(KeyCode.Joystick1Button7) && !Players.ContainsKey(1))
+			NewPlayer(1);
+
+		if (Input.GetKeyDown(KeyCode.Joystick2Button7) && !Players.ContainsKey(2))
+			NewPlayer(2);
+	}
+
+	private void NewPlayer(int id) {
+		GameObject newPlayer = Instantiate(Player);
+		newPlayer.GetComponent<PlayerController>().Initialize(id, this, playerSpeed);
+		Players.Add(id, newPlayer);
+		isPlaying = true;
+
+		currentSpawnRate = spawnRate / Players.Count;
+		elapsedTime = currentSpawnRate;
+	}
+
 	public void PatientCured(PatientController patient) {
-		score += 100;
+		score += patient.patientValue * multiplicator++;
 		scoreText.text = score.ToString();
 	}
 
 	public void PatientDead(PatientController patient) {
-		score -= 50;
+		score -= patient.patientValue;
+		multiplicator = 1;
 		scoreText.text = score.ToString();
     }
 }
