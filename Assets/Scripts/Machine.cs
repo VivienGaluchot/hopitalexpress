@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum MachineTypes {
+	Bed,
+	Scanner
+}
+
 public class Machine : SeatController {
 
     public string machineName;
@@ -38,10 +43,14 @@ public class Machine : SeatController {
 			
 			if(patientAnswer.isNeeded) {
 				// Machine is needed, activate it and set up time (and timebar)
-				TimeBar.transform.parent.gameObject.SetActive(true);
-				elapsedTime = 0f;
-				isWorking = true;
-				neededTime = patientAnswer.time;
+				if(patientAnswer.time == 0) {
+					goHeld.GetComponent<PatientController>().MachineDone(machineName, patientAnswer.time);
+				} else {
+					TimeBar.transform.parent.gameObject.SetActive(true);
+					elapsedTime = 0f;
+					isWorking = true;
+					neededTime = patientAnswer.time;
+				}
             }
 
 			return true;

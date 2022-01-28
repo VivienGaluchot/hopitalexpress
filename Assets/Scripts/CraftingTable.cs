@@ -4,14 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public enum Items {
-	BluePill,
-	GreenPill,
-	EmptySyringe,
-	RedSyringe,
-	YellowSyringe
-}
-
 public class CraftingTable : MonoBehaviour {
 
 	public SpriteRenderer[] ItemsSR;

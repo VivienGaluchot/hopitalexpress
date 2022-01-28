@@ -2,55 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DiseaseTypes {
+	Rhume,
+	Grippe,
+	Covid
+}
+
 public class Disease {
 
 	private PatientController patient;
 	
 	// A struct to store disease informations
 	public readonly struct Infos {
-		public Infos(string name, float lifespan, int points) {
-			_name = name;
+		public Infos(DiseaseTypes name, float lifespan, int points, Step firstStep) {
+			_name = name.ToString();
 			_lifespan = lifespan;
 			_points = points;
+			_firstStep = firstStep;
 		}
 
 		public readonly string _name;
 		public readonly float _lifespan;
 		public readonly int _points;
+		public readonly Step _firstStep;
+	}
+	
+	// A struct to store informations about a treatment step
+	 // We need "name" during "time" seconds to go to next step
+	 // if time == 0, it's instantaneous
+	public readonly struct Step {
+		public Step(Items name, float time = 0f, (float, Step)[] next = null) {
+			_name = name.ToString();
+			_path = "Sprites/Medoc/" + _name;
+			_time = time;
+			_next = next;
+		}
+
+		public Step(MachineTypes name, float time = 0f, (float, Step)[] next = null) {
+			_name = name.ToString();
+			_path = "Sprites/Machines/" + _name;
+			_time = time;
+			_next = next;
+		}
+
+		public readonly string _name;
+		public readonly string _path;
+		public readonly float _time;
+		public readonly (float, Step)[] _next;
 	}
 
 	// Store informations about the different diseases possible
 	private static Infos[] Diseases = new Infos[3] {
-		new Infos("Rhume", 75f, 50),
-		new Infos("Grippe", 90f, 100),
-		new Infos("Covid", 60f, 200)
+		new Infos(DiseaseTypes.Rhume, 75f, 50, 
+			new Step(MachineTypes.Bed, 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.BluePill))}
+			)
+		),
+		new Infos(DiseaseTypes.Grippe, 90f, 100, 
+			new Step(MachineTypes.Bed, 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.GreenPill, 0f,
+					new (float, Step)[2] {(.75f, new Step(Items.GreenPill)),
+										(.25f, new Step(Items.BluePill))
+					})
+				)}
+			)
+		),
+		new Infos(DiseaseTypes.Covid, 60f, 200,
+			new Step(MachineTypes.Bed, 0f,
+				new (float, Step)[1] {(1f, new Step(Items.PCR, 0f,
+					new (float, Step)[1] {(1f, new Step(MachineTypes.Scanner, 10f, 
+						new (float, Step) [2] {(.5f, new Step(Items.RedSyringe)),
+							(.5f, new Step(Items.YellowSyringe))
+						})
+					)}
+				))}
+			)
+		),
 	};
 
+	// The current Disease, take from the array Diseases
 	public Infos myInfos { get; private set; }
 	public Sprite sickFace { get; private set; }
+	private Step currentStep;
 
-	// A struct to store informations about a treatment step
-	// We need "name" during "time" seconds to go to next step
-	// if time == 0, it's instantaneous
-	public readonly struct Step {
-		public Step(string name, float time) {
-			_name= name;
-			_time = time;
-		}
-		public readonly string _name;
-		public readonly float _time;
-	}
 
-	// Store informations about treatment concerning the existing diseases
-	// Maybe add some random in treaments
-	private static Dictionary<string, Step[]> DiseaseSteps = new Dictionary<string, Step[]> {
-		{ "Rhume", new Step[1] { new Step("BluePill", 0) } },
-		{ "Grippe", new Step[2] { new Step("GreenPill", 0), new Step("BluePill", 0) } },
-		{ "Covid", new Step[3] { new Step("PCR", 0), new Step("Scanner", 10), new Step("GreenPill", 0) } }
-	};
-
-	private Step[] Steps;
-	private int currentStep;
 
 	public float lifetime { get; private set; }
 	private bool isOver;
@@ -62,55 +97,58 @@ public class Disease {
 		myInfos = Diseases[Random.Range(0, Diseases.Length)];
 		lifetime = myInfos._lifespan;
 		sickFace = Resources.Load<Sprite>("Sprites/Faces/" + myInfos._name + "Face");
-		DiseaseSteps.TryGetValue(myInfos._name, out Steps);
-		currentStep = 0;
-
-		if (Steps.Length == 0) {
-			isOver = true;
-			patient.DiseaseCured();
-		}
+		currentStep = myInfos._firstStep;
 	}
 
 	// Return the sprite to display the current need
 	public Sprite GetNeedSprite() {
-		string path = "Sprites/Medoc/" + Steps[currentStep]._name;
-		Sprite needSprite = Resources.Load<Sprite>(path);
-
-		if(needSprite == null) {
-			path = "Sprites/Machines/" + Steps[currentStep]._name;
-			needSprite = Resources.Load<Sprite>(path);
-		}
-
-		return needSprite;
+		return Resources.Load<Sprite>(currentStep._path);
 	}
 
 	// Say that we took this item
 	public void TakeItem(string item) {
 		if (!isOver)
-            if (Steps[currentStep]._name == item)
+			if (currentStep._name == item)
 				NextStep();
 	}
 
 	// Say that we use the machine during some time
 	public void UsedMachine(string machine, float time) {
 		if (!isOver)
-			if (Steps[currentStep]._name == machine && time >= Steps[currentStep]._time)
+			if (currentStep._name == machine && time >= currentStep._time)
 				NextStep();
-    }
+	}
 
 	// Check whether we go to next step or if we're done here 
 	private void NextStep() {
-		currentStep++;
-		if (currentStep == Steps.Length) {
+		if (currentStep._next != null) {
+			// Chose random next step
+			float mySum = 0f, randomValue = Random.Range(0f, 1f);
+			bool foundNext = false;
+			for (int i = 0; i < currentStep._next.Length; i++) {
+				if(currentStep._next[i].Item1 + mySum > randomValue) {
+					// We want this one!
+					foundNext = true;
+					currentStep = currentStep._next[i].Item2;
+					break;
+                } else {
+					mySum += currentStep._next[i].Item1;
+				}
+            }
+
+			// To be sure we didn't f*cked up the proba, in doubt take first
+			if (!foundNext)
+				currentStep = currentStep._next[0].Item2;
+
+			patient.DisplayNextNeed();
+		} else {
 			// it was the last step, patient cured!
 			isOver = true;
 			patient.DiseaseCured();
-		} else {
-			patient.DisplayNextNeed();
 		}
 	}
 
 	public (string name, float time) GetCurrentStep() {
-		return (Steps[currentStep]._name, Steps[currentStep]._time);
-    }
+		return (currentStep._name, currentStep._time);
+	}
 }

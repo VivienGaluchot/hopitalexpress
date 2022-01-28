@@ -27,18 +27,19 @@ public class PatientController : MonoBehaviour {
 	public int patientValue { get; private set; }
 
 	private void Start() {
-		state = States.sick;
+		state = States.diagnosticed;
 
 		sr = GetComponent<SpriteRenderer>();
 		needDisplayer = transform.GetChild(0).gameObject;
 		needSr = needDisplayer.transform.GetChild(0).GetComponent<SpriteRenderer>();
-		needDisplayer.SetActive(false);
+		//needDisplayer.SetActive(false);
 
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 
 		sr.sprite = myDisease.sickFace;
+		DisplayNextNeed();
 	}
 
     void Update() {
@@ -73,16 +74,11 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public (bool isNeeded, float time) UseMachine(string machineName) {
-		if (machineName == "Bed" && state == States.sick) {
-			Diagnostic();
-			return (false, 0f);
-		} else {
-			// Check is the machine is needed in the current step
-			// If yes, then return true and time needed
-			var step = myDisease.GetCurrentStep();
-			if (machineName == step.name) {
-				return (true, step.time);
-			}
+		// Check is the machine is needed in the current step
+		// If yes, then return true and time needed
+		var step = myDisease.GetCurrentStep();
+		if (machineName == step.name) {
+			return (true, step.time);
 		}
 
 		return (false, 0f);
