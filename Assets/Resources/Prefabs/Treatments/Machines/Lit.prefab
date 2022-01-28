@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3423708764556893298}
   - component: {fileID: 4793425363779689196}
   m_Layer: 0
-  m_Name: Bed
+  m_Name: Lit
   m_TagString: Machine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 836581521210484172}
   - component: {fileID: 836581521210484163}
   m_Layer: 0
-  m_Name: RedSyringe
+  m_Name: SeringueRouge
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

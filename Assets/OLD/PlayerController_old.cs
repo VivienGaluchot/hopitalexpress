@@ -29,8 +29,8 @@ public class PlayerController_old : MonoBehaviour {
 		crafting
     }
 	private Actions action;
-	private CraftingTable craftTable;
-	private Container containerGathered;
+	private CraftingTableController craftTable;
+	private ContainerController containerGathered;
 
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
@@ -154,7 +154,7 @@ public class PlayerController_old : MonoBehaviour {
 
 	private bool TryPutItemInCraft() {
 		if(craftingTableTarget != null) {
-			if(craftingTableTarget.GetComponent<CraftingTable>().ReceiveItem(HeldGO)) {
+			if(craftingTableTarget.GetComponent<CraftingTableController>().ReceiveItem(HeldGO)) {
 				Destroy(HeldGO);
 				heldType = HeldTypes.none;
 
@@ -194,7 +194,7 @@ public class PlayerController_old : MonoBehaviour {
 					return false;
 				string itemName = ic.itemName;
 				for (int i = 0; i < containerTargets.Count; i++) {
-					if (containerTargets[i].GetComponent<Container>().askedItemName == itemName) {
+					if (containerTargets[i].GetComponent<ContainerController>().askedItemName == itemName) {
 						container = containerTargets[i];
 						break;
 					}
@@ -304,8 +304,8 @@ public class PlayerController_old : MonoBehaviour {
 
 	private bool TryTakePatientFromMachine() {
 		// Look for a not empty seat in seatTargets
-		if (machineTarget != null && machineTarget.GetComponent<Machine>().isHolding) {
-			HoldMyBeer(machineTarget.GetComponent<Machine>().GiveHold());
+		if (machineTarget != null && machineTarget.GetComponent<MachineController>().isHolding) {
+			HoldMyBeer(machineTarget.GetComponent<MachineController>().GiveHold());
 			if (HeldGO != null) {
 				heldType = HeldTypes.patient;
 				return true;
@@ -316,7 +316,7 @@ public class PlayerController_old : MonoBehaviour {
 	}
 
 	private bool TryPutPatientToMachine() {
-		if (machineTarget != null && machineTarget.GetComponent<Machine>().ReceiveHold(HeldGO)) {
+		if (machineTarget != null && machineTarget.GetComponent<MachineController>().ReceiveHold(HeldGO)) {
 
 			// WE'D BETTER DO THAT IN THE MACHINE/SEAT
 			HeldGO.transform.parent = null;

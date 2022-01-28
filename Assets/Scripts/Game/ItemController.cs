@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Items {
-	BluePill,
-	GreenPill,
-	EmptySyringe,
-	RedSyringe,
-	YellowSyringe,
+	PiluleBleue,
+	PiluleVerte,
+	PiluleRouge,
+	PiluleJaune,
+	SeringueVide,
+	SeringueBleue,
+	SeringueVerte,
+	SeringueRouge,
+	SeringueJaune,
 	PCR
 }
 

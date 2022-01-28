@@ -54,25 +54,25 @@ public class Disease {
 	// Store informations about the different diseases possible
 	private static Infos[] Diseases = new Infos[3] {
 		new Infos(DiseaseTypes.Rhume, 75f, 50, 
-			new Step(MachineTypes.Bed, 0f, 
-				new (float, Step)[1] {(1f, new Step(Items.BluePill))}
+			new Step(MachineTypes.Lit, 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.PiluleBleue))}
 			)
 		),
 		new Infos(DiseaseTypes.Grippe, 90f, 100, 
-			new Step(MachineTypes.Bed, 0f, 
-				new (float, Step)[1] {(1f, new Step(Items.GreenPill, 0f,
-					new (float, Step)[2] {(.75f, new Step(Items.GreenPill)),
-										(.25f, new Step(Items.BluePill))
+			new Step(MachineTypes.Lit, 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.PiluleVerte, 0f,
+					new (float, Step)[2] {(.75f, new Step(Items.PiluleVerte)),
+										(.25f, new Step(Items.PiluleBleue))
 					})
 				)}
 			)
 		),
 		new Infos(DiseaseTypes.Covid, 60f, 200,
-			new Step(MachineTypes.Bed, 0f,
+			new Step(MachineTypes.Lit, 0f,
 				new (float, Step)[1] {(1f, new Step(Items.PCR, 0f,
 					new (float, Step)[1] {(1f, new Step(MachineTypes.Scanner, 10f, 
-						new (float, Step) [2] {(.5f, new Step(Items.RedSyringe)),
-							(.5f, new Step(Items.YellowSyringe))
+						new (float, Step) [2] {(.5f, new Step(Items.SeringueRouge)),
+							(.5f, new Step(Items.SeringueJaune))
 						})
 					)}
 				))}
