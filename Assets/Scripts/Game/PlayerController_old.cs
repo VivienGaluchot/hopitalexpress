@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController_old : MonoBehaviour {
 
 	private GameController gc;
 	private int id;
@@ -14,19 +14,6 @@ public class PlayerController : MonoBehaviour {
 	private List<GameObject> seatTargets, itemTargets, patientTargets, containerTargets;
 	private GameObject trashTarget, exitTarget, machineTarget, craftingTableTarget;
 	private GameObject HeldGO;
-
-	private Animator animator;
-	private float animatorSpeed;
-
-	private enum WalkDirections {
-		down, 
-		left, 
-		up, 
-		right, 
-		idle
-    }
-
-	private WalkDirections direction = WalkDirections.idle;
 
 	enum HeldTypes {
 		none,
@@ -40,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 		nothing,
 		gathering,
 		crafting
-	}
+    }
 	private Actions action;
 	private CraftingTable craftTable;
 	private Container containerGathered;
@@ -56,19 +43,16 @@ public class PlayerController : MonoBehaviour {
 		patientTargets = new List<GameObject>();
 		containerTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
-
-		animator = GetComponent<Animator>();
-		animatorSpeed = animator.speed;
 	}
 
 	private void Update() {
-		if (action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
+		if(action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
 			// Button released, we stop gathering
 			action = Actions.nothing;
 			containerGathered.StopGatherItem();
 		}
 
-		if (action == Actions.crafting && Input.GetButtonUp("Fire" + id)) {
+		if(action == Actions.crafting && Input.GetButtonUp("Fire" + id)) {
 			action = Actions.nothing;
 			craftTable.StopCraftItem();
 		}
@@ -76,28 +60,28 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButtonDown("Fire" + id)) {
 			// Are we already holding something?
-			switch (heldType) {
+			switch(heldType) {
 				case HeldTypes.patient:
 					// We are holding a patient, we try to put him somewhere
-					if (!TryPutPatientToExit())
-						if (!TryPutPatientToMachine())
-							if (!TryPutPatientOnSeat())
+					if(!TryPutPatientToExit())
+						if(!TryPutPatientToMachine())
+							if(!TryPutPatientOnSeat())
 								TryPutInTrash();
 					break;
 				case HeldTypes.item:
 					// We try to give the item, if we can't, then drop it
-					if (!TryGiveItemToPatient())
-						if (!TryTakeFromContainer(true))
-							if (!TryPutItemInCraft())
-								if (!TryPutInTrash())
+					if(!TryGiveItemToPatient())
+						if(!TryTakeFromContainer(true))
+							if(!TryPutItemInCraft())
+								if(!TryPutInTrash())
 									TryDropItem();
 					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
-					if (!TryTakePatientFromMachine())
-						if (!TryTakePatientFromSeat())
-							if (!TryTakeItem())
-								if (!TryTakeItemFromCraft())
+					if(!TryTakePatientFromMachine())
+						if(!TryTakePatientFromSeat())
+							if(!TryTakeItem())
+								if(!TryTakeItemFromCraft())
 									TryTakeFromContainer();
 					break;
 			}
@@ -105,61 +89,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (action == Actions.nothing) {
-            // Can only move if doing nothing
-            float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
+		if(action == Actions.nothing) {
+			// Can only move if doing nothing
+			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
 
-            Vector2 input = new Vector2(horiz, vert);
-            float angle = Vector2.SignedAngle(new Vector2(-1, -1), input);
-            angle = angle - (angle + 360) % 90;
-            if (input.sqrMagnitude > (0.1 * 0.1)) {
-                //transform.rotation = Quaternion.Euler(0, 0, angle);
-				//Debug.Log(angle);
-
-				switch(angle) {
-					case 0f:
-						if (direction != WalkDirections.down) {
-							animator.SetTrigger("walkDown");
-
-							// 1
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.down;
-						}
-						break;
-					case 90f:
-						if (direction != WalkDirections.right) {
-							animator.SetTrigger("walkRight");
-
-							// 2
-							if(direction == WalkDirections.idle)
-								animator.speed = animatorSpeed;
-							direction = WalkDirections.right;
-						}
-						break;
-					case -90f:
-						if (direction != WalkDirections.left) {
-							animator.SetTrigger("walkLeft");
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.left;
-						}
-						break;
-					default:
-						if (direction != WalkDirections.up) {
-							animator.SetTrigger("walkUp");
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.up;
-						}
-						break;
-				}
-            } else if (direction != WalkDirections.idle) {
-				animatorSpeed = animator.speed;
-				animator.speed = 0f;
-				direction = WalkDirections.idle;
+			Vector2 input = new Vector2(horiz, vert);
+			float angle = Vector2.SignedAngle(new Vector2(-1, -1), input);
+			angle = angle - (angle + 360) % 90;
+			if (input.sqrMagnitude > (0.1 * 0.1)) {
+				transform.rotation = Quaternion.Euler(0, 0, angle);
 			}
-
-            Vector3 m_Input = new Vector3(horiz, vert, 0);
-            rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
-        }
+			
+			Vector3 m_Input = new Vector3(horiz, vert, 0);
+			rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
+		}
 	}
 
 	// Sort list items by distance from the player (closer first)
@@ -174,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryTakeItem() {
 		// Look for item nearby
-		if (itemTargets.Count > 0) {
+		if(itemTargets.Count > 0) {
 			// Sort by distance
 			SortListByDistance(itemTargets);
 			HoldMyBeer(itemTargets[0]);
@@ -197,7 +140,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryGiveItemToPatient() {
 		// Look for closer patient to give item
-		if (patientTargets.Count > 0) {
+		if(patientTargets.Count > 0) {
 			SortListByDistance(patientTargets);
 			patientTargets[0].GetComponent<PatientController>().TakeItem(HeldGO);
 
@@ -210,32 +153,32 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutItemInCraft() {
-		if (craftingTableTarget != null) {
-			if (craftingTableTarget.GetComponent<CraftingTable>().ReceiveItem(HeldGO)) {
+		if(craftingTableTarget != null) {
+			if(craftingTableTarget.GetComponent<CraftingTable>().ReceiveItem(HeldGO)) {
 				Destroy(HeldGO);
 				heldType = HeldTypes.none;
 
 				return true;
 			}
-		}
+        }
 
 		return false;
 	}
 
 	private bool TryTakeItemFromCraft() {
-		if (craftingTableTarget != null) {
-			var craftAnswer = craftingTableTarget.GetComponent<CraftingTable>().StartCraftingItem(this);
-			if (craftAnswer.craftedItem != null) {
-				ReceiveItemFromContainer(craftAnswer.craftedItem);
-				return true;
-			} else {
-				if (craftAnswer.isCrafting) {
-					action = Actions.crafting;
-					craftTable = craftingTableTarget.GetComponent<CraftingTable>();
-					return true;
-				}
-			}
-		}
+		if(craftingTableTarget != null) {
+			//var craftAnswer = craftingTableTarget.GetComponent<CraftingTable>().StartCraftingItem(this);
+			//if(craftAnswer.craftedItem != null) {
+			//	ReceiveItemFromContainer(craftAnswer.craftedItem);
+			//	return true;
+   //         } else {
+			//	if(craftAnswer.isCrafting) {
+			//		action = Actions.crafting;
+			//		craftTable = craftingTableTarget.GetComponent<CraftingTable>();
+			//		return true;
+   //             }
+   //         }
+        }
 
 		return false;
 	}
@@ -259,19 +202,19 @@ public class PlayerController : MonoBehaviour {
 			} else
 				container = containerTargets[0];
 
-			var containerAnswer = container.GetComponent<Container>().StartGatherItem(this, HeldGO);
-			if (containerAnswer.givenItem != null) {
-				ReceiveItemFromContainer(containerAnswer.givenItem);
+			//var containerAnswer = container.GetComponent<Container>().StartGatherItem(this, HeldGO);
+			//if (containerAnswer.givenItem != null) {
+			//	ReceiveItemFromContainer(containerAnswer.givenItem);
 
-				return true;
-			} else {
-				if (containerAnswer.gathering) {
-					action = Actions.gathering;
-					containerGathered = container.GetComponent<Container>();
+			//	return true;
+			//} else {
+			//	if (containerAnswer.gathering) {
+			//		action = Actions.gathering;
+			//		containerGathered = container.GetComponent<Container>();
 
-					return true;
-				}
-			}
+			//		return true;
+			//	}
+			//}
 		}
 
 		return false;
@@ -313,7 +256,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutInTrash() {
-		if (trashTarget != null) {
+		if(trashTarget != null) {
 			PatientController pc = HeldGO.GetComponent<PatientController>();
 			if (pc != null)
 				gc.PatientDead(pc);
@@ -409,27 +352,27 @@ public class PlayerController : MonoBehaviour {
 		HeldGO.transform.parent = PlaceHolder;
 		HeldGO.transform.localPosition = Vector3.zero;
 	}
-
+	
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Seat") {
 			if (!seatTargets.Contains(collision.gameObject))
 				seatTargets.Add(collision.gameObject);
-		}
+		} 
 		if (collision.gameObject.tag == "Item") {
 			if (!itemTargets.Contains(collision.gameObject))
 				itemTargets.Add(collision.gameObject);
-		}
+		} 
 		if (collision.gameObject.tag == "Patient") {
 			if (!patientTargets.Contains(collision.gameObject))
 				patientTargets.Add(collision.gameObject);
-		}
+		} 
 		if (collision.gameObject.tag == "Container") {
 			if (!containerTargets.Contains(collision.gameObject))
 				containerTargets.Add(collision.gameObject);
-		}
+		} 
 		if (collision.gameObject.tag == "Trash") {
 			trashTarget = collision.gameObject;
-		}
+		} 
 		if (collision.gameObject.tag == "Exit") {
 			exitTarget = collision.gameObject;
 		}
@@ -440,7 +383,7 @@ public class PlayerController : MonoBehaviour {
 			craftingTableTarget = collision.gameObject;
 		}
 	}
-
+	
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (seatTargets.Contains(collision.gameObject))
 			seatTargets.Remove(collision.gameObject);
