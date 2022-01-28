@@ -137,11 +137,11 @@ public class GameController : MonoBehaviour {
 		newPlayer.GetComponent<PlayerController>().Initialize(id, this, playerSpeed);
 		Players.Add(id, newPlayer);
 
-		if(!isPlaying) {
-			// The queue will try to advance each half second, starting now
-			InvokeRepeating("AdvancePatientQueue", 0f, .5f);
-			isPlaying = true;
-		}
+		//if(!isPlaying) {
+		//	// The queue will try to advance each half second, starting now
+		//	InvokeRepeating("AdvancePatientQueue", 0f, .5f);
+		//	isPlaying = true;
+		//}
 
 		currentSpawnRate = spawnRate / ((Players.Count + 1)/2f);
 		elapsedTime = currentSpawnRate;
