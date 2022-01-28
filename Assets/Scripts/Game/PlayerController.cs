@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 	private CraftingTableController craftTable;
 	private ContainerController containerGathered;
 
+	private CapsuleCollider2D DetectionCollider;
+
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
 		gc = parent;
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour {
 
 		animator = GetComponent<Animator>();
 		animatorSpeed = animator.speed;
+
+		DetectionCollider = GetComponent<CapsuleCollider2D>();
 	}
 
 	private void Update() {
@@ -113,10 +117,13 @@ public class PlayerController : MonoBehaviour {
             float angle = Vector2.SignedAngle(new Vector2(-1, -1), input);
             angle = angle - (angle + 360) % 90;
             if (input.sqrMagnitude > (0.1 * 0.1)) {
-                //transform.rotation = Quaternion.Euler(0, 0, angle);
+				//transform.rotation = Quaternion.Euler(0, 0, angle);
 				//Debug.Log(angle);
 
-				switch(angle) {
+
+				// I don't like it to be hardcoded, but we'll see some day.........
+				// ................................. :<
+				switch (angle) {
 					case 0f:
 						if (direction != WalkDirections.down) {
 							animator.SetTrigger("walkDown");
@@ -124,6 +131,9 @@ public class PlayerController : MonoBehaviour {
 							// 1
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.down;
+							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
+							DetectionCollider.size = new Vector2(.3f, .2f);
+							DetectionCollider.offset = new Vector2(0f, -.55f);
 						}
 						break;
 					case 90f:
@@ -134,6 +144,9 @@ public class PlayerController : MonoBehaviour {
 							if(direction == WalkDirections.idle)
 								animator.speed = animatorSpeed;
 							direction = WalkDirections.right;
+							DetectionCollider.direction = CapsuleDirection2D.Vertical;
+							DetectionCollider.size = new Vector2(.2f, .3f);
+							DetectionCollider.offset = new Vector2(.35f, -.2f);
 						}
 						break;
 					case -90f:
@@ -141,6 +154,9 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkLeft");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.left;
+							DetectionCollider.direction = CapsuleDirection2D.Vertical;
+							DetectionCollider.size = new Vector2(.2f, .3f);
+							DetectionCollider.offset = new Vector2(-.35f, -.2f);
 						}
 						break;
 					default:
@@ -148,6 +164,9 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkUp");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.up;
+							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
+							DetectionCollider.size = new Vector2(.3f, .2f);
+							DetectionCollider.offset = new Vector2(0f, .15f);
 						}
 						break;
 				}

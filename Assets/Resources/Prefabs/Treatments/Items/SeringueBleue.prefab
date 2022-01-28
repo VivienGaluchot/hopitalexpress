@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 114251088f91abd45bb796e5b7641fb3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c19c691fcd3cb8b4489b594d6954c147, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3424318588629070088}
   - component: {fileID: 1300023755610435557}
   m_Layer: 0
-  m_Name: SeringueJaune
+  m_Name: SeringueBleue
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

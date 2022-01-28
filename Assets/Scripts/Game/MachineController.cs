@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum MachineTypes {
-	Lit,
+	Diagnostable,
 	Scanner
 }
 
