@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Container : MonoBehaviour {
+public class ContainerController : MonoBehaviour {
 
 	public GameObject askedItem, givenItem;
 	public float askedTime;

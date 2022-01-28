@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class CraftingTable : MonoBehaviour {
+public class CraftingTableController : MonoBehaviour {
 
 	public SpriteRenderer[] ItemsSR;
 	public Image TimeBar;
@@ -25,8 +25,8 @@ public class CraftingTable : MonoBehaviour {
 
 	// Store craft recipes
 	private static CraftingRecipe[] Recipes = new CraftingRecipe[2] {
-		new CraftingRecipe(Items.BluePill, 3f, new Dictionary<Items, int>() { { Items.GreenPill, 2 } }),
-		new CraftingRecipe(Items.GreenPill, 5f, new Dictionary<Items, int>() { { Items.BluePill, 1 }, {Items.EmptySyringe, 2 } }),
+		new CraftingRecipe(Items.PiluleBleue, 3f, new Dictionary<Items, int>() { { Items.PiluleVerte, 2 } }),
+		new CraftingRecipe(Items.PiluleVerte, 5f, new Dictionary<Items, int>() { { Items.PiluleBleue, 1 }, {Items.SeringueVide, 2 } }),
 	};
 
 	private string path;

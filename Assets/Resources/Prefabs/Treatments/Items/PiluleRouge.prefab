@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6921261293648267732}
   - component: {fileID: 65934614770902086}
   m_Layer: 0
-  m_Name: BluePill
+  m_Name: PiluleRouge
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
-  m_Sprite: {fileID: 21300000, guid: 81e7074c58a0bd74a8cd6e16ab0cef04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a601b97e36883749bea160f83e9be6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5938327028945376247}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -119,9 +119,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013471194, y: 0.020499706}
-  m_Size: {x: 0.21757112, y: 0.5105424}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6, y: 0.22}
+  m_Direction: 1
 --- !u!114 &65934614770902086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ece6d05785a72408878a3373a4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: BluePill
+  itemName: RedPill

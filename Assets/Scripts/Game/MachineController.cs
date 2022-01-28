@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum MachineTypes {
-	Bed,
+	Diagnostable,
 	Scanner
 }
 
-public class Machine : SeatController {
+public class MachineController : SeatController {
 
     public string machineName;
 	public Image TimeBar;
