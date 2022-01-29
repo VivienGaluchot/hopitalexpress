@@ -713,57 +713,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 718551873227381661, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
+    - target: {fileID: 3713404077472430231, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.35
       objectReference: {fileID: 0}
-    - target: {fileID: 908971729167877709, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1153562475385196473, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1379465222212056784, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381830476800349094, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1381830476800349094, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509780480869657765, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+    - target: {fileID: 3713404077472430231, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33
+      value: 3.53
       objectReference: {fileID: 0}
-    - target: {fileID: 1509780481055641742, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+    - target: {fileID: 3713404078699780863, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713404078699780863, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2740630202066917596, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697544429700816194, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3713404078248141618, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3713404078248141618, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3713404078701398773, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.33
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 3713404079251285714, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_RootOrder
@@ -813,21 +777,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
-    - target: {fileID: 4803409634476927788, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240021225841238749, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8066710666477509131, guid: df257946a46870f4eafe1e01422b9089, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.04
-      objectReference: {fileID: 0}
     - target: {fileID: 8066710666477509131, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.08
+      value: -1.13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df257946a46870f4eafe1e01422b9089, type: 3}
