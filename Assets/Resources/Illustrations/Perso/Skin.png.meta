@@ -4,484 +4,484 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 534282388630564384
-    second: Skin_0
+    second: 0_D_0
   - first:
       213: -4458291629105794766
-    second: Skin_1
+    second: 0_D_1
   - first:
       213: 570935346578193794
-    second: Skin_2
+    second: 0_D_2
   - first:
       213: -1555607424399219909
-    second: Skin_3
+    second: 0_D_3
   - first:
       213: -1111291676336968473
-    second: Skin_4
+    second: 0_U_0
   - first:
       213: -9185515799868983153
-    second: Skin_5
+    second: 0_U_1
   - first:
       213: -7811210312389729396
-    second: Skin_6
+    second: 0_U_2
   - first:
       213: -4884871960672347632
-    second: Skin_7
+    second: 0_U_3
   - first:
       213: -181721292096639834
-    second: Skin_8
+    second: 0_R_0
   - first:
       213: 584770100583106920
-    second: Skin_9
+    second: 0_R_1
   - first:
       213: -1222344575908727071
-    second: Skin_10
+    second: 0_R_2
   - first:
       213: 3899233468412834421
-    second: Skin_11
+    second: 0_R_3
   - first:
       213: 8873198755378908676
-    second: Skin_12
+    second: 0_L_0
   - first:
       213: -50610343072925243
-    second: Skin_13
+    second: 0_L_1
   - first:
       213: -4649803724038269042
-    second: Skin_14
+    second: 0_L_2
   - first:
       213: 534092739092471820
-    second: Skin_15
+    second: 0_L_3
   - first:
       213: -1507976617452817256
-    second: Skin_16
+    second: 1_D_0
   - first:
       213: 6483081467073847085
-    second: Skin_17
+    second: 1_D_1
   - first:
       213: 9166259134365155961
-    second: Skin_18
+    second: 1_D_2
   - first:
       213: 6255328140075349651
-    second: Skin_19
+    second: 1_D_3
   - first:
       213: 2583610305857193160
-    second: Skin_20
+    second: 1_U_0
   - first:
       213: 1293144819635038512
-    second: Skin_21
+    second: 1_U_1
   - first:
       213: -6759058377844023168
-    second: Skin_22
+    second: 1_U_2
   - first:
       213: -1863975830046403259
-    second: Skin_23
+    second: 1_U_3
   - first:
       213: -2033455289388632385
-    second: Skin_24
+    second: 1_R_0
   - first:
       213: -6308873403480268767
-    second: Skin_25
+    second: 1_R_1
   - first:
       213: 6460661091174908719
-    second: Skin_26
+    second: 1_R_2
   - first:
       213: 8788357127603783884
-    second: Skin_27
+    second: 1_R_3
   - first:
       213: -2532121141107624767
-    second: Skin_28
+    second: 1_L_0
   - first:
       213: -3550769490235007467
-    second: Skin_29
+    second: 1_L_1
   - first:
       213: 6243153192548718501
-    second: Skin_30
+    second: 1_L_2
   - first:
       213: -1131960599431715896
-    second: Skin_31
+    second: 1_L_3
   - first:
       213: -7357550112948327227
-    second: Skin_32
+    second: 2_D_0
   - first:
       213: -6294724013239176216
-    second: Skin_33
+    second: 2_D_1
   - first:
       213: 6869278827947796612
-    second: Skin_34
+    second: 2_D_2
   - first:
       213: -4796271679756721776
-    second: Skin_35
+    second: 2_D_3
   - first:
       213: 2895369502364087208
-    second: Skin_36
+    second: 2_U_0
   - first:
       213: 1545381381454669028
-    second: Skin_37
+    second: 2_U_1
   - first:
       213: 8333562747354693977
-    second: Skin_38
+    second: 2_U_2
   - first:
       213: 1036989651410765348
-    second: Skin_39
+    second: 2_U_3
   - first:
       213: -3150668318277133405
-    second: Skin_40
+    second: 2_R_0
   - first:
       213: -8048877941678204944
-    second: Skin_41
+    second: 2_R_1
   - first:
       213: -1119749363295953428
-    second: Skin_42
+    second: 2_R_2
   - first:
       213: -5603127619456825329
-    second: Skin_43
+    second: 2_R_3
   - first:
       213: 1017716059634410524
-    second: Skin_44
+    second: 2_L_0
   - first:
       213: 1921163536779715379
-    second: Skin_45
+    second: 2_L_1
   - first:
       213: -8100391259552541793
-    second: Skin_46
+    second: 2_L_2
   - first:
       213: -6157359986801236326
-    second: Skin_47
+    second: 2_L_3
   - first:
       213: -6921952079942398657
-    second: Skin_48
+    second: 3_D_0
   - first:
       213: -2811814177176773925
-    second: Skin_49
+    second: 3_D_1
   - first:
       213: -7137040691095840859
-    second: Skin_50
+    second: 3_D_2
   - first:
       213: -4341046775831903809
-    second: Skin_51
+    second: 3_D_3
   - first:
       213: -5551939560251595983
-    second: Skin_52
+    second: 3_U_0
   - first:
       213: 2229431887983190273
-    second: Skin_53
+    second: 3_U_1
   - first:
       213: 5284742950657567061
-    second: Skin_54
+    second: 3_U_2
   - first:
       213: 4984223516422199510
-    second: Skin_55
+    second: 3_U_3
   - first:
       213: 2258740631837121627
-    second: Skin_56
+    second: 3_R_0
   - first:
       213: -4844731717356814311
-    second: Skin_57
+    second: 3_R_1
   - first:
       213: -2716078472497195286
-    second: Skin_58
+    second: 3_R_2
   - first:
       213: -2160605378667063860
-    second: Skin_59
+    second: 3_R_3
   - first:
       213: 3571224032293626543
-    second: Skin_60
+    second: 3_L_0
   - first:
       213: -6832035211025099917
-    second: Skin_61
+    second: 3_L_1
   - first:
       213: 5981553662965529727
-    second: Skin_62
+    second: 3_L_2
   - first:
       213: -570622782222466083
-    second: Skin_63
+    second: 3_L_3
   - first:
       213: 6255935582039967463
-    second: Skin_64
+    second: 4_D_0
   - first:
       213: 6485043560625011703
-    second: Skin_65
+    second: 4_D_1
   - first:
       213: 3057216718205979058
-    second: Skin_66
+    second: 4_D_2
   - first:
       213: -8032587433665874576
-    second: Skin_67
+    second: 4_D_3
   - first:
       213: -8143178979770909807
-    second: Skin_68
+    second: 4_U_0
   - first:
       213: -749968410187177585
-    second: Skin_69
+    second: 4_U_1
   - first:
       213: 3104668824902483137
-    second: Skin_70
+    second: 4_U_2
   - first:
       213: 4469776614051683764
-    second: Skin_71
+    second: 4_U_3
   - first:
       213: -6850588529240885003
-    second: Skin_72
+    second: 4_R_0
   - first:
       213: -7918409795657283502
-    second: Skin_73
+    second: 4_R_1
   - first:
       213: -3806181397367192298
-    second: Skin_74
+    second: 4_R_2
   - first:
       213: -8789352095568874911
-    second: Skin_75
+    second: 4_R_3
   - first:
       213: 1526347527629381362
-    second: Skin_76
+    second: 4_L_0
   - first:
       213: 5326927150810606066
-    second: Skin_77
+    second: 4_L_1
   - first:
       213: -3126625528006097908
-    second: Skin_78
+    second: 4_L_2
   - first:
       213: -1414979219915344849
-    second: Skin_79
+    second: 4_L_3
   - first:
       213: -2176178419914827499
-    second: Skin_80
+    second: 5_D_0
   - first:
       213: 8902120385458226359
-    second: Skin_81
+    second: 5_D_1
   - first:
       213: -1259456410034997115
-    second: Skin_82
+    second: 5_D_2
   - first:
       213: -959443982744966880
-    second: Skin_83
+    second: 5_D_3
   - first:
       213: -6889917437001998241
-    second: Skin_84
+    second: 5_U_0
   - first:
       213: -5820835245291464250
-    second: Skin_85
+    second: 5_U_1
   - first:
       213: -4724916973981330320
-    second: Skin_86
+    second: 5_U_2
   - first:
       213: 6176722856466743986
-    second: Skin_87
+    second: 5_U_3
   - first:
       213: 7942401768806090671
-    second: Skin_88
+    second: 5_R_0
   - first:
       213: 7413658743315369132
-    second: Skin_89
+    second: 5_R_1
   - first:
       213: 5571307862310685291
-    second: Skin_90
+    second: 5_R_2
   - first:
       213: -6243354305790096733
-    second: Skin_91
+    second: 5_R_3
   - first:
       213: -4478179340522728536
-    second: Skin_92
+    second: 5_L_0
   - first:
       213: 7886317602452572650
-    second: Skin_93
+    second: 5_L_1
   - first:
       213: 8352927803971127690
-    second: Skin_94
+    second: 5_L_2
   - first:
       213: -1908410518317295426
-    second: Skin_95
+    second: 5_L_3
   - first:
       213: -3061247832224786794
-    second: Skin_96
+    second: 6_D_0
   - first:
       213: -5903604107027691583
-    second: Skin_97
+    second: 6_D_1
   - first:
       213: 6596133977461399432
-    second: Skin_98
+    second: 6_D_2
   - first:
       213: -6782821284124416080
-    second: Skin_99
+    second: 6_D_3
   - first:
       213: 7365249470625868367
-    second: Skin_100
+    second: 6_U_0
   - first:
       213: -5587243801678626801
-    second: Skin_101
+    second: 6_U_1
   - first:
       213: -5371745338952425214
-    second: Skin_102
+    second: 6_U_2
   - first:
       213: -7555510504847928069
-    second: Skin_103
+    second: 6_U_3
   - first:
       213: -7466708454245618652
-    second: Skin_104
+    second: 6_R_0
   - first:
       213: 5253266525756976654
-    second: Skin_105
+    second: 6_R_1
   - first:
       213: 1852861404109082425
-    second: Skin_106
+    second: 6_R_2
   - first:
       213: -5013747697248520821
-    second: Skin_107
+    second: 6_R_3
   - first:
       213: 2461816338428972309
-    second: Skin_108
+    second: 6_L_0
   - first:
       213: -850193507832509849
-    second: Skin_109
+    second: 6_L_1
   - first:
       213: -8470379791080129120
-    second: Skin_110
+    second: 6_L_2
   - first:
       213: 2161394283566063891
-    second: Skin_111
+    second: 6_L_3
   - first:
       213: -2535522400382041101
-    second: Skin_112
+    second: 7_D_0
   - first:
       213: 3471353820847734463
-    second: Skin_113
+    second: 7_D_1
   - first:
       213: -8994430498509563275
-    second: Skin_114
+    second: 7_D_2
   - first:
       213: 3674618354144908961
-    second: Skin_115
+    second: 7_D_3
   - first:
       213: -8291893961184374962
-    second: Skin_116
+    second: 7_U_0
   - first:
       213: -4988818550288186282
-    second: Skin_117
+    second: 7_U_1
   - first:
       213: -4163021299612282427
-    second: Skin_118
+    second: 7_U_2
   - first:
       213: 8875608246642688814
-    second: Skin_119
+    second: 7_U_3
   - first:
       213: 6044485227900914782
-    second: Skin_120
+    second: 7_R_0
   - first:
       213: -192489141525551881
-    second: Skin_121
+    second: 7_R_1
   - first:
       213: 1041460320410065595
-    second: Skin_122
+    second: 7_R_2
   - first:
       213: 4023529967386849602
-    second: Skin_123
+    second: 7_R_3
   - first:
       213: -1125695304039537177
-    second: Skin_124
+    second: 7_L_0
   - first:
       213: -2166157580728000908
-    second: Skin_125
+    second: 7_L_1
   - first:
       213: 269525155775354984
-    second: Skin_126
+    second: 7_L_2
   - first:
       213: -2644676897511565177
-    second: Skin_127
+    second: 7_L_3
   - first:
       213: 7451949807009535682
-    second: Skin_128
+    second: 8_D_0
   - first:
       213: -35561581219901585
-    second: Skin_129
+    second: 8_D_1
   - first:
       213: -6709097345426139929
-    second: Skin_130
+    second: 8_D_2
   - first:
       213: 3226789694197094573
-    second: Skin_131
+    second: 8_D_3
   - first:
       213: 6219173590633905226
-    second: Skin_132
+    second: 8_U_0
   - first:
       213: -6126744707391292302
-    second: Skin_133
+    second: 8_U_1
   - first:
       213: 6208553030175549784
-    second: Skin_134
+    second: 8_U_2
   - first:
       213: -8440490975463122468
-    second: Skin_135
+    second: 8_U_3
   - first:
       213: -1518946326172319746
-    second: Skin_136
+    second: 8_R_0
   - first:
       213: 1416129854144148365
-    second: Skin_137
+    second: 8_R_1
   - first:
       213: 7247590269032662398
-    second: Skin_138
+    second: 8_R_2
   - first:
       213: -3694703753876018856
-    second: Skin_139
+    second: 8_R_3
   - first:
       213: -6444608052773746273
-    second: Skin_140
+    second: 8_L_0
   - first:
       213: 6156658074179386934
-    second: Skin_141
+    second: 8_L_1
   - first:
       213: 1240672716772080918
-    second: Skin_142
+    second: 8_L_2
   - first:
       213: -5627018117008088823
-    second: Skin_143
+    second: 8_L_3
   - first:
       213: 1781199494180623780
-    second: Skin_144
+    second: 9_D_0
   - first:
       213: 3757318255012362636
-    second: Skin_145
+    second: 9_D_1
   - first:
       213: 8275773998029459133
-    second: Skin_146
+    second: 9_D_2
   - first:
       213: 4376587136306591555
-    second: Skin_147
+    second: 9_D_3
   - first:
       213: -8162224462707393960
-    second: Skin_148
+    second: 9_U_0
   - first:
       213: 6391623819098215199
-    second: Skin_149
+    second: 9_U_1
   - first:
       213: -2298679301566399858
-    second: Skin_150
+    second: 9_U_2
   - first:
       213: -4748245275589896966
-    second: Skin_151
+    second: 9_U_3
   - first:
       213: -2733807681864303967
-    second: Skin_152
+    second: 9_R_0
   - first:
       213: -1776297558543542122
-    second: Skin_153
+    second: 9_R_1
   - first:
       213: -2708154672812846566
-    second: Skin_154
+    second: 9_R_2
   - first:
       213: -4898788532858836482
-    second: Skin_155
+    second: 9_R_3
   - first:
       213: -8575423421413146962
-    second: Skin_156
+    second: 9_L_0
   - first:
       213: 4444503034430650796
-    second: Skin_157
+    second: 9_L_1
   - first:
       213: 2518128637436506950
-    second: Skin_158
+    second: 9_L_2
   - first:
       213: -4835703855158072286
-    second: Skin_159
+    second: 9_L_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -512,7 +512,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -571,7 +571,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skin_0
+      name: 0_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -592,7 +592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_1
+      name: 0_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -613,7 +613,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_2
+      name: 0_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -634,7 +634,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_3
+      name: 0_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -655,7 +655,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_4
+      name: 0_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -676,7 +676,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_5
+      name: 0_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -697,7 +697,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_6
+      name: 0_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -718,7 +718,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_7
+      name: 0_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -739,7 +739,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_8
+      name: 0_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -760,7 +760,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_9
+      name: 0_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -781,7 +781,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_10
+      name: 0_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -802,7 +802,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_11
+      name: 0_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -823,7 +823,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_12
+      name: 0_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -844,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_13
+      name: 0_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -865,7 +865,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_14
+      name: 0_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -886,7 +886,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_15
+      name: 0_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -907,7 +907,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_16
+      name: 1_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -928,7 +928,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_17
+      name: 1_D_1
       rect:
         serializedVersion: 2
         x: 424
@@ -949,7 +949,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_18
+      name: 1_D_2
       rect:
         serializedVersion: 2
         x: 837
@@ -970,7 +970,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_19
+      name: 1_D_3
       rect:
         serializedVersion: 2
         x: 1249
@@ -991,7 +991,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_20
+      name: 1_U_0
       rect:
         serializedVersion: 2
         x: 1663
@@ -1012,7 +1012,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_21
+      name: 1_U_1
       rect:
         serializedVersion: 2
         x: 2077
@@ -1033,7 +1033,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_22
+      name: 1_U_2
       rect:
         serializedVersion: 2
         x: 2490
@@ -1054,7 +1054,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_23
+      name: 1_U_3
       rect:
         serializedVersion: 2
         x: 2903
@@ -1075,7 +1075,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_24
+      name: 1_R_0
       rect:
         serializedVersion: 2
         x: 3353
@@ -1096,7 +1096,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_25
+      name: 1_R_1
       rect:
         serializedVersion: 2
         x: 3765
@@ -1117,7 +1117,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_26
+      name: 1_R_2
       rect:
         serializedVersion: 2
         x: 4179
@@ -1138,7 +1138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_27
+      name: 1_R_3
       rect:
         serializedVersion: 2
         x: 4593
@@ -1159,7 +1159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_28
+      name: 1_L_0
       rect:
         serializedVersion: 2
         x: 5006
@@ -1180,7 +1180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_29
+      name: 1_L_1
       rect:
         serializedVersion: 2
         x: 5419
@@ -1201,7 +1201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_30
+      name: 1_L_2
       rect:
         serializedVersion: 2
         x: 5832
@@ -1222,7 +1222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_31
+      name: 1_L_3
       rect:
         serializedVersion: 2
         x: 6246
@@ -1243,7 +1243,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_32
+      name: 2_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1264,7 +1264,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_33
+      name: 2_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -1285,7 +1285,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_34
+      name: 2_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -1306,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_35
+      name: 2_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -1327,7 +1327,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_36
+      name: 2_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -1348,7 +1348,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_37
+      name: 2_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -1369,7 +1369,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_38
+      name: 2_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -1390,7 +1390,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_39
+      name: 2_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -1411,7 +1411,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_40
+      name: 2_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -1432,7 +1432,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_41
+      name: 2_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -1453,7 +1453,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_42
+      name: 2_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -1474,7 +1474,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_43
+      name: 2_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -1495,7 +1495,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_44
+      name: 2_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -1516,7 +1516,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_45
+      name: 2_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -1537,7 +1537,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_46
+      name: 2_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -1558,7 +1558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_47
+      name: 2_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -1579,7 +1579,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_48
+      name: 3_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1600,7 +1600,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_49
+      name: 3_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -1621,7 +1621,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_50
+      name: 3_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -1642,7 +1642,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_51
+      name: 3_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -1663,7 +1663,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_52
+      name: 3_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -1684,7 +1684,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_53
+      name: 3_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -1705,7 +1705,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_54
+      name: 3_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -1726,7 +1726,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_55
+      name: 3_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -1747,7 +1747,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_56
+      name: 3_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -1768,7 +1768,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_57
+      name: 3_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -1789,7 +1789,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_58
+      name: 3_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -1810,7 +1810,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_59
+      name: 3_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -1831,7 +1831,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_60
+      name: 3_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -1852,7 +1852,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_61
+      name: 3_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -1873,7 +1873,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_62
+      name: 3_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -1894,7 +1894,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_63
+      name: 3_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -1915,7 +1915,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_64
+      name: 4_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1936,7 +1936,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_65
+      name: 4_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -1957,7 +1957,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_66
+      name: 4_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -1978,7 +1978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_67
+      name: 4_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -1999,7 +1999,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_68
+      name: 4_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -2020,7 +2020,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_69
+      name: 4_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -2041,7 +2041,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_70
+      name: 4_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -2062,7 +2062,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_71
+      name: 4_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -2083,7 +2083,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_72
+      name: 4_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -2104,7 +2104,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_73
+      name: 4_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -2125,7 +2125,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_74
+      name: 4_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -2146,7 +2146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_75
+      name: 4_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -2167,7 +2167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_76
+      name: 4_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -2188,7 +2188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_77
+      name: 4_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -2209,7 +2209,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_78
+      name: 4_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -2230,7 +2230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_79
+      name: 4_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -2251,7 +2251,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_80
+      name: 5_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2272,7 +2272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_81
+      name: 5_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -2293,7 +2293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_82
+      name: 5_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -2314,7 +2314,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_83
+      name: 5_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -2335,7 +2335,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_84
+      name: 5_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -2356,7 +2356,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_85
+      name: 5_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -2377,7 +2377,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_86
+      name: 5_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -2398,7 +2398,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_87
+      name: 5_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -2419,7 +2419,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_88
+      name: 5_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -2440,7 +2440,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_89
+      name: 5_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -2461,7 +2461,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_90
+      name: 5_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -2482,7 +2482,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_91
+      name: 5_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -2503,7 +2503,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_92
+      name: 5_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -2524,7 +2524,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_93
+      name: 5_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -2545,7 +2545,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_94
+      name: 5_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -2566,7 +2566,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_95
+      name: 5_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -2587,7 +2587,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_96
+      name: 6_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2608,7 +2608,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_97
+      name: 6_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -2629,7 +2629,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_98
+      name: 6_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -2650,7 +2650,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_99
+      name: 6_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -2671,7 +2671,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_100
+      name: 6_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -2692,7 +2692,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_101
+      name: 6_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -2713,7 +2713,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_102
+      name: 6_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -2734,7 +2734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_103
+      name: 6_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -2755,7 +2755,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_104
+      name: 6_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -2776,7 +2776,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_105
+      name: 6_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -2797,7 +2797,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_106
+      name: 6_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -2818,7 +2818,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_107
+      name: 6_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -2839,7 +2839,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_108
+      name: 6_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -2860,7 +2860,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_109
+      name: 6_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -2881,7 +2881,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_110
+      name: 6_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -2902,7 +2902,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_111
+      name: 6_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -2923,7 +2923,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_112
+      name: 7_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -2944,7 +2944,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_113
+      name: 7_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -2965,7 +2965,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_114
+      name: 7_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -2986,7 +2986,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_115
+      name: 7_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -3007,7 +3007,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_116
+      name: 7_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -3028,7 +3028,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_117
+      name: 7_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -3049,7 +3049,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_118
+      name: 7_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -3070,7 +3070,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_119
+      name: 7_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -3091,7 +3091,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_120
+      name: 7_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -3112,7 +3112,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_121
+      name: 7_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -3133,7 +3133,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_122
+      name: 7_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -3154,7 +3154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_123
+      name: 7_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -3175,7 +3175,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_124
+      name: 7_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -3196,7 +3196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_125
+      name: 7_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -3217,7 +3217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_126
+      name: 7_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -3238,7 +3238,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_127
+      name: 7_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -3259,7 +3259,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_128
+      name: 8_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3280,7 +3280,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_129
+      name: 8_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -3301,7 +3301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_130
+      name: 8_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -3322,7 +3322,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_131
+      name: 8_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -3343,7 +3343,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_132
+      name: 8_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -3364,7 +3364,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_133
+      name: 8_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -3385,7 +3385,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_134
+      name: 8_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -3406,7 +3406,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_135
+      name: 8_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -3427,7 +3427,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_136
+      name: 8_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -3448,7 +3448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_137
+      name: 8_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -3469,7 +3469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_138
+      name: 8_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -3490,7 +3490,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_139
+      name: 8_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -3511,7 +3511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_140
+      name: 8_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -3532,7 +3532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_141
+      name: 8_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -3553,7 +3553,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_142
+      name: 8_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -3574,7 +3574,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_143
+      name: 8_L_3
       rect:
         serializedVersion: 2
         x: 6235
@@ -3595,7 +3595,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_144
+      name: 9_D_0
       rect:
         serializedVersion: 2
         x: 0
@@ -3616,7 +3616,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_145
+      name: 9_D_1
       rect:
         serializedVersion: 2
         x: 411
@@ -3637,7 +3637,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_146
+      name: 9_D_2
       rect:
         serializedVersion: 2
         x: 824
@@ -3658,7 +3658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_147
+      name: 9_D_3
       rect:
         serializedVersion: 2
         x: 1238
@@ -3679,7 +3679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_148
+      name: 9_U_0
       rect:
         serializedVersion: 2
         x: 1651
@@ -3700,7 +3700,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_149
+      name: 9_U_1
       rect:
         serializedVersion: 2
         x: 2064
@@ -3721,7 +3721,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_150
+      name: 9_U_2
       rect:
         serializedVersion: 2
         x: 2478
@@ -3742,7 +3742,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_151
+      name: 9_U_3
       rect:
         serializedVersion: 2
         x: 2891
@@ -3763,7 +3763,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_152
+      name: 9_R_0
       rect:
         serializedVersion: 2
         x: 3340
@@ -3784,7 +3784,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_153
+      name: 9_R_1
       rect:
         serializedVersion: 2
         x: 3753
@@ -3805,7 +3805,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_154
+      name: 9_R_2
       rect:
         serializedVersion: 2
         x: 4167
@@ -3826,7 +3826,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_155
+      name: 9_R_3
       rect:
         serializedVersion: 2
         x: 4580
@@ -3847,7 +3847,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_156
+      name: 9_L_0
       rect:
         serializedVersion: 2
         x: 4994
@@ -3868,7 +3868,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_157
+      name: 9_L_1
       rect:
         serializedVersion: 2
         x: 5407
@@ -3889,7 +3889,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_158
+      name: 9_L_2
       rect:
         serializedVersion: 2
         x: 5820
@@ -3910,7 +3910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skin_159
+      name: 9_L_3
       rect:
         serializedVersion: 2
         x: 6235
