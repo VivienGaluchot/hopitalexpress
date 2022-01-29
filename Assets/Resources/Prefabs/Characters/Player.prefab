@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
   - component: {fileID: 3828187791805623832}
+  - component: {fileID: 1326638615957669793}
+  - component: {fileID: 4707253034973407282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -107,7 +109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -181721292096639834, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: 534282388630564384, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -203,3 +205,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlaceHolder: {fileID: 6301924330231784581}
+--- !u!114 &1326638615957669793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508764698176005531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpriteLibraryAsset: {fileID: 11400000, guid: 26f4179e574b350468bb99ce93feb05c, type: 2}
+--- !u!114 &4707253034973407282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508764698176005531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: -1.3936018e+32
+  m_labelHash: -1.4043723e-28
