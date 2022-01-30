@@ -270,17 +270,19 @@ public class PlayerController : MonoBehaviour {
 			} else
 				container = containerTargets[0];
 
-			var containerAnswer = container.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
-			if (containerAnswer.givenItem != null) {
-				ReceiveItemFromContainer(containerAnswer.givenItem);
-
-				return true;
-			} else {
-				if (containerAnswer.gathering) {
-					action = Actions.gathering;
-					containerGathered = container.GetComponent<ContainerController>();
+			if (container) {
+				var containerAnswer = container.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
+				if (containerAnswer.givenItem != null) {
+					ReceiveItemFromContainer(containerAnswer.givenItem);
 
 					return true;
+				} else {
+					if (containerAnswer.gathering) {
+						action = Actions.gathering;
+						containerGathered = container.GetComponent<ContainerController>();
+
+						return true;
+					}
 				}
 			}
 		}
@@ -332,6 +334,8 @@ public class PlayerController : MonoBehaviour {
 			Destroy(HeldGO);
 			HeldGO = null;
 			heldType = HeldTypes.none;
+
+			trashTarget.GetComponent<Animator>().SetTrigger("activate");
 
 			return true;
 		}
