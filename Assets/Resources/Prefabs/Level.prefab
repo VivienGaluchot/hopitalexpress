@@ -1343,7 +1343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6663673547527717404, guid: c97b3e9f8624ba942978904c62ad7a93, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.958
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 6663673547527717404, guid: c97b3e9f8624ba942978904c62ad7a93, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1629,9 +1629,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5789729262198045975, guid: 46babc510e894b2439e42886fea82a7d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7773188742297225556, guid: 46babc510e894b2439e42886fea82a7d, type: 3}
       propertyPath: m_Name
       value: RedDispenser
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773188742297225556, guid: 46babc510e894b2439e42886fea82a7d, type: 3}
+      propertyPath: m_TagString
+      value: Container
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46babc510e894b2439e42886fea82a7d, type: 3}
@@ -1647,6 +1655,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5231021139090138113}
     m_Modifications:
+    - target: {fileID: -8194648015205012565, guid: d0f0e0c27286c374484a9a0f26fd4fc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4813458817209039267, guid: d0f0e0c27286c374484a9a0f26fd4fc7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1695,6 +1707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 7773188742297225556, guid: d0f0e0c27286c374484a9a0f26fd4fc7, type: 3}
+      propertyPath: m_TagString
+      value: Container
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0f0e0c27286c374484a9a0f26fd4fc7, type: 3}
 --- !u!4 &9122724619039161874 stripped
@@ -1719,11 +1735,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8483707085001100653, guid: ef4e761a159ab874ca0a448093ea686d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.915
+      value: -7.35
       objectReference: {fileID: 0}
     - target: {fileID: 8483707085001100653, guid: ef4e761a159ab874ca0a448093ea686d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.629
+      value: 3.53
       objectReference: {fileID: 0}
     - target: {fileID: 8483707085001100653, guid: ef4e761a159ab874ca0a448093ea686d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1901,11 +1917,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7924873279425366146, guid: 3142c311403cfa54794b12c334dc12d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.993
+      value: -2.98
       objectReference: {fileID: 0}
     - target: {fileID: 7924873279425366146, guid: 3142c311403cfa54794b12c334dc12d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.572
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 7924873279425366146, guid: 3142c311403cfa54794b12c334dc12d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1957,6 +1973,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5231021139090138113}
     m_Modifications:
+    - target: {fileID: 674862469233588448, guid: 27b843b41855d71409409763d7fde4ca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4813458817209039267, guid: 27b843b41855d71409409763d7fde4ca, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2004,6 +2024,10 @@ PrefabInstance:
     - target: {fileID: 7773188742297225556, guid: 27b843b41855d71409409763d7fde4ca, type: 3}
       propertyPath: m_Name
       value: YellowDispenser
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773188742297225556, guid: 27b843b41855d71409409763d7fde4ca, type: 3}
+      propertyPath: m_TagString
+      value: Container
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27b843b41855d71409409763d7fde4ca, type: 3}

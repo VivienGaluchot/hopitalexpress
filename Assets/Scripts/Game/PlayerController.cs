@@ -130,9 +130,7 @@ public class PlayerController : MonoBehaviour {
 							// 1
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.down;
-							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
-							DetectionCollider.size = new Vector2(.3f, .2f);
-							DetectionCollider.offset = new Vector2(0f, -.55f);
+							DetectionCollider.offset = new Vector2(0f, -.25f);
 						}
 						break;
 					case 90f:
@@ -143,9 +141,7 @@ public class PlayerController : MonoBehaviour {
 							if(direction == WalkDirections.idle)
 								animator.speed = animatorSpeed;
 							direction = WalkDirections.right;
-							DetectionCollider.direction = CapsuleDirection2D.Vertical;
-							DetectionCollider.size = new Vector2(.2f, .3f);
-							DetectionCollider.offset = new Vector2(.35f, -.2f);
+							DetectionCollider.offset = new Vector2(.25f, 0);
 						}
 						break;
 					case -90f:
@@ -153,9 +149,7 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkLeft");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.left;
-							DetectionCollider.direction = CapsuleDirection2D.Vertical;
-							DetectionCollider.size = new Vector2(.2f, .3f);
-							DetectionCollider.offset = new Vector2(-.35f, -.2f);
+							DetectionCollider.offset = new Vector2(-.25f, 0);
 						}
 						break;
 					default:
@@ -163,9 +157,7 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkUp");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.up;
-							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
-							DetectionCollider.size = new Vector2(.3f, .2f);
-							DetectionCollider.offset = new Vector2(0f, .15f);
+							DetectionCollider.offset = new Vector2(0f, .25f);
 						}
 						break;
 				}
@@ -185,9 +177,9 @@ public class PlayerController : MonoBehaviour {
 	private void SortListByDistance(List<GameObject> theList) {
 		theList.Sort(delegate (GameObject x, GameObject y) {
 			if (Vector3.Distance(transform.position, x.transform.position) > Vector3.Distance(transform.position, y.transform.position))
-				return -1;
-			else
 				return 1;
+			else
+				return -1;
 		});
 	}
 
@@ -207,10 +199,10 @@ public class PlayerController : MonoBehaviour {
 	private bool TryDropItem() {
 		HeldGO.transform.parent = null;
 		HeldGO.transform.rotation = Quaternion.identity;
+		HeldGO.transform.position = transform.position + (Vector3)DetectionCollider.offset * 2;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = true;
 		HeldGO = null;
 		heldType = HeldTypes.none;
-
 		return true;
 	}
 
