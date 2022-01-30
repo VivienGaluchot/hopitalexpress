@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour {
 		gc = parent;
 		speed = _speed;
 		action = Actions.nothing;
-		rb2D = GetComponent<Rigidbody2D>();
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();
 		patientTargets = new List<GameObject>();
@@ -177,6 +176,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
             Vector3 m_Input = new Vector3(horiz, vert, 0);
+			rb2D = GetComponent<Rigidbody2D>();
             rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
         }
 	}

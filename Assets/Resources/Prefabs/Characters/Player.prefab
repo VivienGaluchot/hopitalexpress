@@ -72,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7357550112948327227, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: 534282388630564384, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6427468, y: 0.9932584}
+  m_Size: {x: 0.6427468, y: 0.988764}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,8 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinIndex: 0
-  spriteSheetName: 
+  selected: 0
+  skinOffset: 16
+  spritePath: Illustrations/Perso/Skin
 --- !u!1 &3018304389473641781
 GameObject:
   m_ObjectHideFlags: 0
