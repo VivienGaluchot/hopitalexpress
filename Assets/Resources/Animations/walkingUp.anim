@@ -84,16 +84,16 @@ AnimationClip:
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: 3620591547966533011, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
+      value: {fileID: -1825105393691405971, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
     attribute: m_Sprite
-    path: Hair
+    path: Blouse
     classID: 212
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: -1825105393691405971, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
+      value: {fileID: 3620591547966533011, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
     attribute: m_Sprite
-    path: Blouse
+    path: Doc
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
@@ -118,14 +118,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     - serializedVersion: 2
-      path: 1019596327
+      path: 2804245124
       attribute: 0
       script: {fileID: 0}
       typeID: 212
       customType: 23
       isPPtrCurve: 1
     - serializedVersion: 2
-      path: 2804245124
+      path: 3188505476
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -150,8 +150,8 @@ AnimationClip:
     - {fileID: -9185515799868983153, guid: 87047aad72891b3499beb624d13a8224, type: 3}
     - {fileID: -7811210312389729396, guid: 87047aad72891b3499beb624d13a8224, type: 3}
     - {fileID: -4884871960672347632, guid: 87047aad72891b3499beb624d13a8224, type: 3}
-    - {fileID: 3620591547966533011, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
     - {fileID: -1825105393691405971, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
+    - {fileID: 3620591547966533011, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

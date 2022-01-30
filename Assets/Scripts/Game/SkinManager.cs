@@ -4,31 +4,57 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SkinManager : MonoBehaviour {
+
     public int selected = 0;
+
     public int skinOffset = 0;
 
     public string spritePath;
 
 
+    // --------------------------
+    // Callbacks
+    // --------------------------
 
-    private SpriteRenderer spriteRenderer;
-
-
-    private Dictionary<string, Sprite> spriteSheet;
+    private void Awake() {
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
+        load();
+    }
 
     private void Start() {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        Sprite[] sprites = Resources.LoadAll<Sprite>(this.spritePath);
-        this.spriteSheet = new Dictionary<string, Sprite>();
-        foreach (var x in sprites) {
-            this.spriteSheet.Add(x.name, x);
-        }
+        load();
     }
 
-    // Runs after the animation has done its work
+    // Runs after the animation
     private void LateUpdate() {
-        // compute actual skin sprite name
-        // "azaef53454_<nombre>" => "azaef53454_<nombre + selected * skinOffset>"
+        applyReplacement();
+    }
+
+
+    // --------------------------
+    // Internals
+    // --------------------------
+
+    private string loadedSpritePath;
+    private SpriteRenderer spriteRenderer;
+    private Dictionary<string, Sprite> spriteSheet;
+
+    private void load() {
+        if (this.loadedSpritePath != this.spritePath)  {
+            Sprite[] sprites = Resources.LoadAll<Sprite>(this.spritePath);
+            this.spriteSheet = new Dictionary<string, Sprite>();
+            foreach (var x in sprites) {
+                this.spriteSheet.Add(x.name, x);
+            }
+        }
+        this.loadedSpritePath = this.spritePath;
+    }
+
+    // compute actual skin sprite name and update it
+    // "azaef53454_<nombre>" => "azaef53454_<nombre + selected * skinOffset>"
+    private void applyReplacement() {
+        load();
 
         var regex = new Regex(@"^(.*_)(\d+)$");
         var match = regex.Match(this.spriteRenderer.sprite.name);
@@ -43,5 +69,4 @@ public class SkinManager : MonoBehaviour {
             Debug.LogWarning(("skin sprite not found ", selectedSpriteName));
         }
     }
-
 }
