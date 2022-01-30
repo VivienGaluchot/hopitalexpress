@@ -347,72 +347,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &526203184
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 564105362}
-    m_Modifications:
-    - target: {fileID: -1278069542510123713, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_Simulated
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376247, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_Name
-      value: PiluleJaune
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938327028945376249, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1633f02146cb3f4b8a73edbed62a001, type: 3}
---- !u!4 &564105362 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4645712757895182434, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-  m_PrefabInstance: {fileID: 958183066}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &636628986
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,10 +531,6 @@ PrefabInstance:
     - target: {fileID: 3508764698176005531, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
       propertyPath: m_Name
       value: Patient
-      objectReference: {fileID: 0}
-    - target: {fileID: 5215556159217211524, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-      propertyPath: selected
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}

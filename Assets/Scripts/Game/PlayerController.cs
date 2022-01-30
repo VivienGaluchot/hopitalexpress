@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 					// Holding nothing, can we grab something?
 					if (!TryTakePatientFromMachine())
 						if (!TryTakePatientFromSeat())
-							if (!TryTakeItem())
+							if (!TryTakeItemFromGround())
 								if (!TryTakeItemFromCraft())
 									TryTakeFromContainer();
 					break;
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour {
 		});
 	}
 
-	private bool TryTakeItem() {
+	private bool TryTakeItemFromGround() {
 		// Look for item nearby
 		if (itemTargets.Count > 0) {
 			// Sort by distance
@@ -418,6 +418,7 @@ public class PlayerController : MonoBehaviour {
 		HeldGO = Beer;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = false;
 		HeldGO.transform.parent = PlaceHolder;
+		HeldGO.transform.localRotation = Quaternion.identity;
 		HeldGO.transform.localPosition = Vector3.zero;
 	}
 

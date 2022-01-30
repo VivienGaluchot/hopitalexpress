@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 1304559474433477215}
   - component: {fileID: 5215556159217211524}
   m_Layer: 0
-  m_Name: Blouse
+  m_Name: Clothes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4558647280124325500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.484, z: 0}
+  m_LocalPosition: {x: 0, y: 0.283, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -436,12 +436,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2747664617569608820, guid: c4efd23ecf612cf4687314466e184af0, type: 3}
+  m_Sprite: {fileID: 4862942130373081034, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.79671574, y: 0.6636704}
+  m_Size: {x: 0.79625475, y: 0.6636752}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 2
   skinOffset: 4
-  spritePath: Illustrations/Perso/PNJ
+  spritePath: Illustrations/Perso/Clothes
 --- !u!1 &4671034273547603053
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6687400769263432422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.004, y: 0.99, z: 0}
+  m_LocalPosition: {x: 0.023, y: 0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -664,7 +664,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.79671574, y: 0.6636704}
+  m_Size: {x: 0.7965428, y: 1.0617977}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
