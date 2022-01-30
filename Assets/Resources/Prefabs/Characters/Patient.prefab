@@ -142,9 +142,9 @@ GameObject:
   - component: {fileID: 3508764698176005535}
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
-  - component: {fileID: 3828187791805623832}
+  - component: {fileID: 4471882130300888735}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Patient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3828187791805623832
+--- !u!114 &4471882130300888735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,10 +262,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3508764698176005531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fadb22cb394f8a1459a9afaaae7f545f, type: 3}
+  m_Script: {fileID: 11500000, guid: d8abbf1d3a1f8844cbb775e2cc9cad9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaceHolder: {fileID: 6301924330231784581}
 --- !u!1 &4558647280124325500
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4558647280124325500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.286, z: 0}
+  m_LocalPosition: {x: 0, y: 0.484, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -338,7 +337,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8971594840958587764, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
+  m_Sprite: {fileID: -2747664617569608820, guid: c4efd23ecf612cf4687314466e184af0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -363,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 0
   skinOffset: 4
-  spritePath: Illustrations/Perso/Doc
+  spritePath: Illustrations/Perso/PNJ
 --- !u!1 &4671034273547603053
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,8 +472,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.6761653, w: 0.73675}
   m_LocalPosition: {x: 0.387, y: 0.395, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3295310679097572063}
+  m_Children: []
   m_Father: {fileID: 3508764698176005528}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85.089}
@@ -501,7 +499,7 @@ GameObject:
   - component: {fileID: 7846585628549479094}
   - component: {fileID: 2759808748405026704}
   m_Layer: 0
-  m_Name: Doc
+  m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6687400769263432422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.808, z: 0}
+  m_LocalPosition: {x: -0.004, y: 0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -561,7 +559,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1213805488590403752, guid: a25dc9f1cee52b542b44c95b82e725bb, type: 3}
+  m_Sprite: {fileID: 6291076074326483787, guid: 3d322fbe23119164d882d9d98e06c480, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -586,66 +584,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 0
   skinOffset: 4
-  spritePath: Illustrations/Perso/Doc
---- !u!1001 &161799764859014105
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4645712757895182434}
-    m_Modifications:
-    - target: {fileID: 3424318588629070083, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_Name
-      value: SeringueBleue
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
---- !u!4 &3295310679097572063 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3424318588629070086, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
-  m_PrefabInstance: {fileID: 161799764859014105}
-  m_PrefabAsset: {fileID: 0}
+  spritePath: Illustrations/Perso/Hair

@@ -16,11 +16,6 @@ public class SkinManager : MonoBehaviour {
     // Callbacks
     // --------------------------
 
-    private void Awake() {
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        load();
-    }
-
     private void Start() {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
         load();
@@ -66,7 +61,7 @@ public class SkinManager : MonoBehaviour {
         if (this.spriteSheet.ContainsKey(selectedSpriteName)) {
             this.spriteRenderer.sprite = this.spriteSheet[selectedSpriteName];
         } else {
-            Debug.LogWarning(("skin sprite not found ", selectedSpriteName));
+            Debug.LogWarning(("skin sprite not found ", selectedSpriteName, this, this.loadedSpritePath));
         }
     }
 }
