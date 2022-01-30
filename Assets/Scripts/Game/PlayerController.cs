@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour {
 		gc = parent;
 		speed = _speed;
 		action = Actions.nothing;
-		rb2D = GetComponent<Rigidbody2D>();
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();
 		patientTargets = new List<GameObject>();
@@ -100,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 					// Holding nothing, can we grab something?
 					if (!TryTakePatientFromMachine())
 						if (!TryTakePatientFromSeat())
-							if (!TryTakeItem())
+							if (!TryTakeItemFromGround())
 								if (!TryTakeItemFromCraft())
 									TryTakeFromContainer();
 					break;
@@ -131,9 +130,7 @@ public class PlayerController : MonoBehaviour {
 							// 1
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.down;
-							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
-							DetectionCollider.size = new Vector2(.3f, .2f);
-							DetectionCollider.offset = new Vector2(0f, -.55f);
+							DetectionCollider.offset = new Vector2(0f, -.25f);
 						}
 						break;
 					case 90f:
@@ -144,9 +141,7 @@ public class PlayerController : MonoBehaviour {
 							if(direction == WalkDirections.idle)
 								animator.speed = animatorSpeed;
 							direction = WalkDirections.right;
-							DetectionCollider.direction = CapsuleDirection2D.Vertical;
-							DetectionCollider.size = new Vector2(.2f, .3f);
-							DetectionCollider.offset = new Vector2(.35f, -.2f);
+							DetectionCollider.offset = new Vector2(.25f, 0);
 						}
 						break;
 					case -90f:
@@ -154,9 +149,7 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkLeft");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.left;
-							DetectionCollider.direction = CapsuleDirection2D.Vertical;
-							DetectionCollider.size = new Vector2(.2f, .3f);
-							DetectionCollider.offset = new Vector2(-.35f, -.2f);
+							DetectionCollider.offset = new Vector2(-.25f, 0);
 						}
 						break;
 					default:
@@ -164,9 +157,7 @@ public class PlayerController : MonoBehaviour {
 							animator.SetTrigger("walkUp");
 							animator.speed = animatorSpeed;
 							direction = WalkDirections.up;
-							DetectionCollider.direction = CapsuleDirection2D.Horizontal;
-							DetectionCollider.size = new Vector2(.3f, .2f);
-							DetectionCollider.offset = new Vector2(0f, .15f);
+							DetectionCollider.offset = new Vector2(0f, .25f);
 						}
 						break;
 				}
@@ -177,6 +168,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
             Vector3 m_Input = new Vector3(horiz, vert, 0);
+			rb2D = GetComponent<Rigidbody2D>();
             rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
         }
 	}
@@ -185,13 +177,13 @@ public class PlayerController : MonoBehaviour {
 	private void SortListByDistance(List<GameObject> theList) {
 		theList.Sort(delegate (GameObject x, GameObject y) {
 			if (Vector3.Distance(transform.position, x.transform.position) > Vector3.Distance(transform.position, y.transform.position))
-				return -1;
-			else
 				return 1;
+			else
+				return -1;
 		});
 	}
 
-	private bool TryTakeItem() {
+	private bool TryTakeItemFromGround() {
 		// Look for item nearby
 		if (itemTargets.Count > 0) {
 			// Sort by distance
@@ -207,10 +199,10 @@ public class PlayerController : MonoBehaviour {
 	private bool TryDropItem() {
 		HeldGO.transform.parent = null;
 		HeldGO.transform.rotation = Quaternion.identity;
+		HeldGO.transform.position = transform.position + (Vector3)DetectionCollider.offset * 2;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = true;
 		HeldGO = null;
 		heldType = HeldTypes.none;
-
 		return true;
 	}
 
@@ -278,17 +270,19 @@ public class PlayerController : MonoBehaviour {
 			} else
 				container = containerTargets[0];
 
-			var containerAnswer = container.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
-			if (containerAnswer.givenItem != null) {
-				ReceiveItemFromContainer(containerAnswer.givenItem);
-
-				return true;
-			} else {
-				if (containerAnswer.gathering) {
-					action = Actions.gathering;
-					containerGathered = container.GetComponent<ContainerController>();
+			if (container) {
+				var containerAnswer = container.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
+				if (containerAnswer.givenItem != null) {
+					ReceiveItemFromContainer(containerAnswer.givenItem);
 
 					return true;
+				} else {
+					if (containerAnswer.gathering) {
+						action = Actions.gathering;
+						containerGathered = container.GetComponent<ContainerController>();
+
+						return true;
+					}
 				}
 			}
 		}
@@ -340,6 +334,8 @@ public class PlayerController : MonoBehaviour {
 			Destroy(HeldGO);
 			HeldGO = null;
 			heldType = HeldTypes.none;
+
+			trashTarget.GetComponent<Animator>().SetTrigger("activate");
 
 			return true;
 		}
@@ -426,6 +422,7 @@ public class PlayerController : MonoBehaviour {
 		HeldGO = Beer;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = false;
 		HeldGO.transform.parent = PlaceHolder;
+		HeldGO.transform.localRotation = Quaternion.identity;
 		HeldGO.transform.localPosition = Vector3.zero;
 	}
 

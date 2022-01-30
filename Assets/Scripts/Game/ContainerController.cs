@@ -7,7 +7,6 @@ public class ContainerController : MonoBehaviour {
 
 	public GameObject askedItem, givenItem;
 	public float askedTime;
-	public SpriteRenderer sr;
 
 	public string askedItemName { get; private set; }
 
@@ -22,10 +21,6 @@ public class ContainerController : MonoBehaviour {
 	private void Start() {
 		TimeBar.transform.parent.gameObject.SetActive(false);
 		isGathering = false;
-
-		// Display item
-		if (sr != null)
-			sr.sprite = givenItem.GetComponent<SpriteRenderer>().sprite;
 
 		if (askedItem != null)
 			askedItemName = askedItem.GetComponent<ItemController>().itemName;
