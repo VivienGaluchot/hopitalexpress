@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LevelEditorController : MonoBehaviour {
 
+	public bool randomFun;
+	public float tickrate;
+	private float elapsedTime;
+	private int clicked, total;
+
 	public float size;
 
 	public Sprite[] wallSprites;
@@ -22,9 +27,30 @@ public class LevelEditorController : MonoBehaviour {
 
 	private void Start() {
 		InitGrid();
+		elapsedTime = 0f;
+		clicked = 0;
+		total = columns * rows;
 	}
 
-	public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
+    private void Update() {
+        if(randomFun) {
+			elapsedTime += Time.deltaTime;
+			if(elapsedTime > tickrate) {
+				elapsedTime -= tickrate;
+				int i = Random.Range(0, rows), j = Random.Range(0, columns);
+				bool reset = Random.Range(0, 1f) < (float)clicked / total;
+				if (grid[(i, j)].value > 0 && reset) {
+					clicked--;
+					ClickedCell(i, j, true, true);
+				} else if(grid[(i, j)].value == 0 && !reset) {
+					clicked++;
+					ClickedCell(i, j, true);
+				}
+            }
+		}
+    }
+
+    public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
 		Cell cell;
 		if (grid.TryGetValue((i, j), out cell) && (cell.value != 0 || clicked) && !reset) {
 			int newValue = ComputeCellValue(i, j);
