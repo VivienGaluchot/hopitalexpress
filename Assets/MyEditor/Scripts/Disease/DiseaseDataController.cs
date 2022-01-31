@@ -69,8 +69,6 @@ public class DiseaseDataController : MonoBehaviour {
 		sw.Close();
 	}
 
-	private List<List<GameObject>> nodes;
-
 	public void LoadData() {
 		string filename = dd.options[dd.value].text;
 		DiseaseData Data = JsonUtility.FromJson<DiseaseData>(ReadFromFile(filename));

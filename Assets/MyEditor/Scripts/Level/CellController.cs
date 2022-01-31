@@ -7,8 +7,6 @@ public class CellController : MonoBehaviour {
     private LevelEditorController lec;
     private int row, column;
 
-    private Color baseColor;
-
     private bool isClicked;
 
     public void Setup(LevelEditorController parent, int i, int j) {
@@ -17,25 +15,29 @@ public class CellController : MonoBehaviour {
         column = j;
     }
 
+    public void AdjustClickedBool(int value) {
+        isClicked = value > 0;
+    }
+
     private void OnMouseEnter() {
-        if(!isClicked && Input.GetMouseButton(0)) {
+        if(!isClicked && Input.GetMouseButton(0) && !lec.DoesHitUI()) {
             isClicked = true;
             lec.ClickedCell(row, column, true);
-        } else if(isClicked && Input.GetMouseButton(1)) {
+        } else if(isClicked && Input.GetMouseButton(1) && !lec.DoesHitUI()) {
             isClicked = false;
             lec.ClickedCell(row, column, true, true);
         }
     }
 
     private void OnMouseDown() {
-        if(!isClicked) {
+        if(!isClicked && !lec.DoesHitUI()) {
             isClicked = true;
             lec.ClickedCell(row, column, true);
         }
     }
 
     private void OnMouseOver() {
-        if(Input.GetMouseButtonDown(1) && isClicked) {
+        if(Input.GetMouseButtonDown(1) && isClicked && !lec.DoesHitUI()) {
             isClicked = false;
             lec.ClickedCell(row, column, true, true);
         }

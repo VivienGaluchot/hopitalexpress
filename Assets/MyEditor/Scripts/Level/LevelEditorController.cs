@@ -1,22 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour {
 
+
+	// USELESS BUT FUN
 	public bool randomFun;
 	public float tickrate;
 	private float elapsedTime;
 	private int clicked, total;
+	// END OF USELESS BUT FUN
 
 	public float size;
+	public int columns, rows;
 
 	public Sprite[] wallSprites;
-
 	private Sprite baseSprite;
 
-	public int columns, rows;
-	private Dictionary<(int, int), Cell> grid;
+	public Dictionary<(int, int), Cell> grid { get; private set; }
+
+	[SerializeField] private GraphicRaycaster m_Raycaster;
+	[SerializeField] private PointerEventData m_PointerEventData;
+	[SerializeField] private EventSystem m_EventSystem;
+	[SerializeField] private GameObject MenuPanel;
 
 	public class Cell {
 		public Cell(SpriteRenderer sr) { this.sr = sr; value = 0; }
@@ -33,7 +41,10 @@ public class LevelEditorController : MonoBehaviour {
 	}
 
     private void Update() {
-        if(randomFun) {
+		if (Input.GetKeyDown("tab"))
+			MenuPanel.SetActive(!MenuPanel.activeSelf);
+
+		if (randomFun) {
 			elapsedTime += Time.deltaTime;
 			if(elapsedTime > tickrate) {
 				elapsedTime -= tickrate;
@@ -50,7 +61,17 @@ public class LevelEditorController : MonoBehaviour {
 		}
     }
 
-    public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
+	public bool DoesHitUI() {
+		m_PointerEventData = new PointerEventData(m_EventSystem);
+		m_PointerEventData.position = Input.mousePosition;
+
+		List<RaycastResult> results = new List<RaycastResult>();
+		m_Raycaster.Raycast(m_PointerEventData, results);
+
+		return results.Count != 0;
+	}
+
+	public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
 		Cell cell;
 		if (grid.TryGetValue((i, j), out cell) && (cell.value != 0 || clicked) && !reset) {
 			int newValue = ComputeCellValue(i, j);
@@ -193,6 +214,21 @@ public class LevelEditorController : MonoBehaviour {
 		return sum;
 	}
 
+	public void ClearGrid() {
+		foreach (KeyValuePair<(int, int), Cell> cell in grid) {
+			cell.Value.value = 0;
+			ChangeSprite(cell.Value);
+			cell.Value.sr.gameObject.GetComponent<CellController>().AdjustClickedBool(cell.Value.value);
+		}
+	}
+
+	public void RefreshGrid() {
+		foreach (KeyValuePair<(int, int), Cell> cell in grid) {
+			ChangeSprite(cell.Value);
+			cell.Value.sr.gameObject.GetComponent<CellController>().AdjustClickedBool(cell.Value.value);
+		}
+	}
+
 	private void InitGrid() {
 		baseSprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 1, 1), new Vector2(.5f, .5f), size);
 		grid = new Dictionary<(int, int), Cell>();
@@ -215,6 +251,6 @@ public class LevelEditorController : MonoBehaviour {
 			}
 		}
 
-		Camera.main.transform.position = new Vector3(15f/size, -10f/size, -10f);
+		Camera.main.transform.position = new Vector3((columns-1)/2f/size, (1-rows)/2f/size, -10f);
 	}
 }
