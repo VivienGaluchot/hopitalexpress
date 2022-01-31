@@ -1,0 +1,1 @@
+{"name":"Rhume à tisme","lifespan":60.0,"points":120.0,"sprite":"Faces_4","treatment":"Traitement_1.txt"}
