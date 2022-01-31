@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class EditorController : MonoBehaviour {
 
+	// IDEA : use monobehaviour.OnMouse...
+	[SerializeField] private Material defaultMat, outlineMat;
 	[SerializeField] private Transform canvas;
 	public GameObject LinePrefab;
 	public GameObject ValueDisplayer;
@@ -78,9 +80,14 @@ public class EditorController : MonoBehaviour {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit2D hit2D = Physics2D.GetRayIntersection(ray);
 
-		clickedDown = null;
-		if (hit2D.collider)
+		if(clickedDown != null) {
+			clickedDown.GetComponentInChildren<SpriteRenderer>().material = defaultMat;
+			clickedDown = null;
+		}
+		if (hit2D.collider) {
 			clickedDown = hit2D.collider.gameObject;
+			clickedDown.GetComponentInChildren<SpriteRenderer>().material = outlineMat;
+		}
 	}
 
 	private bool DoesHitUI() {

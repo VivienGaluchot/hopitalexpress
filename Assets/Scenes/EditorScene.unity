@@ -321,6 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaea7f5eee7f7744b52ccaaa8d92c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  outlineMat: {fileID: 2100000, guid: 8f98b18660c15b94f82395a12fa516ad, type: 2}
   canvas: {fileID: 2103553993}
   LinePrefab: {fileID: 6339035237273098132, guid: e1218f7190a1b524293a215a0b67f6d4, type: 3}
   ValueDisplayer: {fileID: 3689046435970060870, guid: 9251d08adbe8f60428cfebfebec3344e, type: 3}
