@@ -5,15 +5,15 @@ using System;
 using System.IO;
 using System.Globalization;
 
-public class DataController : MonoBehaviour {
+public class TreatmentDataController : MonoBehaviour {
 
 	[SerializeField] private Dropdown dd;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
-    private EditorController ec;
+    private TreatmentEditorController ec;
 
     private void Start() {
-        ec = GetComponent<EditorController>();
+        ec = GetComponent<TreatmentEditorController>();
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 	}

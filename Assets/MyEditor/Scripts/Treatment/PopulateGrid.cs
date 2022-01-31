@@ -7,10 +7,10 @@ public class PopulateGrid : MonoBehaviour {
 
     public GameObject prefab;
 
-    private EditorController ec;
+    private TreatmentEditorController ec;
 
     private void Start() {
-        ec = GameObject.Find("EditorController").GetComponent<EditorController>();
+        ec = GameObject.Find("TreatmentEditorController").GetComponent<TreatmentEditorController>();
         Populate();
     }
 

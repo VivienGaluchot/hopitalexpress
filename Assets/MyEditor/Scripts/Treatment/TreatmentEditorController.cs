@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class EditorController : MonoBehaviour {
+public class TreatmentEditorController : MonoBehaviour {
 
 	// IDEA : use monobehaviour.OnMouse...
 	[SerializeField] private Material defaultMat, outlineMat;

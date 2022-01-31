@@ -8,10 +8,10 @@ public class ContentItemController : MonoBehaviour {
     [SerializeField] private Image DisplaySprite;
     [SerializeField] private Text DisplayName;
 
-    private EditorController ec;
+    private TreatmentEditorController ec;
     private string path;
 
-    public void Display(EditorController edCo, Sprite sprite, string name, string _path) {
+    public void Display(TreatmentEditorController edCo, Sprite sprite, string name, string _path) {
         ec = edCo;
         DisplaySprite.sprite = sprite;
         DisplayName.text = name;
