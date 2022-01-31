@@ -11,6 +11,7 @@ public class EditorController : MonoBehaviour {
 
 	// Store prefabs to serialize them later
 	public List<PrefabItem> MyPrefabs { get; private set; }
+	public List<GameObject> everyObjects { get; private set; }
 
 	private GameObject followerGO, clickedDown, lineStart, myLine;
 	private LineRenderer myLineLR;
@@ -24,7 +25,8 @@ public class EditorController : MonoBehaviour {
 
     private void Start() {
 		MyPrefabs = new List<PrefabItem>();
-    }
+		everyObjects = new List<GameObject>();
+	}
     private void Update() {
 		if (Input.GetKeyDown("escape")) {
 			StopDrawLine();
@@ -42,9 +44,11 @@ public class EditorController : MonoBehaviour {
 			// We didn't move, we have something to create, we're not over UI, we didn't clickeddownn something
 			if(clickedDownPos == worldPos && !DoesHitUI()) {
 				if (!clickedDown) {
-					if (followerGO != null)
-						MyPrefabs.Add(Instantiate(followerGO, worldPos, Quaternion.identity).GetComponent<PrefabItem>());
-					else
+					if (followerGO != null) {
+						GameObject newGo = Instantiate(followerGO, worldPos, Quaternion.identity);
+						MyPrefabs.Add(newGo.GetComponent<PrefabItem>());
+						everyObjects.Add(newGo);
+					} else
 						StopDrawLine();
 				} else {
 					DrawLine();
@@ -60,6 +64,14 @@ public class EditorController : MonoBehaviour {
 				clickedDown.transform.position = worldPos;
 			}
         }
+	}
+
+	public void ClearScreen() {
+		foreach(GameObject go in everyObjects) {
+			Destroy(go);
+		}
+		everyObjects.Clear();
+		MyPrefabs.Clear();
 	}
 
 	private void TryRayCastClicked() {
@@ -116,6 +128,7 @@ public class EditorController : MonoBehaviour {
 
 			isDrawingLine = false;
 			lineStart = null;
+			everyObjects.Add(myLine);
 			myLine = null;
 		} else {
 			// Clicked the starting object again

@@ -3,14 +3,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using System.Globalization;
 
 public class DataController : MonoBehaviour {
 
+	[SerializeField] private Dropdown dd;
+	[SerializeField] private InputField FileNameInputField;
     private EditorController ec;
 
     private void Start() {
         ec = GetComponent<EditorController>();
-    }
+		FetchDDOptions();
+	}
+
+	private void FetchDDOptions(string path = "") {
+		string[] paths = System.IO.Directory.GetFiles(path != "" ? path : UnityEngine.Windows.Directory.localFolder);
+		List<string> pathsList = new List<string>();
+		foreach (string s in paths) {
+			pathsList.Add(Path.GetFileName(s));
+		}
+		dd.ClearOptions();
+		dd.AddOptions(pathsList);
+	}
 
 	public class PrefabsData {
 		public List<PrefabData> myPrefabs;
@@ -50,6 +64,8 @@ public class DataController : MonoBehaviour {
 			WriteToFile(JsonUtility.ToJson(PrefabItemToPrefabData(starter)));
 		else
 			Debug.Log("NO STARTER FOUND -- Un objet ne doit pas avoir de parent pour être le point de départ du traitement");
+
+		FetchDDOptions();
 	}
 
 	public PrefabData PrefabItemToPrefabData(PrefabItem item) {
@@ -57,14 +73,18 @@ public class DataController : MonoBehaviour {
 		NextsData nsData = new NextsData(nextDataList);
 
 		foreach (PrefabItem.Next next in item.Nexts) {
-			nsData.Nexts.Add(new NextData(next.proba, PrefabItemToPrefabData(next.item)));
+			string proba = next.proba.text != "" ? next.proba.text : (1f/item.Nexts.Count).ToString();
+			proba = proba.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+			proba = proba.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+			nsData.Nexts.Add(new NextData(float.Parse(proba), PrefabItemToPrefabData(next.item)));
 		}
 
-		return new PrefabData(item.path, item.myTime, nsData);
+		return new PrefabData(item.path, item.TimeDisplayedValue(), nsData);
 	}
 
-	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Application.dataPath + "/MyEditor/DataTest.txt");
+	private void WriteToFile(string content, string path = "") {
+		StreamWriter sw = new StreamWriter(path != "" ? path : UnityEngine.Windows.Directory.localFolder + "/" + FileNameInputField.text + ".txt");
 		sw.WriteLine(content);
 		sw.Close();
 	}
@@ -72,14 +92,18 @@ public class DataController : MonoBehaviour {
 	private List<List<GameObject>> nodes;
 
 	public void LoadData() {
-		PrefabData Data = JsonUtility.FromJson<PrefabData>(ReadFromFile(Application.dataPath + "/MyEditor/DataTest.txt"));
-		nodes = new List<List<GameObject>>();
-		CreateGameObjectsFromPrefabData(Data);
-		OrganizeTree();
-	}
+		ec.ClearScreen();
+		string filename = dd.options[dd.value].text;
+		PrefabData Data = JsonUtility.FromJson<PrefabData>(ReadFromFile(filename));
+        FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
+        nodes = new List<List<GameObject>>();
+        CreateGameObjectsFromPrefabData(Data);
+        OrganizeTree();
+    }
+	
 
-	private string ReadFromFile(string path) {
-		StreamReader sr = new StreamReader(path);
+	private string ReadFromFile(string fileName, string path = "") {
+		StreamReader sr = new StreamReader(Path.Combine(path != "" ? path : UnityEngine.Windows.Directory.localFolder, fileName));
 		return sr.ReadToEnd();
 	}
 
@@ -88,24 +112,33 @@ public class DataController : MonoBehaviour {
 			nodes.Add(new List<GameObject>());
 
 		GameObject newItem = Instantiate(Resources.Load<GameObject>(data.path));
+		ec.everyObjects.Add(newItem);
 		newItem.AddComponent<PrefabItem>();
 		PrefabItem pi = newItem.GetComponent<PrefabItem>();
+		ec.MyPrefabs.Add(pi);
 		pi.path = data.path;
-		pi.myTime = data.time;
 
 		GameObject displayer = Instantiate(ec.ValueDisplayer, newItem.transform.position, Quaternion.identity, newItem.transform);
-		newItem.transform.Find("ValueDisplayer(Clone)/InputField/Text").gameObject.GetComponent<Text>().text = data.time.ToString();
+		newItem.transform.Find("ValueDisplayer(Clone)/InputField").gameObject.GetComponent<InputField>().text = data.time.ToString();
 
+		List<PrefabItem.Next> PrefabItemNexts = new List<PrefabItem.Next>();
 		foreach (NextData n in data.Nexts.Nexts) {
 			GameObject nextItem = CreateGameObjectsFromPrefabData(n.next, layer+1);
 			GameObject myLine = Instantiate(ec.LinePrefab);
+			ec.everyObjects.Add(myLine);
 			LineRenderer myLineLR = myLine.GetComponent<LineRenderer>();
 			myLineLR.SetPositions(new Vector3[] { newItem.transform.position, nextItem.transform.position });
 			myLine.GetComponent<LineController>().DisplayCanvas();
 
+			InputField probaInputField = myLine.GetComponent<LineController>().ProbaDisplayedValue();
+			probaInputField.text = n.proba.ToString();
+			PrefabItemNexts.Add(new PrefabItem.Next(nextItem.GetComponent<PrefabItem>(), probaInputField));
+			
 			pi.AddToStartingLine(myLineLR);
 			nextItem.GetComponent<PrefabItem>().AddToEndingLine(myLineLR);
+
 		}
+		pi.Nexts = PrefabItemNexts;
 
 		nodes[layer].Add(newItem);
 
@@ -113,6 +146,8 @@ public class DataController : MonoBehaviour {
 	}
 
 	private void OrganizeTree() {
-		Debug.Log(nodes);
-    }
+		for (int i = 0; i < nodes.Count; i++)
+			for (int j = 0; j < nodes[i].Count; j++)
+				nodes[i][j].transform.position = new Vector3(-nodes[i].Count / 2f + j, 4 - 2 * i, 0f);
+	}
 }

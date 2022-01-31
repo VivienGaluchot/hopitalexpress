@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +7,12 @@ public class PrefabItem : MonoBehaviour {
 
     public string path;
     public List<Next> Nexts;
-    public float myTime;
 
     [Serializable]
     public struct Next {
-        public Next(float _proba, PrefabItem _item) { proba = _proba; item = _item; }
+        public Next(PrefabItem _item, InputField _proba = null) { proba = _proba; item = _item; }
 
-        public float proba;
+        public InputField proba;
         public PrefabItem item;
     }
 
@@ -51,13 +49,13 @@ public class PrefabItem : MonoBehaviour {
         isNexted = true;
     }
 
-    public void StoreDisplayedValue() {
-        string value = transform.Find("ValueDisplayer(Clone)/InputField/Text").gameObject.GetComponent<Text>().text;
-        myTime = value != "" ? float.Parse(value) : 0f;
+    public float TimeDisplayedValue() {
+        string value = transform.Find("ValueDisplayer(Clone)/InputField").GetComponent<InputField>().text;
+        return value != "" ? float.Parse(value) : 0f;
     }
 
     // We try to add the item as next
-    public bool TryAddNext(LineRenderer lr, PrefabItem item, float proba = 1f) {
+    public bool TryAddNext(LineRenderer lr, PrefabItem item) {
         foreach(Next n in Nexts) {
             if (n.item == item)
                 return false;
@@ -68,7 +66,7 @@ public class PrefabItem : MonoBehaviour {
             return false;
 
         // You're not already my next, you accepted to be my next, so be it
-        Nexts.Add(new Next(proba, item));
+        Nexts.Add(new Next(item, lr.gameObject.GetComponent<LineController>().ProbaDisplayedValue()));
         startingLines.Add(lr);
 
         return true;

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LineController : MonoBehaviour {
 
@@ -23,6 +22,10 @@ public class LineController : MonoBehaviour {
 			lr.GetPositions(linePos);
 			myCanvas.position = (linePos[0] + linePos[1])/ 2f;
 		}
+	}
+
+	public InputField ProbaDisplayedValue() {
+		return myCanvas.Find("InputField").GetComponent<InputField>();
 	}
 
 	public void DisplayCanvas() {
