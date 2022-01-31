@@ -22,9 +22,12 @@ public class PrefabItem : MonoBehaviour {
     public bool isNexted { get; private set; }
 
     private void Start() {
-        Nexts = new List<Next>();
-        startingLines = new List<LineRenderer>();
-        endingLines = new List<LineRenderer>();
+        if (Nexts == null)
+            Nexts = new List<Next>();
+        if (startingLines == null)
+            startingLines = new List<LineRenderer>();
+        if (endingLines == null)
+            endingLines = new List<LineRenderer>();
     }
 
     private void Update() {
@@ -35,8 +38,17 @@ public class PrefabItem : MonoBehaviour {
             lr.SetPosition(1, transform.position);
     }
 
-    public void SetPath(string _path) {
-        path = _path;
+    public void AddToStartingLine(LineRenderer newLR) {
+        if (startingLines == null)
+            startingLines = new List<LineRenderer>();
+        startingLines.Add(newLR);
+    }
+
+    public void AddToEndingLine(LineRenderer newLR) {
+        if (endingLines == null)
+            endingLines = new List<LineRenderer>();
+        endingLines.Add(newLR);
+        isNexted = true;
     }
 
     public void StoreDisplayedValue() {

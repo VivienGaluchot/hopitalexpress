@@ -8,8 +8,10 @@ public class LineController : MonoBehaviour {
 	private LineRenderer lr;
 
 	private void Start() {
-		myCanvas = transform.GetChild(0);
-		myCanvas.gameObject.SetActive(false);
+		if (myCanvas == null) {
+			myCanvas = transform.GetChild(0);
+			myCanvas.gameObject.SetActive(false);
+		}
 
 		lr = GetComponent<LineRenderer>();
 	}
@@ -24,6 +26,9 @@ public class LineController : MonoBehaviour {
 	}
 
 	public void DisplayCanvas() {
+		if(myCanvas == null)
+			myCanvas = transform.GetChild(0);
+
 		myCanvas.gameObject.SetActive(true);
 	}
 }

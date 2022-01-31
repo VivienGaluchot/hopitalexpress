@@ -1,24 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.IO;
-using System;
 
 public class EditorController : MonoBehaviour {
 
 	[SerializeField] private Transform canvas;
-
-	[SerializeField] private GameObject LinePrefab;
-	[SerializeField] private GameObject ValueDisplayer;
+	public GameObject LinePrefab;
+	public GameObject ValueDisplayer;
 
 	// Store prefabs to serialize them later
-	private List<PrefabItem> MyPrefabs;
+	public List<PrefabItem> MyPrefabs { get; private set; }
 
-	private GameObject followerGO;
-	private GameObject clickedDown, lineStart;
-	private GameObject myLine;
+	private GameObject followerGO, clickedDown, lineStart, myLine;
 	private LineRenderer myLineLR;
 	private bool isDrawingLine;
 
@@ -28,9 +22,7 @@ public class EditorController : MonoBehaviour {
 	[SerializeField] private PointerEventData m_PointerEventData;
 	[SerializeField] private EventSystem m_EventSystem;
 
-
     private void Start() {
-		Debug.Log(Application.dataPath);
 		MyPrefabs = new List<PrefabItem>();
     }
     private void Update() {
@@ -89,6 +81,7 @@ public class EditorController : MonoBehaviour {
 		return results.Count != 0;
 	}
 
+	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
 	public void NewFollower(string path) {
 		followerGO = Resources.Load<GameObject>(path);
 		if (!followerGO)
@@ -96,7 +89,7 @@ public class EditorController : MonoBehaviour {
 		else {
 			followerGO = Instantiate(followerGO);
 			followerGO.AddComponent<PrefabItem>();
-			followerGO.GetComponent<PrefabItem>().SetPath(path);
+			followerGO.GetComponent<PrefabItem>().path = path;
 			Instantiate(ValueDisplayer, followerGO.transform.position, Quaternion.identity, followerGO.transform);
 		}
 	}
@@ -107,7 +100,7 @@ public class EditorController : MonoBehaviour {
 		Destroy(myLine);
 	}
 
-	public void DrawLine() {
+	private void DrawLine() {
 		if (lineStart == null) {
 			// Start drawing a line from the clickedDown object!
 			lineStart = clickedDown;
@@ -132,75 +125,4 @@ public class EditorController : MonoBehaviour {
 			StopDrawLine();
 		}	
 	}
-
-
-	// ------------------------------------------------------------------
-	// SERIALIZATION AREA -- WE SHOULD MOVE IT ELSEWHERE
-	// ------------------------------------------------------------------
-
-
-
-	public class PrefabsData {
-		public List<PrefabData> myPrefabs;
-    }
-
-	[Serializable]
-	public class PrefabData {
-		public PrefabData(string path, float time, NextsData Nexts) { this.path = path; this.time = time; this.Nexts = Nexts; }
-
-		public string path;
-		public float time;
-		public NextsData Nexts;
-    }
-	[Serializable]
-	public class NextsData {
-		public NextsData(List<NextData> Nexts) { this.Nexts = Nexts;  }
-		public List<NextData> Nexts;
-	}
-
-	[Serializable]
-	public class NextData {
-		public NextData(float proba, PrefabData next) { this.proba = proba; this.next = next; }
-		public float proba;
-		public PrefabData next;
-    }
-
-	public PrefabData converterPrefabItemToPrefabData(PrefabItem item) {
-
-		List<NextData> nextDataList = new List<NextData>();
-		NextsData nsData = new NextsData(nextDataList);
-
-		foreach (PrefabItem.Next next in item.Nexts) {
-			nsData.Nexts.Add(new NextData(next.proba, converterPrefabItemToPrefabData(next.item)));
-		}
-
-		return new PrefabData(item.path, item.myTime, nsData);
-    }
-
-	public void SaveData() {
-
-		PrefabItem starter = null;
-		foreach(PrefabItem prefab in MyPrefabs) {
-			if(!prefab.isNexted) {
-				starter = prefab;
-				break;
-			}
-		}
-
-		WriteToFile(JsonUtility.ToJson(converterPrefabItemToPrefabData(starter)));
-	}
-
-	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Application.dataPath + "/DataTest.txt");
-		sw.WriteLine(content);
-		sw.Close();
-	}
-
-	public void LoadData() {
-
-    }
-
-	private string ReadFromFile(string path) {
-		return "";
-    }
 }
