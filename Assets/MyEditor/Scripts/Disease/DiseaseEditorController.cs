@@ -19,7 +19,8 @@ public class DiseaseEditorController : MonoBehaviour {
         string[] treatments = Directory.GetFiles(Path.Combine(Application.dataPath, "MyEditor/Data/Treatment"));
         List<string> treatmentsList = new List<string>();
         foreach (string s in treatments) {
-            treatmentsList.Add(Path.GetFileName(s));
+            if(!s.EndsWith(".meta"))
+                treatmentsList.Add(Path.GetFileName(s));
         }
         Treatment.ClearOptions();
         Treatment.AddOptions(treatmentsList);

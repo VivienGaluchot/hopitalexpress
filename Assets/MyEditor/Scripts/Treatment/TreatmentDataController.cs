@@ -22,7 +22,8 @@ public class TreatmentDataController : MonoBehaviour {
 		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
-			pathsList.Add(Path.GetFileName(s));
+			if (!s.EndsWith(".meta"))
+				pathsList.Add(Path.GetFileName(s));
 		}
 		dd.ClearOptions();
 		dd.AddOptions(pathsList);

@@ -1092,7 +1092,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 297887750}
-        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TreatmentDataController, Assembly-CSharp
         m_MethodName: LoadData
         m_Mode: 1
         m_Arguments:
@@ -2164,6 +2164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1223852224012863000, guid: c9125602157dfb54abdd7041cb428e83, type: 3}
+  ec: {fileID: 297887749}
 --- !u!114 &1401188909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2553,7 +2554,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 297887750}
-        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TreatmentDataController, Assembly-CSharp
         m_MethodName: SaveData
         m_Mode: 1
         m_Arguments:

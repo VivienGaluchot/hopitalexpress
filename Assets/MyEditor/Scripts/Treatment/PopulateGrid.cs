@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class PopulateGrid : MonoBehaviour {
 
     public GameObject prefab;
-
-    private TreatmentEditorController ec;
+    public TreatmentEditorController ec;
 
     private void Start() {
-        ec = GameObject.Find("TreatmentEditorController").GetComponent<TreatmentEditorController>();
         Populate();
     }
 

@@ -1,0 +1,1 @@
+{"path":"EditorPrefabs/DispenserBleu","time":0.0,"Nexts":{"Nexts":[{"proba":0.5,"next":{"path":"EditorPrefabs/DispenserRouge","time":0.0,"Nexts":{"Nexts":[]}}},{"proba":0.5,"next":{"path":"EditorPrefabs/DispenserBleu","time":0.0,"Nexts":{"Nexts":[{"proba":1.0,"next":{"path":"EditorPrefabs/DispenserRouge","time":0.0,"Nexts":{"Nexts":[]}}}]}}}]}}
