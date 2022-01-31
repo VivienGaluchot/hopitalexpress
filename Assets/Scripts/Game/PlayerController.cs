@@ -15,9 +15,6 @@ public class PlayerController : MonoBehaviour {
 	private GameObject trashTarget, exitTarget, machineTarget, craftingTableTarget;
 	private GameObject HeldGO;
 
-	private Animator animator;
-	private float animatorSpeed;
-
 	private enum WalkDirections {
 		down, 
 		left, 
@@ -57,10 +54,6 @@ public class PlayerController : MonoBehaviour {
 		patientTargets = new List<GameObject>();
 		containerTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
-
-		animator = GetComponent<Animator>();
-		animatorSpeed = animator.speed;
-
 		DetectionCollider = GetComponent<CapsuleCollider2D>();
 	}
 
@@ -125,51 +118,31 @@ public class PlayerController : MonoBehaviour {
 				switch (angle) {
 					case 0f:
 						if (direction != WalkDirections.down) {
-							animator.SetTrigger("walkDown");
-
-							// 1
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.down;
 							DetectionCollider.offset = new Vector2(0f, -.25f);
 						}
 						break;
 					case 90f:
 						if (direction != WalkDirections.right) {
-							animator.SetTrigger("walkRight");
-
-							// 2
-							if(direction == WalkDirections.idle)
-								animator.speed = animatorSpeed;
-							direction = WalkDirections.right;
 							DetectionCollider.offset = new Vector2(.25f, 0);
 						}
 						break;
 					case -90f:
 						if (direction != WalkDirections.left) {
-							animator.SetTrigger("walkLeft");
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.left;
 							DetectionCollider.offset = new Vector2(-.25f, 0);
 						}
 						break;
 					default:
 						if (direction != WalkDirections.up) {
-							animator.SetTrigger("walkUp");
-							animator.speed = animatorSpeed;
-							direction = WalkDirections.up;
 							DetectionCollider.offset = new Vector2(0f, .25f);
 						}
 						break;
 				}
-            } else if (direction != WalkDirections.idle) {
-				animatorSpeed = animator.speed;
-				animator.speed = 0f;
-				direction = WalkDirections.idle;
-			}
+            } 
 
             Vector3 m_Input = new Vector3(horiz, vert, 0);
 			rb2D = GetComponent<Rigidbody2D>();
-            rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
+            // rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
+			rb2D.velocity = m_Input * speed;
         }
 	}
 

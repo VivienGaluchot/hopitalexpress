@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PatientZeroController : MonoBehaviour {
+public class WalkAnimator : MonoBehaviour {
 
 	private Rigidbody2D rb2D;
 
