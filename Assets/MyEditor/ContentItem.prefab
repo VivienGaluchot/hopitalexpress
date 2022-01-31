@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0549a3af2751e8b4f9b8ac5ab269a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ec: {fileID: 8030797894879537466, guid: 707c57d33aee20748b89c8b16d05fe2a, type: 3}
   DisplaySprite: {fileID: 5819794183523401629}
   DisplayName: {fileID: 5811097327596779630}
 --- !u!1 &2351004537449235899

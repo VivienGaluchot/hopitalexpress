@@ -17,15 +17,15 @@ public class PopulateGrid : MonoBehaviour {
     private void Populate() {
         GameObject go;
 
-        Sprite[] Sprites = Resources.LoadAll<Sprite>("Sprites/Medoc");
+        Sprite[] Sprites = Resources.LoadAll<Sprite>("Illustrations/Objets");
         foreach (Sprite sprite in Sprites) {
             go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "Prefabs/Treatments/Items/" + sprite.name);
+            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/" + sprite.name);
         }
-        Sprites = Resources.LoadAll<Sprite>("Sprites/Machines");
+        Sprites = Resources.LoadAll<Sprite>("Illustrations/Pills");
         foreach (Sprite sprite in Sprites) {
             go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "Prefabs/Treatments/Machines/" + sprite.name);
+            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/" + sprite.name);
         }
     }
 }

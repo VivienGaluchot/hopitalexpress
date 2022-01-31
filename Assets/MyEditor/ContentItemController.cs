@@ -19,8 +19,6 @@ public class ContentItemController : MonoBehaviour {
     }
 
     public void SendInformations() {
-        GameObject newGO = Resources.Load<GameObject>(path);
-        if(newGO != null)
-            ec.NewFollower(Instantiate(newGO));
+        ec.NewFollower(path);
     }
 }
