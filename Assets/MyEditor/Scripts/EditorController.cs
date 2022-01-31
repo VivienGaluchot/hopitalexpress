@@ -17,7 +17,7 @@ public class EditorController : MonoBehaviour {
 
 	private GameObject followerGO, clickedDown, lineStart, myLine;
 	private LineRenderer myLineLR;
-	private bool isDrawingLine;
+	private bool isDrawingLine, hasMoved;
 
 	private Vector3 clickedDownPos;
 
@@ -33,6 +33,7 @@ public class EditorController : MonoBehaviour {
 		if (Input.GetKeyDown("escape")) {
 			StopDrawLine();
 			Destroy(followerGO);
+			followerGO = null;
 		}
 
 		if (Input.GetKeyDown("delete") && clickedDown != null) {
@@ -49,7 +50,7 @@ public class EditorController : MonoBehaviour {
 
 		if(Input.GetMouseButtonUp(0)) {
 			// We didn't move, we have something to create, we're not over UI, we didn't clickeddownn something
-			if(clickedDownPos == worldPos && !DoesHitUI()) {
+			if(!hasMoved && !DoesHitUI()) {
 				if (!clickedDown) {
 					if (followerGO != null) {
 						GameObject newGo = Instantiate(followerGO, worldPos, Quaternion.identity);
@@ -63,15 +64,24 @@ public class EditorController : MonoBehaviour {
 			}
 		} else if(Input.GetMouseButtonDown(0)) {
 			clickedDownPos = worldPos;
+			hasMoved = false;
 			TryRayCastClicked();
 		} else if(Input.GetMouseButton(0)) {
+			if (!hasMoved)
+				CheckHasMoved(worldPos);
 			// Do we drag something?
-			if(!isDrawingLine && clickedDown && clickedDownPos != worldPos) {
+			if(!isDrawingLine && clickedDown && hasMoved) {
 				// WE MOVED! MOVE THE CLIKED ITEM
 				clickedDown.transform.position = worldPos;
 			}
         }
 	}
+
+	private void CheckHasMoved(Vector3 currentPos) {
+		hasMoved = (clickedDownPos - currentPos).sqrMagnitude > .1f;
+		if (hasMoved)
+			Debug.Log("TOO FAR BUDDY");
+    }
 
 	public void ClearScreen() {
 		foreach(GameObject go in everyObjects) {
@@ -92,6 +102,8 @@ public class EditorController : MonoBehaviour {
 		if (hit2D.collider) {
 			clickedDown = hit2D.collider.gameObject;
 			clickedDown.GetComponentInChildren<SpriteRenderer>().material = outlineMat;
+			Destroy(followerGO);
+			followerGO = null;
 		}
 	}
 
