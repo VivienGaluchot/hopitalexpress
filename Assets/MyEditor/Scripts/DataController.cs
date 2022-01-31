@@ -9,15 +9,17 @@ public class DataController : MonoBehaviour {
 
 	[SerializeField] private Dropdown dd;
 	[SerializeField] private InputField FileNameInputField;
+	[SerializeField] private string path;
     private EditorController ec;
 
     private void Start() {
         ec = GetComponent<EditorController>();
+		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 	}
 
-	private void FetchDDOptions(string path = "") {
-		string[] paths = System.IO.Directory.GetFiles(path != "" ? path : UnityEngine.Windows.Directory.localFolder);
+	private void FetchDDOptions() {
+		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			pathsList.Add(Path.GetFileName(s));
@@ -83,8 +85,8 @@ public class DataController : MonoBehaviour {
 		return new PrefabData(item.path, item.TimeDisplayedValue(), nsData);
 	}
 
-	private void WriteToFile(string content, string path = "") {
-		StreamWriter sw = new StreamWriter(path != "" ? path : UnityEngine.Windows.Directory.localFolder + "/" + FileNameInputField.text + ".txt");
+	private void WriteToFile(string content) {
+		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".txt"));
 		sw.WriteLine(content);
 		sw.Close();
 	}
@@ -102,8 +104,8 @@ public class DataController : MonoBehaviour {
     }
 	
 
-	private string ReadFromFile(string fileName, string path = "") {
-		StreamReader sr = new StreamReader(Path.Combine(path != "" ? path : UnityEngine.Windows.Directory.localFolder, fileName));
+	private string ReadFromFile(string fileName) {
+		StreamReader sr = new StreamReader(Path.Combine(path, fileName));
 		return sr.ReadToEnd();
 	}
 

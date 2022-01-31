@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1928521763467216688}
   - component: {fileID: 83039952087057764}
   m_Layer: 0
-  m_Name: RedDispenser
+  m_Name: DispenserRouge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

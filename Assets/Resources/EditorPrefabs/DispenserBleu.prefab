@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3491ca71a9919940be5a5c3184edf95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9033693a3fcbeaf44b3e44704d123045, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,9 +92,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4813458817209039267}
   - component: {fileID: 1928521763467216688}
-  - component: {fileID: 4996297221851311145}
+  - component: {fileID: 6744619152720247010}
   m_Layer: 0
-  m_Name: YellowDispenser
+  m_Name: DispenserBleu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!61 &4996297221851311145
+--- !u!61 &6744619152720247010
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

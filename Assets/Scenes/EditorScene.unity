@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dd: {fileID: 772014782}
   FileNameInputField: {fileID: 1395081387}
+  path: MyEditor/Data
 --- !u!1 &304633277
 GameObject:
   m_ObjectHideFlags: 0
