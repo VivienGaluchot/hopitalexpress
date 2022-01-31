@@ -85,8 +85,6 @@ public class Disease {
 	public Sprite sickFace { get; private set; }
 	private Step currentStep;
 
-
-
 	public float lifetime { get; private set; }
 	private bool isOver;
 
