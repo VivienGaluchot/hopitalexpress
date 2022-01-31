@@ -29,11 +29,27 @@ public class PrefabItem : MonoBehaviour {
     }
 
     private void Update() {
-        foreach (LineRenderer lr in startingLines)
-            lr.SetPosition(0, transform.position);
+        for (int i = 0; i < startingLines.Count; i++) {
+            if (startingLines[i])
+                startingLines[i].SetPosition(0, transform.position);
+            else
+                startingLines.RemoveAt(i);
+        }
+        for (int i = 0; i < endingLines.Count; i++) {
+            if (endingLines[i])
+                endingLines[i].SetPosition(1, transform.position);
+            else
+                endingLines.RemoveAt(i);
+        }
+    }
 
+    public void Delete() {
+        foreach (LineRenderer lr in startingLines)
+            Destroy(lr.gameObject);
         foreach (LineRenderer lr in endingLines)
-            lr.SetPosition(1, transform.position);
+            Destroy(lr.gameObject);
+
+        Destroy(gameObject);
     }
 
     public void AddToStartingLine(LineRenderer newLR) {

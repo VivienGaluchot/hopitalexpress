@@ -35,6 +35,11 @@ public class EditorController : MonoBehaviour {
 			Destroy(followerGO);
 		}
 
+		if (Input.GetKeyDown("delete") && clickedDown != null) {
+			clickedDown.GetComponent<PrefabItem>().Delete();
+			StopDrawLine();
+		}
+
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 		if (followerGO != null)
 			followerGO.transform.position = worldPos + new Vector3(.5f, -.5f, 10f);
