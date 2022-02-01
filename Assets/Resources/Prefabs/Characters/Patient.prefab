@@ -424,6 +424,8 @@ MonoBehaviour:
   body: {fileID: 1402126273352743420}
   need: {fileID: 1718445427611651231}
   TimeBarImage: {fileID: 1447859250854064952}
+  noDiseaseDuration: 5
+  diseaseDuration: 1
 --- !u!114 &4471882130300888735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8abbf1d3a1f8844cbb775e2cc9cad9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diseaseAnimationPeriod: 0
   direction: 0
 --- !u!1 &3807074980244481042
 GameObject:

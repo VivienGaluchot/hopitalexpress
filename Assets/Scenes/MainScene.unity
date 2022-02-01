@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
+    - target: {fileID: 8378036458740779853, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
+      propertyPath: diseaseDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378036458740779853, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
+      propertyPath: noDiseaseDuration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
 --- !u!1 &1080036707

@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PersoAnimator : MonoBehaviour {
 
-	public float diseaseAnimationPeriod;
-
-
     public enum Dir {
         Down, Up, Left, Right
     }
@@ -16,12 +13,9 @@ public class PersoAnimator : MonoBehaviour {
 
 	private Animator animator;
 
-	private float periodWithoutDiseaseAnimation;
-
 	private void Start() {
 		rb2D = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		periodWithoutDiseaseAnimation = 0;
     }
 
 	private void FixedUpdate() {
@@ -44,14 +38,6 @@ public class PersoAnimator : MonoBehaviour {
 				default:
 					direction = Dir.Up;
 					break;
-			}
-		}
-
-		if (diseaseAnimationPeriod > 0) {
-			periodWithoutDiseaseAnimation += Time.fixedDeltaTime;
-			if (periodWithoutDiseaseAnimation > diseaseAnimationPeriod) {
-				periodWithoutDiseaseAnimation = 0;
-				animator.SetTrigger("diseasing");
 			}
 		}
 	}
