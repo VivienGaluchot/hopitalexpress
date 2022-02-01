@@ -24,30 +24,38 @@ public class GameController : MonoBehaviour {
 	
 	private int counter;
 
-	private bool isPlaying;
+	private bool isLoaded, isPlaying;
 
 	private Dictionary<int, GameObject> Players;
 
 	private void Start() {
+		isLoaded = false;
 		isPlaying = false;
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
 		multiplicator = 1;
-		scoreText.text = "0";
+		if(scoreText)
+			scoreText.text = "0";
 		PatientQueue = new GameObject[patientQueueSize];
 	}
 
 	private void Update() {
-		CheckNewPlayers();
+		if(isLoaded) {
+			CheckNewPlayers();
 
-		if (isPlaying) {
-			if (elapsedTime > currentSpawnRate) {
-				if (TrySpawnNewPatient())
-					elapsedTime -= currentSpawnRate;
-			} else
-				elapsedTime += Time.deltaTime;
+			if (isPlaying) {
+				if (elapsedTime > currentSpawnRate) {
+					if (TrySpawnNewPatient())
+						elapsedTime -= currentSpawnRate;
+				} else
+					elapsedTime += Time.deltaTime;
+			}
 		}
 	}
+
+	public void StartGame() {
+		isLoaded = true;
+    }
 
 	// One at a time
 	private void AdvancePatientQueue() {
@@ -149,12 +157,14 @@ public class GameController : MonoBehaviour {
 
 	public void PatientCured(PatientController patient) {
 		score += patient.patientValue * multiplicator++;
-		scoreText.text = score.ToString();
+		if (scoreText)
+			scoreText.text = score.ToString();
 	}
 
 	public void PatientDead(PatientController patient) {
 		score -= patient.patientValue;
 		multiplicator = 1;
-		scoreText.text = score.ToString();
+		if (scoreText)
+			scoreText.text = score.ToString();
     }
 }

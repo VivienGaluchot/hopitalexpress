@@ -3,7 +3,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
-using System.Globalization;
+
+[Serializable]
+public class LevelData {
+	public LevelData(int rows, int columns, List<CellData> cells, List<string> diseases) { this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; }
+
+	public int rows;
+	public int columns;
+	public List<CellData> cells;
+	public List<string> diseases;
+}
+
+[Serializable]
+public class CellData {
+	public CellData(int x, int y, int value) { this.x = x; this.y = y; this.value = value; }
+	public int x;
+	public int y;
+	public int value;
+}
 
 public class LevelDataController : MonoBehaviour {
 
@@ -30,25 +47,6 @@ public class LevelDataController : MonoBehaviour {
 		dd.ClearOptions();
 		dd.AddOptions(pathsList);
 	}
-
-	[Serializable]
-	public class LevelData {
-		public LevelData(int rows, int columns, List<CellData> cells, List<string> diseases) 
-			{ this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; }
-
-		public int rows;
-		public int columns;
-		public List<CellData> cells;
-		public List<string> diseases;
-	}
-
-	[Serializable]
-	public class CellData {
-		public CellData(int x, int y, int value) { this.x = x; this.y = y; this.value = value; }
-		public int x;
-		public int y;
-		public int value;
-    }
 
 	public void SaveData() {
 		WriteToFile(JsonUtility.ToJson(FetchDataToLevelData()));
