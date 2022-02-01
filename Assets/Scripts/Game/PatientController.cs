@@ -5,14 +5,12 @@ public class PatientController : MonoBehaviour {
 
 	private GameController gc;
 
-	[SerializeField] private GameObject needDisplayer;
-	[SerializeField] private SpriteRenderer needSr;
-	[SerializeField] private Sprite happySprite;
-	[SerializeField] private Sprite deadSprite;
+	[SerializeField] private GameObject face;
+	[SerializeField] private GameObject body;
+	[SerializeField] private SpriteRenderer need;
 	[SerializeField] private Image TimeBarImage;
 
 	private Disease myDisease;
-	private SpriteRenderer sr;
 
 	public enum States { 
 		sick,
@@ -29,16 +27,12 @@ public class PatientController : MonoBehaviour {
 	private void Start() {
 		state = States.diagnosticed;
 
-		sr = GetComponent<SpriteRenderer>();
-		needDisplayer = transform.GetChild(0).gameObject;
-		needSr = needDisplayer.transform.GetChild(0).GetComponent<SpriteRenderer>();
-		//needDisplayer.SetActive(false);
-
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 
-		sr.sprite = myDisease.sickFace;
+		face.GetComponent<SkinManager>().selected = myDisease.GetFaceSkinIndex();
+
 		DisplayNextNeed();
 	}
 
@@ -57,13 +51,12 @@ public class PatientController : MonoBehaviour {
 
     private void Diagnostic() {
 		state = States.diagnosticed;
-		needDisplayer.SetActive(true);
+		need.gameObject.SetActive(true);
 		DisplayNextNeed();
-
 	}
 
 	public void DisplayNextNeed() {
-		needSr.sprite = myDisease.GetNeedSprite();
+		need.GetComponent<SpriteRenderer>().sprite = myDisease.GetNeedSprite();
 	}
 
 	public void TakeItem(GameObject item) {
@@ -91,17 +84,15 @@ public class PatientController : MonoBehaviour {
 
 	public void DiseaseLifetimeElapsed() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
-		needDisplayer.SetActive(false);
-		sr.sprite = deadSprite;
+		need.gameObject.SetActive(false);
 		state = States.dead;
-		gc.PatientDead(this);
+		gc?.PatientDead(this);
 	}
 
 	public void DiseaseCured() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
-		needDisplayer.SetActive(false);
+		need.gameObject.SetActive(false);
 		state = States.cured;
-		sr.sprite = happySprite;
 	}
 
 }

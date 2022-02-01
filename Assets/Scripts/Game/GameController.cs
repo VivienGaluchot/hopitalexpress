@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private float spawnRate;
 	[SerializeField] private Transform PatientQueueParent;
 	[SerializeField] private int patientQueueSize;
+	[SerializeField] public int targetFrameRate = 120;
 
 	private GameObject[] PatientQueue;
 
@@ -29,6 +30,8 @@ public class GameController : MonoBehaviour {
 	private Dictionary<int, GameObject> Players;
 
 	private void Start() {
+		QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = targetFrameRate;
 		isPlaying = false;
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
