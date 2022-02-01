@@ -10,17 +10,26 @@ public enum DiseaseTypes {
 
 public class Disease {
 
+	// Skins to select for each disease (depends on order or sprite sheets)
+	static private Dictionary<DiseaseTypes, int> faceSkinIndex = new Dictionary<DiseaseTypes, int>() {
+		{ DiseaseTypes.Rhume, 0 },
+		{ DiseaseTypes.Grippe, 2 },
+		{ DiseaseTypes.Covid, 4 }
+	};
+
 	private PatientController patient;
 	
 	// A struct to store disease informations
 	public readonly struct Infos {
 		public Infos(DiseaseTypes name, float lifespan, int points, Step firstStep) {
+			_type = name;
 			_name = name.ToString();
 			_lifespan = lifespan;
 			_points = points;
 			_firstStep = firstStep;
 		}
 
+		public readonly DiseaseTypes _type;
 		public readonly string _name;
 		public readonly float _lifespan;
 		public readonly int _points;
@@ -31,16 +40,16 @@ public class Disease {
 	 // We need "name" during "time" seconds to go to next step
 	 // if time == 0, it's instantaneous
 	public readonly struct Step {
-		public Step(Items name, float time = 0f, (float, Step)[] next = null) {
+		public Step(Items name, string icon, float time = 0f, (float, Step)[] next = null) {
 			_name = name.ToString();
-			_path = "Sprites/Medoc/" + _name;
+			_path = "Illustrations/Pills/" + icon;
 			_time = time;
 			_next = next;
 		}
 
-		public Step(MachineTypes name, float time = 0f, (float, Step)[] next = null) {
+		public Step(MachineTypes name, string icon, float time = 0f, (float, Step)[] next = null) {
 			_name = name.ToString();
-			_path = "Sprites/Machines/" + _name;
+			_path = "Illustrations/Objets/" + icon;
 			_time = time;
 			_next = next;
 		}
@@ -54,25 +63,26 @@ public class Disease {
 	// Store informations about the different diseases possible
 	private static Infos[] Diseases = new Infos[3] {
 		new Infos(DiseaseTypes.Rhume, 75f, 50, 
-			new Step(MachineTypes.Diagnostable, 0f, 
-				new (float, Step)[1] {(1f, new Step(Items.PiluleBleue))}
+			new Step(MachineTypes.Diagnostable, "Diagnostable", 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.PiluleBleue, "bleu"))}
 			)
 		),
 		new Infos(DiseaseTypes.Grippe, 90f, 100, 
-			new Step(MachineTypes.Diagnostable, 0f, 
-				new (float, Step)[1] {(1f, new Step(Items.PiluleVerte, 0f,
-					new (float, Step)[2] {(.75f, new Step(Items.PiluleVerte)),
-										(.25f, new Step(Items.PiluleBleue))
+			new Step(MachineTypes.Diagnostable, "Diagnostable", 0f, 
+				new (float, Step)[1] {(1f, new Step(Items.PiluleVerte, "vert", 0f,
+					new (float, Step)[2] {(.75f, new Step(Items.PiluleVerte, "vert")),
+										(.25f, new Step(Items.PiluleBleue, "bleu"))
 					})
 				)}
 			)
 		),
 		new Infos(DiseaseTypes.Covid, 60f, 200,
-			new Step(MachineTypes.Diagnostable, 0f,
-				new (float, Step)[1] {(1f, new Step(Items.PCR, 0f,
-					new (float, Step)[1] {(1f, new Step(MachineTypes.Scanner, 10f, 
-						new (float, Step) [2] {(.5f, new Step(Items.SeringueRouge)),
-							(.5f, new Step(Items.SeringueJaune))
+			new Step(MachineTypes.Diagnostable, "Diagnostable", 0f,
+				// TODO PCR
+				new (float, Step)[1] {(1f, new Step(Items.PCR, "bleu", 0f,
+					new (float, Step)[1] {(1f, new Step(MachineTypes.Scanner, "scanner", 10f, 
+						new (float, Step) [2] {(.5f, new Step(Items.SeringueRouge, "Fiolerouge")),
+							(.5f, new Step(Items.SeringueJaune, "Fiolejaune"))
 						})
 					)}
 				))}
@@ -96,6 +106,10 @@ public class Disease {
 		lifetime = myInfos._lifespan;
 		sickFace = Resources.Load<Sprite>("Sprites/Faces/" + myInfos._name + "Face");
 		currentStep = myInfos._firstStep;
+	}
+
+	public int GetFaceSkinIndex() {
+		return faceSkinIndex[myInfos._type];
 	}
 
 	// Return the sprite to display the current need
