@@ -11,9 +11,11 @@ public class LevelDataController : MonoBehaviour {
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
 	private LevelEditorController lec;
+	private LevelDiseasesController ldc;
 
 	private void Start() {
 		lec = GetComponent<LevelEditorController>();
+		ldc = GetComponent<LevelDiseasesController>();
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 	}
@@ -30,9 +32,14 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	[Serializable]
-	public class GridData {
-		public GridData(List<CellData> cells) { this.cells = cells;  }
+	public class LevelData {
+		public LevelData(int rows, int columns, List<CellData> cells, List<string> diseases) 
+			{ this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; }
+
+		public int rows;
+		public int columns;
 		public List<CellData> cells;
+		public List<string> diseases;
 	}
 
 	[Serializable]
@@ -44,16 +51,18 @@ public class LevelDataController : MonoBehaviour {
     }
 
 	public void SaveData() {
-		WriteToFile(JsonUtility.ToJson(FetchDataToGridData()));
+		WriteToFile(JsonUtility.ToJson(FetchDataToLevelData()));
 		FetchDDOptions();
 	}
 
-	public GridData FetchDataToGridData() {
+	public LevelData FetchDataToLevelData() {
 		List<CellData> cells = new List<CellData>();
 		foreach(KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grid) {
-			cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
+			if(cell.Value.value > 0)
+				cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
         }
-		return new GridData(cells);
+
+		return new LevelData(lec.rows, lec.columns, cells, new List<string>(ldc.Elements.Keys));
 	}
 
 	private void WriteToFile(string content) {
@@ -64,16 +73,22 @@ public class LevelDataController : MonoBehaviour {
 
 	public void LoadData() {
 		string filename = dd.options[dd.value].text;
-		GridData Data = JsonUtility.FromJson<GridData>(ReadFromFile(filename));
+		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
 		DisplayLoadedData(Data);
 	}
 
-	private void DisplayLoadedData(GridData Data) {
-		foreach(CellData cell in Data.cells) {
+	private void DisplayLoadedData(LevelData Data) {
+		lec.ResizeGrid(Data.rows, Data.columns);
+		lec.ClearGrid();
+		foreach(CellData cell in Data.cells)
 			lec.grid[(cell.x, cell.y)].value = cell.value;
-        }
+
 		lec.RefreshGrid();
+
+		ldc.DeleteAll();
+		foreach (string s in Data.diseases)
+			ldc.TryAddDisease(s);
 	}
 
 	private string ReadFromFile(string fileName) {

@@ -26,15 +26,22 @@ public class LevelEditorController : MonoBehaviour {
 	[SerializeField] private EventSystem m_EventSystem;
 	[SerializeField] private GameObject MenuPanel;
 
-	public class Cell {
-		public Cell(SpriteRenderer sr) { this.sr = sr; value = 0; }
+	private Transform CellsParent;
 
+	public class Cell {
+		public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
+		public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
+
+		public GameObject go;
 		public int value;
 		public SpriteRenderer sr;
 	}
 
 	private void Start() {
+		CellsParent = transform.Find("Cells");
 		InitGrid();
+
+		// USELESS BUT FUN
 		elapsedTime = 0f;
 		clicked = 0;
 		total = columns * rows;
@@ -44,6 +51,7 @@ public class LevelEditorController : MonoBehaviour {
 		if (Input.GetKeyDown("tab"))
 			MenuPanel.SetActive(!MenuPanel.activeSelf);
 
+		// USELESS BUT FUN
 		if (randomFun) {
 			elapsedTime += Time.deltaTime;
 			if(elapsedTime > tickrate) {
@@ -229,28 +237,52 @@ public class LevelEditorController : MonoBehaviour {
 		}
 	}
 
+	public void ResizeGrid(int rows, int columns) {
+		for (int i = 0; i < Mathf.Max(rows, this.rows); i++)
+			for (int j = 0; j < Mathf.Max(columns, this.columns); j++)
+				if (i >= rows || j >= columns)
+					DeleteCell(i, j);
+
+		for (int i = 0; i < Mathf.Max(rows, this.rows); i++)
+			for (int j = 0; j < Mathf.Max(columns, this.columns); j++)
+				if (i >= this.rows || j >= this.columns)
+					InitCell(i, j);
+
+		this.rows = rows;
+		this.columns = columns;
+		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);
+	}
+
 	private void InitGrid() {
 		baseSprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0, 0, 1, 1), new Vector2(.5f, .5f), size);
 		grid = new Dictionary<(int, int), Cell>();
-		Transform parent = new GameObject("Cells").transform;
-		int counter = 0;
-		for(int i = 0; i < rows; i++) {
-			for(int j = 0; j < columns; j++) {
-				GameObject newGO = new GameObject("Cell" + counter++, typeof(SpriteRenderer), typeof(BoxCollider2D));
-				newGO.AddComponent<CellController>();
-				newGO.GetComponent<CellController>().Setup(this, i, j);
-				newGO.transform.SetParent(parent);
-				newGO.transform.position = new Vector3(j/size, -i/size, 0);
-				SpriteRenderer sr = newGO.GetComponent<SpriteRenderer>();
-				sr.sprite = baseSprite;
-				sr.sortingOrder = -1;
-				sr.color = (i + j) % 2 == 0 ? Color.grey : Color.white;
-				newGO.GetComponent<BoxCollider2D>().size = new Vector2(1f/size, 1f/size);
-
-				grid.Add((i, j), new Cell(sr));
-			}
-		}
+		for(int i = 0; i < rows; i++)
+			for(int j = 0; j < columns; j++)
+				InitCell(i, j);
 
 		Camera.main.transform.position = new Vector3((columns-1)/2f/size, (1-rows)/2f/size, -10f);
+	}
+
+	private void InitCell(int i, int j) {
+		GameObject newGO = new GameObject(i + "-" + j, typeof(SpriteRenderer), typeof(BoxCollider2D));
+		newGO.transform.SetParent(CellsParent);
+		newGO.AddComponent<CellController>();
+		newGO.GetComponent<CellController>().Setup(this, i, j);
+		newGO.transform.position = new Vector3(j / size, -i / size, 0);
+		SpriteRenderer sr = newGO.GetComponent<SpriteRenderer>();
+		sr.sprite = baseSprite;
+		sr.sortingOrder = -1;
+		sr.color = (i + j) % 2 == 0 ? Color.grey : Color.white;
+		newGO.GetComponent<BoxCollider2D>().size = new Vector2(1f / size, 1f / size);
+
+		grid.Add((i, j), new Cell(newGO, sr));
+	}
+
+	private void DeleteCell(int i, int j) {
+		Cell cell;
+		if(grid.TryGetValue((i, j), out cell)) {
+			Destroy(cell.go);
+			grid.Remove((i, j));
+        }
 	}
 }

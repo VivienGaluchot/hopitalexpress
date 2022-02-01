@@ -314,13 +314,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1327730450}
+      - m_Target: {fileID: 314651541}
         m_TargetAssemblyTypeName: LevelDiseasesController, Assembly-CSharp
         m_MethodName: TryDeleteDisease
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 901940999}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 1102597938}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 314651538}
   - component: {fileID: 314651539}
   - component: {fileID: 314651540}
+  - component: {fileID: 314651541}
   m_Layer: 0
   m_Name: LevelEditorController
   m_TagString: Untagged
@@ -467,7 +468,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 487179818}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -513,6 +515,19 @@ MonoBehaviour:
   dd: {fileID: 4017059396595553026}
   FileNameInputField: {fileID: 4017059395301691671}
   path: MyEditor/Data/Level
+--- !u!114 &314651541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314651537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6f33e1e1162674da8d3ae11095a318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1327730447}
 --- !u!1 &382363194
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +815,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423786276}
   m_CullTransparentMesh: 1
+--- !u!1 &487179817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 487179818}
+  m_Layer: 0
+  m_Name: Cells
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &487179818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487179817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 314651538}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &805702113
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,8 +1013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4168e2f36fb56234bb08d5497ac6c743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: MyEditor/Data/Level
-  ldc: {fileID: 1327730450}
+  path: MyEditor/Data/Disease
+  ldc: {fileID: 314651541}
 --- !u!114 &1052546013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,7 +1678,6 @@ GameObject:
   - component: {fileID: 1327730447}
   - component: {fileID: 1327730448}
   - component: {fileID: 1327730449}
-  - component: {fileID: 1327730450}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1699,18 +1743,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &1327730450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327730446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6f33e1e1162674da8d3ae11095a318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1356196635
 GameObject:
   m_ObjectHideFlags: 0

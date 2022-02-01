@@ -4,25 +4,38 @@ using UnityEngine.UI;
 
 public class LevelDiseasesController : MonoBehaviour {
 
+    [SerializeField] private Transform parent;
+
     private GameObject TemplateElement;
-    private List<string> Elements;
+    public Dictionary<string, GameObject> Elements { get; private set; }
 
     private void Start() {
-        Elements = new List<string>();
-        TemplateElement = transform.Find("TemplateElement").gameObject;
+        Elements = new Dictionary<string, GameObject>();
+        TemplateElement = parent.Find("TemplateElement").gameObject;
     }
 
     public void TryAddDisease(string name) {
-        if(!Elements.Exists(n => n == name)) {
-            Elements.Add(name);
-            GameObject newGO = Instantiate(TemplateElement, transform);
+        if(!Elements.ContainsKey(name)) {
+            GameObject newGO = Instantiate(TemplateElement, parent);
             newGO.GetComponentInChildren<Text>().text = name;
             newGO.SetActive(true);
+            Elements.Add(name, newGO);
         }
     }
 
-    public void TryDeleteDisease(GameObject go) {
-        Elements.Remove(go.GetComponentInChildren<Text>().text);
-        Destroy(go);        
+    public void DeleteAll() {
+        foreach(KeyValuePair<string, GameObject> e in Elements) {
+            Destroy(e.Value);
+        }
+        Elements.Clear();
+    }
+
+    public void TryDeleteDisease(Text text) {
+        GameObject value;
+        Elements.TryGetValue(text.text, out value);
+        if(value) {
+            Elements.Remove(text.text);
+            Destroy(value);
+        }       
     }
 }
