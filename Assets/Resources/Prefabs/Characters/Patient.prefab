@@ -155,7 +155,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 534282388630564384, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: -7357550112948327227, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,9 +178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
-  skinOffset: 16
+  frameSelected: 0
+  framePerDirection: 4
+  skinSelected: 2
   spritePath: Illustrations/Perso/Skin
+  perso: {fileID: 3508764698176005531}
 --- !u!114 &3803036310602100784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,9 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
-  skinOffset: 4
+  frameSelected: 0
+  framePerDirection: 1
+  skinSelected: 0
   spritePath: Illustrations/Perso/Faces
+  perso: {fileID: 3508764698176005531}
 --- !u!1 &3508764698176005531
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,8 +310,8 @@ GameObject:
   - component: {fileID: 3906777537559676649}
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
-  - component: {fileID: 4471882130300888735}
   - component: {fileID: 8378036458740779853}
+  - component: {fileID: 4471882130300888735}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -404,18 +408,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4471882130300888735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3508764698176005531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8abbf1d3a1f8844cbb775e2cc9cad9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8378036458740779853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +424,20 @@ MonoBehaviour:
   body: {fileID: 1402126273352743420}
   need: {fileID: 1718445427611651231}
   TimeBarImage: {fileID: 1447859250854064952}
+--- !u!114 &4471882130300888735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508764698176005531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8abbf1d3a1f8844cbb775e2cc9cad9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diseaseAnimationPeriod: 0
+  direction: 0
 --- !u!1 &3807074980244481042
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +595,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4862942130373081034, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
+  m_Sprite: {fileID: -6475819047146179335, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -612,9 +618,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
-  skinOffset: 4
+  frameSelected: 0
+  framePerDirection: 1
+  skinSelected: 1
   spritePath: Illustrations/Perso/Clothes
+  perso: {fileID: 3508764698176005531}
 --- !u!114 &908056040074118087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,9 +939,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
-  skinOffset: 4
+  frameSelected: 0
+  framePerDirection: 1
+  skinSelected: 0
   spritePath: Illustrations/Perso/Hair
+  perso: {fileID: 3508764698176005531}
 --- !u!114 &1730942402994220613
 MonoBehaviour:
   m_ObjectHideFlags: 0

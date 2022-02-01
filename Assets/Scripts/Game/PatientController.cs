@@ -31,7 +31,7 @@ public class PatientController : MonoBehaviour {
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 
-		face.GetComponent<SkinManager>().selected = myDisease.GetFaceSkinIndex();
+		face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
 
 		DisplayNextNeed();
 	}
