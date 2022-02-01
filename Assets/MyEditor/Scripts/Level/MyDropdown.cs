@@ -7,6 +7,7 @@ public class MyDropdown : MonoBehaviour {
 
     [SerializeField] private string path;
     [SerializeField] private LevelDiseasesController ldc;
+    [SerializeField] private LevelEditorController lec;
 
     private GameObject ElementsParent, TemplateElement;
     private float templateHeight;
@@ -44,6 +45,7 @@ public class MyDropdown : MonoBehaviour {
     }
 
     public void ScrollDropdown() {
+        lec.StopSelectingSpawns();
         ElementsParent.SetActive(!isScrolledDown);
         isScrolledDown = !isScrolledDown;
     }

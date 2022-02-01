@@ -30,9 +30,9 @@ public class GameController : MonoBehaviour {
 	private Dictionary<int, GameObject> Players;
 
 	private void Start() {
-		isLoaded = false;
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
+		isLoaded = false;
 		isPlaying = false;
 		Players = new Dictionary<int, GameObject>();
 		score = 0;

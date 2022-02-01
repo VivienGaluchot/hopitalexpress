@@ -6,12 +6,17 @@ using System.IO;
 
 [Serializable]
 public class LevelData {
-	public LevelData(int rows, int columns, List<CellData> cells, List<string> diseases) { this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; }
+	public LevelData(float size, int rows, int columns, List<CellData> cells, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection)
+		{ this.size = size; this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; }
 
+	public float size;
 	public int rows;
 	public int columns;
 	public List<CellData> cells;
 	public List<string> diseases;
+	public Vector3 playerSpawn;
+	public Vector3 patientSpawn;
+	public string patientSpawnDirection;
 }
 
 [Serializable]
@@ -24,7 +29,8 @@ public class CellData {
 
 public class LevelDataController : MonoBehaviour {
 
-	[SerializeField] private Dropdown dd;
+	[SerializeField] private Dropdown FilesDropdown;
+	[SerializeField] private Dropdown PatientSpawnDirectionDropdown;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
 	private LevelEditorController lec;
@@ -44,11 +50,12 @@ public class LevelDataController : MonoBehaviour {
 			if (!s.EndsWith(".meta"))
 				pathsList.Add(Path.GetFileName(s));
 		}
-		dd.ClearOptions();
-		dd.AddOptions(pathsList);
+		FilesDropdown.ClearOptions();
+		FilesDropdown.AddOptions(pathsList);
 	}
 
 	public void SaveData() {
+		lec.StopSelectingSpawns();
 		WriteToFile(JsonUtility.ToJson(FetchDataToLevelData()));
 		FetchDDOptions();
 	}
@@ -60,7 +67,7 @@ public class LevelDataController : MonoBehaviour {
 				cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
         }
 
-		return new LevelData(lec.rows, lec.columns, cells, new List<string>(ldc.Elements.Keys));
+		return new LevelData(lec.size, lec.rows, lec.columns, cells, new List<string>(ldc.Elements.Keys), lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
 	}
 
 	private void WriteToFile(string content) {
@@ -70,7 +77,8 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	public void LoadData() {
-		string filename = dd.options[dd.value].text;
+		lec.StopSelectingSpawns();
+		string filename = FilesDropdown.options[FilesDropdown.value].text;
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
 		DisplayLoadedData(Data);
@@ -83,6 +91,10 @@ public class LevelDataController : MonoBehaviour {
 			lec.grid[(cell.x, cell.y)].value = cell.value;
 
 		lec.RefreshGrid();
+
+		lec.SetPatientSpawn(Data.patientSpawn);
+		lec.SetPlayerSpawn(Data.playerSpawn);
+		PatientSpawnDirectionDropdown.value = PatientSpawnDirectionDropdown.options.FindIndex(o => o.text == Data.patientSpawnDirection);
 
 		ldc.DeleteAll();
 		foreach (string s in Data.diseases)

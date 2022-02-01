@@ -4,15 +4,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour {
-
-
-	// USELESS BUT FUN
-	public bool randomFun;
-	public float tickrate;
-	private float elapsedTime;
-	private int clicked, total;
-	// END OF USELESS BUT FUN
-
 	public float size;
 	public int columns, rows;
 
@@ -28,6 +19,14 @@ public class LevelEditorController : MonoBehaviour {
 
 	private Transform CellsParent;
 
+	private bool selectingPatientSpawn, selectingPlayerSpawn;
+	[SerializeField] private Image patientButtonImage;
+	[SerializeField] private Image playerButtonImage;
+	[SerializeField] private GameObject PatientSpawnPrefab;
+	[SerializeField] private GameObject PlayerSpawnPrefab;
+	public GameObject PlayerSpawn { get; private set; }
+	public GameObject PatientSpawn { get; private set; }
+
 	public class Cell {
 		public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
 		public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
@@ -40,34 +39,77 @@ public class LevelEditorController : MonoBehaviour {
 	private void Start() {
 		CellsParent = transform.Find("Cells");
 		InitGrid();
-
-		// USELESS BUT FUN
-		elapsedTime = 0f;
-		clicked = 0;
-		total = columns * rows;
 	}
 
     private void Update() {
 		if (Input.GetKeyDown("tab"))
 			MenuPanel.SetActive(!MenuPanel.activeSelf);
 
-		// USELESS BUT FUN
-		if (randomFun) {
-			elapsedTime += Time.deltaTime;
-			if(elapsedTime > tickrate) {
-				elapsedTime -= tickrate;
-				int i = Random.Range(0, rows), j = Random.Range(0, columns);
-				bool reset = Random.Range(0, 1f) < (float)clicked / total;
-				if (grid[(i, j)].value > 0 && reset) {
-					clicked--;
-					ClickedCell(i, j, true, true);
-				} else if(grid[(i, j)].value == 0 && !reset) {
-					clicked++;
-					ClickedCell(i, j, true);
-				}
-            }
+		if(Input.GetMouseButtonDown(0) && !DoesHitUI()) {
+			if(selectingPatientSpawn) {
+				if (!PatientSpawn)
+					PatientSpawn = Instantiate(PatientSpawnPrefab);
+				PatientSpawn.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+				SetPatientSpawnButton(false);
+			} else if(selectingPlayerSpawn) {
+				if (!PlayerSpawn)
+					PlayerSpawn = Instantiate(PlayerSpawnPrefab);
+				PlayerSpawn.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+				SetPlayerSpawnButton(false);
+			}
+        }
+	}
+
+	public void SetPlayerSpawn(Vector3 pos) {
+		if (!PlayerSpawn)
+			PlayerSpawn = Instantiate(PlayerSpawnPrefab);
+		PlayerSpawn.transform.position = pos;
+	}
+
+	public void SetPatientSpawn(Vector3 pos) {
+		if (!PatientSpawn)
+			PatientSpawn = Instantiate(PatientSpawnPrefab);
+		PatientSpawn.transform.position = pos;
+	}
+
+	public void StopSelectingSpawns() {
+		SetPatientSpawnButton(false);
+		SetPlayerSpawnButton(false);
+	}
+
+	private void SetPatientSpawnButton(bool oui) {
+		if (oui) {
+			patientButtonImage.color = Color.green;
+			selectingPatientSpawn = true;
+			playerButtonImage.color = Color.white;
+			selectingPlayerSpawn = false;
+		} else {
+			patientButtonImage.color = Color.white;
+			selectingPatientSpawn = false;
 		}
-    }
+	}
+
+	private void SetPlayerSpawnButton(bool oui) {
+		if (oui) {
+			playerButtonImage.color = Color.green;
+			selectingPlayerSpawn = true;
+			patientButtonImage.color = Color.white;
+			selectingPatientSpawn = false;
+		} else {
+			playerButtonImage.color = Color.white;
+			selectingPlayerSpawn = false;
+		}
+	}
+
+	public void SelectPatientSpawn() {
+		selectingPatientSpawn = !selectingPatientSpawn;
+		SetPatientSpawnButton(selectingPatientSpawn);
+	}
+
+	public void SelectPlayerSpawn() {
+		selectingPlayerSpawn = !selectingPlayerSpawn;
+		SetPlayerSpawnButton(selectingPlayerSpawn);
+	}
 
 	public bool DoesHitUI() {
 		m_PointerEventData = new PointerEventData(m_EventSystem);
@@ -79,20 +121,28 @@ public class LevelEditorController : MonoBehaviour {
 		return results.Count != 0;
 	}
 
-	public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
-		Cell cell;
-		if (grid.TryGetValue((i, j), out cell) && (cell.value != 0 || clicked) && !reset) {
-			int newValue = ComputeCellValue(i, j);
-			if (newValue != cell.value) {
-				cell.value = newValue;
+	public bool ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
+		if(!selectingPatientSpawn && !selectingPlayerSpawn) {
+			Cell cell;
+			if (grid.TryGetValue((i, j), out cell) && (cell.value != 0 || clicked) && !reset) {
+				int newValue = ComputeCellValue(i, j);
+				if (newValue != cell.value) {
+					cell.value = newValue;
+					ChangeSprite(cell);
+					Propagate(i, j);
+				}
+
+				return true;
+			} else if (reset && grid.TryGetValue((i, j), out cell) && cell.value != 0) {
+				cell.value = 0;
 				ChangeSprite(cell);
 				Propagate(i, j);
+
+				return false;
 			}
-		} else if(reset && grid.TryGetValue((i, j), out cell) && cell.value != 0) {
-			cell.value = 0;
-			ChangeSprite(cell);
-			Propagate(i, j);
-		}	
+		}
+
+		return reset;
 	}
 
 	private void Propagate(int i, int j) {

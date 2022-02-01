@@ -21,25 +21,21 @@ public class CellController : MonoBehaviour {
 
     private void OnMouseEnter() {
         if(!isClicked && Input.GetMouseButton(0) && !lec.DoesHitUI()) {
-            isClicked = true;
-            lec.ClickedCell(row, column, true);
+            isClicked =  lec.ClickedCell(row, column, true);
         } else if(isClicked && Input.GetMouseButton(1) && !lec.DoesHitUI()) {
-            isClicked = false;
-            lec.ClickedCell(row, column, true, true);
+            isClicked =  lec.ClickedCell(row, column, true, true);
         }
     }
 
     private void OnMouseDown() {
         if(!isClicked && !lec.DoesHitUI()) {
-            isClicked = true;
-            lec.ClickedCell(row, column, true);
+            isClicked = lec.ClickedCell(row, column, true);
         }
     }
 
     private void OnMouseOver() {
         if(Input.GetMouseButtonDown(1) && isClicked && !lec.DoesHitUI()) {
-            isClicked = false;
-            lec.ClickedCell(row, column, true, true);
+            isClicked = lec.ClickedCell(row, column, true, true);
         }
     }
 }
