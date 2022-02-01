@@ -68,20 +68,14 @@ public class TreatmentEditorController : MonoBehaviour {
 			TryRayCastClicked();
 		} else if(Input.GetMouseButton(0)) {
 			if (!hasMoved)
-				CheckHasMoved(worldPos);
+				hasMoved = (clickedDownPos - worldPos).sqrMagnitude > .1f;
 			// Do we drag something?
-			if(!isDrawingLine && clickedDown && hasMoved) {
+			if (!isDrawingLine && clickedDown && hasMoved) {
 				// WE MOVED! MOVE THE CLIKED ITEM
 				clickedDown.transform.position = worldPos;
 			}
         }
 	}
-
-	private void CheckHasMoved(Vector3 currentPos) {
-		hasMoved = (clickedDownPos - currentPos).sqrMagnitude > .1f;
-		if (hasMoved)
-			Debug.Log("TOO FAR BUDDY");
-    }
 
 	public void ClearScreen() {
 		foreach(GameObject go in everyObjects) {
