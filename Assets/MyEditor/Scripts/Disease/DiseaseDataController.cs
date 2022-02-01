@@ -64,7 +64,7 @@ public class DiseaseDataController : MonoBehaviour {
     }
 
 	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".txt"));
+		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".json"));
 		sw.WriteLine(content);
 		sw.Close();
 	}
