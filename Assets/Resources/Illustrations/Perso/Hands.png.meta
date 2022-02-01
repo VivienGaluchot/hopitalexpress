@@ -1,463 +1,487 @@
 fileFormatVersion: 2
-guid: ba98893a00b10c841b7a58784de4109b
+guid: f147ddaa0b755ff4b9366a2b821aab4d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4862942130373081034
-    second: Clothes_0
+      213: -1624108181874779714
+    second: Hands_0
   - first:
-      213: 7566583126990785104
-    second: Clothes_1
+      213: 4710320323224341537
+    second: Hands_1
   - first:
-      213: 7798115773135034406
-    second: Clothes_2
+      213: -3607849992788312949
+    second: Hands_2
   - first:
-      213: -6630935928423092300
-    second: Clothes_3
+      213: 4785893250104691602
+    second: Hands_3
   - first:
-      213: -6475819047146179335
-    second: Clothes_4
+      213: 8548358002291925304
+    second: Hands_4
   - first:
-      213: 1741794351880512470
-    second: Clothes_5
+      213: 4115896618408713961
+    second: Hands_5
   - first:
-      213: 8927547857190717070
-    second: Clothes_6
+      213: -8794073143430624990
+    second: Hands_6
   - first:
-      213: 3954441825173325506
-    second: Clothes_7
+      213: -540470037707228130
+    second: Hands_7
   - first:
-      213: 4366684086613286107
-    second: Clothes_8
+      213: 337372214685337209
+    second: Hands_8
   - first:
-      213: 1290318136122146416
-    second: Clothes_9
+      213: -6027080290790340996
+    second: Hands_9
   - first:
-      213: 6286683622799710322
-    second: Clothes_10
+      213: 6313145923079975146
+    second: Hands_10
   - first:
-      213: 8110221161724722410
-    second: Clothes_11
+      213: -2244605342048754875
+    second: Hands_11
   - first:
-      213: 7254362255520461511
-    second: Clothes_12
+      213: 859294344300821939
+    second: Hands_12
   - first:
-      213: -637323445732092492
-    second: Clothes_13
+      213: -6203160313062490431
+    second: Hands_13
   - first:
-      213: -4802816168423138402
-    second: Clothes_14
+      213: 6490441197078613766
+    second: Hands_14
   - first:
-      213: 3937410617418940033
-    second: Clothes_15
+      213: -7573015894517977269
+    second: Hands_15
   - first:
-      213: 2828996374530656606
-    second: Clothes_16
+      213: -314947720306782068
+    second: Hands_16
   - first:
-      213: 7764994100992046867
-    second: Clothes_17
+      213: 26296084836591099
+    second: Hands_17
   - first:
-      213: -1316791772089669184
-    second: Clothes_18
+      213: -9178579888807069751
+    second: Hands_18
   - first:
-      213: -8226343461223425356
-    second: Clothes_19
+      213: 1921108735553240517
+    second: Hands_19
   - first:
-      213: -513756934259180950
-    second: Clothes_20
+      213: -4750953261085658584
+    second: Hands_20
   - first:
-      213: -6772237230224424218
-    second: Clothes_21
+      213: -5458733777100467512
+    second: Hands_21
   - first:
-      213: 6212748738806187063
-    second: Clothes_22
+      213: -8071427073243095318
+    second: Hands_22
   - first:
-      213: 1432158603760658101
-    second: Clothes_23
+      213: 5759719348628222881
+    second: Hands_23
   - first:
-      213: 7107654968574462458
-    second: Clothes_24
+      213: 2988517110407143233
+    second: Hands_24
   - first:
-      213: -6539785974647745046
-    second: Clothes_25
+      213: -4221485570552067592
+    second: Hands_25
   - first:
-      213: -3140943264465810728
-    second: Clothes_26
+      213: -16798591176348973
+    second: Hands_26
   - first:
-      213: 7313367144915826069
-    second: Clothes_27
+      213: 629783809339439106
+    second: Hands_27
   - first:
-      213: 5326090128287157872
-    second: Clothes_28
+      213: -1703410017906894379
+    second: Hands_28
   - first:
-      213: -3342751365141391400
-    second: Clothes_29
+      213: 8971780045525306467
+    second: Hands_29
   - first:
-      213: -7192374408484715366
-    second: Clothes_30
+      213: -8005602462598688101
+    second: Hands_30
   - first:
-      213: -5566232542358664908
-    second: Clothes_31
+      213: -6565099381637744603
+    second: Hands_31
   - first:
-      213: 3737192490090388984
-    second: Clothes_32
+      213: -4502599915332463521
+    second: Hands_32
   - first:
-      213: 7335355711411455175
-    second: Clothes_33
+      213: 7333912409572810732
+    second: Hands_33
   - first:
-      213: 7770002172270960924
-    second: Clothes_34
+      213: -8434767100866408013
+    second: Hands_34
   - first:
-      213: 7339327899261220902
-    second: Clothes_35
+      213: -835607287298755217
+    second: Hands_35
   - first:
-      213: 8062578679239534774
-    second: Clothes_36
+      213: -1880748239174726596
+    second: Hands_36
   - first:
-      213: 4452894594966064651
-    second: Clothes_37
+      213: -7734527954104208889
+    second: Hands_37
   - first:
-      213: -5513095976425856072
-    second: Clothes_38
+      213: -6749284923562407533
+    second: Hands_38
   - first:
-      213: 7982905293891928105
-    second: Clothes_39
+      213: -4407880603186592641
+    second: Hands_39
   - first:
-      213: 3937169591643475508
-    second: Clothes_40
+      213: 6877629330500538932
+    second: Hands_40
   - first:
-      213: 3092755013151379931
-    second: Clothes_41
+      213: 7207775556339184744
+    second: Hands_41
   - first:
-      213: 8416661881385430898
-    second: Clothes_42
+      213: 1307720838199357778
+    second: Hands_42
   - first:
-      213: 3065838577423432638
-    second: Clothes_43
+      213: -3965229780079865069
+    second: Hands_43
   - first:
-      213: 3226766262301838090
-    second: Clothes_44
+      213: 4163753104386710896
+    second: Hands_44
   - first:
-      213: 8050143410527258551
-    second: Clothes_45
+      213: 6459440467759248413
+    second: Hands_45
   - first:
-      213: 4805071307150247799
-    second: Clothes_46
+      213: -3426624747224828791
+    second: Hands_46
   - first:
-      213: 2780725923992637675
-    second: Clothes_47
+      213: -5304627498473336024
+    second: Hands_47
   - first:
-      213: -2029772376415538687
-    second: Clothes_48
+      213: -5085455279546134099
+    second: Hands_48
   - first:
-      213: 3736725344549684599
-    second: Clothes_49
+      213: 3801935792637472412
+    second: Hands_49
   - first:
-      213: -5227930563937713026
-    second: Clothes_50
+      213: -6536259498318609627
+    second: Hands_50
   - first:
-      213: 896638238836358824
-    second: Clothes_51
+      213: -1347838333004505851
+    second: Hands_51
   - first:
-      213: -8201561942999286714
-    second: Clothes_52
+      213: 9136416575539038882
+    second: Hands_52
   - first:
-      213: 8880825801376432568
-    second: Clothes_53
+      213: 5166119149001584570
+    second: Hands_53
   - first:
-      213: -154846162370045270
-    second: Clothes_54
+      213: 6661739820872391264
+    second: Hands_54
   - first:
-      213: 5888331563143131188
-    second: Clothes_55
+      213: -5479279535930693383
+    second: Hands_55
   - first:
-      213: -2207147845229246216
-    second: Clothes_56
+      213: -393093270960051532
+    second: Hands_56
   - first:
-      213: -5934801836729722649
-    second: Clothes_57
+      213: -2830258539077384805
+    second: Hands_57
   - first:
-      213: -3517837456470927341
-    second: Clothes_58
+      213: 639916297437625590
+    second: Hands_58
   - first:
-      213: -5853046840645509043
-    second: Clothes_59
+      213: 4667303153216679103
+    second: Hands_59
   - first:
-      213: 75362642307169427
-    second: Clothes_60
+      213: -8556005475693847373
+    second: Hands_60
   - first:
-      213: 1595540023094940324
-    second: Clothes_61
+      213: 812933041208644728
+    second: Hands_61
   - first:
-      213: -2744973200666783154
-    second: Clothes_62
+      213: -5737840882685945148
+    second: Hands_62
   - first:
-      213: 2721586908954857342
-    second: Clothes_63
+      213: -3889138066660859864
+    second: Hands_63
   - first:
-      213: 3634461788822421134
-    second: Clothes_64
+      213: -4715696611449833471
+    second: Hands_64
   - first:
-      213: 6072010755788814385
-    second: Clothes_65
+      213: 5660889140912808183
+    second: Hands_65
   - first:
-      213: -4024684688033552176
-    second: Clothes_66
+      213: 2147066021812134060
+    second: Hands_66
   - first:
-      213: 8321260491322208249
-    second: Clothes_67
+      213: -5031439026007582784
+    second: Hands_67
   - first:
-      213: -7264762709909508136
-    second: Clothes_68
+      213: -952145918396886763
+    second: Hands_68
   - first:
-      213: -1145670841154385373
-    second: Clothes_69
+      213: -205501661269529917
+    second: Hands_69
   - first:
-      213: -1146324495362450703
-    second: Clothes_70
+      213: 647427796446159072
+    second: Hands_70
   - first:
-      213: 3814375276970193392
-    second: Clothes_71
+      213: 7895193972753801580
+    second: Hands_71
   - first:
-      213: 2480607084508546581
-    second: Clothes_72
+      213: -8862024715099136343
+    second: Hands_72
   - first:
-      213: -4211784305509723253
-    second: Clothes_73
+      213: -543650169225682900
+    second: Hands_73
   - first:
-      213: 4668823819254961931
-    second: Clothes_74
+      213: 3359820274129400836
+    second: Hands_74
   - first:
-      213: 9123043762581011341
-    second: Clothes_75
+      213: -3701987991643850410
+    second: Hands_75
   - first:
-      213: -5814004715358958499
-    second: Clothes_76
+      213: -4355253944431135572
+    second: Hands_76
   - first:
-      213: 3240549638005264582
-    second: Clothes_77
+      213: -5530159467239224882
+    second: Hands_77
   - first:
-      213: -5417392260111564166
-    second: Clothes_78
+      213: 7628361573678620065
+    second: Hands_78
   - first:
-      213: -5064307710101775847
-    second: Clothes_79
+      213: 5859427911767657753
+    second: Hands_79
   - first:
-      213: 6754366960032111615
-    second: Clothes_80
+      213: 8775882223420338651
+    second: Hands_80
   - first:
-      213: -4702856468967562984
-    second: Clothes_81
+      213: 3199697177844766004
+    second: Hands_81
   - first:
-      213: -1016185413833286468
-    second: Clothes_82
+      213: -6222546229601321722
+    second: Hands_82
   - first:
-      213: -3836470989571272842
-    second: Clothes_83
+      213: -3685720979682456103
+    second: Hands_83
   - first:
-      213: 6601530334391159486
-    second: Clothes_84
+      213: 7221629290618203644
+    second: Hands_84
   - first:
-      213: -192804202948581596
-    second: Clothes_85
+      213: 5854658762984825419
+    second: Hands_85
   - first:
-      213: -1031400575117195588
-    second: Clothes_86
+      213: -4031726892747918740
+    second: Hands_86
   - first:
-      213: 6221355982746508927
-    second: Clothes_87
+      213: 1098859724293907984
+    second: Hands_87
   - first:
-      213: 8219968288728044869
-    second: Clothes_88
+      213: -921087035276389623
+    second: Hands_88
   - first:
-      213: 1286653784379033058
-    second: Clothes_89
+      213: -9032048106811930354
+    second: Hands_89
   - first:
-      213: -1037109160862607223
-    second: Clothes_90
+      213: 2713689836402708815
+    second: Hands_90
   - first:
-      213: 39245038770924433
-    second: Clothes_91
+      213: -2739896527799192106
+    second: Hands_91
   - first:
-      213: -1455503135084753697
-    second: Clothes_92
+      213: 1280085973332912146
+    second: Hands_92
   - first:
-      213: 5854447629313070265
-    second: Clothes_93
+      213: -8855728184961546943
+    second: Hands_93
   - first:
-      213: -2322132744685735757
-    second: Clothes_94
+      213: 7117680471681640473
+    second: Hands_94
   - first:
-      213: -4184213266154599898
-    second: Clothes_95
+      213: 427343867805587030
+    second: Hands_95
   - first:
-      213: -8165282691821057050
-    second: Clothes_96
+      213: 4173660291707019083
+    second: Hands_96
   - first:
-      213: -5451372362365036868
-    second: Clothes_97
+      213: -2867112677760117404
+    second: Hands_97
   - first:
-      213: -8439115561201927698
-    second: Clothes_98
+      213: -2358200333937555316
+    second: Hands_98
   - first:
-      213: -1636040542334030270
-    second: Clothes_99
+      213: -253929051234355317
+    second: Hands_99
   - first:
-      213: -3907614719088242778
-    second: Clothes_100
+      213: -8089729068970499950
+    second: Hands_100
   - first:
-      213: 4123462106893955989
-    second: Clothes_101
+      213: -4222825039945604939
+    second: Hands_101
   - first:
-      213: 5871540157194483463
-    second: Clothes_102
+      213: -7344952432418102153
+    second: Hands_102
   - first:
-      213: -1503933538615997558
-    second: Clothes_103
+      213: -2542040936726642240
+    second: Hands_103
   - first:
-      213: -4765214165276416337
-    second: Clothes_104
+      213: -1148938881960568896
+    second: Hands_104
   - first:
-      213: -6999553272895599543
-    second: Clothes_105
+      213: 349668980570168496
+    second: Hands_105
   - first:
-      213: 8079384258339617254
-    second: Clothes_106
+      213: -8270782341284009023
+    second: Hands_106
   - first:
-      213: -7384642890821942353
-    second: Clothes_107
+      213: 8698966470300481441
+    second: Hands_107
   - first:
-      213: 6863068955861317520
-    second: Clothes_108
+      213: 5648712703428483969
+    second: Hands_108
   - first:
-      213: -2115463575369870590
-    second: Clothes_109
+      213: 4322075334376364321
+    second: Hands_109
   - first:
-      213: 8219792234961527233
-    second: Clothes_110
+      213: 6878414634054656983
+    second: Hands_110
   - first:
-      213: -1386834226296858280
-    second: Clothes_111
+      213: -4464884359708232930
+    second: Hands_111
   - first:
-      213: 199106061373426818
-    second: Clothes_112
+      213: -3650421276600925304
+    second: Hands_112
   - first:
-      213: 2520255336197389411
-    second: Clothes_113
+      213: -4655758645604385467
+    second: Hands_113
   - first:
-      213: 3179269011440729583
-    second: Clothes_114
+      213: -294543712177298576
+    second: Hands_114
   - first:
-      213: -3669575696152680319
-    second: Clothes_115
+      213: -1810731371482803763
+    second: Hands_115
   - first:
-      213: -4522285108925896825
-    second: Clothes_116
+      213: 7320400768079294253
+    second: Hands_116
   - first:
-      213: 1885474779744454686
-    second: Clothes_117
+      213: 9136896716467681141
+    second: Hands_117
   - first:
-      213: -1568856540529257473
-    second: Clothes_118
+      213: 3943545130998108678
+    second: Hands_118
   - first:
-      213: 4273540030026976229
-    second: Clothes_119
+      213: 6512567896075060456
+    second: Hands_119
   - first:
-      213: -6318700679628516013
-    second: Clothes_120
+      213: 2630228438137688576
+    second: Hands_120
   - first:
-      213: 270576249909480907
-    second: Clothes_121
+      213: 7654166780022865228
+    second: Hands_121
   - first:
-      213: -4757368189007787001
-    second: Clothes_122
+      213: -921575609636525395
+    second: Hands_122
   - first:
-      213: -8876229212134137832
-    second: Clothes_123
+      213: 2861924623352583100
+    second: Hands_123
   - first:
-      213: 8723873860129610293
-    second: Clothes_124
+      213: -2583284042550306905
+    second: Hands_124
   - first:
-      213: 6993321439512752093
-    second: Clothes_125
+      213: 2487498939600718849
+    second: Hands_125
   - first:
-      213: -2557449821167841037
-    second: Clothes_126
+      213: -8543009279652631930
+    second: Hands_126
   - first:
-      213: -7818241859399208198
-    second: Clothes_127
+      213: -2978987316270223729
+    second: Hands_127
   - first:
-      213: 4859710489751085656
-    second: Clothes_128
+      213: 7546554936304820603
+    second: Hands_128
   - first:
-      213: 1562159689638828487
-    second: Clothes_129
+      213: -6220000587924150451
+    second: Hands_129
   - first:
-      213: 3391802924373904427
-    second: Clothes_130
+      213: 8284763954090012770
+    second: Hands_130
   - first:
-      213: -3686441318957370814
-    second: Clothes_131
+      213: -3366494106593872343
+    second: Hands_131
   - first:
-      213: 4783707677530090524
-    second: Clothes_132
+      213: 6743585058530713151
+    second: Hands_132
   - first:
-      213: 2398334384169414384
-    second: Clothes_133
+      213: -825111337350491318
+    second: Hands_133
   - first:
-      213: 704782590660858745
-    second: Clothes_134
+      213: -1325720465363053416
+    second: Hands_134
   - first:
-      213: -8424745608025224590
-    second: Clothes_135
+      213: 8765520535145373537
+    second: Hands_135
   - first:
-      213: 571624484371105108
-    second: Clothes_136
+      213: 8749393617276868916
+    second: Hands_136
   - first:
-      213: 5936511901090128675
-    second: Clothes_137
+      213: 5477260650958325082
+    second: Hands_137
   - first:
-      213: -8245037285283972754
-    second: Clothes_138
+      213: 550712405196023802
+    second: Hands_138
   - first:
-      213: 2614124633080404423
-    second: Clothes_139
+      213: -4982056357066076129
+    second: Hands_139
   - first:
-      213: -4879609465694490496
-    second: Clothes_140
+      213: -2646255965697176515
+    second: Hands_140
   - first:
-      213: -3616617204399199647
-    second: Clothes_141
+      213: 2598780918520249010
+    second: Hands_141
   - first:
-      213: 8586378224048852119
-    second: Clothes_142
+      213: -5554237026175994008
+    second: Hands_142
   - first:
-      213: -6207222732732121987
-    second: Clothes_143
+      213: -2345473508653263277
+    second: Hands_143
   - first:
-      213: -5546906095629841258
-    second: Clothes_144
+      213: 3970838260635253903
+    second: Hands_144
   - first:
-      213: 2189325069121023576
-    second: Clothes_145
+      213: 6505895572013445186
+    second: Hands_145
   - first:
-      213: -3559076490537600711
-    second: Clothes_146
+      213: 3032262565833287542
+    second: Hands_146
   - first:
-      213: -7388951990725579764
-    second: Clothes_147
+      213: -2842217776429498636
+    second: Hands_147
   - first:
-      213: 3463260598448013078
-    second: Clothes_148
+      213: 8525459986890677796
+    second: Hands_148
   - first:
-      213: -2736058471705999416
-    second: Clothes_149
+      213: -8677198111473124565
+    second: Hands_149
   - first:
-      213: -1189044576405699072
-    second: Clothes_150
+      213: -6027477747306526872
+    second: Hands_150
   - first:
-      213: -909859687910421670
-    second: Clothes_151
+      213: -3928384116412540301
+    second: Hands_151
+  - first:
+      213: 2245305723325093420
+    second: Hands_152
+  - first:
+      213: -6084089265218821850
+    second: Hands_153
+  - first:
+      213: -157794330301121250
+    second: Hands_154
+  - first:
+      213: -2893576232651544355
+    second: Hands_155
+  - first:
+      213: -1613662004426140768
+    second: Hands_156
+  - first:
+      213: 7616044195153577776
+    second: Hands_157
+  - first:
+      213: -7011206445413488864
+    second: Hands_158
+  - first:
+      213: -803366674457352719
+    second: Hands_159
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -488,7 +512,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -547,13 +571,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clothes_0
+      name: Hands_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -561,20 +585,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac73b244a14ac7340800000000000000
-      internalID: 4862942130373081034
+      spriteID: eb95c86a6320679e0800000000000000
+      internalID: -1624108181874779714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_1
+      name: Hands_1
       rect:
         serializedVersion: 2
-        x: 354
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -582,20 +606,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05a00c7b347e10960800000000000000
-      internalID: 7566583126990785104
+      spriteID: 12c071ca06b6e5140800000000000000
+      internalID: 4710320323224341537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_2
+      name: Hands_2
       rect:
         serializedVersion: 2
-        x: 708
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -603,20 +627,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 628951fbaf8783c60800000000000000
-      internalID: 7798115773135034406
+      spriteID: b8cf4f8fb875eedc0800000000000000
+      internalID: -3607849992788312949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_3
+      name: Hands_3
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -624,20 +648,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bf67f1c7ee2af3a0800000000000000
-      internalID: -6630935928423092300
+      spriteID: 29b0e61ed88ea6240800000000000000
+      internalID: 4785893250104691602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_4
+      name: Hands_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -645,20 +669,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f4b42113e44126a0800000000000000
-      internalID: -6475819047146179335
+      spriteID: 8316a7bdf4ed1a670800000000000000
+      internalID: 8548358002291925304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_5
+      name: Hands_5
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -666,125 +690,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d3ae9f0cb81c2810800000000000000
-      internalID: 1741794351880512470
+      spriteID: 9ee9b70ea2a9e1930800000000000000
+      internalID: 4115896618408713961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_6
-      rect:
-        serializedVersion: 2
-        x: 708
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e860727d97505eb70800000000000000
-      internalID: 8927547857190717070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_7
-      rect:
-        serializedVersion: 2
-        x: 1062
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c6476273eff0e630800000000000000
-      internalID: 3954441825173325506
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_8
-      rect:
-        serializedVersion: 2
-        x: 1416
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bdc9fe48a04999c30800000000000000
-      internalID: 4366684086613286107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_9
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 07efdc6228128e110800000000000000
-      internalID: 1290318136122146416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_10
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2781e385279ce3750800000000000000
-      internalID: 6286683622799710322
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_11
+      name: Hands_6
       rect:
         serializedVersion: 2
         x: 2478
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -792,20 +711,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aec35724d2b4d8070800000000000000
-      internalID: 8110221161724722410
+      spriteID: 229c30da11d25f580800000000000000
+      internalID: -8794073143430624990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_12
+      name: Hands_7
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -813,20 +732,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c27c40490caca460800000000000000
-      internalID: 7254362255520461511
+      spriteID: e1cf7be3d5ddf78f0800000000000000
+      internalID: -540470037707228130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_13
+      name: Hands_8
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -834,20 +753,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b55c1ae3b5c727f0800000000000000
-      internalID: -637323445732092492
+      spriteID: 9760865ed369ea400800000000000000
+      internalID: 337372214685337209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_14
+      name: Hands_9
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -855,20 +774,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9bd2a72428f85db0800000000000000
-      internalID: -4802816168423138402
+      spriteID: c760faa88628b5ca0800000000000000
+      internalID: -6027080290790340996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_15
+      name: Hands_10
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -876,20 +795,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18e7b12681e74a630800000000000000
-      internalID: 3937410617418940033
+      spriteID: ae03360c4cccc9750800000000000000
+      internalID: 6313145923079975146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_16
+      name: Hands_11
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -897,41 +816,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5984c6c63d924720800000000000000
-      internalID: 2828996374530656606
+      spriteID: 5436d36755f89d0e0800000000000000
+      internalID: -2244605342048754875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_17
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 31772a08efcc2cb60800000000000000
-      internalID: 7764994100992046867
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_18
+      name: Hands_12
       rect:
         serializedVersion: 2
         x: 4956
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -939,20 +837,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c920752cd0d9bde0800000000000000
-      internalID: -1316791772089669184
+      spriteID: 3bd7d8547a3dceb00800000000000000
+      internalID: 859294344300821939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_19
+      name: Hands_13
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -960,20 +858,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ba9b61053826dd80800000000000000
-      internalID: -8226343461223425356
+      spriteID: 1cefb1f9f82f9e9a0800000000000000
+      internalID: -6203160313062490431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_20
+      name: Hands_14
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 5782
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -981,20 +879,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6a76905ac4ced8f0800000000000000
-      internalID: -513756934259180950
+      spriteID: 60f8e6381eda21a50800000000000000
+      internalID: 6490441197078613766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_21
+      name: Hands_15
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 6195
+        y: 4783.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1002,146 +900,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e24cc5be1e2402a0800000000000000
-      internalID: -6772237230224424218
+      spriteID: b4f6ed0ea2e37e690800000000000000
+      internalID: -7573015894517977269
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_22
-      rect:
-        serializedVersion: 2
-        x: 6372
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7348c47bf0e183650800000000000000
-      internalID: 6212748738806187063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_23
-      rect:
-        serializedVersion: 2
-        x: 6726
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b66c2789ac00e310800000000000000
-      internalID: 1432158603760658101
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_24
-      rect:
-        serializedVersion: 2
-        x: 7080
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af9cbe3398673a260800000000000000
-      internalID: 7107654968574462458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_25
-      rect:
-        serializedVersion: 2
-        x: 7434
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae51a0a2e430e35a0800000000000000
-      internalID: -6539785974647745046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_26
-      rect:
-        serializedVersion: 2
-        x: 7788
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8da0cdd0eb02964d0800000000000000
-      internalID: -3140943264465810728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_27
-      rect:
-        serializedVersion: 2
-        x: 8142
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59578b0abac4e7560800000000000000
-      internalID: 7313367144915826069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_28
+      name: Hands_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1149,20 +921,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07e454ab0c21ae940800000000000000
-      internalID: 5326090128287157872
+      spriteID: c809b4097b411abf0800000000000000
+      internalID: -314947720306782068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_29
+      name: Hands_17
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1170,20 +942,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d79b4418592c91d0800000000000000
-      internalID: -3342751365141391400
+      spriteID: bf52bab562c6d5000800000000000000
+      internalID: 26296084836591099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_30
+      name: Hands_18
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1191,20 +963,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9488a2159d8f2c90800000000000000
-      internalID: -7192374408484715366
+      spriteID: 9c73c19a8322f9080800000000000000
+      internalID: -9178579888807069751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_31
+      name: Hands_19
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1212,20 +984,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4390e7f6ef4c0c2b0800000000000000
-      internalID: -5566232542358664908
+      spriteID: 5cdfc8d673629aa10800000000000000
+      internalID: 1921108735553240517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_32
+      name: Hands_20
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1233,20 +1005,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd581de4cc2dd330800000000000000
-      internalID: 3737192490090388984
+      spriteID: 82271804e29311eb0800000000000000
+      internalID: -4750953261085658584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_33
+      name: Hands_21
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1254,41 +1026,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c400d7b72b6cc560800000000000000
-      internalID: 7335355711411455175
+      spriteID: 8c210842d8eae34b0800000000000000
+      internalID: -5458733777100467512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_34
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c116936fec794db60800000000000000
-      internalID: 7770002172270960924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_35
+      name: Hands_22
       rect:
         serializedVersion: 2
         x: 2478
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1296,20 +1047,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6283495c6d78ad560800000000000000
-      internalID: 7339327899261220902
+      spriteID: aeedfd457d78cff80800000000000000
+      internalID: -8071427073243095318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_36
+      name: Hands_23
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1317,20 +1068,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b8e5b5679804ef60800000000000000
-      internalID: 8062578679239534774
+      spriteID: 1a3fde43b32aeef40800000000000000
+      internalID: 5759719348628222881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_37
+      name: Hands_24
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1338,20 +1089,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0e853baa0cdbcd30800000000000000
-      internalID: 4452894594966064651
+      spriteID: 14f9ef26a78597920800000000000000
+      internalID: 2988517110407143233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_38
+      name: Hands_25
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1359,20 +1110,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b360884b6c8d73b0800000000000000
-      internalID: -5513095976425856072
+      spriteID: 8f98ece6d354a65c0800000000000000
+      internalID: -4221485570552067592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_39
+      name: Hands_26
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1380,20 +1131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 920830ec11af8ce60800000000000000
-      internalID: 7982905293891928105
+      spriteID: 3dae43435c154cff0800000000000000
+      internalID: -16798591176348973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_40
+      name: Hands_27
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1401,41 +1152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43e016232e2a3a630800000000000000
-      internalID: 3937169591643475508
+      spriteID: 20838f0b9017db800800000000000000
+      internalID: 629783809339439106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_41
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd152306c4cabea20800000000000000
-      internalID: 3092755013151379931
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_42
+      name: Hands_28
       rect:
         serializedVersion: 2
         x: 4956
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1443,20 +1173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27fac82436dfdc470800000000000000
-      internalID: 8416661881385430898
+      spriteID: 5d951df1d954c58e0800000000000000
+      internalID: -1703410017906894379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_43
+      name: Hands_29
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1464,20 +1194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb330251fb0c8a20800000000000000
-      internalID: 3065838577423432638
+      spriteID: 36c4978ba6a228c70800000000000000
+      internalID: 8971780045525306467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_44
+      name: Hands_30
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 5782
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1485,20 +1215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0b47b5c1d6c7cc20800000000000000
-      internalID: 3226766262301838090
+      spriteID: b9210dbc9f266e090800000000000000
+      internalID: -8005602462598688101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_45
+      name: Hands_31
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 6195
+        y: 4252.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1506,146 +1236,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b7cd67c7cad7bf60800000000000000
-      internalID: 8050143410527258551
+      spriteID: 528785255e414e4a0800000000000000
+      internalID: -6565099381637744603
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_46
-      rect:
-        serializedVersion: 2
-        x: 6372
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 777cc1f35ea0fa240800000000000000
-      internalID: 4805071307150247799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_47
-      rect:
-        serializedVersion: 2
-        x: 6726
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be01d45be7f179620800000000000000
-      internalID: 2780725923992637675
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_48
-      rect:
-        serializedVersion: 2
-        x: 7080
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 102f9d027ccc4d3e0800000000000000
-      internalID: -2029772376415538687
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_49
-      rect:
-        serializedVersion: 2
-        x: 7434
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 775451127e38bd330800000000000000
-      internalID: 3736725344549684599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_50
-      rect:
-        serializedVersion: 2
-        x: 7788
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e74c512d9d8a277b0800000000000000
-      internalID: -5227930563937713026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_51
-      rect:
-        serializedVersion: 2
-        x: 8142
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ae7fd54abf717c00800000000000000
-      internalID: 896638238836358824
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_52
+      name: Hands_32
       rect:
         serializedVersion: 2
         x: 0
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1653,20 +1257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64c3a28ddd23e2e80800000000000000
-      internalID: -8201561942999286714
+      spriteID: f5497e89b3d8381c0800000000000000
+      internalID: -4502599915332463521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_53
+      name: Hands_33
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1674,20 +1278,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b18a2383080f3b70800000000000000
-      internalID: 8880825801376432568
+      spriteID: cef9a62da7a47c560800000000000000
+      internalID: 7333912409572810732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_54
+      name: Hands_34
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1695,20 +1299,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaad9195c30e9ddf0800000000000000
-      internalID: -154846162370045270
+      spriteID: 3b1d4b5d200b1fa80800000000000000
+      internalID: -8434767100866408013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_55
+      name: Hands_35
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1716,20 +1320,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 430fdd4eb5e87b150800000000000000
-      internalID: 5888331563143131188
+      spriteID: f6574d479935764f0800000000000000
+      internalID: -835607287298755217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_56
+      name: Hands_36
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1737,20 +1341,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f8875e8ab2ae51e0800000000000000
-      internalID: -2207147845229246216
+      spriteID: c3c8c0ce07d36e5e0800000000000000
+      internalID: -1880748239174726596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_57
+      name: Hands_37
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1758,41 +1362,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e893656c2953ada0800000000000000
-      internalID: -5934801836729722649
+      spriteID: 7023a461ecf69a490800000000000000
+      internalID: -7734527954104208889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_58
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3189c7db8712e2fc0800000000000000
-      internalID: -3517837456470927341
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_59
+      name: Hands_38
       rect:
         serializedVersion: 2
         x: 2478
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1800,20 +1383,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d402a91c8ecc5cea0800000000000000
-      internalID: -5853046840645509043
+      spriteID: 399c92b0f19b552a0800000000000000
+      internalID: -6749284923562407533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_60
+      name: Hands_39
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1821,20 +1404,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39cbd048cedbb0100800000000000000
-      internalID: 75362642307169427
+      spriteID: f748ab202ff04d2c0800000000000000
+      internalID: -4407880603186592641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_61
+      name: Hands_40
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1842,20 +1425,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a21e7d823f742610800000000000000
-      internalID: 1595540023094940324
+      spriteID: 432da45df6f327f50800000000000000
+      internalID: 6877629330500538932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_62
+      name: Hands_41
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1863,20 +1446,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e421a40ea65e7e9d0800000000000000
-      internalID: -2744973200666783154
+      spriteID: 86437581ea9270460800000000000000
+      internalID: 7207775556339184744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_63
+      name: Hands_42
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1884,20 +1467,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7f8b95cfd405c520800000000000000
-      internalID: 2721586908954857342
+      spriteID: 251bf3a7c25f52210800000000000000
+      internalID: 1307720838199357778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_64
+      name: Hands_43
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1905,41 +1488,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8ebd70adb3307230800000000000000
-      internalID: 3634461788822421134
+      spriteID: 3131a81168ca8f8c0800000000000000
+      internalID: -3965229780079865069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_65
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 138b42b8c9d144450800000000000000
-      internalID: 6072010755788814385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_66
+      name: Hands_44
       rect:
         serializedVersion: 2
         x: 4956
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1947,20 +1509,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d86ec499927528c0800000000000000
-      internalID: -4024684688033552176
+      spriteID: 07d566f436f98c930800000000000000
+      internalID: 4163753104386710896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_67
+      name: Hands_45
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1968,20 +1530,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ffa0c4345e0b7370800000000000000
-      internalID: 8321260491322208249
+      spriteID: d14b290c1ea84a950800000000000000
+      internalID: 6459440467759248413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_68
+      name: Hands_46
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 5782
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1989,20 +1551,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dfe6524ec06e2b90800000000000000
-      internalID: -7264762709909508136
+      spriteID: 984f91b82fe2270d0800000000000000
+      internalID: -3426624747224828791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_69
+      name: Hands_47
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 6195
+        y: 3721.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2010,146 +1572,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32a4873a072c910f0800000000000000
-      internalID: -1145670841154385373
+      spriteID: 8235abf256d2266b0800000000000000
+      internalID: -5304627498473336024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_70
-      rect:
-        serializedVersion: 2
-        x: 6372
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1fa9798e1ff6710f0800000000000000
-      internalID: -1146324495362450703
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_71
-      rect:
-        serializedVersion: 2
-        x: 6726
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f137dfda126fe430800000000000000
-      internalID: 3814375276970193392
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_72
-      rect:
-        serializedVersion: 2
-        x: 7080
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51603732003ec6220800000000000000
-      internalID: 2480607084508546581
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_73
-      rect:
-        serializedVersion: 2
-        x: 7434
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8317873d7cbc85c0800000000000000
-      internalID: -4211784305509723253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_74
-      rect:
-        serializedVersion: 2
-        x: 7788
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b071391f68efac040800000000000000
-      internalID: 4668823819254961931
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_75
-      rect:
-        serializedVersion: 2
-        x: 8142
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8bfbf257ff8b9e70800000000000000
-      internalID: 9123043762581011341
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_76
+      name: Hands_48
       rect:
         serializedVersion: 2
         x: 0
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2157,20 +1593,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5c459ae381805fa0800000000000000
-      internalID: -5814004715358958499
+      spriteID: da1948dfd55dc69b0800000000000000
+      internalID: -5085455279546134099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_77
+      name: Hands_49
       rect:
         serializedVersion: 2
-        x: 354
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2178,20 +1614,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c013520abeb8fc20800000000000000
-      internalID: 3240549638005264582
+      spriteID: c9eeffab57033c430800000000000000
+      internalID: 3801935792637472412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_78
+      name: Hands_50
       rect:
         serializedVersion: 2
-        x: 708
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2199,20 +1635,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a728917217e81d4b0800000000000000
-      internalID: -5417392260111564166
+      spriteID: 52342faed9a8a45a0800000000000000
+      internalID: -6536259498318609627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_79
+      name: Hands_51
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2220,20 +1656,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91a9c1238f6f7b9b0800000000000000
-      internalID: -5064307710101775847
+      spriteID: 50d9c926d248b4de0800000000000000
+      internalID: -1347838333004505851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_80
+      name: Hands_52
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2241,20 +1677,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb5957c6f45cbd50800000000000000
-      internalID: 6754366960032111615
+      spriteID: 2aacef8f7721bce70800000000000000
+      internalID: 9136416575539038882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_81
+      name: Hands_53
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2262,41 +1698,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8116a8155f81cbeb0800000000000000
-      internalID: -4702856468967562984
+      spriteID: abf2597aefdb1b740800000000000000
+      internalID: 5166119149001584570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_82
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 886.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cbc988600c8c5e1f0800000000000000
-      internalID: -1016185413833286468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_83
+      name: Hands_54
       rect:
         serializedVersion: 2
         x: 2478
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2304,20 +1719,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67f438326fd12cac0800000000000000
-      internalID: -3836470989571272842
+      spriteID: 06a5c295211437c50800000000000000
+      internalID: 6661739820872391264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_84
+      name: Hands_55
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2325,20 +1740,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebac95bdcd85d9b50800000000000000
-      internalID: 6601530334391159486
+      spriteID: 9f8a8c3ea40b5f3b0800000000000000
+      internalID: -5479279535930693383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_85
+      name: Hands_56
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2346,20 +1761,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4272c045995035df0800000000000000
-      internalID: -192804202948581596
+      spriteID: 4ba64d4b0c37b8af0800000000000000
+      internalID: -393093270960051532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_86
+      name: Hands_57
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2367,20 +1782,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb6810b34aabfa1f0800000000000000
-      internalID: -1031400575117195588
+      spriteID: b95c6c3aad6e8b8d0800000000000000
+      internalID: -2830258539077384805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_87
+      name: Hands_58
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2388,20 +1803,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7e5bdcdd42b65650800000000000000
-      internalID: 6221355982746508927
+      spriteID: 6fcb0ca6b7071e800800000000000000
+      internalID: 639916297437625590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_88
+      name: Hands_59
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2409,41 +1824,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5455c9a7b91331270800000000000000
-      internalID: 8219968288728044869
+      spriteID: fbc6a8a4d7795c040800000000000000
+      internalID: 4667303153216679103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_89
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 886.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e503d6cccc1bd110800000000000000
-      internalID: 1286653784379033058
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_90
+      name: Hands_60
       rect:
         serializedVersion: 2
         x: 4956
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2451,20 +1845,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9881b7986b27b91f0800000000000000
-      internalID: -1037109160862607223
+      spriteID: 3bc98fcf956f24980800000000000000
+      internalID: -8556005475693847373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_91
+      name: Hands_61
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2472,20 +1866,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19b2323a72d6b8000800000000000000
-      internalID: 39245038770924433
+      spriteID: 8745b6b3b4e184b00800000000000000
+      internalID: 812933041208644728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_92
+      name: Hands_62
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 5782
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2493,20 +1887,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdc4ec73c930dcbe0800000000000000
-      internalID: -1455503135084753697
+      spriteID: 4ca5ac91e181f50b0800000000000000
+      internalID: -5737840882685945148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_93
+      name: Hands_63
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 6195
+        y: 3190.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2514,62 +1908,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b45555c91d2f3150800000000000000
-      internalID: 5854447629313070265
+      spriteID: 820ea3ea881070ac0800000000000000
+      internalID: -3889138066660859864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_94
-      rect:
-        serializedVersion: 2
-        x: 6372
-        y: 886.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b034b7629026cfd0800000000000000
-      internalID: -2322132744685735757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_95
-      rect:
-        serializedVersion: 2
-        x: 6726
-        y: 886.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62ac06e0430bee5c0800000000000000
-      internalID: -4184213266154599898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_96
+      name: Hands_64
       rect:
         serializedVersion: 2
         x: 0
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2577,20 +1929,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6eb4c5f37a61fae80800000000000000
-      internalID: -8165282691821057050
+      spriteID: 108f40eaaea7e8eb0800000000000000
+      internalID: -4715696611449833471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_97
+      name: Hands_65
       rect:
         serializedVersion: 2
-        x: 354
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2598,20 +1950,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb699d218b5d854b0800000000000000
-      internalID: -5451372362365036868
+      spriteID: 7f069f45ea48f8e40800000000000000
+      internalID: 5660889140912808183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_98
+      name: Hands_66
       rect:
         serializedVersion: 2
-        x: 708
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2619,20 +1971,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee976140c1d32ea80800000000000000
-      internalID: -8439115561201927698
+      spriteID: ca06c63db29ebcd10800000000000000
+      internalID: 2147066021812134060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_99
+      name: Hands_67
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2640,20 +1992,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24eea0c7bcd9b49e0800000000000000
-      internalID: -1636040542334030270
+      spriteID: 0c7d7c11ddcbc2ab0800000000000000
+      internalID: -5031439026007582784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_100
+      name: Hands_68
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2661,20 +2013,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6af48adcd1d55c9c0800000000000000
-      internalID: -3907614719088242778
+      spriteID: 5119d97f45c49c2f0800000000000000
+      internalID: -952145918396886763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_101
+      name: Hands_69
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2682,41 +2034,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 593b23e60fa793930800000000000000
-      internalID: 4123462106893955989
+      spriteID: 3cae64fe359e52df0800000000000000
+      internalID: -205501661269529917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_102
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 707b40a0aa6eb7150800000000000000
-      internalID: 5871540157194483463
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_103
+      name: Hands_70
       rect:
         serializedVersion: 2
         x: 2478
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2724,20 +2055,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8b4ff03a64f02be0800000000000000
-      internalID: -1503933538615997558
+      spriteID: 0e023e096202cf800800000000000000
+      internalID: 647427796446159072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_104
+      name: Hands_71
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2745,20 +2076,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa62a00c6fe8eddb0800000000000000
-      internalID: -4765214165276416337
+      spriteID: c61abc2761d519d60800000000000000
+      internalID: 7895193972753801580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_105
+      name: Hands_72
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2766,20 +2097,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94c82ae22679cde90800000000000000
-      internalID: -6999553272895599543
+      spriteID: 9ae98c18973c30580800000000000000
+      internalID: -8862024715099136343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_106
+      name: Hands_73
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2787,20 +2118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e937323d2dbf1070800000000000000
-      internalID: 8079384258339617254
+      spriteID: c20e83d2d019478f0800000000000000
+      internalID: -543650169225682900
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_107
+      name: Hands_74
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2808,20 +2139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa3c1739a6a748990800000000000000
-      internalID: -7384642890821942353
+      spriteID: 40473acfcba70ae20800000000000000
+      internalID: 3359820274129400836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_108
+      name: Hands_75
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2829,41 +2160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 097ff1f6ad48e3f50800000000000000
-      internalID: 6863068955861317520
+      spriteID: 6597e4b1985ef9cc0800000000000000
+      internalID: -3701987991643850410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_109
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2031dce161d54a2e0800000000000000
-      internalID: -2115463575369870590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_110
+      name: Hands_76
       rect:
         serializedVersion: 2
         x: 4956
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2871,20 +2181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c16564cc71921270800000000000000
-      internalID: 8219792234961527233
+      spriteID: ca43097dc970f83c0800000000000000
+      internalID: -4355253944431135572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_111
+      name: Hands_77
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2892,20 +2202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 859d8337e99f0cce0800000000000000
-      internalID: -1386834226296858280
+      spriteID: ec941fbb34de043b0800000000000000
+      internalID: -5530159467239224882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_112
+      name: Hands_78
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 5782
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2913,20 +2223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28c4acc68ed53c200800000000000000
-      internalID: 199106061373426818
+      spriteID: 1ad9a593f626dd960800000000000000
+      internalID: 7628361573678620065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_113
+      name: Hands_79
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 6195
+        y: 2659.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2934,146 +2244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36cf35910eeb9f220800000000000000
-      internalID: 2520255336197389411
+      spriteID: 91d8be324aed05150800000000000000
+      internalID: 5859427911767657753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_114
-      rect:
-        serializedVersion: 2
-        x: 6372
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fedf45842580f1c20800000000000000
-      internalID: 3179269011440729583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_115
-      rect:
-        serializedVersion: 2
-        x: 6726
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 188a96ab85c031dc0800000000000000
-      internalID: -3669575696152680319
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_116
-      rect:
-        serializedVersion: 2
-        x: 7080
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 787ee6d47ad9d31c0800000000000000
-      internalID: -4522285108925896825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_117
-      rect:
-        serializedVersion: 2
-        x: 7434
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1840af825d8a2a10800000000000000
-      internalID: 1885474779744454686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_118
-      rect:
-        serializedVersion: 2
-        x: 7788
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff3943ed94d4a3ae0800000000000000
-      internalID: -1568856540529257473
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_119
-      rect:
-        serializedVersion: 2
-        x: 8142
-        y: 591.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eb8b2fd30aae4b30800000000000000
-      internalID: 4273540030026976229
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_120
+      name: Hands_80
       rect:
         serializedVersion: 2
         x: 0
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3081,20 +2265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35519b4b5377f48a0800000000000000
-      internalID: -6318700679628516013
+      spriteID: bd172a5b2623ac970800000000000000
+      internalID: 8775882223420338651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_121
+      name: Hands_81
       rect:
         serializedVersion: 2
-        x: 354
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3102,20 +2286,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcd038c6aa741c300800000000000000
-      internalID: 270576249909480907
+      spriteID: 435d14a61ab976c20800000000000000
+      internalID: 3199697177844766004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_122
+      name: Hands_82
       rect:
         serializedVersion: 2
-        x: 708
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3123,20 +2307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70c827476de6afdb0800000000000000
-      internalID: -4757368189007787001
+      spriteID: 60dba223c2315a9a0800000000000000
+      internalID: -6222546229601321722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_123
+      name: Hands_83
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3144,20 +2328,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 810acc15f8c41d480800000000000000
-      internalID: -8876229212134137832
+      spriteID: 9dd82d8fb40b9dcc0800000000000000
+      internalID: -3685720979682456103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_124
+      name: Hands_84
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3165,20 +2349,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53a57520e0d611970800000000000000
-      internalID: 8723873860129610293
+      spriteID: cfdaad6f391683460800000000000000
+      internalID: 7221629290618203644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_125
+      name: Hands_85
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3186,41 +2370,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddfe74a0cc44d0160800000000000000
-      internalID: 6993321439512752093
+      spriteID: b42a6d8202def3150800000000000000
+      internalID: 5854658762984825419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_126
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 296.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f0976600fc128cd0800000000000000
-      internalID: -2557449821167841037
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_127
+      name: Hands_86
       rect:
         serializedVersion: 2
         x: 2478
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3228,20 +2391,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af2bb62a376008390800000000000000
-      internalID: -7818241859399208198
+      spriteID: c62fe5680cd6c08c0800000000000000
+      internalID: -4031726892747918740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_128
+      name: Hands_87
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3249,20 +2412,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8526adc41f8217340800000000000000
-      internalID: 4859710489751085656
+      spriteID: 016a584e81fef3f00800000000000000
+      internalID: 1098859724293907984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_129
+      name: Hands_88
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3270,20 +2433,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c95b5706f7eda510800000000000000
-      internalID: 1562159689638828487
+      spriteID: 9031227b834a733f0800000000000000
+      internalID: -921087035276389623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_130
+      name: Hands_89
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3291,20 +2454,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2c00770aca121f20800000000000000
-      internalID: 3391802924373904427
+      spriteID: e094c37c918b7a280800000000000000
+      internalID: -9032048106811930354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_131
+      name: Hands_90
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3312,20 +2475,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 242393ae62127dcc0800000000000000
-      internalID: -3686441318957370814
+      spriteID: f411f594786f8a520800000000000000
+      internalID: 2713689836402708815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_132
+      name: Hands_91
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3333,41 +2496,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1c6d7c99c4236240800000000000000
-      internalID: 4783707677530090524
+      spriteID: 6d5f333ef9ee9f9d0800000000000000
+      internalID: -2739896527799192106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_133
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 296.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fee50d5a68984120800000000000000
-      internalID: 2398334384169414384
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_134
+      name: Hands_92
       rect:
         serializedVersion: 2
         x: 4956
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3375,20 +2517,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97358383804e7c900800000000000000
-      internalID: 704782590660858745
+      spriteID: 218e77a1967c3c110800000000000000
+      internalID: 1280085973332912146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_135
+      name: Hands_93
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 2128.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3396,20 +2538,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27acf96718a451b80800000000000000
-      internalID: -8424745608025224590
+      spriteID: 145c3fba2222a1580800000000000000
+      internalID: -8855728184961546943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_136
+      name: Hands_94
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 2128.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918a15b8da417c260800000000000000
+      internalID: 7117680471681640473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_95
+      rect:
+        serializedVersion: 2
+        x: 6195
+        y: 2128.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6565e7dcbfa3ee500800000000000000
+      internalID: 427343867805587030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_96
       rect:
         serializedVersion: 2
         x: 0
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3417,20 +2601,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4550bdf9071dee700800000000000000
-      internalID: 571624484371105108
+      spriteID: b4f995c1ce1dbe930800000000000000
+      internalID: 4173660291707019083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_137
+      name: Hands_97
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 413
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3438,20 +2622,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3232b5dfe1ab26250800000000000000
-      internalID: 5936511901090128675
+      spriteID: 465d61fc538f538d0800000000000000
+      internalID: -2867112677760117404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_138
+      name: Hands_98
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 826
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3459,20 +2643,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e693ccae54eb39d80800000000000000
-      internalID: -8245037285283972754
+      spriteID: c88c1726a4df54fd0800000000000000
+      internalID: -2358200333937555316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_139
+      name: Hands_99
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 1239
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3480,20 +2664,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c91b59e08c374420800000000000000
-      internalID: 2614124633080404423
+      spriteID: b87360f8fdcd97cf0800000000000000
+      internalID: -253929051234355317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_140
+      name: Hands_100
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 1652
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3501,20 +2685,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08075a25b05284cb0800000000000000
-      internalID: -4879609465694490496
+      spriteID: 290acd2e5428bbf80800000000000000
+      internalID: -8089729068970499950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_141
+      name: Hands_101
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 2065
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3522,41 +2706,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16a283370d13fcdc0800000000000000
-      internalID: -3616617204399199647
+      spriteID: 5b0ea69eff28565c0800000000000000
+      internalID: -4222825039945604939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_142
-      rect:
-        serializedVersion: 2
-        x: 2124
-        y: 1.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79cc49f8081f82770800000000000000
-      internalID: 8586378224048852119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_143
+      name: Hands_102
       rect:
         serializedVersion: 2
         x: 2478
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3564,20 +2727,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7cb5c5dfc38bd9a0800000000000000
-      internalID: -6207222732732121987
+      spriteID: 774e39d8dac711a90800000000000000
+      internalID: -7344952432418102153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_144
+      name: Hands_103
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 2891
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3585,20 +2748,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69cc8877b4e6503b0800000000000000
-      internalID: -5546906095629841258
+      spriteID: 0c148e18c3bd8bcd0800000000000000
+      internalID: -2542040936726642240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_145
+      name: Hands_104
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3304
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3606,20 +2769,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85ee0d20d8b026e10800000000000000
-      internalID: 2189325069121023576
+      spriteID: 0c71b189c262e00f0800000000000000
+      internalID: -1148938881960568896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_146
+      name: Hands_105
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3717
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3627,20 +2790,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 939ff05e9ce9b9ec0800000000000000
-      internalID: -3559076490537600711
+      spriteID: 0bc9bdfc5164ad400800000000000000
+      internalID: 349668980570168496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_147
+      name: Hands_106
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 4130
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3648,20 +2811,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0ce262105b257990800000000000000
-      internalID: -7388951990725579764
+      spriteID: 1cb6135f747483d80800000000000000
+      internalID: -8270782341284009023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_148
+      name: Hands_107
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 4543
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3669,41 +2832,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61fb9174a29ff0030800000000000000
-      internalID: 3463260598448013078
+      spriteID: 1a73b476aefe8b870800000000000000
+      internalID: 8698966470300481441
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_149
-      rect:
-        serializedVersion: 2
-        x: 4602
-        y: 1.75
-        width: 354.33334
-        height: 295.25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c70445f051970ad0800000000000000
-      internalID: -2736058471705999416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clothes_150
+      name: Hands_108
       rect:
         serializedVersion: 2
         x: 4956
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3711,20 +2853,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 006cb31f14aaf7fe0800000000000000
-      internalID: -1189044576405699072
+      spriteID: 18b571e8642446e40800000000000000
+      internalID: 5648712703428483969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clothes_151
+      name: Hands_109
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 5369
+        y: 1597.5
+        width: 413.375
+        height: 531.5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3732,8 +2874,1058 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5bc6aa3f678f53f0800000000000000
-      internalID: -909859687910421670
+      spriteID: 1291bf50e981bfb30800000000000000
+      internalID: 4322075334376364321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_110
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 1597.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d32da09aa9057f50800000000000000
+      internalID: 6878414634054656983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_111
+      rect:
+        serializedVersion: 2
+        x: 6195
+        y: 1597.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13b460b45b8902c0800000000000000
+      internalID: -4464884359708232930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8838caf8039175dc0800000000000000
+      internalID: -3650421276600925304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_113
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54dfbc8dd2c636fb0800000000000000
+      internalID: -4655758645604385467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_114
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073e8d8ed0299ebf0800000000000000
+      internalID: -294543712177298576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_115
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc19c1b496dfed6e0800000000000000
+      internalID: -1810731371482803763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_116
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2fecd2a6b9479560800000000000000
+      internalID: 7320400768079294253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_117
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5773d7e7727ccce70800000000000000
+      internalID: 9136896716467681141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_118
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6021dd027694ab630800000000000000
+      internalID: 3943545130998108678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_119
+      rect:
+        serializedVersion: 2
+        x: 2891
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e4ca251ff9416a50800000000000000
+      internalID: 6512567896075060456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_120
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 002d35534d2708420800000000000000
+      internalID: 2630228438137688576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_121
+      rect:
+        serializedVersion: 2
+        x: 3717
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4dbbd60220193a60800000000000000
+      internalID: 7654166780022865228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_122
+      rect:
+        serializedVersion: 2
+        x: 4130
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa63f1add7e533f0800000000000000
+      internalID: -921575609636525395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_123
+      rect:
+        serializedVersion: 2
+        x: 4543
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb3dfd4284997b720800000000000000
+      internalID: 2861924623352583100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_124
+      rect:
+        serializedVersion: 2
+        x: 4956
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a79ad1a9d4562cd0800000000000000
+      internalID: -2583284042550306905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_125
+      rect:
+        serializedVersion: 2
+        x: 5369
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ccf023b1f558220800000000000000
+      internalID: 2487498939600718849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_126
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68a607da252217980800000000000000
+      internalID: -8543009279652631930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_127
+      rect:
+        serializedVersion: 2
+        x: 6195
+        y: 1066.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ea157b1d288a6d0800000000000000
+      internalID: -2978987316270223729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_128
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b716b603bbfbab860800000000000000
+      internalID: 7546554936304820603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_129
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d476f069b6e1ea9a0800000000000000
+      internalID: -6220000587924150451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_130
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 260fe73fbe469f270800000000000000
+      internalID: 8284763954090012770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_131
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 926b60e427fc741d0800000000000000
+      internalID: -3366494106593872343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_132
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3eda56b1e6069d50800000000000000
+      internalID: 6743585058530713151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_133
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43931d3c9d9c84f0800000000000000
+      internalID: -825111337350491318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_134
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894d19eb2481a9de0800000000000000
+      internalID: -1325720465363053416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_135
+      rect:
+        serializedVersion: 2
+        x: 2891
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16f5bb82c7265a970800000000000000
+      internalID: 8765520535145373537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_136
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4399bdd73271c6970800000000000000
+      internalID: 8749393617276868916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_137
+      rect:
+        serializedVersion: 2
+        x: 3717
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a558892da83230c40800000000000000
+      internalID: 5477260650958325082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_138
+      rect:
+        serializedVersion: 2
+        x: 4130
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af72c15c30684a700800000000000000
+      internalID: 550712405196023802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_139
+      rect:
+        serializedVersion: 2
+        x: 4543
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f10991aa32e2cdab0800000000000000
+      internalID: -4982056357066076129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_140
+      rect:
+        serializedVersion: 2
+        x: 4956
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c8cdb383c964bd0800000000000000
+      internalID: -2646255965697176515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_141
+      rect:
+        serializedVersion: 2
+        x: 5369
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba7679f979b01420800000000000000
+      internalID: 2598780918520249010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_142
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86735703ad26be2b0800000000000000
+      internalID: -5554237026175994008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_143
+      rect:
+        serializedVersion: 2
+        x: 6195
+        y: 535.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35612ae4544337fd0800000000000000
+      internalID: -2345473508653263277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_144
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8cb1b11c504b1730800000000000000
+      internalID: 3970838260635253903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_145
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 240f5a39d85994a50800000000000000
+      internalID: 6505895572013445186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_146
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 677253eecb2c41a20800000000000000
+      internalID: 3032262565833287542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_147
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe7e95bdf96e88d0800000000000000
+      internalID: -2842217776429498636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_148
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42edc6130b4805670800000000000000
+      internalID: 8525459986890677796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_149
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b34f79a46649780800000000000000
+      internalID: -8677198111473124565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_150
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 867093c7ce81a5ca0800000000000000
+      internalID: -6027477747306526872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_151
+      rect:
+        serializedVersion: 2
+        x: 2891
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37a91f7a5739b79c0800000000000000
+      internalID: -3928384116412540301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_152
+      rect:
+        serializedVersion: 2
+        x: 3304
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2691f2c8ade82f10800000000000000
+      internalID: 2245305723325093420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_153
+      rect:
+        serializedVersion: 2
+        x: 3717
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6216dd45c09f09ba0800000000000000
+      internalID: -6084089265218821850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_154
+      rect:
+        serializedVersion: 2
+        x: 4130
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1db4d284e66fcdf0800000000000000
+      internalID: -157794330301121250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_155
+      rect:
+        serializedVersion: 2
+        x: 4543
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8aa4a4fb3f7d7d0800000000000000
+      internalID: -2893576232651544355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_156
+      rect:
+        serializedVersion: 2
+        x: 4956
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a392aed4fe1b99e0800000000000000
+      internalID: -1613662004426140768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_157
+      rect:
+        serializedVersion: 2
+        x: 5369
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0370ecd08df91b960800000000000000
+      internalID: 7616044195153577776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_158
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 027233682e033be90800000000000000
+      internalID: -7011206445413488864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands_159
+      rect:
+        serializedVersion: 2
+        x: 6195
+        y: 4.5
+        width: 413.375
+        height: 531.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f52598144ed9d4f0800000000000000
+      internalID: -803366674457352719
       vertices: []
       indices: 
       edges: []
