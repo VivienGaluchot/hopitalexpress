@@ -154,7 +154,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 445
+  spritePixelsToUnits: 380
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -203,9 +203,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2834.6667
-        width: 295.25
-        height: 354.33334
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: Faces_1
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2834.6667
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,10 +244,10 @@ TextureImporter:
       name: Faces_2
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2834.6667
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +265,10 @@ TextureImporter:
       name: Faces_3
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2834.6667
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,9 +287,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2480.6667
-        width: 295.25
-        height: 354.33334
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,10 +307,10 @@ TextureImporter:
       name: Faces_5
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2480.6667
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,10 +328,10 @@ TextureImporter:
       name: Faces_6
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2480.6667
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,10 +349,10 @@ TextureImporter:
       name: Faces_7
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2480.6667
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -371,9 +371,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2126.6667
-        width: 295.25
-        height: 354.33334
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,10 +391,10 @@ TextureImporter:
       name: Faces_9
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2126.6667
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,10 +412,10 @@ TextureImporter:
       name: Faces_10
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2126.6667
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,10 +433,10 @@ TextureImporter:
       name: Faces_11
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2126.6667
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -455,9 +455,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1772.6666
-        width: 295.25
-        height: 354.33334
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -475,10 +475,10 @@ TextureImporter:
       name: Faces_13
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1772.6666
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -496,10 +496,10 @@ TextureImporter:
       name: Faces_14
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1772.6666
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -517,10 +517,10 @@ TextureImporter:
       name: Faces_15
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1772.6666
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -539,9 +539,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1418.6666
-        width: 295.25
-        height: 354.33334
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -559,10 +559,10 @@ TextureImporter:
       name: Faces_17
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1418.6666
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -580,10 +580,10 @@ TextureImporter:
       name: Faces_18
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1418.6666
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -601,10 +601,10 @@ TextureImporter:
       name: Faces_19
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1418.6666
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -623,9 +623,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1064.6666
-        width: 295.25
-        height: 354.33334
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -643,10 +643,10 @@ TextureImporter:
       name: Faces_21
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1064.6666
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -664,10 +664,10 @@ TextureImporter:
       name: Faces_22
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1064.6666
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -685,10 +685,10 @@ TextureImporter:
       name: Faces_23
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1064.6666
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -707,9 +707,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 710.6666
-        width: 295.25
-        height: 354.33334
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -727,10 +727,10 @@ TextureImporter:
       name: Faces_25
       rect:
         serializedVersion: 2
-        x: 295
-        y: 710.6666
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -748,10 +748,10 @@ TextureImporter:
       name: Faces_26
       rect:
         serializedVersion: 2
-        x: 590
-        y: 710.6666
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -769,10 +769,10 @@ TextureImporter:
       name: Faces_27
       rect:
         serializedVersion: 2
-        x: 885
-        y: 710.6666
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -791,9 +791,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 356.66666
-        width: 295.25
-        height: 354.33334
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -811,10 +811,10 @@ TextureImporter:
       name: Faces_29
       rect:
         serializedVersion: 2
-        x: 295
-        y: 356.66666
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -832,10 +832,10 @@ TextureImporter:
       name: Faces_30
       rect:
         serializedVersion: 2
-        x: 590
-        y: 356.66666
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -853,10 +853,10 @@ TextureImporter:
       name: Faces_31
       rect:
         serializedVersion: 2
-        x: 885
-        y: 356.66666
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -875,9 +875,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2.6666565
-        width: 295.25
-        height: 354.33334
+        y: 0
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -895,10 +895,10 @@ TextureImporter:
       name: Faces_33
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2.6666565
-        width: 295.25
-        height: 354.33334
+        x: 250
+        y: 0
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -916,10 +916,10 @@ TextureImporter:
       name: Faces_34
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2.6666565
-        width: 295.25
-        height: 354.33334
+        x: 500
+        y: 0
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -937,10 +937,10 @@ TextureImporter:
       name: Faces_35
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2.6666565
-        width: 295.25
-        height: 354.33334
+        x: 750
+        y: 0
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

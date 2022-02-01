@@ -502,7 +502,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 445
+  spritePixelsToUnits: 380
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -551,9 +551,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        y: 1750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -571,10 +571,10 @@ TextureImporter:
       name: Clothes_1
       rect:
         serializedVersion: 2
-        x: 354
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 1750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -592,10 +592,10 @@ TextureImporter:
       name: Clothes_2
       rect:
         serializedVersion: 2
-        x: 708
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 1750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -613,10 +613,10 @@ TextureImporter:
       name: Clothes_3
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 2066.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 1750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -635,9 +635,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -655,10 +655,10 @@ TextureImporter:
       name: Clothes_5
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -676,10 +676,10 @@ TextureImporter:
       name: Clothes_6
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -697,10 +697,10 @@ TextureImporter:
       name: Clothes_7
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -718,10 +718,10 @@ TextureImporter:
       name: Clothes_8
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -739,10 +739,10 @@ TextureImporter:
       name: Clothes_9
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -760,10 +760,10 @@ TextureImporter:
       name: Clothes_10
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -781,10 +781,10 @@ TextureImporter:
       name: Clothes_11
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -802,10 +802,10 @@ TextureImporter:
       name: Clothes_12
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -823,10 +823,10 @@ TextureImporter:
       name: Clothes_13
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -844,10 +844,10 @@ TextureImporter:
       name: Clothes_14
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -865,10 +865,10 @@ TextureImporter:
       name: Clothes_15
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -886,10 +886,10 @@ TextureImporter:
       name: Clothes_16
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -907,10 +907,10 @@ TextureImporter:
       name: Clothes_17
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -928,10 +928,10 @@ TextureImporter:
       name: Clothes_18
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -949,10 +949,10 @@ TextureImporter:
       name: Clothes_19
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -970,10 +970,10 @@ TextureImporter:
       name: Clothes_20
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 4800
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -991,10 +991,10 @@ TextureImporter:
       name: Clothes_21
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 5100
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1012,10 +1012,10 @@ TextureImporter:
       name: Clothes_22
       rect:
         serializedVersion: 2
-        x: 6372
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 5400
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1033,10 +1033,10 @@ TextureImporter:
       name: Clothes_23
       rect:
         serializedVersion: 2
-        x: 6726
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 5700
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1054,10 +1054,10 @@ TextureImporter:
       name: Clothes_24
       rect:
         serializedVersion: 2
-        x: 7080
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 6000
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1075,10 +1075,10 @@ TextureImporter:
       name: Clothes_25
       rect:
         serializedVersion: 2
-        x: 7434
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 6300
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1096,10 +1096,10 @@ TextureImporter:
       name: Clothes_26
       rect:
         serializedVersion: 2
-        x: 7788
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 6600
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1117,10 +1117,10 @@ TextureImporter:
       name: Clothes_27
       rect:
         serializedVersion: 2
-        x: 8142
-        y: 1771.75
-        width: 354.33334
-        height: 295.25
+        x: 6900
+        y: 1500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1139,9 +1139,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1159,10 +1159,10 @@ TextureImporter:
       name: Clothes_29
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1180,10 +1180,10 @@ TextureImporter:
       name: Clothes_30
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1201,10 +1201,10 @@ TextureImporter:
       name: Clothes_31
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1222,10 +1222,10 @@ TextureImporter:
       name: Clothes_32
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1243,10 +1243,10 @@ TextureImporter:
       name: Clothes_33
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1264,10 +1264,10 @@ TextureImporter:
       name: Clothes_34
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1285,10 +1285,10 @@ TextureImporter:
       name: Clothes_35
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1306,10 +1306,10 @@ TextureImporter:
       name: Clothes_36
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1327,10 +1327,10 @@ TextureImporter:
       name: Clothes_37
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1348,10 +1348,10 @@ TextureImporter:
       name: Clothes_38
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1369,10 +1369,10 @@ TextureImporter:
       name: Clothes_39
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1390,10 +1390,10 @@ TextureImporter:
       name: Clothes_40
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1411,10 +1411,10 @@ TextureImporter:
       name: Clothes_41
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1432,10 +1432,10 @@ TextureImporter:
       name: Clothes_42
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1453,10 +1453,10 @@ TextureImporter:
       name: Clothes_43
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1474,10 +1474,10 @@ TextureImporter:
       name: Clothes_44
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 4800
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1495,10 +1495,10 @@ TextureImporter:
       name: Clothes_45
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 5100
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1516,10 +1516,10 @@ TextureImporter:
       name: Clothes_46
       rect:
         serializedVersion: 2
-        x: 6372
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 5400
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1537,10 +1537,10 @@ TextureImporter:
       name: Clothes_47
       rect:
         serializedVersion: 2
-        x: 6726
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 5700
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1558,10 +1558,10 @@ TextureImporter:
       name: Clothes_48
       rect:
         serializedVersion: 2
-        x: 7080
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 6000
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1579,10 +1579,10 @@ TextureImporter:
       name: Clothes_49
       rect:
         serializedVersion: 2
-        x: 7434
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 6300
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1600,10 +1600,10 @@ TextureImporter:
       name: Clothes_50
       rect:
         serializedVersion: 2
-        x: 7788
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 6600
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1621,10 +1621,10 @@ TextureImporter:
       name: Clothes_51
       rect:
         serializedVersion: 2
-        x: 8142
-        y: 1476.75
-        width: 354.33334
-        height: 295.25
+        x: 6900
+        y: 1250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1643,9 +1643,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1663,10 +1663,10 @@ TextureImporter:
       name: Clothes_53
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1684,10 +1684,10 @@ TextureImporter:
       name: Clothes_54
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1705,10 +1705,10 @@ TextureImporter:
       name: Clothes_55
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1726,10 +1726,10 @@ TextureImporter:
       name: Clothes_56
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1747,10 +1747,10 @@ TextureImporter:
       name: Clothes_57
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1768,10 +1768,10 @@ TextureImporter:
       name: Clothes_58
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1789,10 +1789,10 @@ TextureImporter:
       name: Clothes_59
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1810,10 +1810,10 @@ TextureImporter:
       name: Clothes_60
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1831,10 +1831,10 @@ TextureImporter:
       name: Clothes_61
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1852,10 +1852,10 @@ TextureImporter:
       name: Clothes_62
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1873,10 +1873,10 @@ TextureImporter:
       name: Clothes_63
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1894,10 +1894,10 @@ TextureImporter:
       name: Clothes_64
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1915,10 +1915,10 @@ TextureImporter:
       name: Clothes_65
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1936,10 +1936,10 @@ TextureImporter:
       name: Clothes_66
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1957,10 +1957,10 @@ TextureImporter:
       name: Clothes_67
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1978,10 +1978,10 @@ TextureImporter:
       name: Clothes_68
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 4800
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1999,10 +1999,10 @@ TextureImporter:
       name: Clothes_69
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 5100
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2020,10 +2020,10 @@ TextureImporter:
       name: Clothes_70
       rect:
         serializedVersion: 2
-        x: 6372
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 5400
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2041,10 +2041,10 @@ TextureImporter:
       name: Clothes_71
       rect:
         serializedVersion: 2
-        x: 6726
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 5700
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2062,10 +2062,10 @@ TextureImporter:
       name: Clothes_72
       rect:
         serializedVersion: 2
-        x: 7080
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 6000
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2083,10 +2083,10 @@ TextureImporter:
       name: Clothes_73
       rect:
         serializedVersion: 2
-        x: 7434
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 6300
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2104,10 +2104,10 @@ TextureImporter:
       name: Clothes_74
       rect:
         serializedVersion: 2
-        x: 7788
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 6600
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2125,10 +2125,10 @@ TextureImporter:
       name: Clothes_75
       rect:
         serializedVersion: 2
-        x: 8142
-        y: 1181.75
-        width: 354.33334
-        height: 295.25
+        x: 6900
+        y: 1000
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2147,9 +2147,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2167,10 +2167,10 @@ TextureImporter:
       name: Clothes_77
       rect:
         serializedVersion: 2
-        x: 354
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2188,10 +2188,10 @@ TextureImporter:
       name: Clothes_78
       rect:
         serializedVersion: 2
-        x: 708
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2209,10 +2209,10 @@ TextureImporter:
       name: Clothes_79
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2230,10 +2230,10 @@ TextureImporter:
       name: Clothes_80
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2251,10 +2251,10 @@ TextureImporter:
       name: Clothes_81
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2272,10 +2272,10 @@ TextureImporter:
       name: Clothes_82
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2293,10 +2293,10 @@ TextureImporter:
       name: Clothes_83
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2314,10 +2314,10 @@ TextureImporter:
       name: Clothes_84
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2335,10 +2335,10 @@ TextureImporter:
       name: Clothes_85
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2356,10 +2356,10 @@ TextureImporter:
       name: Clothes_86
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2377,10 +2377,10 @@ TextureImporter:
       name: Clothes_87
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2398,10 +2398,10 @@ TextureImporter:
       name: Clothes_88
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2419,10 +2419,10 @@ TextureImporter:
       name: Clothes_89
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2440,10 +2440,10 @@ TextureImporter:
       name: Clothes_90
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2461,10 +2461,10 @@ TextureImporter:
       name: Clothes_91
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2482,10 +2482,10 @@ TextureImporter:
       name: Clothes_92
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 4800
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2503,10 +2503,10 @@ TextureImporter:
       name: Clothes_93
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 5100
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2524,10 +2524,10 @@ TextureImporter:
       name: Clothes_94
       rect:
         serializedVersion: 2
-        x: 6372
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 5400
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2545,10 +2545,10 @@ TextureImporter:
       name: Clothes_95
       rect:
         serializedVersion: 2
-        x: 6726
-        y: 886.75
-        width: 354.33334
-        height: 295.25
+        x: 5700
+        y: 750
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2567,9 +2567,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2587,10 +2587,10 @@ TextureImporter:
       name: Clothes_97
       rect:
         serializedVersion: 2
-        x: 354
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2608,10 +2608,10 @@ TextureImporter:
       name: Clothes_98
       rect:
         serializedVersion: 2
-        x: 708
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2629,10 +2629,10 @@ TextureImporter:
       name: Clothes_99
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2650,10 +2650,10 @@ TextureImporter:
       name: Clothes_100
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2671,10 +2671,10 @@ TextureImporter:
       name: Clothes_101
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2692,10 +2692,10 @@ TextureImporter:
       name: Clothes_102
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2713,10 +2713,10 @@ TextureImporter:
       name: Clothes_103
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2734,10 +2734,10 @@ TextureImporter:
       name: Clothes_104
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2755,10 +2755,10 @@ TextureImporter:
       name: Clothes_105
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2776,10 +2776,10 @@ TextureImporter:
       name: Clothes_106
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2797,10 +2797,10 @@ TextureImporter:
       name: Clothes_107
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2818,10 +2818,10 @@ TextureImporter:
       name: Clothes_108
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2839,10 +2839,10 @@ TextureImporter:
       name: Clothes_109
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2860,10 +2860,10 @@ TextureImporter:
       name: Clothes_110
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2881,10 +2881,10 @@ TextureImporter:
       name: Clothes_111
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2902,10 +2902,10 @@ TextureImporter:
       name: Clothes_112
       rect:
         serializedVersion: 2
-        x: 5664
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 4800
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2923,10 +2923,10 @@ TextureImporter:
       name: Clothes_113
       rect:
         serializedVersion: 2
-        x: 6018
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 5100
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2944,10 +2944,10 @@ TextureImporter:
       name: Clothes_114
       rect:
         serializedVersion: 2
-        x: 6372
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 5400
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2965,10 +2965,10 @@ TextureImporter:
       name: Clothes_115
       rect:
         serializedVersion: 2
-        x: 6726
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 5700
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2986,10 +2986,10 @@ TextureImporter:
       name: Clothes_116
       rect:
         serializedVersion: 2
-        x: 7080
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 6000
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3007,10 +3007,10 @@ TextureImporter:
       name: Clothes_117
       rect:
         serializedVersion: 2
-        x: 7434
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 6300
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3028,10 +3028,10 @@ TextureImporter:
       name: Clothes_118
       rect:
         serializedVersion: 2
-        x: 7788
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 6600
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3049,10 +3049,10 @@ TextureImporter:
       name: Clothes_119
       rect:
         serializedVersion: 2
-        x: 8142
-        y: 591.75
-        width: 354.33334
-        height: 295.25
+        x: 6900
+        y: 500
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3071,9 +3071,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3091,10 +3091,10 @@ TextureImporter:
       name: Clothes_121
       rect:
         serializedVersion: 2
-        x: 354
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3112,10 +3112,10 @@ TextureImporter:
       name: Clothes_122
       rect:
         serializedVersion: 2
-        x: 708
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3133,10 +3133,10 @@ TextureImporter:
       name: Clothes_123
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3154,10 +3154,10 @@ TextureImporter:
       name: Clothes_124
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3175,10 +3175,10 @@ TextureImporter:
       name: Clothes_125
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3196,10 +3196,10 @@ TextureImporter:
       name: Clothes_126
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3217,10 +3217,10 @@ TextureImporter:
       name: Clothes_127
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3238,10 +3238,10 @@ TextureImporter:
       name: Clothes_128
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3259,10 +3259,10 @@ TextureImporter:
       name: Clothes_129
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3280,10 +3280,10 @@ TextureImporter:
       name: Clothes_130
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3301,10 +3301,10 @@ TextureImporter:
       name: Clothes_131
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3322,10 +3322,10 @@ TextureImporter:
       name: Clothes_132
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3343,10 +3343,10 @@ TextureImporter:
       name: Clothes_133
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3364,10 +3364,10 @@ TextureImporter:
       name: Clothes_134
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3385,10 +3385,10 @@ TextureImporter:
       name: Clothes_135
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 296.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 250
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3407,9 +3407,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3427,10 +3427,10 @@ TextureImporter:
       name: Clothes_137
       rect:
         serializedVersion: 2
-        x: 354
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 300
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3448,10 +3448,10 @@ TextureImporter:
       name: Clothes_138
       rect:
         serializedVersion: 2
-        x: 708
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 600
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3469,10 +3469,10 @@ TextureImporter:
       name: Clothes_139
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 900
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3490,10 +3490,10 @@ TextureImporter:
       name: Clothes_140
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 1200
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3511,10 +3511,10 @@ TextureImporter:
       name: Clothes_141
       rect:
         serializedVersion: 2
-        x: 1770
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 1500
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3532,10 +3532,10 @@ TextureImporter:
       name: Clothes_142
       rect:
         serializedVersion: 2
-        x: 2124
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 1800
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3553,10 +3553,10 @@ TextureImporter:
       name: Clothes_143
       rect:
         serializedVersion: 2
-        x: 2478
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 2100
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3574,10 +3574,10 @@ TextureImporter:
       name: Clothes_144
       rect:
         serializedVersion: 2
-        x: 2832
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 2400
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3595,10 +3595,10 @@ TextureImporter:
       name: Clothes_145
       rect:
         serializedVersion: 2
-        x: 3186
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 2700
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3616,10 +3616,10 @@ TextureImporter:
       name: Clothes_146
       rect:
         serializedVersion: 2
-        x: 3540
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3000
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3637,10 +3637,10 @@ TextureImporter:
       name: Clothes_147
       rect:
         serializedVersion: 2
-        x: 3894
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3300
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3658,10 +3658,10 @@ TextureImporter:
       name: Clothes_148
       rect:
         serializedVersion: 2
-        x: 4248
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3600
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3679,10 +3679,10 @@ TextureImporter:
       name: Clothes_149
       rect:
         serializedVersion: 2
-        x: 4602
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 3900
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3700,10 +3700,10 @@ TextureImporter:
       name: Clothes_150
       rect:
         serializedVersion: 2
-        x: 4956
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 4200
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3721,10 +3721,10 @@ TextureImporter:
       name: Clothes_151
       rect:
         serializedVersion: 2
-        x: 5310
-        y: 1.75
-        width: 354.33334
-        height: 295.25
+        x: 4500
+        y: 0
+        width: 300
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

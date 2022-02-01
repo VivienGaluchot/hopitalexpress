@@ -100,7 +100,7 @@ AnimationClip:
     script: {fileID: 0}
   - curve:
     - time: 0
-      value: {fileID: -2352396353401391747, guid: b6c093ec731710f40a68d37371425784, type: 3}
+      value: {fileID: 1466030004215106612, guid: b6c093ec731710f40a68d37371425784, type: 3}
     attribute: m_Sprite
     path: Face
     classID: 212
@@ -174,7 +174,7 @@ AnimationClip:
     - {fileID: -1222344575908727071, guid: 87047aad72891b3499beb624d13a8224, type: 3}
     - {fileID: 3899233468412834421, guid: 87047aad72891b3499beb624d13a8224, type: 3}
     - {fileID: 2204669579196900006, guid: 3d322fbe23119164d882d9d98e06c480, type: 3}
-    - {fileID: -2352396353401391747, guid: b6c093ec731710f40a68d37371425784, type: 3}
+    - {fileID: 1466030004215106612, guid: b6c093ec731710f40a68d37371425784, type: 3}
     - {fileID: 7798115773135034406, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
