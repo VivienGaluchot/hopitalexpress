@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopulateGrid : MonoBehaviour {
 
@@ -18,12 +15,12 @@ public class PopulateGrid : MonoBehaviour {
         Sprite[] Sprites = Resources.LoadAll<Sprite>("Illustrations/Traitements/Items");
         foreach (Sprite sprite in Sprites) {
             go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/" + sprite.name);
+            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/Traitements/" + sprite.name);
         }
         Sprites = Resources.LoadAll<Sprite>("Illustrations/Traitements/Machines");
         foreach (Sprite sprite in Sprites) {
             go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/" + sprite.name);
+            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/Traitements/" + sprite.name);
         }
     }
 }

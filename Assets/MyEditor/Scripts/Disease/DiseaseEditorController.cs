@@ -20,7 +20,7 @@ public class DiseaseEditorController : MonoBehaviour {
         List<string> treatmentsList = new List<string>();
         foreach (string s in treatments) {
             if(!s.EndsWith(".meta"))
-                treatmentsList.Add(Path.GetFileName(s));
+                treatmentsList.Add(Path.GetFileNameWithoutExtension(s));
         }
         Treatment.ClearOptions();
         Treatment.AddOptions(treatmentsList);

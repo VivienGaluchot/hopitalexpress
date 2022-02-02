@@ -10,7 +10,8 @@ public class LevelEditorController : MonoBehaviour {
 	public Sprite[] floorSprites, wallSprites;
 	public Sprite[][] sprites;
 	public Dictionary<(int, int), Cell>[] grids { get; private set; }
-	private LayerController lc;
+	public int currentLayer;
+	public bool canDraw;
 	private Transform[] CellsParents;
 
 	[SerializeField] private GraphicRaycaster m_Raycaster;
@@ -26,8 +27,13 @@ public class LevelEditorController : MonoBehaviour {
 	public GameObject PlayerSpawn { get; private set; }
 	public GameObject PatientSpawn { get; private set; }
 
+	private bool isHiddingWalls;
+	[SerializeField] private Image hideWallsImage;
+
 	private bool isFloorFillerSelected;
 	[SerializeField] private Image floorFillerImage;
+	private bool isWallFillerSelected;
+	[SerializeField] private Image wallFillerImage;
 
 	private LevelDiseasesController ldc;
 
@@ -43,8 +49,8 @@ public class LevelEditorController : MonoBehaviour {
 	private void Start() {
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
 		grids = new Dictionary<(int, int), Cell>[2];
+		currentLayer = 0;
 		ldc = GetComponent<LevelDiseasesController>();
-		lc = GetComponent<LayerController>();
 		CellsParents = new Transform[2];
 		CellsParents[0] = transform.Find("FloorLayer");
 		CellsParents[1] = transform.Find("WallsLayer");
@@ -67,9 +73,28 @@ public class LevelEditorController : MonoBehaviour {
 		}
 	}
 
+	public void ShowWalls() {
+		if(isHiddingWalls) {
+			isHiddingWalls = false;
+			hideWallsImage.color = Color.white;
+			CellsParents[1].gameObject.SetActive(true);
+		}
+	}
+
+	public void SwitchWallsVisibility() {
+		isHiddingWalls = !isHiddingWalls;
+		hideWallsImage.color = isHiddingWalls ? Color.green : Color.white;
+		CellsParents[1].gameObject.SetActive(!isHiddingWalls);
+	}
+
 	public void FloorFillerClicked() {
 		isFloorFillerSelected = !isFloorFillerSelected;
 		floorFillerImage.color = isFloorFillerSelected ? Color.green : Color.white;
+	}
+
+	public void WallFillerClicked() {
+		isWallFillerSelected = !isWallFillerSelected;
+		wallFillerImage.color = isWallFillerSelected ? Color.green : Color.white;
 	}
 
 	public void SetPlayerSpawn(Vector3 pos) {
@@ -134,16 +159,16 @@ public class LevelEditorController : MonoBehaviour {
 	}
 
 	public bool ClickedCell(int i, int j, bool clicked = false, bool reset = false, bool fill = false) {
-		if(!selectingPatientSpawn && !selectingPlayerSpawn) {
+		if(canDraw && !selectingPatientSpawn && !selectingPlayerSpawn) {
 			Cell cell;
-			if(grids[lc.currentLayer].TryGetValue((i, j), out cell)) {
+			if(grids[currentLayer].TryGetValue((i, j), out cell)) {
 				if (isFloorFillerSelected) {
 					// c'est niqué comme méthode, faudrait faire mieux...........
 					int newValue = ComputeCellValue(i, j);
 					if (cell.value == 0) {
 						if (newValue != cell.value) {
 							cell.value = newValue;
-							ChangeSprite(cell, lc.currentLayer);
+							ChangeSprite(cell, currentLayer);
 
 							Propagate(i, j, false, true);
 						}
@@ -157,7 +182,7 @@ public class LevelEditorController : MonoBehaviour {
 					int newValue = ComputeCellValue(i, j);
 					if (newValue != cell.value) {
 						cell.value = newValue;
-						ChangeSprite(cell, lc.currentLayer);
+						ChangeSprite(cell, currentLayer);
 
 						Propagate(i, j);
 					}
@@ -165,7 +190,7 @@ public class LevelEditorController : MonoBehaviour {
 					return true;
 				} else if (reset && cell.value != 0) {
 					cell.value = 0;
-					ChangeSprite(cell, lc.currentLayer);
+					ChangeSprite(cell, currentLayer);
 					Propagate(i, j);
 
 					return false;
@@ -294,35 +319,35 @@ public class LevelEditorController : MonoBehaviour {
 			case 0:
 				return 1;
 			case 1:
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
-				if (grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
-				if (grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
+				if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
+				if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
 				return 5;
 			case 2:
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
-				if (grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
-				if (grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
+				if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
+				if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
 				return 11;
 			case 3:
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
-				if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
-				if (grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
+				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
+				if (grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
 				return 15;
 			case 4:
-				if(lc.currentLayer == 1)
+				if(currentLayer == 1)
 					return 16;
 
 				// Check diag neighbours to see if empty corner
 				// We can't NOT find diag neighbours because cell has 4 neighbours and grid is rect-shape
-				if (grids[lc.currentLayer][(i - 1, j + 1)].value == 0)
+				if (grids[currentLayer][(i - 1, j + 1)].value == 0)
 					return 17;
-				if (grids[lc.currentLayer][(i - 1, j - 1)].value == 0)
+				if (grids[currentLayer][(i - 1, j - 1)].value == 0)
 					return 18;
-				if (grids[lc.currentLayer][(i + 1, j - 1)].value == 0)
+				if (grids[currentLayer][(i + 1, j - 1)].value == 0)
 					return 19;
-				if (grids[lc.currentLayer][(i + 1, j + 1)].value == 0)
+				if (grids[currentLayer][(i + 1, j + 1)].value == 0)
 					return 20;
 				return 16;
 		}
@@ -332,10 +357,10 @@ public class LevelEditorController : MonoBehaviour {
 	private int CountNeighbours(int i, int j) {
 		Cell cell;
 		int sum = 0;
-		if (grids[lc.currentLayer].TryGetValue((i, j + 1), out cell) && cell.value != 0) sum++;
-		if (grids[lc.currentLayer].TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
-		if (grids[lc.currentLayer].TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
-		if (grids[lc.currentLayer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
+		if (grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value != 0) sum++;
+		if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
+		if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
+		if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
 		return sum;
 	}
 
@@ -403,7 +428,7 @@ public class LevelEditorController : MonoBehaviour {
 		newGO.GetComponent<CellController>().Setup(this, i, j);
 		newGO.transform.position = new Vector3(j / size, -i / size, 0);
 		SpriteRenderer sr = newGO.GetComponent<SpriteRenderer>();
-		sr.sortingOrder = x;
+		sr.sortingOrder = x-2;
 
 		newGO.GetComponent<BoxCollider2D>().size = new Vector2(1f / size, 1f / size);
 
