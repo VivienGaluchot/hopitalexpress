@@ -27,16 +27,24 @@ public class PersoAnimator : MonoBehaviour {
 		if (this.rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
 			switch (angle) {
 				case 0f:
-					direction = Dir.Down;
+					animator.SetBool("isUp", false);
+					animator.SetBool("isRight", false);
+					animator.SetBool("isLeft", false);
 					break;
 				case 90f:
-					direction = Dir.Right;
+					animator.SetBool("isUp", false);
+					animator.SetBool("isRight", true);
+					animator.SetBool("isLeft", false);
 					break;
 				case -90f:
-					direction = Dir.Left;
+					animator.SetBool("isUp", false);
+					animator.SetBool("isRight", false);
+					animator.SetBool("isLeft", true);
 					break;
 				default:
-					direction = Dir.Up;
+					animator.SetBool("isUp", true);
+					animator.SetBool("isRight", false);
+					animator.SetBool("isLeft", false);
 					break;
 			}
 		}
