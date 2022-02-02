@@ -359,6 +359,7 @@ MonoBehaviour:
   WallsParent: {fileID: 0}
   Walls: []
   Floor: []
+  instantLoad: 1
   loadLevel: 0
   loadSpawns: 0
   loadDiseases: 1
