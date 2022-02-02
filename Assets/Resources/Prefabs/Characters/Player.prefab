@@ -602,7 +602,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5612859048394387560, guid: b6c093ec731710f40a68d37371425784, type: 3}
+  m_Sprite: {fileID: 97639857983031210, guid: b6c093ec731710f40a68d37371425784, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -626,8 +626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameSelected: 0
-  framePerDirection: 1
-  skinSelected: 8
+  framePerDirection: 2
+  skinSelected: 5
   spritePath: Illustrations/Perso/Faces
   perso: {fileID: 3508764698176005531}
   annexLayers: []
