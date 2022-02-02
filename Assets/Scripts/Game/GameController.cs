@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour {
 
 	private Vector3 playerSpawn;
 
+	public Infos[] DiseasesAvailable;
+
 	private void Start() {
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;

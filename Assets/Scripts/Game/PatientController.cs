@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PatientController : MonoBehaviour {
 
-	private GameController gc;
+	public GameController gc { get; private set; }
 
 	[SerializeField] private GameObject face;
 	[SerializeField] private GameObject body;

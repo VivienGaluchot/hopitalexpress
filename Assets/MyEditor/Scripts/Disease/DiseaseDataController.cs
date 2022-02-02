@@ -5,6 +5,18 @@ using System;
 using System.IO;
 using System.Globalization;
 
+public class DiseaseData {
+	public DiseaseData(string name, float lifespan, float points, string sprite, string treatment) {
+		this.name = name; this.lifespan = lifespan; this.points = points; this.sprite = sprite; this.treatment = treatment;
+	}
+
+	public string name;
+	public float lifespan;
+	public float points;
+	public string sprite;
+	public string treatment;
+}
+
 public class DiseaseDataController : MonoBehaviour {
 
 	[SerializeField] private Dropdown dd;
@@ -29,17 +41,6 @@ public class DiseaseDataController : MonoBehaviour {
 		dd.AddOptions(pathsList);
 	}
 
-	public class DiseaseData {
-		public DiseaseData(string name, float lifespan, float points, string sprite, string treatment) {
-			this.name = name; this.lifespan = lifespan; this.points = points; this.sprite = sprite; this.treatment = treatment;
-        }
-
-		public string name;
-		public float lifespan;
-		public float points;
-		public string sprite;
-		public string treatment;
-    }
 
 	public void SaveData() {
 		WriteToFile(JsonUtility.ToJson(FetchDataToDiseaseData()));
