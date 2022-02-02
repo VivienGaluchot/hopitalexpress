@@ -111,7 +111,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8394854420890877549}
   m_Father: {fileID: 3508764698176005528}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +156,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3150668318277133405, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: -7357550112948327227, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -183,6 +184,8 @@ MonoBehaviour:
   skinSelected: 2
   spritePath: Illustrations/Perso/Skin
   perso: {fileID: 3508764698176005531}
+  annexLayers:
+  - {fileID: 6880701722253073697}
 --- !u!114 &3803036310602100784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +230,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1695668161033391852
 SpriteRenderer:
@@ -269,7 +272,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2352396353401391747, guid: b6c093ec731710f40a68d37371425784, type: 3}
+  m_Sprite: {fileID: -5285785097126754818, guid: b6c093ec731710f40a68d37371425784, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -293,10 +296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameSelected: 0
-  framePerDirection: 1
+  framePerDirection: 2
   skinSelected: 0
   spritePath: Illustrations/Perso/Faces
   perso: {fileID: 3508764698176005531}
+  annexLayers: []
 --- !u!1 &3508764698176005531
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +338,6 @@ Transform:
   - {fileID: 7510458666819467206}
   - {fileID: 6965162300062012296}
   - {fileID: 6479815067793919130}
-  - {fileID: 8394854420890877549}
   - {fileID: 1139188637426422189}
   - {fileID: 2500938050345342631}
   - {fileID: 520271034182124823}
@@ -555,7 +558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1304559474433477215
 SpriteRenderer:
@@ -597,7 +600,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8927547857190717070, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
+  m_Sprite: {fileID: -6475819047146179335, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -625,6 +628,7 @@ MonoBehaviour:
   skinSelected: 1
   spritePath: Illustrations/Perso/Clothes
   perso: {fileID: 3508764698176005531}
+  annexLayers: []
 --- !u!114 &908056040074118087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,7 +754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85.089}
 --- !u!210 &9008669462824845255
 SortingGroup:
@@ -876,7 +880,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7846585628549479094
 SpriteRenderer:
@@ -918,7 +922,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2204669579196900006, guid: 3d322fbe23119164d882d9d98e06c480, type: 3}
+  m_Sprite: {fileID: 6291076074326483787, guid: 3d322fbe23119164d882d9d98e06c480, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -946,6 +950,7 @@ MonoBehaviour:
   skinSelected: 0
   spritePath: Illustrations/Perso/Hair
   perso: {fileID: 3508764698176005531}
+  annexLayers: []
 --- !u!114 &1730942402994220613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,7 +976,6 @@ GameObject:
   - component: {fileID: 8394854420890877549}
   - component: {fileID: 312000564699717218}
   - component: {fileID: 4380093801307479033}
-  - component: {fileID: 2501691377952442359}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
@@ -987,11 +991,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6880701722253073697}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 4
+  m_Father: {fileID: 6479815067793919130}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &312000564699717218
 SpriteRenderer:
@@ -1033,7 +1037,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6877629330500538932, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
+  m_Sprite: {fileID: -4502599915332463521, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1061,20 +1065,7 @@ MonoBehaviour:
   skinSelected: 2
   spritePath: Illustrations/Perso/Hands
   perso: {fileID: 3508764698176005531}
---- !u!114 &2501691377952442359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880701722253073697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85580fe5013445f4eacff2349e6d1455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSelected: 0
-  maxSelected: 9
+  annexLayers: []
 --- !u!1001 &285656954511445253
 PrefabInstance:
   m_ObjectHideFlags: 0
