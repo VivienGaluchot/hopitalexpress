@@ -14,7 +14,7 @@ public class GameLoader : MonoBehaviour {
 	[SerializeField] private GameObject[] Walls;
 	[SerializeField] private GameObject[] Floor;
 
-	public bool loadLevel, loadSpawns, loadDiseases;
+	public bool instantLoad, loadLevel, loadSpawns, loadDiseases;
 
 	private Transform[] PrefabsParents;
 	private GameObject[][] Prefabs;
@@ -27,6 +27,10 @@ public class GameLoader : MonoBehaviour {
 		Prefabs = new GameObject[2][] { Floor, Walls };
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
+
+		if(instantLoad) {
+			LoadLevel();
+		}
 	}
 
 	private void FetchDDOptions() {
