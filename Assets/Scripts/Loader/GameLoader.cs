@@ -14,6 +14,8 @@ public class GameLoader : MonoBehaviour {
 	[SerializeField] private GameObject[] Walls;
 	[SerializeField] private GameObject[] Floor;
 
+	public bool loadLevel, loadSpawns, loadDiseases;
+
 	private Transform[] PrefabsParents;
 	private GameObject[][] Prefabs;
 
@@ -39,30 +41,40 @@ public class GameLoader : MonoBehaviour {
 	}
 
 	public void LoadLevel() {
+
+		dd.transform.parent.parent.gameObject.SetActive(false);
+
 		string filename = dd.options[dd.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
 
-		for(int i = 0; i < Data.layers.Count; i++) {
-			foreach (CellData cell in Data.layers[i].cells) {
-				GameObject newGO = Instantiate(Prefabs[i][cell.value - 1], PrefabsParents[i]);
-				newGO.GetComponent<SpriteRenderer>().sortingOrder = i-2;
-				newGO.transform.position = new Vector3(cell.y / Data.size, -cell.x / Data.size, 0f);
+		if(loadLevel) {
+			for (int i = 0; i < Data.layers.Count; i++) {
+				foreach (CellData cell in Data.layers[i].cells) {
+					GameObject newGO = Instantiate(Prefabs[i][cell.value - 1], PrefabsParents[i]);
+					newGO.GetComponent<SpriteRenderer>().sortingOrder = i - 2;
+					newGO.transform.position = new Vector3(cell.y / Data.size, -cell.x / Data.size, 0f);
+				}
+			}
+			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / Data.size, (1 - Data.rows) / 2f / Data.size, -10f);
+		}
+
+		if(loadDiseases) {
+			// LOAD DISEASES
+			gc.DiseasesAvailable = new Infos[Data.diseases.Count];
+			for (int i = 0; i < Data.diseases.Count; i++) {
+				DiseaseData diseaseData = JsonUtility.FromJson<DiseaseData>(ReadFromFile(Path.Combine(Application.dataPath, "MyEditor/Data/Disease/" + Data.diseases[i] + ".json")));
+				Step firstStep = ComputeStep(ReadNextStep(diseaseData.treatment));
+				DiseaseTypes dt = (DiseaseTypes)diseaseData.faceID;
+				gc.DiseasesAvailable[i] = new Infos(dt, diseaseData.lifespan, (int)diseaseData.points, firstStep);
 			}
 		}
-
-		Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / Data.size, (1 - Data.rows) / 2f / Data.size, -10f);
-
-		// LOAD DISEASES
-		gc.DiseasesAvailable = new Infos[Data.diseases.Count];
-		for(int i = 0; i < Data.diseases.Count; i++) {
-			DiseaseData diseaseData = JsonUtility.FromJson<DiseaseData>(ReadFromFile(Path.Combine(Application.dataPath, "MyEditor/Data/Disease/" + Data.diseases[i] + ".json")));
-			Step firstStep = ComputeStep(ReadNextStep(diseaseData.treatment));
-			DiseaseTypes dt;
-			Enum.TryParse<DiseaseTypes>(diseaseData.name, out dt);
-			gc.DiseasesAvailable[i] = new Infos(dt, diseaseData.lifespan, (int)diseaseData.points, firstStep);
+		
+		if(loadSpawns) {
+			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection);
+		} else {
+			GetComponent<GameController>().StartGame();
 		}
 
-		GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection);
 	}
 
 	private Step ComputeStep(StepData stepData) {

@@ -8,6 +8,7 @@ public class DiseaseEditorController : MonoBehaviour {
     public Dropdown Treatment;
     public InputField Name, Lifespan, Points;
     public Image SickFaceImage;
+    public int sickFaceID;
     public Transform ScrollviewContent;
 
     private void Start() {
@@ -28,16 +29,20 @@ public class DiseaseEditorController : MonoBehaviour {
 
     private void FetchSickFaces() {
         Sprite[] sickFaces = Resources.LoadAll<Sprite>("Illustrations/Perso/Faces");
-        for(int i = 0; i < sickFaces.Length; i += 4) {
+        int counter = 0;
+        for (int i = 0; i < sickFaces.Length - 16; i += 8) {
             GameObject newSprite = new GameObject(sickFaces[i].name, typeof(Button), typeof(Image));
             newSprite.transform.SetParent(ScrollviewContent);
             Sprite displayed = sickFaces[i];
-            newSprite.GetComponent<Button>().onClick.AddListener(delegate { DisplaySprite(displayed); });
+            int faceID = counter;
+            newSprite.GetComponent<Button>().onClick.AddListener(delegate { DisplaySprite(displayed, faceID); });
             newSprite.GetComponent<Image>().sprite = sickFaces[i];
+            counter++;
         }
     }
 
-    private void DisplaySprite(Sprite s) {
+    private void DisplaySprite(Sprite s, int faceID) {
         SickFaceImage.sprite = s;
+        sickFaceID = faceID;
     }
 }

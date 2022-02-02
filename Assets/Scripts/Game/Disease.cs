@@ -61,8 +61,8 @@ public class Disease {
 	// Skins to select for each disease (depends on order or sprite sheets)
 	static private Dictionary<DiseaseTypes, int> faceSkinIndex = new Dictionary<DiseaseTypes, int>() {
 		{ DiseaseTypes.Rhume, 0 },
-		{ DiseaseTypes.Grippe, 2 },
-		{ DiseaseTypes.Covid, 4 }
+		{ DiseaseTypes.Grippe, 1 },
+		{ DiseaseTypes.Covid, 2 }
 	};
 
 	private PatientController patient;

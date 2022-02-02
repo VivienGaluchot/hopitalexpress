@@ -62,12 +62,17 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void StartGame() {
+		isLoaded = true;
+		playerSpawn = Vector3.zero;
+		patientQueueDirection = "UP";
+	}
+
 	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction) {
 		isLoaded = true;
 		this.playerSpawn = playerSpawn;
 		PatientQueueParent.position = patientSpawn;
 		patientQueueDirection = direction;
-
 	}
 
 	// One at a time

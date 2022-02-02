@@ -6,14 +6,15 @@ using System.IO;
 using System.Globalization;
 
 public class DiseaseData {
-	public DiseaseData(string name, float lifespan, float points, string sprite, string treatment) {
-		this.name = name; this.lifespan = lifespan; this.points = points; this.sprite = sprite; this.treatment = treatment;
+	public DiseaseData(string name, float lifespan, float points, string sprite, int faceID, string treatment) {
+		this.name = name; this.lifespan = lifespan; this.points = points; this.sprite = sprite; this.faceID = faceID; this.treatment = treatment;
 	}
 
 	public string name;
 	public float lifespan;
 	public float points;
 	public string sprite;
+	public int faceID;
 	public string treatment;
 }
 
@@ -52,9 +53,10 @@ public class DiseaseDataController : MonoBehaviour {
 		float lifespan = ParseFromString(dec.Lifespan.text);
 		float points = ParseFromString(dec.Points.text);
 		string sprite = dec.SickFaceImage.sprite.name;
+		int faceID = dec.sickFaceID;
 		string treatment = dec.Treatment.options[dec.Treatment.value].text;
 
-		return new DiseaseData(name, lifespan, points, sprite, treatment);
+		return new DiseaseData(name, lifespan, points, sprite, faceID, treatment);
 	}
 
 	private float ParseFromString(string s) {
@@ -86,6 +88,7 @@ public class DiseaseDataController : MonoBehaviour {
 		for(int i = 0; i < sickFaces.Length; i++) {
 			if (sickFaces[i].name == Data.sprite) {
 				dec.SickFaceImage.sprite = sickFaces[i];
+				dec.sickFaceID = Data.faceID;
 				break;
 			}
 		}
