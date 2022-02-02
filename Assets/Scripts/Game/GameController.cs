@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private int patientQueueSize;
 	[SerializeField] public int targetFrameRate = 120;
 
+	private string patientQueueDirection;
+
 	private GameObject[] PatientQueue;
 
 	private float elapsedTime, currentSpawnRate;
@@ -28,6 +30,8 @@ public class GameController : MonoBehaviour {
 	private bool isLoaded, isPlaying;
 
 	private Dictionary<int, GameObject> Players;
+
+	private Vector3 playerSpawn;
 
 	private void Start() {
 		QualitySettings.vSyncCount = 0;
@@ -56,9 +60,13 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void StartGame() {
+	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction) {
 		isLoaded = true;
-    }
+		this.playerSpawn = playerSpawn;
+		PatientQueueParent.position = patientSpawn;
+		patientQueueDirection = direction;
+
+	}
 
 	// One at a time
 	private void AdvancePatientQueue() {
@@ -120,7 +128,10 @@ public class GameController : MonoBehaviour {
 				if (PatientQueue[i] == null) {
 					// Nice slot you got there mate
 					PatientQueue[i] = Instantiate(Patient, PatientQueueParent);
-					PatientQueue[i].transform.localPosition = new Vector3(0, i, 0);
+					Vector3 nextPos = patientQueueDirection == "UP" ? new Vector3(0, i, 0)
+						: patientQueueDirection == "RIGHT" ? new Vector3(i, 0, 0)
+						: patientQueueDirection == "DOWN" ? new Vector3(0, -i, 0) : new Vector3(-i, 0, 0);
+					PatientQueue[i].transform.localPosition = nextPos;
 					PatientQueue[i].name = "patient " + counter++;
 					PatientQueue[i].GetComponent<PatientController>().Initialize(this);
 
@@ -144,7 +155,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void NewPlayer(int id) {
-		GameObject newPlayer = Instantiate(Player);
+		GameObject newPlayer = Instantiate(Player, playerSpawn, Quaternion.identity);
 		newPlayer.GetComponent<PlayerController>().Initialize(id, this, playerSpeed);
 		Players.Add(id, newPlayer);
 

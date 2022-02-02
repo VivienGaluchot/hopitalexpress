@@ -63,8 +63,11 @@ public class LevelDataController : MonoBehaviour {
 
 	public void SaveData() {
 		lec.StopSelectingSpawns();
-		WriteToFile(JsonUtility.ToJson(FetchDataToLevelData()));
-		FetchDDOptions();
+		LevelData ld = FetchDataToLevelData();
+		if(ld != null) {
+			WriteToFile(JsonUtility.ToJson(ld));
+			FetchDDOptions();
+		}
 	}
 
 	public LevelData FetchDataToLevelData() {
@@ -77,6 +80,16 @@ public class LevelDataController : MonoBehaviour {
 			}
 
 			layers.Add(new LayerData(cells));
+		}
+
+		if (lec.PlayerSpawn == null) {
+			Debug.Log("Erreur pas de spawn Player");
+			return null;
+		}
+			
+		if (lec.PatientSpawn == null) {
+			Debug.Log("Erreur pas de spawn Patient");
+			return null;
 		}
 
 		return new LevelData(lec.size, lec.rows, lec.columns, layers, new List<string>(ldc.Elements.Keys), lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
