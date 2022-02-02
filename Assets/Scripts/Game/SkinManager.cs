@@ -17,6 +17,8 @@ public class SkinManager : MonoBehaviour {
 
     public GameObject perso;
 
+    public List<GameObject> annexLayers;
+
 
     private SpriteRenderer spriteRenderer = null;
 
@@ -86,6 +88,12 @@ public class SkinManager : MonoBehaviour {
         }
         if (persoAnimator.direction == PersoAnimator.Dir.Left) {
             dirIndex = 3;
+        }
+        foreach (GameObject child in annexLayers) {
+            var cmp = child.GetComponent<SkinManager>();
+            cmp.frameSelected = frameSelected;
+            cmp.skinSelected = skinSelected;
+            cmp.applyReplacement();
         }
         string selectedSpriteName = initialPrefix + (frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4).ToString();
 
