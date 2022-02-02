@@ -29,6 +29,8 @@ public class LevelEditorController : MonoBehaviour {
 	private bool isFloorFillerSelected;
 	[SerializeField] private Image floorFillerImage;
 
+	private LevelDiseasesController ldc;
+
 	public class Cell {
 		public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
 		public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
@@ -41,6 +43,7 @@ public class LevelEditorController : MonoBehaviour {
 	private void Start() {
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
 		grids = new Dictionary<(int, int), Cell>[2];
+		ldc = GetComponent<LevelDiseasesController>();
 		lc = GetComponent<LayerController>();
 		CellsParents = new Transform[2];
 		CellsParents[0] = transform.Find("FloorLayer");
@@ -140,7 +143,7 @@ public class LevelEditorController : MonoBehaviour {
 					if (cell.value == 0) {
 						if (newValue != cell.value) {
 							cell.value = newValue;
-							ChangeSprite(cell);
+							ChangeSprite(cell, lc.currentLayer);
 
 							Propagate(i, j, false, true);
 						}
@@ -154,7 +157,7 @@ public class LevelEditorController : MonoBehaviour {
 					int newValue = ComputeCellValue(i, j);
 					if (newValue != cell.value) {
 						cell.value = newValue;
-						ChangeSprite(cell);
+						ChangeSprite(cell, lc.currentLayer);
 
 						Propagate(i, j);
 					}
@@ -162,7 +165,7 @@ public class LevelEditorController : MonoBehaviour {
 					return true;
 				} else if (reset && cell.value != 0) {
 					cell.value = 0;
-					ChangeSprite(cell);
+					ChangeSprite(cell, lc.currentLayer);
 					Propagate(i, j);
 
 					return false;
@@ -186,87 +189,87 @@ public class LevelEditorController : MonoBehaviour {
 		}
 	}
 
-	private void ChangeSprite(Cell cell) {
+	private void ChangeSprite(Cell cell, int layer) {
 		switch(cell.value) {
 			case 0:
 				cell.sr.sprite = null;
 				break;
 			case 1:
-				cell.sr.sprite = sprites[lc.currentLayer][0];
+				cell.sr.sprite = sprites[layer][0];
 				break;
 			case 2:
-				cell.sr.sprite = sprites[lc.currentLayer][1];
+				cell.sr.sprite = sprites[layer][1];
 				cell.sr.transform.rotation = Quaternion.identity;
 				break;
 			case 3:
-				cell.sr.sprite = sprites[lc.currentLayer][1];
+				cell.sr.sprite = sprites[layer][1];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
 				break;
 			case 4:
-				cell.sr.sprite = sprites[lc.currentLayer][1];
+				cell.sr.sprite = sprites[layer][1];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 				break;
 			case 5:
-				cell.sr.sprite = sprites[lc.currentLayer][1];
+				cell.sr.sprite = sprites[layer][1];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 				break;
 			case 6:
-				cell.sr.sprite = sprites[lc.currentLayer][2];
+				cell.sr.sprite = sprites[layer][2];
 				cell.sr.transform.rotation = Quaternion.identity;
 				break;
 			case 7:
-				cell.sr.sprite = sprites[lc.currentLayer][2];
+				cell.sr.sprite = sprites[layer][2];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 				break;
 			case 8:
-				cell.sr.sprite = sprites[lc.currentLayer][3];
+				cell.sr.sprite = sprites[layer][3];
 				cell.sr.transform.rotation = Quaternion.identity;
 				break;
 			case 9:
-				cell.sr.sprite = sprites[lc.currentLayer][3];
+				cell.sr.sprite = sprites[layer][3];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
 				break;
 			case 10:
-				cell.sr.sprite = sprites[lc.currentLayer][3];
+				cell.sr.sprite = sprites[layer][3];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 				break;
 			case 11:
-				cell.sr.sprite = sprites[lc.currentLayer][3];
+				cell.sr.sprite = sprites[layer][3];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 				break;
 			case 12:
-				cell.sr.sprite = sprites[lc.currentLayer][4];
+				cell.sr.sprite = sprites[layer][4];
 				cell.sr.transform.rotation = Quaternion.identity;
 				break;
 			case 13:
-				cell.sr.sprite = sprites[lc.currentLayer][4];
+				cell.sr.sprite = sprites[layer][4];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
 				break;
 			case 14:
-				cell.sr.sprite = sprites[lc.currentLayer][4];
+				cell.sr.sprite = sprites[layer][4];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 				break;
 			case 15:
-				cell.sr.sprite = sprites[lc.currentLayer][4];
+				cell.sr.sprite = sprites[layer][4];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 				break;
 			case 16:
-				cell.sr.sprite = sprites[lc.currentLayer][5];
+				cell.sr.sprite = sprites[layer][5];
 				break;
 			case 17:
-				cell.sr.sprite = sprites[lc.currentLayer][6];
+				cell.sr.sprite = sprites[layer][6];
 				cell.sr.transform.rotation = Quaternion.identity;
 				break;
 			case 18:
-				cell.sr.sprite = sprites[lc.currentLayer][6];
+				cell.sr.sprite = sprites[layer][6];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 				break;
 			case 19:
-				cell.sr.sprite = sprites[lc.currentLayer][6];
+				cell.sr.sprite = sprites[layer][6];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
 				break;
 			case 20:
-				cell.sr.sprite = sprites[lc.currentLayer][6];
+				cell.sr.sprite = sprites[layer][6];
 				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
 				break;
 		}
@@ -339,19 +342,19 @@ public class LevelEditorController : MonoBehaviour {
 	public void ClearAllGrid() {
 		for (int i = 0; i < grids.Length; i++)
 			ClearGrid(i);
-	}
-
-	public void ClearGrid(int layer) {
-		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
-			cell.Value.value = 0;
-			ChangeSprite(cell.Value);
-			cell.Value.sr.gameObject.GetComponent<CellController>().AdjustClickedBool(cell.Value.value);
-		}
 
 		Destroy(PlayerSpawn);
 		Destroy(PatientSpawn);
 		PlayerSpawn = null;
 		PatientSpawn = null;
+		ldc.DeleteAll();		
+	}
+
+	public void ClearGrid(int layer) {
+		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
+			cell.Value.value = 0;
+			ChangeSprite(cell.Value, layer);
+		}
 	}
 
 	public void RefreshAllGrid() {
@@ -360,10 +363,8 @@ public class LevelEditorController : MonoBehaviour {
 	}
 
 	public void RefreshGrid(int layer) {
-		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
-			ChangeSprite(cell.Value);
-			cell.Value.sr.gameObject.GetComponent<CellController>().AdjustClickedBool(cell.Value.value);
-		}
+		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer])
+			ChangeSprite(cell.Value, layer);
 	}
 
 	public void ResizeGrid(int rows, int columns) {

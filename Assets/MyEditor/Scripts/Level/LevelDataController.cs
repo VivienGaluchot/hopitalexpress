@@ -6,17 +6,24 @@ using System.IO;
 
 [Serializable]
 public class LevelData {
-	public LevelData(float size, int rows, int columns, List<CellData> cells, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection)
-		{ this.size = size; this.rows = rows; this.columns = columns; this.cells = cells; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; }
+	public LevelData(float size, int rows, int columns, List<LayerData> layers, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection)
+		{ this.size = size; this.rows = rows; this.columns = columns; this.layers = layers; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; }
 
 	public float size;
 	public int rows;
 	public int columns;
-	public List<CellData> cells;
+	public List<LayerData> layers;
 	public List<string> diseases;
 	public Vector3 playerSpawn;
 	public Vector3 patientSpawn;
 	public string patientSpawnDirection;
+}
+
+[Serializable]
+public class LayerData {
+	public LayerData(List<CellData> cells) { this.cells = cells; }
+
+	public List<CellData> cells;
 }
 
 [Serializable]
@@ -61,13 +68,18 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	public LevelData FetchDataToLevelData() {
-		List<CellData> cells = new List<CellData>();
-		foreach(KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grids[1]) {
-			if(cell.Value.value > 0)
-				cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
-        }
+		List<LayerData> layers = new List<LayerData>();
+		for(int i = 0; i < lec.grids.Length; i++) {
+			List<CellData> cells = new List<CellData>();
+			foreach (KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grids[i]) {
+				if (cell.Value.value > 0)
+					cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
+			}
 
-		return new LevelData(lec.size, lec.rows, lec.columns, cells, new List<string>(ldc.Elements.Keys), lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
+			layers.Add(new LayerData(cells));
+		}
+
+		return new LevelData(lec.size, lec.rows, lec.columns, layers, new List<string>(ldc.Elements.Keys), lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
 	}
 
 	private void WriteToFile(string content) {
@@ -86,11 +98,12 @@ public class LevelDataController : MonoBehaviour {
 
 	private void DisplayLoadedData(LevelData Data) {
 		lec.ResizeGrid(Data.rows, Data.columns);
-		lec.ClearGrid(1);
-		foreach(CellData cell in Data.cells)
-			lec.grids[1][(cell.x, cell.y)].value = cell.value;
-
-		lec.RefreshGrid(1);
+		lec.ClearAllGrid();
+		for(int i = 0; i < Data.layers.Count; i++)
+			foreach (CellData cell in Data.layers[i].cells)
+				lec.grids[i][(cell.x, cell.y)].value = cell.value;
+		
+		lec.RefreshAllGrid();
 
 		lec.SetPatientSpawn(Data.patientSpawn);
 		lec.SetPlayerSpawn(Data.playerSpawn);
