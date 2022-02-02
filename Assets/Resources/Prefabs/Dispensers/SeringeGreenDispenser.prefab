@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2562048416023497580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0.73099995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4813458817209039267}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24306ba3dcf3c004e8b6ec129079030d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 056c0daed611cb64a9a410ca1f745fc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,12 +92,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4813458817209039267}
   - component: {fileID: 1928521763467216688}
-  - component: {fileID: 83039952087057764}
-  - component: {fileID: 8284242788130429223}
-  - component: {fileID: 5789729262198045975}
+  - component: {fileID: 6744619152720247010}
+  - component: {fileID: 4149853021904160328}
+  - component: {fileID: -1790730193496685055}
   m_Layer: 0
-  m_Name: RedDispenser
-  m_TagString: Untagged
+  m_Name: SeringeGreenDispenser
+  m_TagString: Container
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3550491374035642158}
-  - {fileID: 837538754842247067}
+  - {fileID: 5964973692952513859}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,7 +129,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!61 &83039952087057764
+--- !u!61 &6744619152720247010
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,7 +155,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.57047075, y: 0.2995509}
   m_EdgeRadius: 0
---- !u!50 &8284242788130429223
+--- !u!50 &4149853021904160328
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5789729262198045975
+--- !u!114 &-1790730193496685055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,11 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164308f7934edb748b3d0acfd159cd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  askedItem: {fileID: 0}
-  givenItem: {fileID: 5938327028945376247, guid: 0140638d6def4f142ba8477943296253, type: 3}
+  askedItem: {fileID: 1373370309606671891, guid: 20a35026ff2ebd841b52cf39cac2dbb6, type: 3}
+  givenItem: {fileID: 3424318588629070083, guid: f764c8f61541f7145a9d66fda0aafe02, type: 3}
   askedTime: 0
-  TimeBar: {fileID: 2906963574168168797}
---- !u!1001 &4798296936178821586
+  TimeBar: {fileID: 8146946919626283909}
+--- !u!1001 &2003722859264482058
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.552
+      value: 1.3599999
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -289,15 +289,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
---- !u!224 &837538754842247067 stripped
+--- !u!224 &5964973692952513859 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 4798296936178821586}
+  m_PrefabInstance: {fileID: 2003722859264482058}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2906963574168168797 stripped
+--- !u!114 &8146946919626283909 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 4798296936178821586}
+  m_PrefabInstance: {fileID: 2003722859264482058}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
