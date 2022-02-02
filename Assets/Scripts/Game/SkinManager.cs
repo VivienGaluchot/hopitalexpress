@@ -7,100 +7,100 @@ using UnityEngine;
 [ExecuteAlways]
 public class SkinManager : MonoBehaviour {
 
-    public int frameSelected = 0;
+	public int frameSelected = 0;
 
-    public int framePerDirection = 1;
+	public int framePerDirection = 1;
 
-    public int skinSelected = 0;
+	public int skinSelected = 0;
 
-    public string spritePath;
+	public string spritePath;
 
-    public GameObject perso;
+	public GameObject perso;
 
-    public List<GameObject> annexLayers;
-
-
-    private SpriteRenderer spriteRenderer = null;
-
-    private PersoAnimator persoAnimator = null;
-
-    private string loadedSpritePath = null;
-
-    private Dictionary<string, Sprite> spriteSheet = new Dictionary<string, Sprite>();
+	public List<GameObject> annexLayers;
 
 
-    // --------------------------
-    // Callbacks
-    // --------------------------
+	private SpriteRenderer spriteRenderer = null;
 
-    private void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        persoAnimator = perso.GetComponent<PersoAnimator>();
-        loadedSpritePath = null;
-        load();
-    }
-    private void Awake() {
-        Start();
-    }
-    private void OnValidate() {
-        Start();
-    }
+	private PersoAnimator persoAnimator = null;
 
-    // Runs after the animation
-    private void LateUpdate() {
-        applyReplacement();
-    }
+	private string loadedSpritePath = null;
+
+	private Dictionary<string, Sprite> spriteSheet = new Dictionary<string, Sprite>();
 
 
-    // --------------------------
-    // Internals
-    // --------------------------
+	// --------------------------
+	// Callbacks
+	// --------------------------
 
-    private void load() {
-        if (loadedSpritePath != null || loadedSpritePath != spritePath)  {
-            spriteSheet.Clear();
-            Sprite[] sprites = Resources.LoadAll<Sprite>(spritePath);
-            foreach (var x in sprites) {
-                spriteSheet.Add(x.name, x);
-            }
-        }
-        loadedSpritePath = spritePath;
-    }
+	private void Start() {
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		persoAnimator = perso.GetComponent<PersoAnimator>();
+		loadedSpritePath = null;
+		load();
+	}
+	private void Awake() {
+		Start();
+	}
+	private void OnValidate() {
+		Start();
+	}
 
-    // compute actual skin sprite name and update it
-    // "azaef53454_<nombre>" => "azaef53454_<new index>"
-    private void applyReplacement() {
-        load();
+	// Runs after the animation
+	private void LateUpdate() {
+		applyReplacement();
+	}
 
-        var regex = new Regex(@"^(.*_)(\d+)$");
-        var match = regex.Match(spriteRenderer.sprite.name);
-        string initialPrefix = match.Groups[1].ToString();
 
-        int dirIndex = 0;
-        if (persoAnimator.direction == PersoAnimator.Dir.Down) {
-            dirIndex = 0;
-        }
-        if (persoAnimator.direction == PersoAnimator.Dir.Up) {
-            dirIndex = 1;
-        }
-        if (persoAnimator.direction == PersoAnimator.Dir.Right) {
-            dirIndex = 2;
-        }
-        if (persoAnimator.direction == PersoAnimator.Dir.Left) {
-            dirIndex = 3;
-        }
-        foreach (GameObject child in annexLayers) {
-            var cmp = child.GetComponent<SkinManager>();
-            cmp.frameSelected = frameSelected;
-            cmp.skinSelected = skinSelected;
-            cmp.applyReplacement();
-        }
-        string selectedSpriteName = initialPrefix + (frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4).ToString();
+	// --------------------------
+	// Internals
+	// --------------------------
 
-        if (spriteSheet.ContainsKey(selectedSpriteName)) {
-            spriteRenderer.sprite = spriteSheet[selectedSpriteName];
-        } else {
-            Debug.LogWarning(("skin sprite not found ", selectedSpriteName, this, loadedSpritePath));
-        }
-    }
+	private void load() {
+		if (loadedSpritePath != null || loadedSpritePath != spritePath)  {
+			spriteSheet.Clear();
+			Sprite[] sprites = Resources.LoadAll<Sprite>(spritePath);
+			foreach (var x in sprites) {
+				spriteSheet.Add(x.name, x);
+			}
+		}
+		loadedSpritePath = spritePath;
+	}
+
+	// compute actual skin sprite name and update it
+	// "azaef53454_<nombre>" => "azaef53454_<new index>"
+	private void applyReplacement() {
+		load();
+
+		var regex = new Regex(@"^(.*_)(\d+)$");
+		var match = regex.Match(spriteRenderer.sprite.name);
+		string initialPrefix = match.Groups[1].ToString();
+
+		int dirIndex = 0;
+		if (persoAnimator.direction == PersoAnimator.Dir.Down) {
+			dirIndex = 0;
+		}
+		if (persoAnimator.direction == PersoAnimator.Dir.Up) {
+			dirIndex = 1;
+		}
+		if (persoAnimator.direction == PersoAnimator.Dir.Right) {
+			dirIndex = 2;
+		}
+		if (persoAnimator.direction == PersoAnimator.Dir.Left) {
+			dirIndex = 3;
+		}
+		foreach (GameObject child in annexLayers) {
+			var cmp = child.GetComponent<SkinManager>();
+			cmp.frameSelected = frameSelected;
+			cmp.skinSelected = skinSelected;
+			cmp.applyReplacement();
+		}
+		string selectedSpriteName = initialPrefix + (frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4).ToString();
+
+		if (spriteSheet.ContainsKey(selectedSpriteName)) {
+			spriteRenderer.sprite = spriteSheet[selectedSpriteName];
+		} else {
+			Debug.LogWarning(("skin sprite not found ", selectedSpriteName, this, loadedSpritePath));
+		}
+	}
 }

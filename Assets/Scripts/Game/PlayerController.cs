@@ -15,15 +15,6 @@ public class PlayerController : MonoBehaviour {
 	private GameObject trashTarget, exitTarget, machineTarget, craftingTableTarget;
 	private GameObject HeldGO;
 
-	private enum WalkDirections {
-		down, 
-		left, 
-		up, 
-		right, 
-		idle
-    }
-
-	private WalkDirections direction = WalkDirections.idle;
 
 	enum HeldTypes {
 		none,
@@ -42,7 +33,9 @@ public class PlayerController : MonoBehaviour {
 	private CraftingTableController craftTable;
 	private ContainerController containerGathered;
 
-	private CapsuleCollider2D DetectionCollider;
+	private CapsuleCollider2D detectionCollider;
+
+	private PersoAnimator perso;
 
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
@@ -54,7 +47,9 @@ public class PlayerController : MonoBehaviour {
 		patientTargets = new List<GameObject>();
 		containerTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
-		DetectionCollider = GetComponent<CapsuleCollider2D>();
+		detectionCollider = GetComponent<CapsuleCollider2D>();
+		perso = GetComponent<PersoAnimator>();
+		rb2D = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update() {
@@ -102,48 +97,29 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (action == Actions.nothing) {
-            // Can only move if doing nothing
-            float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
-
-            Vector2 input = new Vector2(horiz, vert);
-            float angle = Vector2.SignedAngle(new Vector2(-1, -1), input);
-            angle = angle - (angle + 360) % 90;
-            if (input.sqrMagnitude > (0.1 * 0.1)) {
-				//transform.rotation = Quaternion.Euler(0, 0, angle);
-				//Debug.Log(angle);
-
-
-				// I don't like it to be hardcoded, but we'll see some day.........
-				// ................................. :<
-				switch (angle) {
-					case 0f:
-						if (direction != WalkDirections.down) {
-							DetectionCollider.offset = new Vector2(0f, -.25f);
-						}
-						break;
-					case 90f:
-						if (direction != WalkDirections.right) {
-							DetectionCollider.offset = new Vector2(.25f, 0);
-						}
-						break;
-					case -90f:
-						if (direction != WalkDirections.left) {
-							DetectionCollider.offset = new Vector2(-.25f, 0);
-						}
-						break;
-					default:
-						if (direction != WalkDirections.up) {
-							DetectionCollider.offset = new Vector2(0f, .25f);
-						}
-						break;
-				}
-            } 
-
-            Vector3 m_Input = new Vector3(horiz, vert, 0);
-			rb2D = GetComponent<Rigidbody2D>();
-            // rb2D.MovePosition(transform.position + m_Input * Time.deltaTime * speed);
-			rb2D.velocity = m_Input * speed;
-        }
+			// Can only move if doing nothing
+			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
+			Vector3 input = Vector2.ClampMagnitude(new Vector2(horiz, vert), 1);
+			if (input.sqrMagnitude > (0.1 * 0.1)) {
+				perso.SetStoppedDirection(input);
+			}
+			rb2D.velocity = input * speed;
+		}
+		
+		switch (perso.direction) {
+			case PersoAnimator.Dir.Down:
+				detectionCollider.offset = new Vector2(0f, -.25f);
+				break;
+			case PersoAnimator.Dir.Right:
+				detectionCollider.offset = new Vector2(.25f, 0);
+				break;
+			case PersoAnimator.Dir.Left:
+				detectionCollider.offset = new Vector2(-.25f, 0);
+				break;
+			case PersoAnimator.Dir.Up:
+				detectionCollider.offset = new Vector2(0, .25f);
+				break;
+		}
 	}
 
 	// Sort list items by distance from the player (closer first)
@@ -172,7 +148,7 @@ public class PlayerController : MonoBehaviour {
 	private bool TryDropItem() {
 		HeldGO.transform.parent = null;
 		HeldGO.transform.rotation = Quaternion.identity;
-		HeldGO.transform.position = transform.position + (Vector3)DetectionCollider.offset * 2;
+		HeldGO.transform.position = transform.position + (Vector3)detectionCollider.offset * 2;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = true;
 		HeldGO = null;
 		heldType = HeldTypes.none;

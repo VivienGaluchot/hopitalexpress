@@ -41,13 +41,13 @@ public class PatientController : MonoBehaviour {
 		DisplayNextNeed();
 	}
 
-    void Update() {
-        if (state == States.sick || state == States.diagnosticed) {
-            lifetime -= Time.deltaTime;
+	void Update() {
+		if (state == States.sick || state == States.diagnosticed) {
+			lifetime -= Time.deltaTime;
 			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
-            if (lifetime < 0f)
-                DiseaseLifetimeElapsed();
-        }
+			if (lifetime < 0f)
+				DiseaseLifetimeElapsed();
+		}
 
 		if (noDiseaseDuration > 0 && diseaseDuration > 0) {
 			periodWithoutDiseaseAnimation += Time.deltaTime;
@@ -58,13 +58,13 @@ public class PatientController : MonoBehaviour {
 				face.GetComponent<SkinManager>().frameSelected = 1;
 			}
 		}
-    }
+	}
 
-    public void Initialize(GameController parent) {
+	public void Initialize(GameController parent) {
 		gc = parent;
-    }
+	}
 
-    private void Diagnostic() {
+	private void Diagnostic() {
 		state = States.diagnosticed;
 		need.gameObject.SetActive(true);
 		DisplayNextNeed();
@@ -90,12 +90,12 @@ public class PatientController : MonoBehaviour {
 		}
 
 		return (false, 0f);
-    }
+	}
 
 	// We used the machine during time, tell the disease about it!
 	public void MachineDone(string machineName, float time) {
 		myDisease.UsedMachine(machineName, time);
-    }
+	}
 
 	public void DiseaseLifetimeElapsed() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);

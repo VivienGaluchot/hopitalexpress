@@ -1448,25 +1448,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5231021139090138113}
     m_Modifications:
-    - target: {fileID: 1322319941843848753, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1322319941843848753, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7838676
-      objectReference: {fileID: 0}
-    - target: {fileID: 1322319941843848753, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.46584272
-      objectReference: {fileID: 0}
     - target: {fileID: 2685476388826398785, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
       propertyPath: m_Name
       value: SerineDispenserTable
-      objectReference: {fileID: 0}
-    - target: {fileID: 3015019881627839596, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5142847914458942288, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
       propertyPath: m_RootOrder
@@ -1512,10 +1496,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7326145769141589413, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
 --- !u!4 &6125559264301407852 stripped
@@ -1523,32 +1503,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5142847914458942288, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
   m_PrefabInstance: {fileID: 1323296724502369596}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8912497793141695657 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7634382956371325333, guid: ec9a98e27e9166a458f9788a43be6d6d, type: 3}
-  m_PrefabInstance: {fileID: 1323296724502369596}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1739095660
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8912497793141695657}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &1509780480363500287
 PrefabInstance:
   m_ObjectHideFlags: 0

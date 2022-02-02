@@ -26,8 +26,8 @@ public class ContainerController : MonoBehaviour {
 			askedItemName = askedItem.GetComponent<ItemController>().itemName;
 	}
 
-    private void Update() {
-        if(isGathering) {
+	private void Update() {
+		if(isGathering) {
 			elapsedTime += Time.deltaTime;
 			TimeBar.fillAmount = elapsedTime / askedTime;
 			if (elapsedTime > askedTime) {
@@ -35,10 +35,10 @@ public class ContainerController : MonoBehaviour {
 				TimeBar.transform.parent.gameObject.SetActive(false);
 				target.ReceiveItemFromContainer(Instantiate(givenItem));
 			}
-        }
-    }
+		}
+	}
 
-    public (GameObject givenItem, bool gathering) StartGatherItem(PlayerController player, GameObject item = null)  {
+	public (GameObject givenItem, bool gathering) StartGatherItem(PlayerController player, GameObject item = null)  {
 		if (askedItem == null || item != null && item.GetComponent<ItemController>().itemName == askedItemName) {
 			if (askedTime == 0f) {
 				return (Instantiate(givenItem), true);
@@ -57,10 +57,10 @@ public class ContainerController : MonoBehaviour {
 		}
 
 		return (null, false);
-    }
+	}
 
 	public void StopGatherItem() {
 		TimeBar.transform.parent.gameObject.SetActive(false);
 		isGathering = false;
-    }
+	}
 }
