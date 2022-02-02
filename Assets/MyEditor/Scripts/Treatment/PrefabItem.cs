@@ -8,8 +8,7 @@ public class PrefabItem : MonoBehaviour {
     public string path;
     public List<Next> Nexts;
 
-    [Serializable]
-    public struct Next {
+    public class Next {
         public Next(PrefabItem _item, InputField _proba = null) { proba = _proba; item = _item; }
 
         public InputField proba;
@@ -50,6 +49,14 @@ public class PrefabItem : MonoBehaviour {
             Destroy(lr.gameObject);
 
         Destroy(gameObject);
+    }
+
+    public void DeleteIfNexted(PrefabItem pi) {
+        Nexts.RemoveAll(n => n.item == pi);
+    }
+
+    public void UnNext() {
+        isNexted = false;
     }
 
     public void AddToStartingLine(LineRenderer newLR) {

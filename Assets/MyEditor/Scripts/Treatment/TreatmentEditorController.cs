@@ -37,6 +37,14 @@ public class TreatmentEditorController : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown("delete") && clickedDown != null) {
+			PrefabItem pi = clickedDown.GetComponent<PrefabItem>();
+			foreach(PrefabItem.Next next in pi.Nexts)
+				next.item.UnNext();
+
+			MyPrefabs.Remove(pi);
+			foreach (PrefabItem p in MyPrefabs)
+				p.DeleteIfNexted(pi);
+
 			clickedDown.GetComponent<PrefabItem>().Delete();
 			StopDrawLine();
 		}

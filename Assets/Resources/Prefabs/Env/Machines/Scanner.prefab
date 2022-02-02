@@ -32,7 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7639372985484545886}
+  - {fileID: 7686205109475863122}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineName: Scanner
-  TimeBar: {fileID: 5317787669914196376}
+  TimeBar: {fileID: 5288052957272374420}
 --- !u!50 &7932379444378912382
 Rigidbody2D:
   serializedVersion: 4
@@ -150,7 +150,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.49905607, y: 0.30092183}
-    oldSize: {x: 2.7566667, y: 2.6533334}
+    oldSize: {x: 2.362857, y: 2.0514286}
     newSize: {x: 2.7566667, y: 2.6533334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -174,7 +174,7 @@ PolygonCollider2D:
       - {x: -0.2840488, y: -0.72670615}
       - {x: -1.10161, y: -0.7145773}
       - {x: -1.2864151, y: -0.6003617}
---- !u!1001 &2525940953797335319
+--- !u!1001 &2568057263825615899
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -222,10 +222,6 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -259,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.114
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -273,21 +269,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5707897030756153435, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-      propertyPath: m_SortingOrder
-      value: 201
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
---- !u!224 &7639372985484545886 stripped
+--- !u!224 &7686205109475863122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 2525940953797335319}
+  m_PrefabInstance: {fileID: 2568057263825615899}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5317787669914196376 stripped
+--- !u!114 &5288052957272374420 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 2525940953797335319}
+  m_PrefabInstance: {fileID: 2568057263825615899}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

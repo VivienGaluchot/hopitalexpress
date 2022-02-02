@@ -31,7 +31,7 @@ Transform:
   m_LocalPosition: {x: 1.64, y: -0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4113292955901407029}
+  - {fileID: 2114167959539444619}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineName: Diagnostable
-  TimeBar: {fileID: 1935783477981690355}
---- !u!1001 &8078378617709050236
+  TimeBar: {fileID: 4512354461282860365}
+--- !u!1001 &6079428649586163138
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -224,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.023
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.063
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -244,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
---- !u!224 &4113292955901407029 stripped
+--- !u!224 &2114167959539444619 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 8078378617709050236}
+  m_PrefabInstance: {fileID: 6079428649586163138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1935783477981690355 stripped
+--- !u!114 &4512354461282860365 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
-  m_PrefabInstance: {fileID: 8078378617709050236}
+  m_PrefabInstance: {fileID: 6079428649586163138}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

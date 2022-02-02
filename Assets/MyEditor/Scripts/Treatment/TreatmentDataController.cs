@@ -79,7 +79,7 @@ public class TreatmentDataController : MonoBehaviour {
 			nsData.Nexts.Add(new NextStepData(float.Parse(proba), PrefabItemToStepData(next.item)));
 		}
 
-		return new StepData(item.name, item.path, item.TimeDisplayedValue(), nsData);
+		return new StepData(Path.GetFileNameWithoutExtension(item.path), item.path, item.TimeDisplayedValue(), nsData);
 	}
 
 	private void WriteToFile(string content) {
