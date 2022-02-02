@@ -53,9 +53,9 @@ public class PatientController : MonoBehaviour {
 			periodWithoutDiseaseAnimation += Time.deltaTime;
 			if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
 				periodWithoutDiseaseAnimation = 0;
-				face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
+				face.GetComponent<SkinManager>().frameSelected = 0;
 			} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
-				face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex() + 1;
+				face.GetComponent<SkinManager>().frameSelected = 1;
 			}
 		}
     }
