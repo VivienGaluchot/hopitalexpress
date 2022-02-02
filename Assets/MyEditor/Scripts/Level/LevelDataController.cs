@@ -62,7 +62,7 @@ public class LevelDataController : MonoBehaviour {
 
 	public LevelData FetchDataToLevelData() {
 		List<CellData> cells = new List<CellData>();
-		foreach(KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grid) {
+		foreach(KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grids[1]) {
 			if(cell.Value.value > 0)
 				cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
         }
@@ -86,11 +86,11 @@ public class LevelDataController : MonoBehaviour {
 
 	private void DisplayLoadedData(LevelData Data) {
 		lec.ResizeGrid(Data.rows, Data.columns);
-		lec.ClearGrid();
+		lec.ClearGrid(1);
 		foreach(CellData cell in Data.cells)
-			lec.grid[(cell.x, cell.y)].value = cell.value;
+			lec.grids[1][(cell.x, cell.y)].value = cell.value;
 
-		lec.RefreshGrid();
+		lec.RefreshGrid(1);
 
 		lec.SetPatientSpawn(Data.patientSpawn);
 		lec.SetPlayerSpawn(Data.playerSpawn);
