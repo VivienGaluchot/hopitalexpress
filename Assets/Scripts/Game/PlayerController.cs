@@ -333,10 +333,6 @@ public class PlayerController : MonoBehaviour {
 
 			// Step 3 : Allocate patient to seat if found
 			if (emptySeat != null && emptySeat.GetComponent<SeatController>().ReceiveHold(HeldGO)) {
-				HeldGO.transform.parent = null;
-				HeldGO.transform.position = emptySeat.transform.position;
-				HeldGO.transform.rotation = emptySeat.transform.rotation;
-				HeldGO.GetComponent<Rigidbody2D>().simulated = false;
 				HeldGO = null;
 				heldType = HeldTypes.none;
 
@@ -362,13 +358,6 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryPutPatientToMachine() {
 		if (machineTarget != null && machineTarget.GetComponent<MachineController>().ReceiveHold(HeldGO)) {
-
-			// WE'D BETTER DO THAT IN THE MACHINE/SEAT
-			HeldGO.transform.parent = null;
-			HeldGO.transform.position = machineTarget.transform.position;
-			HeldGO.transform.rotation = machineTarget.transform.rotation;
-			HeldGO.GetComponent<Rigidbody2D>().simulated = false;
-
 			HeldGO = null;
 			heldType = HeldTypes.none;
 
