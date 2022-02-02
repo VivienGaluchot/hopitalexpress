@@ -98,6 +98,18 @@ TextureImporter:
   - first:
       213: -3343957337008492073
     second: Faces_31
+  - first:
+      213: 5612859048394387560
+    second: Faces_32
+  - first:
+      213: -3655083867925746968
+    second: Faces_33
+  - first:
+      213: 1466030004215106612
+    second: Faces_34
+  - first:
+      213: 7028389675812736792
+    second: Faces_35
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -142,7 +154,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 445
+  spritePixelsToUnits: 380
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -191,9 +203,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2480.625
-        width: 295.25
-        height: 354.375
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +223,10 @@ TextureImporter:
       name: Faces_1
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2480.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,10 +244,10 @@ TextureImporter:
       name: Faces_2
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2480.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +265,10 @@ TextureImporter:
       name: Faces_3
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2480.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 2400
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,9 +287,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2126.625
-        width: 295.25
-        height: 354.375
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,10 +307,10 @@ TextureImporter:
       name: Faces_5
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2126.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +328,10 @@ TextureImporter:
       name: Faces_6
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2126.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,10 +349,10 @@ TextureImporter:
       name: Faces_7
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2126.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 2100
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,9 +371,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1772.625
-        width: 295.25
-        height: 354.375
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,10 +391,10 @@ TextureImporter:
       name: Faces_9
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1772.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -400,10 +412,10 @@ TextureImporter:
       name: Faces_10
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1772.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -421,10 +433,10 @@ TextureImporter:
       name: Faces_11
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1772.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 1800
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -443,9 +455,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1418.625
-        width: 295.25
-        height: 354.375
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -463,10 +475,10 @@ TextureImporter:
       name: Faces_13
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1418.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -484,10 +496,10 @@ TextureImporter:
       name: Faces_14
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1418.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -505,10 +517,10 @@ TextureImporter:
       name: Faces_15
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1418.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 1500
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -527,9 +539,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1064.625
-        width: 295.25
-        height: 354.375
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -547,10 +559,10 @@ TextureImporter:
       name: Faces_17
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1064.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -568,10 +580,10 @@ TextureImporter:
       name: Faces_18
       rect:
         serializedVersion: 2
-        x: 590
-        y: 1064.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -589,10 +601,10 @@ TextureImporter:
       name: Faces_19
       rect:
         serializedVersion: 2
-        x: 885
-        y: 1064.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 1200
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -611,9 +623,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 710.625
-        width: 295.25
-        height: 354.375
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -631,10 +643,10 @@ TextureImporter:
       name: Faces_21
       rect:
         serializedVersion: 2
-        x: 295
-        y: 710.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -652,10 +664,10 @@ TextureImporter:
       name: Faces_22
       rect:
         serializedVersion: 2
-        x: 590
-        y: 710.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -673,10 +685,10 @@ TextureImporter:
       name: Faces_23
       rect:
         serializedVersion: 2
-        x: 885
-        y: 710.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 900
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -695,9 +707,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 356.625
-        width: 295.25
-        height: 354.375
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -715,10 +727,10 @@ TextureImporter:
       name: Faces_25
       rect:
         serializedVersion: 2
-        x: 295
-        y: 356.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -736,10 +748,10 @@ TextureImporter:
       name: Faces_26
       rect:
         serializedVersion: 2
-        x: 590
-        y: 356.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -757,10 +769,10 @@ TextureImporter:
       name: Faces_27
       rect:
         serializedVersion: 2
-        x: 885
-        y: 356.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 600
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -779,9 +791,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2.625
-        width: 295.25
-        height: 354.375
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -799,10 +811,10 @@ TextureImporter:
       name: Faces_29
       rect:
         serializedVersion: 2
-        x: 295
-        y: 2.625
-        width: 295.25
-        height: 354.375
+        x: 250
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -820,10 +832,10 @@ TextureImporter:
       name: Faces_30
       rect:
         serializedVersion: 2
-        x: 590
-        y: 2.625
-        width: 295.25
-        height: 354.375
+        x: 500
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -841,10 +853,10 @@ TextureImporter:
       name: Faces_31
       rect:
         serializedVersion: 2
-        x: 885
-        y: 2.625
-        width: 295.25
-        height: 354.375
+        x: 750
+        y: 300
+        width: 250
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -854,6 +866,90 @@ TextureImporter:
       bones: []
       spriteID: 7d13c8fd480e791d0800000000000000
       internalID: -3343957337008492073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Faces_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 250
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86072e9f091e4ed40800000000000000
+      internalID: 5612859048394387560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Faces_33
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 250
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea660c6698864dc0800000000000000
+      internalID: -3655083867925746968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Faces_34
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 250
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c4e4f7582685410800000000000000
+      internalID: 1466030004215106612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Faces_35
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 250
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81f47d11c2bd98160800000000000000
+      internalID: 7028389675812736792
       vertices: []
       indices: 
       edges: []

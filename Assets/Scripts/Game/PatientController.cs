@@ -10,6 +10,9 @@ public class PatientController : MonoBehaviour {
 	[SerializeField] private SpriteRenderer need;
 	[SerializeField] private Image TimeBarImage;
 
+	public float noDiseaseDuration;
+	public float diseaseDuration;
+
 	private Disease myDisease;
 
 	public enum States { 
@@ -24,6 +27,8 @@ public class PatientController : MonoBehaviour {
 
 	public int patientValue { get; private set; }
 
+	private float periodWithoutDiseaseAnimation = 0;
+
 	private void Start() {
 		state = States.diagnosticed;
 
@@ -31,7 +36,7 @@ public class PatientController : MonoBehaviour {
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 
-		face.GetComponent<SkinManager>().selected = myDisease.GetFaceSkinIndex();
+		face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
 
 		DisplayNextNeed();
 	}
@@ -43,6 +48,16 @@ public class PatientController : MonoBehaviour {
             if (lifetime < 0f)
                 DiseaseLifetimeElapsed();
         }
+
+		if (noDiseaseDuration > 0 && diseaseDuration > 0) {
+			periodWithoutDiseaseAnimation += Time.deltaTime;
+			if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
+				periodWithoutDiseaseAnimation = 0;
+				face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
+			} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
+				face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex() + 1;
+			}
+		}
     }
 
     public void Initialize(GameController parent) {

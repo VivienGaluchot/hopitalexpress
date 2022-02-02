@@ -12,6 +12,6 @@ public class SkinRandomizer : MonoBehaviour
     }
 
     void randomize() {
-        GetComponent<SkinManager>().selected = Random.Range(minSelected, maxSelected + 1);
+        GetComponent<SkinManager>().skinSelected = Random.Range(minSelected, maxSelected + 1);
     }
 }
