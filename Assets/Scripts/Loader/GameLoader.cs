@@ -12,6 +12,8 @@ public class GameLoader : MonoBehaviour {
 	[SerializeField] private Transform FloorParent;
 	[SerializeField] private Transform WallsParent;
 	[SerializeField] private GameObject[] Walls;
+	public bool useTest;
+	public GameObject[] WallsTest;
 	[SerializeField] private GameObject[] Floor;
 
 	public bool instantLoad, loadLevel, loadSpawns, loadDiseases;
@@ -24,7 +26,7 @@ public class GameLoader : MonoBehaviour {
 	private void Start() {
 		gc = GetComponent<GameController>();
 		PrefabsParents = new Transform[2] { FloorParent, WallsParent };
-		Prefabs = new GameObject[2][] { Floor, Walls };
+		Prefabs = new GameObject[2][] { Floor, useTest ? WallsTest : Walls };
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 
@@ -50,7 +52,7 @@ public class GameLoader : MonoBehaviour {
 
 		string filename = dd.options[dd.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
-
+		
 		if(loadLevel) {
 			for (int i = 0; i < Data.layers.Count; i++) {
 				foreach (CellData cell in Data.layers[i].cells) {
