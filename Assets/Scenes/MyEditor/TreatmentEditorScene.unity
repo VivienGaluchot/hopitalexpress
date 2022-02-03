@@ -2240,7 +2240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73f1e64ed8110a44a97b463a929c55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1223852224012863000, guid: c9125602157dfb54abdd7041cb428e83, type: 3}
+  Prefab: {fileID: 7564228919396299855, guid: 356bf400eb011ae4995885ce2bf8c621, type: 3}
   ec: {fileID: 297887749}
 --- !u!114 &1401188909
 MonoBehaviour:
@@ -2269,16 +2269,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 375, y: 50}
-  m_Spacing: {x: 5, y: 5}
-  m_Constraint: 1
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 25, y: 25}
+  m_Constraint: 0
   m_ConstraintCount: 1
 --- !u!1 &1619150595
 GameObject:

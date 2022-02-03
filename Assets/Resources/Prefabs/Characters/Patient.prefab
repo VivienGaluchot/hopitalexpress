@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1620322259302807474}
   - component: {fileID: 39990540723369633}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5155283708339216236}
   - component: {fileID: 370626301214472289}
   - component: {fileID: 3803036310602100784}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 2500938050345342631}
   - component: {fileID: 1695668161033391852}
   - component: {fileID: 9038404745928765587}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,9 +318,9 @@ GameObject:
   - component: {fileID: 6814037511771535448}
   - component: {fileID: 8378036458740779853}
   - component: {fileID: 4471882130300888735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patient
-  m_TagString: Untagged
+  m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,7 +383,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3508764698176005531}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -456,7 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7510458666819467206}
   - component: {fileID: 1718445427611651231}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Need
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 1304559474433477215}
   - component: {fileID: 5215556159217211524}
   - component: {fileID: 908056040074118087}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Clothes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6965162300062012296}
   - component: {fileID: 3197610266667747805}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,7 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4645712757895182434}
   - component: {fileID: 9008669462824845255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HandHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3511161801931647190}
   - component: {fileID: 5136117364398931305}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 7846585628549479094}
   - component: {fileID: 2759808748405026704}
   - component: {fileID: 1730942402994220613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 8394854420890877549}
   - component: {fileID: 312000564699717218}
   - component: {fileID: 4380093801307479033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,9 +1078,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3508764698176005528}
     m_Modifications:
+    - target: {fileID: 2594606987169001151, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4181825846017128040, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181825846017128040, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_Pivot.x
@@ -1173,6 +1181,10 @@ PrefabInstance:
     - target: {fileID: 5707897030756153435, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435590616821880559, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_Enabled

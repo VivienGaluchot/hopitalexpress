@@ -17,7 +17,6 @@ public class PatientController : MonoBehaviour {
 
 	public enum States { 
 		sick,
-		diagnosticed,
 		cured,
 		dead
 	}
@@ -30,7 +29,7 @@ public class PatientController : MonoBehaviour {
 	private float periodWithoutDiseaseAnimation = 0;
 
 	private void Start() {
-		state = States.diagnosticed;
+		state = States.sick;
 
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
@@ -42,7 +41,7 @@ public class PatientController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (state == States.sick || state == States.diagnosticed) {
+		if (state == States.sick) {
 			lifetime -= Time.deltaTime;
 			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
 			if (lifetime < 0f)
@@ -64,19 +63,13 @@ public class PatientController : MonoBehaviour {
 		gc = parent;
 	}
 
-	private void Diagnostic() {
-		state = States.diagnosticed;
-		need.gameObject.SetActive(true);
-		DisplayNextNeed();
-	}
-
 	public void DisplayNextNeed() {
 		need.GetComponent<SpriteRenderer>().sprite = myDisease.GetNeedSprite();
 	}
 
 	public void TakeItem(GameObject item) {
-		if(state == States.diagnosticed)
-			myDisease.TakeItem(item.GetComponent<ItemController>().itemName);
+		if(state == States.sick)
+			myDisease.TakeItem(item.GetComponent<ItemController>().itemType.ToString());
 
 		Destroy(item);
 	}

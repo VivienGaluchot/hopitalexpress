@@ -120,16 +120,14 @@ public class TreatmentEditorController : MonoBehaviour {
 	}
 
 	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
-	public void NewFollower(string path) {
-		followerGO = Resources.Load<GameObject>(path);
-		if (!followerGO)
-			Debug.Log("No sprite at path : " + path);
-		else {
-			followerGO = Instantiate(followerGO);
-			followerGO.AddComponent<PrefabItem>();
-			followerGO.GetComponent<PrefabItem>().path = path;
-			Instantiate(ValueDisplayer, followerGO.transform.position, Quaternion.identity, followerGO.transform);
-		}
+	public void NewFollower(GameObject go, string path) {
+		if (followerGO)
+			Destroy(followerGO);
+
+		followerGO = Instantiate(go);
+		followerGO.AddComponent<PrefabItem>();
+		followerGO.GetComponent<PrefabItem>().path = path;
+		Instantiate(ValueDisplayer, followerGO.transform.position, Quaternion.identity, followerGO.transform);
 	}
 
 	private void StopDrawLine() {
@@ -137,6 +135,9 @@ public class TreatmentEditorController : MonoBehaviour {
 		lineStart = null;
 		Destroy(myLine);
 	}
+
+	// IDEA : CHECK FOR CICLES WHEN TARGETING SOMETHING
+	// CHECK NEXT -> NEXT -> NEXT ... if we find the starter then we abort
 
 	private void DrawLine() {
 		if (lineStart == null) {
@@ -156,6 +157,7 @@ public class TreatmentEditorController : MonoBehaviour {
 			lineStart = null;
 			everyObjects.Add(myLine);
 			myLine = null;
+			DrawLine();
 		} else {
 			// Clicked the starting object again
 			// or target is already nexted

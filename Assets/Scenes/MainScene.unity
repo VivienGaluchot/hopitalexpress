@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8.9, y: 0.0000038147}
+  m_AnchoredPosition: {x: 8.900002, y: 0.0000038146973}
   m_SizeDelta: {x: -102.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &51563642
@@ -336,7 +336,7 @@ MonoBehaviour:
   - {fileID: 1845620948}
   - {fileID: 1153479329}
   Patient: {fileID: 3508764698176005531, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-  spawnRate: 10
+  spawnRate: 1
   PatientQueueParent: {fileID: 1140363381}
   patientQueueSize: 10
   targetFrameRate: 120
@@ -399,7 +399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 522.64, y: -67.01503}
+  m_AnchoredPosition: {x: 522.64, y: -67.015015}
   m_SizeDelta: {x: 159.98, y: 82.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769402340
@@ -698,7 +698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18.1, y: -54.6}
+  m_AnchoredPosition: {x: 18.099998, y: -54.599995}
   m_SizeDelta: {x: -18.6, y: -50.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1321584882
@@ -1058,6 +1058,10 @@ PrefabInstance:
     - target: {fileID: 3713404079251285716, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_Name
       value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201488921844956329, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df257946a46870f4eafe1e01422b9089, type: 3}

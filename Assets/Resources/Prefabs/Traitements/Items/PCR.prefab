@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937063911249367467}
-  m_LocalRotation: {x: -0, y: -0, z: -0.70740587, w: 0.7068076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.048}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1937063911249367460
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5bb8d46d851f65a4caa38dc472266076, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b60a18f9966c25a47b60dece39fcb93f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ece6d05785a72408878a3373a4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: PCR
+  itemType: 9
 --- !u!50 &8550326303840648862
 Rigidbody2D:
   serializedVersion: 4
@@ -132,6 +132,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01262004, y: 0.0000000015048998}
-  m_Size: {x: 0.1550524, y: 0.6400001}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 13.3}
   m_Direction: 0

@@ -192,7 +192,7 @@ public class PlayerController_old : MonoBehaviour {
 				ItemController ic = HeldGO.GetComponent<ItemController>();
 				if (ic == null)
 					return false;
-				string itemName = ic.itemName;
+				string itemName = ic.itemType.ToString();
 				for (int i = 0; i < containerTargets.Count; i++) {
 					if (containerTargets[i].GetComponent<ContainerController>().askedItemName == itemName) {
 						container = containerTargets[i];

@@ -3,20 +3,17 @@ using UnityEngine.UI;
 
 public class ContentItemController : MonoBehaviour {
 
-    [SerializeField] private Image DisplaySprite;
-    [SerializeField] private Text DisplayName;
-
     private TreatmentEditorController ec;
     private string path;
+    private GameObject myObject;
 
-    public void Display(TreatmentEditorController edCo, Sprite sprite, string name, string _path) {
+    public void SetInformations(TreatmentEditorController edCo, GameObject go, string _path) {
         ec = edCo;
-        DisplaySprite.sprite = sprite;
-        DisplayName.text = name;
+        myObject = go;
         path = _path;
     }
 
     public void SendInformations() {
-        ec.NewFollower(path);
+        ec.NewFollower(myObject, path);
     }
 }

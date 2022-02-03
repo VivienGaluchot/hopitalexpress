@@ -29,23 +29,23 @@ public readonly struct Infos {
 // We need "name" during "time" seconds to go to next step
 // if time == 0, it's instantaneous
 public readonly struct Step {
-	public Step(Items name, string icon, float time = 0f, (float, Step)[] next = null) {
+	public Step(Items name, string path, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = "Illustrations/Pills/" + icon;
+		_path = path;
 		_time = time;
 		_next = next;
 	}
 
-	public Step(MachineTypes name, string icon, float time = 0f, (float, Step)[] next = null) {
+	public Step(MachineTypes name, string path, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = "Illustrations/Objets/" + icon;
+		_path = path;
 		_time = time;
 		_next = next;
 	}
 
-	public Step(string name, string icon, float time = 0f, (float, Step)[] next = null) {
+	public Step(string name, string path, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = "Illustrations/Pills/" + icon;
+		_path = path;
 		_time = time;
 		_next = next;
 	}
@@ -92,7 +92,22 @@ public class Disease {
 
 	// Return the sprite to display the current need
 	public Sprite GetNeedSprite() {
-		return Resources.Load<Sprite>(currentStep._path);
+		GameObject tmp = Resources.Load<GameObject>(currentStep._path);
+		if(tmp != null) {
+			SpriteRenderer sr;
+			if (tmp.TryGetComponent<SpriteRenderer>(out sr))
+				return sr.sprite;
+
+			sr = tmp.GetComponentInChildren<SpriteRenderer>();
+			if (sr != null)
+				return sr.sprite;
+
+			Debug.LogError("UNABLE TO GET NEED SPRITE FROM " + currentStep._path);
+			return null;
+		} else {
+			Debug.LogError("UNABLE TO GET GAMEOBJECT AT " + currentStep._path);
+			return null;
+		}
 	}
 
 	// Say that we took this item
@@ -111,7 +126,7 @@ public class Disease {
 
 	// Check whether we go to next step or if we're done here 
 	private void NextStep() {
-		if (currentStep._next != null) {
+		if (currentStep._next.Length > 0) {
 			// Chose random next step
 			float mySum = 0f, randomValue = Random.Range(0f, 1f);
 			bool foundNext = false;

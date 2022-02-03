@@ -70,7 +70,7 @@ public class CraftingTableController : MonoBehaviour {
 			if(ic != null) {
 				// Display sprite and store item
 				ItemsSR[counter++].sprite = item.GetComponent<SpriteRenderer>().sprite;
-				Items parsedItem = (Items)Enum.Parse(typeof(Items), ic.itemName);
+				Items parsedItem = (Items)Enum.Parse(typeof(Items), ic.itemType.ToString());
 				if (items.ContainsKey(parsedItem))
 					items[parsedItem]++;
 				else

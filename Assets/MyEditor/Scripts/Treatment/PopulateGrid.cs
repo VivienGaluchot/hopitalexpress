@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopulateGrid : MonoBehaviour {
 
-    public GameObject prefab;
+    public GameObject Prefab;
     public TreatmentEditorController ec;
 
     private void Start() {
@@ -10,17 +11,12 @@ public class PopulateGrid : MonoBehaviour {
     }
 
     private void Populate() {
-        GameObject go;
-
-        Sprite[] Sprites = Resources.LoadAll<Sprite>("Illustrations/Traitements/Items");
-        foreach (Sprite sprite in Sprites) {
-            go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/Traitements/" + sprite.name);
-        }
-        Sprites = Resources.LoadAll<Sprite>("Illustrations/Traitements/Machines");
-        foreach (Sprite sprite in Sprites) {
-            go = Instantiate(prefab, transform);
-            go.GetComponent<ContentItemController>().Display(ec, sprite, sprite.name, "EditorPrefabs/Traitements/" + sprite.name);
+        GameObject[] Prefabs = Resources.LoadAll<GameObject>("EditorPrefabs/Traitement/");
+        foreach (GameObject p in Prefabs) {
+            GameObject go = Instantiate(Prefab, transform);
+            string path = "EditorPrefabs/Traitement/" + p.name;
+            go.GetComponent<Image>().sprite = p.GetComponentInChildren<SpriteRenderer>().sprite;
+            go.GetComponent<ContentItemController>().SetInformations(ec, p, path);
         }
     }
 }

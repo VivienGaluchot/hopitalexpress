@@ -23,7 +23,7 @@ public class ContainerController : MonoBehaviour {
 		isGathering = false;
 
 		if (askedItem != null)
-			askedItemName = askedItem.GetComponent<ItemController>().itemName;
+			askedItemName = askedItem.GetComponent<ItemController>().itemType.ToString();
 	}
 
 	private void Update() {
@@ -39,7 +39,7 @@ public class ContainerController : MonoBehaviour {
 	}
 
 	public (GameObject givenItem, bool gathering) StartGatherItem(PlayerController player, GameObject item = null)  {
-		if (askedItem == null || item != null && item.GetComponent<ItemController>().itemName == askedItemName) {
+		if (askedItem == null || item != null && item.GetComponent<ItemController>().itemType.ToString() == askedItemName) {
 			if (askedTime == 0f) {
 				return (Instantiate(givenItem), true);
 			} else {

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ece6d05785a72408878a3373a4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: SeringueJaune
+  itemType: 8
 --- !u!50 &-2481807350536839599
 Rigidbody2D:
   serializedVersion: 4
