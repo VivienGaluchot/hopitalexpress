@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
+	[SerializeField] private float levelTime;
+	[SerializeField] private Image levelTimeImage;
+	private float currentLevelTime;
+
 	[SerializeField] private GameObject Player;
 	[SerializeField] private float playerSpeed;
 	
@@ -57,7 +61,11 @@ public class GameController : MonoBehaviour {
 			CheckNewPlayers();
 
 			if (isPlaying) {
-				if (elapsedTime > currentSpawnRate) {
+				currentLevelTime -= Time.deltaTime;
+				levelTimeImage.fillAmount = currentLevelTime / levelTime;
+				if (currentLevelTime / levelTime < .5)
+					levelTimeImage.color = Color.red;
+                if (elapsedTime > currentSpawnRate) {
 					if (TrySpawnNewPatient())
 						elapsedTime -= currentSpawnRate;
 				} else
