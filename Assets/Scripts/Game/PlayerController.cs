@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour {
 	private float speed;
 	private Rigidbody2D rb2D;
 
-	private List<GameObject> seatTargets, itemTargets, patientTargets, containerTargets;
-	private GameObject trashTarget, exitTarget, machineTarget, craftingTableTarget;
+	private List<GameObject> seatTargets, itemTargets, /*patientTargets, */containerTargets;
+	private GameObject trashTarget, exitTarget, /*machineTarget, */craftingTableTarget;
 	private GameObject HeldGO;
 
 
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 		action = Actions.nothing;
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();
-		patientTargets = new List<GameObject>();
+		//patientTargets = new List<GameObject>();
 		containerTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CapsuleCollider2D>();
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 				case HeldTypes.patient:
 					// We are holding a patient, we try to put him somewhere
 					if (!TryPutPatientToExit())
-						if (!TryPutPatientToMachine())
+						//if (!TryPutPatientToMachine())
 							if (!TryPutPatientOnSeat())
 								TryPutInTrash();
 					break;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
 					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
-					if (!TryTakePatientFromMachine())
+					//if (!TryTakePatientFromMachine())
 						if (!TryTakePatientFromSeat())
 							if (!TryTakeItemFromGround())
 								if (!TryTakeItemFromCraft())
@@ -160,14 +160,24 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryGiveItemToPatient() {
 		// Look for closer patient to give item
-		if (patientTargets.Count > 0) {
-			SortListByDistance(patientTargets);
-			patientTargets[0].GetComponent<PatientController>().TakeItem(HeldGO);
+		if (seatTargets.Count > 0) {
+			SortListByDistance(seatTargets);
 
-			HeldGO = null;
-			heldType = HeldTypes.none;
+			GameObject occupiedSeat = null;
+			for (int i = 0; i < seatTargets.Count; i++) {
+				if (seatTargets[i].GetComponent<SeatController>().isHolding) {
+					occupiedSeat = seatTargets[i];
+					break;
+				}
+			}
 
-			return true;
+			if (occupiedSeat != null) {
+				occupiedSeat.GetComponent<PatientController>().TakeItem(HeldGO);
+				HeldGO = null;
+				heldType = HeldTypes.none;
+
+				return true;
+			}
 		}
 		return false;
 	}
@@ -322,29 +332,29 @@ public class PlayerController : MonoBehaviour {
 		return false;
 	}
 
-	private bool TryTakePatientFromMachine() {
-		// Look for a not empty seat in seatTargets
-		if (machineTarget != null && machineTarget.GetComponent<MachineController>().isHolding) {
-			HoldMyBeer(machineTarget.GetComponent<MachineController>().GiveHold());
-			if (HeldGO != null) {
-				heldType = HeldTypes.patient;
-				return true;
-			}
-		}
+	//private bool TryTakePatientFromMachine() {
+	//	// Look for a not empty seat in seatTargets
+	//	if (machineTarget != null && machineTarget.GetComponent<MachineController>().isHolding) {
+	//		HoldMyBeer(machineTarget.GetComponent<MachineController>().GiveHold());
+	//		if (HeldGO != null) {
+	//			heldType = HeldTypes.patient;
+	//			return true;
+	//		}
+	//	}
 
-		return false;
-	}
+	//	return false;
+	//}
 
-	private bool TryPutPatientToMachine() {
-		if (machineTarget != null && machineTarget.GetComponent<MachineController>().ReceiveHold(HeldGO)) {
-			HeldGO = null;
-			heldType = HeldTypes.none;
+	//private bool TryPutPatientToMachine() {
+	//	if (machineTarget != null && machineTarget.GetComponent<MachineController>().ReceiveHold(HeldGO)) {
+	//		HeldGO = null;
+	//		heldType = HeldTypes.none;
 
-			return true;
-		}
+	//		return true;
+	//	}
 
-		return false;
-	}
+	//	return false;
+	//}
 
 	private bool TryPutPatientToExit() {
 		if (exitTarget != null && HeldGO.GetComponent<PatientController>().state == PatientController.States.cured) {
@@ -368,7 +378,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "Seat") {
+		if (collision.gameObject.tag == "Seat" || collision.gameObject.tag == "Machine") {
 			if (!seatTargets.Contains(collision.gameObject))
 				seatTargets.Add(collision.gameObject);
 		}
@@ -376,10 +386,10 @@ public class PlayerController : MonoBehaviour {
 			if (!itemTargets.Contains(collision.gameObject))
 				itemTargets.Add(collision.gameObject);
 		}
-		if (collision.gameObject.tag == "Patient") {
-			if (!patientTargets.Contains(collision.gameObject))
-				patientTargets.Add(collision.gameObject);
-		}
+		//if (collision.gameObject.tag == "Patient") {
+		//	if (!patientTargets.Contains(collision.gameObject))
+		//		patientTargets.Add(collision.gameObject);
+		//}
 		if (collision.gameObject.tag == "Container") {
 			if (!containerTargets.Contains(collision.gameObject))
 				containerTargets.Add(collision.gameObject);
@@ -390,9 +400,9 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "Exit") {
 			exitTarget = collision.gameObject;
 		}
-		if (collision.gameObject.tag == "Machine") {
-			machineTarget = collision.gameObject;
-		}
+		//if (collision.gameObject.tag == "Machine") {
+		//	machineTarget = collision.gameObject;
+		//}
 		if (collision.gameObject.tag == "CraftingTable") {
 			craftingTableTarget = collision.gameObject;
 		}
@@ -403,16 +413,16 @@ public class PlayerController : MonoBehaviour {
 			seatTargets.Remove(collision.gameObject);
 		if (itemTargets.Contains(collision.gameObject))
 			itemTargets.Remove(collision.gameObject);
-		if (patientTargets.Contains(collision.gameObject))
-			patientTargets.Remove(collision.gameObject);
+		//if (patientTargets.Contains(collision.gameObject))
+		//	patientTargets.Remove(collision.gameObject);
 		if (containerTargets.Contains(collision.gameObject))
 			containerTargets.Remove(collision.gameObject);
 		if (trashTarget = collision.gameObject)
 			trashTarget = null;
 		if (exitTarget = collision.gameObject)
 			exitTarget = null;
-		if (machineTarget = collision.gameObject)
-			machineTarget = null;
+		//if (machineTarget = collision.gameObject)
+		//	machineTarget = null;
 		if (craftingTableTarget = collision.gameObject)
 			craftingTableTarget = null;
 	}
