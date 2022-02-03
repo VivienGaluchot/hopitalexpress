@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 		id = _id;
 		gc = parent;
 		speed = _speed;
+	}
+
+	private void Start() {
 		action = Actions.nothing;
 		seatTargets = new List<GameObject>();
 		itemTargets = new List<GameObject>();

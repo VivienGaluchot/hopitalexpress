@@ -182,6 +182,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 4
   skinSelected: 2
+  skinMin: 0
+  skinMax: 9
   spritePath: Illustrations/Perso/Skin
   perso: {fileID: 3508764698176005531}
   annexLayers:
@@ -198,8 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85580fe5013445f4eacff2349e6d1455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSelected: 0
-  maxSelected: 9
 --- !u!1 &2301655207604851932
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +298,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 2
   skinSelected: 0
+  skinMin: 0
+  skinMax: 5
   spritePath: Illustrations/Perso/Faces
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -443,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  stoppedDirection: 0
 --- !u!1 &3807074980244481042
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4558647280124325500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2741, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2733, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -626,6 +629,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 1
+  skinMin: 1
+  skinMax: 18
   spritePath: Illustrations/Perso/Clothes
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -641,8 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85580fe5013445f4eacff2349e6d1455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSelected: 1
-  maxSelected: 18
 --- !u!1 &4671034273547603053
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +951,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 0
+  skinMin: 0
+  skinMax: 23
   spritePath: Illustrations/Perso/Hair
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -963,8 +968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85580fe5013445f4eacff2349e6d1455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSelected: 0
-  maxSelected: 23
 --- !u!1 &6880701722253073697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1066,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 4
   skinSelected: 2
+  skinMin: 0
+  skinMax: 9
   spritePath: Illustrations/Perso/Hands
   perso: {fileID: 3508764698176005531}
   annexLayers: []

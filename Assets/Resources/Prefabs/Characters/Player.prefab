@@ -140,6 +140,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 24
+  skinMin: 0
+  skinMax: 0
   spritePath: Illustrations/Perso/Hair
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -242,6 +244,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 4
   skinSelected: 2
+  skinMin: 0
+  skinMax: 0
   spritePath: Illustrations/Perso/Skin
   perso: {fileID: 3508764698176005531}
   annexLayers:
@@ -272,7 +276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744204554316385340}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.283, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2798, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
@@ -344,6 +348,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 19
+  skinMin: 0
+  skinMax: 0
   spritePath: Illustrations/Perso/Clothes
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -486,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  stoppedDirection: 0
 --- !u!114 &3828187791805623832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +604,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 2
   skinSelected: 5
+  skinMin: 0
+  skinMax: 0
   spritePath: Illustrations/Perso/Faces
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -708,7 +717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8819294504144376455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.007000029, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6479815067793919130}
@@ -780,6 +789,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 4
   skinSelected: 2
+  skinMin: 0
+  skinMax: 0
   spritePath: Illustrations/Perso/Hands
   perso: {fileID: 3508764698176005531}
   annexLayers: []
