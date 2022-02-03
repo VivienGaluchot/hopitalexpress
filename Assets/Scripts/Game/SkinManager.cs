@@ -13,6 +13,10 @@ public class SkinManager : MonoBehaviour {
 
 	public int skinSelected = 0;
 
+	public int skinMin = 0;
+
+	public int skinMax = 0;
+
 	public string spritePath;
 
 	public GameObject perso;
@@ -44,6 +48,20 @@ public class SkinManager : MonoBehaviour {
 	}
 	private void OnValidate() {
 		Start();
+	}
+
+	public void NextSkinIndex() {
+		skinSelected=skinSelected+1;
+		if (skinSelected>skinMax) {
+			skinSelected=skinMin;
+		}
+	}
+
+	public void PreviousSkinIndex() {
+		skinSelected=skinSelected-1;
+		if (skinSelected<skinMin) {
+			skinSelected=skinMax;
+		}
 	}
 
 	// Runs after the animation
