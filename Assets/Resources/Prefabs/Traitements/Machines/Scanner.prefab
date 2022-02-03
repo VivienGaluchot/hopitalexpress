@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6663673547527717407}
   - component: {fileID: 6663673547527717405}
   - component: {fileID: 7932379444378912382}
-  - component: {fileID: 6166545356623583041}
+  - component: {fileID: 2589753505835681406}
   m_Layer: 0
   m_Name: Scanner
   m_TagString: Machine
@@ -165,7 +165,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &6166545356623583041
+--- !u!60 &2589753505835681406
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +178,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.51}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.49905607, y: 0.30092183}
@@ -190,22 +190,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.3744453, y: -0.3661569}
-      - {x: -1.3821306, y: 1.1370991}
-      - {x: 1.3637185, y: 1.1378303}
-      - {x: 1.3820904, y: -0.34664956}
-      - {x: 1.2756602, y: -0.6133097}
-      - {x: 1.073035, y: -0.71819043}
-      - {x: 0.2932546, y: -0.7358254}
-      - {x: 0.29814142, y: -1.1701725}
-      - {x: 0.25806606, y: -1.2526886}
-      - {x: 0.16047636, y: -1.3128536}
-      - {x: -0.1709415, y: -1.315667}
-      - {x: -0.241934, y: -1.2794888}
-      - {x: -0.3065177, y: -1.1894112}
-      - {x: -0.2840488, y: -0.72670615}
-      - {x: -1.10161, y: -0.7145773}
-      - {x: -1.2864151, y: -0.6003617}
+    - - {x: -1.191453, y: -0.33453494}
+      - {x: -1.1929399, y: 0.07796651}
+      - {x: -0.0020199344, y: 0.08234082}
+      - {x: 1.1785269, y: 0.09196635}
+      - {x: 1.1782477, y: -0.32212523}
+      - {x: 0.2572573, y: -0.3320876}
+      - {x: 0.2613216, y: -0.747172}
+      - {x: -0.25339398, y: -0.75306433}
+      - {x: -0.26040077, y: -0.32650647}
 --- !u!1001 &2568057263825615899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,7 +280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.75
+      value: 1.578
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
