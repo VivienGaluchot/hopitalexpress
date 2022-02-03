@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (occupiedSeat != null) {
-				occupiedSeat.GetComponent<PatientController>().TakeItem(HeldGO);
+				occupiedSeat.GetComponent<SeatController>().goHeld.GetComponent<PatientController>().TakeItem(HeldGO);
 				HeldGO = null;
 				heldType = HeldTypes.none;
 

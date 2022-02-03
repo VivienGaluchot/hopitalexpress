@@ -54,7 +54,11 @@ public class GameController : MonoBehaviour {
 			scoreText.text = "0";
 		PatientQueue = new GameObject[patientQueueSize];
 		coinAnimator = coin.GetComponent<Animator>();
+		currentLevelTime = levelTime;
 	}
+
+	private const float clockStartHue = 100f / 255f;
+	private const float clockEndHue = 0f;
 
 	private void Update() {
 		if(isLoaded) {
@@ -62,16 +66,25 @@ public class GameController : MonoBehaviour {
 
 			if (isPlaying) {
 				currentLevelTime -= Time.deltaTime;
-				levelTimeImage.fillAmount = currentLevelTime / levelTime;
-				if (currentLevelTime / levelTime < .5)
-					levelTimeImage.color = Color.red;
-                if (elapsedTime > currentSpawnRate) {
+				UpdateClock(currentLevelTime);
+
+				if (elapsedTime > currentSpawnRate) {
 					if (TrySpawnNewPatient())
 						elapsedTime -= currentSpawnRate;
 				} else
 					elapsedTime += Time.deltaTime;
 			}
 		}
+	}
+
+	private void UpdateClock(float currentTime) {
+		float ratio = Mathf.Max(currentTime / levelTime, 0);
+		float newH = clockEndHue + ratio * (clockStartHue - clockEndHue);
+		float H, S, V;
+		Color.RGBToHSV(levelTimeImage.color, out H, out S, out V);
+		H = clockEndHue + ratio * (clockStartHue - clockEndHue);
+		levelTimeImage.color = Color.HSVToRGB(newH, S, V);
+		levelTimeImage.fillAmount = ratio;
 	}
 
 	public void StartGame() {
@@ -117,8 +130,8 @@ public class GameController : MonoBehaviour {
 						PatientQueue[i].transform.localPosition = new Vector3(0, i, 0);
 						break;
 					}
-                }
-            }
+				}
+			}
 		}
 	}
 
@@ -178,13 +191,13 @@ public class GameController : MonoBehaviour {
 		newPlayer.GetComponent<PlayerController>().Initialize(id, this, playerSpeed);
 		Players.Add(id, newPlayer);
 
-        if (!isPlaying) {
-            // The queue will try to advance each half second, starting now
-            InvokeRepeating("AdvancePatientQueue", 0f, .5f);
-            isPlaying = true;
-        }
+		if (!isPlaying) {
+			// The queue will try to advance each half second, starting now
+			InvokeRepeating("AdvancePatientQueue", 0f, .5f);
+			isPlaying = true;
+		}
 
-        currentSpawnRate = spawnRate / ((Players.Count + 1)/2f);
+		currentSpawnRate = spawnRate / ((Players.Count + 1)/2f);
 		elapsedTime = currentSpawnRate;
 	}
 
@@ -205,5 +218,5 @@ public class GameController : MonoBehaviour {
 		if (coin) {
 			coinAnimator.SetTrigger("removeCoin");
 		}
-    }
+	}
 }
