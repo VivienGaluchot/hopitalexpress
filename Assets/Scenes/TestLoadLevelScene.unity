@@ -287,6 +287,24 @@ MonoBehaviour:
   - {fileID: 6969774318281751434, guid: 5fb9d9aa7e045834dad71fc7040f93d9, type: 3}
   - {fileID: 731780514921333783, guid: 61bd0d500a0187248b866c8d43517ff5, type: 3}
   - {fileID: 5201196985508756104, guid: 88c5956b2b54cb2489cdf12ae9603716, type: 3}
+  useTest: 1
+  WallsTest:
+  - {fileID: 8594471451466440459, guid: fc7bf627cf8ec824db409d39162d52d4, type: 3}
+  - {fileID: 2148472191227763891, guid: 0636dc95fffa9d244a659227d2c677b5, type: 3}
+  - {fileID: 7393503454793483490, guid: e6f85de485306f143bebc9a9a1d5a3a2, type: 3}
+  - {fileID: 6165035585590823541, guid: b04d9a74b08f8e144bbbc1e9ee2919bb, type: 3}
+  - {fileID: 3534351167556354339, guid: 057d6a504a9951c4dbf94a6b3a048576, type: 3}
+  - {fileID: 2148472191227763891, guid: 0636dc95fffa9d244a659227d2c677b5, type: 3}
+  - {fileID: 2122136685989711785, guid: 4592ad076fcdf9f49b9d528397224c97, type: 3}
+  - {fileID: 3534351167556354339, guid: 057d6a504a9951c4dbf94a6b3a048576, type: 3}
+  - {fileID: 4591233431811324431, guid: 126b33a5b995f2d4e8c8974ecb722f21, type: 3}
+  - {fileID: 1720247982899766971, guid: 8f0fd7ebc49325d41a61a1ffe0d30eaa, type: 3}
+  - {fileID: 7393503454793483490, guid: e6f85de485306f143bebc9a9a1d5a3a2, type: 3}
+  - {fileID: 6401749224407825366, guid: 33f7495f2db4e7541b9e5db3911f6f5e, type: 3}
+  - {fileID: 1720247982899766971, guid: 8f0fd7ebc49325d41a61a1ffe0d30eaa, type: 3}
+  - {fileID: 2122136685989711785, guid: 4592ad076fcdf9f49b9d528397224c97, type: 3}
+  - {fileID: 4591233431811324431, guid: 126b33a5b995f2d4e8c8974ecb722f21, type: 3}
+  - {fileID: 6401749224407825366, guid: 33f7495f2db4e7541b9e5db3911f6f5e, type: 3}
   Floor:
   - {fileID: 2088366876109970412, guid: 4ef4915909353474c99e2361433e498a, type: 3}
   - {fileID: 4889518948023836325, guid: bd6bfe3ac26230d48a86056295d89e4c, type: 3}
@@ -308,6 +326,10 @@ MonoBehaviour:
   - {fileID: 3641660755991963182, guid: e8115767ae30af0458875c547f2f000d, type: 3}
   - {fileID: 3446953838596126844, guid: 3813485bb41d3e443a709f1df5d35ad1, type: 3}
   - {fileID: 2305264926498774563, guid: b1c57db1184549942a5c9ddbbf696c32, type: 3}
+  instantLoad: 0
+  loadLevel: 1
+  loadSpawns: 1
+  loadDiseases: 1
 --- !u!114 &1088580439
 MonoBehaviour:
   m_ObjectHideFlags: 0
