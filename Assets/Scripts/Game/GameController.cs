@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private int patientQueueSize;
 	[SerializeField] public int targetFrameRate = 120;
 
+
 	private string patientQueueDirection;
 
 	private GameObject[] PatientQueue;
@@ -24,6 +25,8 @@ public class GameController : MonoBehaviour {
 
 	[SerializeField] private Text scoreText;
 	private int score, multiplicator;
+	[SerializeField] private  GameObject coin;
+	private Animator coinAnimator;
 	
 	private int counter;
 
@@ -46,6 +49,7 @@ public class GameController : MonoBehaviour {
 		if(scoreText)
 			scoreText.text = "0";
 		PatientQueue = new GameObject[patientQueueSize];
+		coinAnimator = coin.GetComponent<Animator>();
 	}
 
 	private void Update() {
@@ -180,6 +184,9 @@ public class GameController : MonoBehaviour {
 		score += patient.patientValue * multiplicator++;
 		if (scoreText)
 			scoreText.text = score.ToString();
+		if (coin) {
+			coinAnimator.SetTrigger("addCoin");
+		}
 	}
 
 	public void PatientDead(PatientController patient) {
@@ -187,5 +194,8 @@ public class GameController : MonoBehaviour {
 		multiplicator = 1;
 		if (scoreText)
 			scoreText.text = score.ToString();
+		if (coin) {
+			coinAnimator.SetTrigger("removeCoin");
+		}
     }
 }
