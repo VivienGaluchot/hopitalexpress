@@ -12,6 +12,7 @@ TagManager:
   - Exit
   - Machine
   - CraftingTable
+  - Fauteuil
   layers:
   - Default
   - TransparentFX

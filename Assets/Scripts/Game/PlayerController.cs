@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private float speed;
 	private Rigidbody2D rb2D;
 
-	private List<GameObject> seatTargets, itemTargets, /*patientTargets, */containerTargets;
+	private List<GameObject> seatTargets, itemTargets, /*patientTargets, */containerTargets, fauteuilTargets;
 	private GameObject trashTarget, exitTarget, /*machineTarget, */craftingTableTarget;
 	private GameObject HeldGO;
 
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour {
 	enum HeldTypes {
 		none,
 		patient,
-		item
+		item,
+		fauteuil
 	}
 
 	private HeldTypes heldType;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 		itemTargets = new List<GameObject>();
 		//patientTargets = new List<GameObject>();
 		containerTargets = new List<GameObject>();
+		fauteuilTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CapsuleCollider2D>();
 		perso = GetComponent<WalkController>();
@@ -86,13 +88,18 @@ public class PlayerController : MonoBehaviour {
 								if (!TryPutInTrash())
 									TryDropItem();
 					break;
+				case HeldTypes.fauteuil:
+					// We try to drop the faulteuil
+					TryDropFauteuil();
+					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
 					//if (!TryTakePatientFromMachine())
-						if (!TryTakePatientFromSeat())
-							if (!TryTakeItemFromGround())
-								if (!TryTakeItemFromCraft())
-									TryTakeFromContainer();
+						if (!TryTakeFauteuil())
+							if (!TryTakePatientFromSeat())
+								if (!TryTakeItemFromGround())
+										if (!TryTakeItemFromCraft())
+											TryTakeFromContainer();
 					break;
 			}
 		}
@@ -154,6 +161,25 @@ public class PlayerController : MonoBehaviour {
 		HeldGO.transform.position = transform.position + (Vector3)detectionCollider.offset * 2;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = true;
 		HeldGO = null;
+		heldType = HeldTypes.none;
+		return true;
+	}
+
+	private bool TryTakeFauteuil() {
+		// Look for item nearby
+		if (fauteuilTargets.Count > 0) {
+			// Sort by distance
+			SortListByDistance(fauteuilTargets);
+			fauteuilTargets[0].GetComponent<FauteuilController>().SetHolder(transform.gameObject);
+			HeldGO = fauteuilTargets[0];
+			heldType = HeldTypes.fauteuil;
+			return true;
+		}
+		return false;
+	}
+
+	private bool TryDropFauteuil() {
+		HeldGO.GetComponent<FauteuilController>().SetHolder(null);
 		heldType = HeldTypes.none;
 		return true;
 	}
@@ -406,6 +432,10 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "CraftingTable") {
 			craftingTableTarget = collision.gameObject;
 		}
+		if (collision.gameObject.tag == "Fauteuil") {
+			if (!fauteuilTargets.Contains(collision.gameObject))
+				fauteuilTargets.Add(collision.gameObject);
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision) {
@@ -425,5 +455,7 @@ public class PlayerController : MonoBehaviour {
 		//	machineTarget = null;
 		if (craftingTableTarget = collision.gameObject)
 			craftingTableTarget = null;
+		if (fauteuilTargets.Contains(collision.gameObject))
+			fauteuilTargets.Remove(collision.gameObject);
 	}
 }

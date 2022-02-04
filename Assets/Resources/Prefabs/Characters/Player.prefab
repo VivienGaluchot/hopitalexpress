@@ -492,7 +492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  stoppedDirection: 0
 --- !u!114 &3828187791805623832
 MonoBehaviour:
   m_ObjectHideFlags: 0
