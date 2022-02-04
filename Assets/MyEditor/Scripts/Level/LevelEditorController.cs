@@ -7,12 +7,14 @@ public class LevelEditorController : MonoBehaviour {
 	public float size;
 	public int columns, rows;
 
-	public Sprite[] floorSprites, wallSprites;
+	public Sprite[] floorSprites, wallSprites, fullWallSprites;
 	public Sprite[][] sprites;
 	public Dictionary<(int, int), Cell>[] grids { get; private set; }
+	private Dictionary<(int, int), GameObject> fullWallsGrid;
 	public int currentLayer;
 	public bool canDraw;
 	private Transform[] CellsParents;
+	private Transform FullWallsParent;
 
 	[SerializeField] private GraphicRaycaster m_Raycaster;
 	[SerializeField] private PointerEventData m_PointerEventData;
@@ -55,6 +57,17 @@ public class LevelEditorController : MonoBehaviour {
 		CellsParents[0] = transform.Find("FloorLayer");
 		CellsParents[1] = transform.Find("WallsLayer");
 		InitGrid();
+
+		FullWallsParent = transform.Find("FullWallsLayer");
+		fullWallsGrid = new Dictionary<(int, int), GameObject>();
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < columns; j++) {
+				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
+				newCell.transform.SetParent(FullWallsParent);
+				newCell.transform.position = new Vector3(j / size, -i / size, 0);
+				fullWallsGrid.Add((i, j), newCell);
+            }
+        }
 	}
 
 	private void Update() {
@@ -73,12 +86,20 @@ public class LevelEditorController : MonoBehaviour {
 		}
 	}
 
-	public void ShowWalls() {
-		if(isHiddingWalls) {
-			isHiddingWalls = false;
-			hideWallsImage.color = Color.white;
-			CellsParents[1].gameObject.SetActive(true);
-		}
+	public void ShowWalls(bool visible = true) {
+		if(visible) {
+			if (isHiddingWalls) {
+				isHiddingWalls = false;
+				hideWallsImage.color = Color.white;
+				CellsParents[1].gameObject.SetActive(true);
+			}
+		} else {
+            if (!isHiddingWalls) {
+                isHiddingWalls = true;
+                hideWallsImage.color = Color.green;
+                CellsParents[1].gameObject.SetActive(false);
+            }
+        }		
 	}
 
 	public void SwitchWallsVisibility() {
@@ -171,7 +192,7 @@ public class LevelEditorController : MonoBehaviour {
 			if(grids[currentLayer].TryGetValue((i, j), out cell)) {
 				if(!reset) {
 					if (isWallFillerSelected) {
-						WallFill(i, j, cell.value);
+						WallFill(i, j);
 					} else if (isFloorFillerSelected) {
 						FloorFill(i, j, cell);
 					} else if ((cell.value != 0 || clicked)) {
@@ -179,12 +200,14 @@ public class LevelEditorController : MonoBehaviour {
 						if (newValue != cell.value) {
 							cell.value = newValue;
 							ChangeSprite(cell, currentLayer);
+							if(currentLayer == 1 && newValue > 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue-2];
 							Propagate(i, j);
 						}
 					}
 				} else if (cell.value != 0) {
 					cell.value = 0;
 					ChangeSprite(cell, currentLayer);
+					if (currentLayer == 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
 					Propagate(i, j);
 				}
 			}
@@ -209,14 +232,15 @@ public class LevelEditorController : MonoBehaviour {
 
 	int startingX, startingY;
 	bool first;
-	private void WallFill(int i, int j, int cellValue = 1) {
+	private void WallFill(int i, int j) {
 		// If we clicked on void cell, abort mission
-		if (cellValue == 0)
+		if (!grids[0].TryGetValue((i, j), out Cell cell) || cell.value == 0)
 			return;
 
 		int x = i-1;
-		while(grids[0].TryGetValue((x, j), out Cell cell) && cell.value > 0) { x--; }
+		while(grids[0].TryGetValue((x, j), out cell) && cell.value > 0) { x--; }
 		// We found an edge!!
+		Debug.Log("edge found : " + (x, j));
 		grids[1][(x+1, j)].value = 1;
 		startingX = x + 1;
 		startingY = j;
@@ -227,6 +251,7 @@ public class LevelEditorController : MonoBehaviour {
 
 
 	private void StepByStep(int i, int j, int oldI, int oldJ) {
+		Debug.Log("StepByStep ! " + (i, j));
 		if(i == startingX && j == startingY) {
 			if (first)
 				first = false;
@@ -271,6 +296,7 @@ public class LevelEditorController : MonoBehaviour {
 
 	private bool tryDirection(int newI, int newJ, int oldI, int oldJ, int currentI, int currentJ) {
 		if(newI != oldI || newJ != oldJ) {
+			Debug.Log((newI, newJ) + " layer 1, value 1");
 			grids[1][(newI, newJ)].value = 1;
 			StepByStep(newI, newJ, currentI, currentJ);
 			return true;
@@ -439,6 +465,7 @@ public class LevelEditorController : MonoBehaviour {
 		for (int i = 0; i < grids.Length; i++)
 			ClearGrid(i);
 
+
 		Destroy(PlayerSpawn);
 		Destroy(PatientSpawn);
 		PlayerSpawn = null;
@@ -450,6 +477,7 @@ public class LevelEditorController : MonoBehaviour {
 		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
 			cell.Value.value = 0;
 			ChangeSprite(cell.Value, layer);
+			if (layer == 1) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = null;
 		}
 	}
 
@@ -463,6 +491,7 @@ public class LevelEditorController : MonoBehaviour {
 			if (recompute && cell.Value.value > 0)
 				cell.Value.value = ComputeCellValue(cell.Key.Item1, cell.Key.Item2);
 			ChangeSprite(cell.Value, layer);
+			if (currentLayer == 1 && cell.Value.value > 1) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value-2];
 		}
 	}
 

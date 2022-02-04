@@ -1864,6 +1864,36 @@ RectTransform:
   m_AnchoredPosition: {x: -7.5, y: -0.5}
   m_SizeDelta: {x: -35, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &204369499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 204369500}
+  m_Layer: 0
+  m_Name: FullWallsLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &204369500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204369499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 967185747}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206328031
 GameObject:
   m_ObjectHideFlags: 0
@@ -9177,6 +9207,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4bf557b76b4bb2f4388425508733da86, type: 3}
   - {fileID: 21300000, guid: a4b02e7b1773b3941ace04848347f24a, type: 3}
   - {fileID: 21300000, guid: 1d09dc6d79640a54e964e1703e5424ff, type: 3}
+  fullWallSprites:
+  - {fileID: 21300000, guid: ee95309a8dce71d4498b399f3bcff4c5, type: 3}
+  - {fileID: 21300000, guid: e0065b58c8249454d9ed8def75cdb2de, type: 3}
+  - {fileID: 21300000, guid: 1a3bda3d2fa2b4841a01f915985e8848, type: 3}
+  - {fileID: 21300000, guid: 397753b5c70e2bb41b2d39b4c904b696, type: 3}
+  - {fileID: 21300000, guid: 6fed607496545da4d988bf0dd150c615, type: 3}
+  - {fileID: 21300000, guid: 8e3ceaa43f26dc14e9997d73b03aacca, type: 3}
+  - {fileID: 21300000, guid: 19415b1b95bfc6743aef7202f0e0a56d, type: 3}
+  - {fileID: 21300000, guid: 4613fc57d19b7e746a2343a6f4a702d2, type: 3}
+  - {fileID: 21300000, guid: bc55d174bbabf994da3443fbbc7ae7bb, type: 3}
+  - {fileID: 21300000, guid: 1669e43eb4787b04e9f2cb35ffeda783, type: 3}
+  - {fileID: 21300000, guid: 162994c687d50894e957f71b0c1ca493, type: 3}
+  - {fileID: 21300000, guid: 97fe70ff019541f43a84da8d04706003, type: 3}
+  - {fileID: 21300000, guid: d5b68a3e420372d4ca03797fced69eae, type: 3}
+  - {fileID: 21300000, guid: 41fb7e0e49c9c1c4fb6efa3c29271983, type: 3}
+  - {fileID: 21300000, guid: 94b863f85baa1014ab0daac930e10a22, type: 3}
   currentLayer: 0
   canDraw: 0
   m_Raycaster: {fileID: 530434630}
@@ -9202,6 +9248,7 @@ Transform:
   - {fileID: 1676905084}
   - {fileID: 382665532}
   - {fileID: 207921279}
+  - {fileID: 204369500}
   m_Father: {fileID: 1614407710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16314,10 +16361,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe02d6506369284bb8f974feb89149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Editors:
+  dropdown: {fileID: 1281802453}
+  EditorsPanels:
   - {fileID: 1475475243}
   - {fileID: 1490672737}
   - {fileID: 1614407709}
+  currentEditor: 2
 --- !u!1 &1891508733
 GameObject:
   m_ObjectHideFlags: 0

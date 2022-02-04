@@ -178,11 +178,11 @@ public class TreatmentDataController : MonoBehaviour {
 			if(step.first) {
 				starter = step;
 				break;
-            }
+			}
 		}
 
 		CreateGameObjectsFromStepData(starter);
-		OrganizeTree();
+		OrganizeTree(starter);
 	}
 
 
@@ -218,14 +218,23 @@ public class TreatmentDataController : MonoBehaviour {
 		return newItem;
 	}
 
-	private void OrganizeTree() {
-		for (int i = 0; i < nodes.Count; i++) {
-			for (int j = 0; j < nodes[i].Count; j++) {
-                nodes[i][j].transform.position = new Vector3(-nodes[i].Count + 2*j, 4 - 2 * i, 0f);
-            }
-		}
+	private void OrganizeTree(StepData first) {
 
-		foreach(LineController lc in lines)
-            lc.UpdateMeshAndPosition();
+		//nodes[0][0].transform.position = new Vector3(0f, 4f, 0f);
+
+		//StepData[] nexts = new StepData[nodes[1].Count];
+		//foreach(NextStepData next in first.NextsList) {
+
+  //      }
+
+
+        for (int i = 0; i < nodes.Count; i++) {
+            for (int j = 0; j < nodes[i].Count; j++) {
+                nodes[i][j].transform.position = new Vector3(-nodes[i].Count + 2 * j, 4 - 2 * i, 0f);
+            }
+        }
+
+        foreach (LineController lc in lines)
+			lc.UpdateMeshAndPosition();
 	}
 }

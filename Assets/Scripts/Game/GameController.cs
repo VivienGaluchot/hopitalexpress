@@ -53,7 +53,8 @@ public class GameController : MonoBehaviour {
 		if(scoreText)
 			scoreText.text = "0";
 		PatientQueue = new GameObject[patientQueueSize];
-		coinAnimator = coin.GetComponent<Animator>();
+		if(coin != null)
+			coinAnimator = coin.GetComponent<Animator>();
 		currentLevelTime = levelTime;
 	}
 

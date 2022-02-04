@@ -3,22 +3,29 @@ using UnityEngine.UI;
 
 public class MainEditorController : MonoBehaviour {
 
-    [SerializeField] private GameObject[] Editors;
-    private int currentEditor;
+    public enum Editors {
+        Treatment,
+        Disease,
+        Level
+    }
+
+    [SerializeField] private Dropdown dropdown;
+    [SerializeField] private GameObject[] EditorsPanels;
+    public Editors currentEditor;
 
     private void Start() {
-        for (int i = 0; i < Editors.Length; i++)
-            Editors[i].SetActive(false);
+        for (int i = 0; i < EditorsPanels.Length; i++)
+            EditorsPanels[i].SetActive(false);
 
-        currentEditor = 0;
-        Editors[0].SetActive(true);
+        dropdown.value = (int)currentEditor;
+        EditorsPanels[(int)currentEditor].SetActive(true);
     }
 
     public void ChangeEditor(Dropdown dd) {
-        if (dd.value < Editors.Length) {
-            Editors[currentEditor].SetActive(false);
-            currentEditor = dd.value;
-            Editors[currentEditor].SetActive(true);
+        if (dd.value < EditorsPanels.Length) {
+            EditorsPanels[(int)currentEditor].SetActive(false);
+            currentEditor = (Editors)dd.value;
+            EditorsPanels[(int)currentEditor].SetActive(true);
         }
     }
 }

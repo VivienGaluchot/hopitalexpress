@@ -6,7 +6,7 @@ public class LevelObjectsController : MonoBehaviour {
 
 	private LevelEditorController lec;
 
-	private Transform ObjectsParent;
+	private Transform ObjectsParent, FullWallsParent;
 	private GameObject Follower;
 	private bool hasFollower;
 
@@ -15,6 +15,10 @@ public class LevelObjectsController : MonoBehaviour {
 	private void Start() {
 		lec = GetComponent<LevelEditorController>();
 		ObjectsParent = transform.Find("ObjectsLayer");
+		FullWallsParent = transform.Find("FullWallsLayer");
+
+		ObjectsParent.gameObject.SetActive(false);
+		FullWallsParent.gameObject.SetActive(false);
 
 		objects = new Dictionary<GameObject, Vector3>();
 	}
@@ -35,6 +39,7 @@ public class LevelObjectsController : MonoBehaviour {
 
 	public void StartDisplay() {
 		ObjectsParent.gameObject.SetActive(true);
+		FullWallsParent.gameObject.SetActive(true);
 	}
 
 	public void StopDisplay() {
@@ -42,6 +47,7 @@ public class LevelObjectsController : MonoBehaviour {
 		Follower = null;
 		hasFollower = false;
 		ObjectsParent.gameObject.SetActive(false);
+		FullWallsParent.gameObject.SetActive(false);
 	}
 
 	public void SetFollower(GameObject go) {

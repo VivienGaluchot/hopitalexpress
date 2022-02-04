@@ -65,7 +65,7 @@ public class MenuController : MonoBehaviour {
 
             lec.UnclickFillers();
             lec.StopSelectingSpawns();
-            lec.ShowWalls();
+            lec.ShowWalls(activeContent != 3);
         }
     }
 
