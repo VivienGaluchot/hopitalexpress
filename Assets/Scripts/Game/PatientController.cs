@@ -8,6 +8,7 @@ public class PatientController : MonoBehaviour {
 	[SerializeField] private GameObject face;
 	[SerializeField] private GameObject body;
 	[SerializeField] private SpriteRenderer need;
+	[SerializeField] private GameObject needBubble;
 	[SerializeField] private Image TimeBarImage;
 
 	public float noDiseaseDuration;
@@ -53,8 +54,10 @@ public class PatientController : MonoBehaviour {
 			if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
 				periodWithoutDiseaseAnimation = 0;
 				face.GetComponent<SkinManager>().frameSelected = 0;
+				needBubble.SetActive(true);
 			} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
 				face.GetComponent<SkinManager>().frameSelected = 1;
+				needBubble.SetActive(false);
 			}
 		}
 	}

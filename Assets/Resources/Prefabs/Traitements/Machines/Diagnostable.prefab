@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacerHolder: {fileID: 8459969879227706159}
   machineName: Diagnostable
-  TimeBar: {fileID: 4512354461282860365}
+  TimeBar: {fileID: 7613005066871253571}
 --- !u!1001 &6079428649586163138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,9 +281,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
   m_PrefabInstance: {fileID: 6079428649586163138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4512354461282860365 stripped
+--- !u!114 &7613005066871253571 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4465508010641741697, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
   m_PrefabInstance: {fileID: 6079428649586163138}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

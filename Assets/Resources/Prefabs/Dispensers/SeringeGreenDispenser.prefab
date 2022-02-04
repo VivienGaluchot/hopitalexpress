@@ -191,7 +191,7 @@ MonoBehaviour:
   askedItem: {fileID: 1373370309606671891, guid: 20a35026ff2ebd841b52cf39cac2dbb6, type: 3}
   givenItem: {fileID: 3424318588629070083, guid: f764c8f61541f7145a9d66fda0aafe02, type: 3}
   askedTime: 0
-  TimeBar: {fileID: 8146946919626283909}
+  TimeBar: {fileID: 2753402186686549131}
 --- !u!1001 &2003722859264482058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,9 +294,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
   m_PrefabInstance: {fileID: 2003722859264482058}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8146946919626283909 stripped
+--- !u!114 &2753402186686549131 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7692537786246856847, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4465508010641741697, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
   m_PrefabInstance: {fileID: 2003722859264482058}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
