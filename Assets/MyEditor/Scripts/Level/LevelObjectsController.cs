@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelObjectsController : MonoBehaviour {
-
-	private LevelEditorController lec;
+	public static LevelObjectsController instance;
 
 	private Transform ObjectsParent, FullWallsParent;
 	private GameObject Follower;
@@ -13,7 +12,9 @@ public class LevelObjectsController : MonoBehaviour {
 	private Dictionary<GameObject, Vector3> objects;
 
 	private void Start() {
-		lec = GetComponent<LevelEditorController>();
+		instance = this;
+
+		LevelEditorController.instance = GetComponent<LevelEditorController>();
 		ObjectsParent = transform.Find("ObjectsLayer");
 		FullWallsParent = transform.Find("FullWallsLayer");
 
@@ -31,7 +32,7 @@ public class LevelObjectsController : MonoBehaviour {
 				hasFollower = false;
 				Destroy(Follower);
 				Follower = null;
-			} else if (Input.GetMouseButtonDown(0) && !lec.DoesHitUI()) {
+			} else if (Input.GetMouseButtonDown(0) && !LevelEditorController.instance.DoesHitUI()) {
 				objects.Add(Instantiate(Follower, ObjectsParent), worldMousePos);
 			}
 		}

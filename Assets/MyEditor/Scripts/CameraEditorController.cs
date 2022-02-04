@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraEditorController : MonoBehaviour {
 
-    [SerializeField] private float scrollSpeed, dragSpeed;
+    [SerializeField] private float scrollSpeed;
 
-    private Vector3 lastPos;
+    private Vector3 clickedPos;
 
     private void Update() {
         if(Input.GetMouseButtonDown(2)) {
-            lastPos = Input.mousePosition;
+            clickedPos = Input.mousePosition;
         } else if(Input.GetMouseButton(2)) {
-            Vector3 dist = lastPos - Input.mousePosition;
-            transform.position += dist * dragSpeed;
-            lastPos = Input.mousePosition;
+            //Vector3 dist = lastPos - Input.mousePosition;
+            //transform.position += dist * dragSpeed;
+            //lastPos = Input.mousePosition;
         }
     }
 

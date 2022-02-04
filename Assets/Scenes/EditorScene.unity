@@ -2145,8 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0c851dfd80b9a47b1f025e607721f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lec: {fileID: 967185746}
-  loc: {fileID: 967185743}
   arrowText: {fileID: 884382882}
   activeColor: {r: 0.47058827, g: 0.47058827, b: 0.47058827, a: 1}
   passiveColor: {r: 0.6627451, g: 0.6627451, b: 0.6627451, a: 1}
@@ -5176,7 +5174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86391ef74552cb74aa2319422e19ac3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loc: {fileID: 967185743}
   Prefab: {fileID: 7564228919396299855, guid: aa474d5fe9b98ed4a8058f9d985709c4, type: 3}
 --- !u!114 &621107349
 MonoBehaviour:
@@ -17458,6 +17455,7 @@ GameObject:
   - component: {fileID: 2044466288}
   - component: {fileID: 2044466287}
   - component: {fileID: 2044466286}
+  - component: {fileID: 2044466289}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17530,6 +17528,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044466289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044466285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aca3604b4f32a4287addacaf3cca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0
+  dragSpeed: 0
 --- !u!1 &2044767636
 GameObject:
   m_ObjectHideFlags: 0

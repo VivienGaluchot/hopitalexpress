@@ -41,11 +41,11 @@ public class MyDropdown : MonoBehaviour {
     }
 
     public void ElementClicked(Text text) {
-        ldc.TryAddDisease(text.text);
+        LevelDiseasesController.instance.TryAddDisease(text.text);
     }
 
     public void ScrollDropdown() {
-        lec.StopSelectingSpawns();
+        LevelEditorController.instance.StopSelectingSpawns();
         ElementsParent.SetActive(!isScrolledDown);
         isScrolledDown = !isScrolledDown;
     }

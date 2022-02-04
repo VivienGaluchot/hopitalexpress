@@ -5,14 +5,13 @@ using System.IO;
 public class PopulateGrid : MonoBehaviour {
 
     public GameObject Prefab;
-    public TreatmentEditorController ec;
 
     private void Start() {
         Populate();
     }
 
     private void Populate() {
-        foreach(string s in ec.treatmentPaths) {
+        foreach(string s in TreatmentEditorController.instance.treatmentPaths) {
             GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
             foreach (GameObject p in Prefabs) {
                 GameObject go = Instantiate(Prefab, transform).transform.GetChild(0).gameObject;
@@ -21,7 +20,7 @@ public class PopulateGrid : MonoBehaviour {
                 SpriteRenderer sr = p.GetComponent<SpriteRenderer>();
                 if (sr == null)
                     sr = p.GetComponentInChildren<SpriteRenderer>();
-                go.GetComponent<ContentItemController>().SetInformations(ec, sr.sprite, path);
+                go.GetComponent<ContentItemController>().SetInformations(sr.sprite, path);
             }
         }
         

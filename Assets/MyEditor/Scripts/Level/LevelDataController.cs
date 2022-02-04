@@ -40,14 +40,10 @@ public class LevelDataController : MonoBehaviour {
 	[SerializeField] private Dropdown PatientSpawnDirectionDropdown;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
-	private LevelEditorController lec;
-	private LevelDiseasesController ldc;
 
 	private bool clickedDelete;
 
 	private void Start() {
-		lec = GetComponent<LevelEditorController>();
-		ldc = GetComponent<LevelDiseasesController>();
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 	}
@@ -78,7 +74,7 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	public void SaveData() {
-		lec.StopSelectingSpawns();
+		LevelEditorController.instance.StopSelectingSpawns();
 		LevelData ld = FetchDataToLevelData();
 		if(ld != null) {
 			WriteToFile(JsonUtility.ToJson(ld));
@@ -88,9 +84,9 @@ public class LevelDataController : MonoBehaviour {
 
 	public LevelData FetchDataToLevelData() {
 		List<LayerData> layers = new List<LayerData>();
-		for(int i = 0; i < lec.grids.Length; i++) {
+		for(int i = 0; i < LevelEditorController.instance.grids.Length; i++) {
 			List<CellData> cells = new List<CellData>();
-			foreach (KeyValuePair<(int, int), LevelEditorController.Cell> cell in lec.grids[i]) {
+			foreach (KeyValuePair<(int, int), LevelEditorController.Cell> cell in LevelEditorController.instance.grids[i]) {
 				if (cell.Value.value > 0)
 					cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
 			}
@@ -98,17 +94,17 @@ public class LevelDataController : MonoBehaviour {
 			layers.Add(new LayerData(cells));
 		}
 
-		if (lec.PlayerSpawn == null) {
+		if (LevelEditorController.instance.PlayerSpawn == null) {
 			Debug.Log("Erreur pas de spawn Player");
 			return null;
 		}
 			
-		if (lec.PatientSpawn == null) {
+		if (LevelEditorController.instance.PatientSpawn == null) {
 			Debug.Log("Erreur pas de spawn Patient");
 			return null;
 		}
 
-		return new LevelData(lec.size, lec.rows, lec.columns, layers, new List<string>(ldc.Elements.Keys), lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
+		return new LevelData(LevelEditorController.instance.size, LevelEditorController.instance.rows, LevelEditorController.instance.columns, layers, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelEditorController.instance.PlayerSpawn.transform.position, LevelEditorController.instance.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
 	}
 
 	private void WriteToFile(string content) {
@@ -118,7 +114,7 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	public void LoadData() {
-		lec.StopSelectingSpawns();
+		LevelEditorController.instance.StopSelectingSpawns();
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
@@ -126,21 +122,21 @@ public class LevelDataController : MonoBehaviour {
 	}
 
 	private void DisplayLoadedData(LevelData Data) {
-		lec.ResizeGrid(Data.rows, Data.columns);
-		lec.ClearAllGrid();
+		LevelEditorController.instance.ResizeGrid(Data.rows, Data.columns);
+		LevelEditorController.instance.ClearAllGrid();
 		for(int i = 0; i < Data.layers.Count; i++)
 			foreach (CellData cell in Data.layers[i].cells)
-				lec.grids[i][(cell.x, cell.y)].value = cell.value;
+				LevelEditorController.instance.grids[i][(cell.x, cell.y)].value = cell.value;
 		
-		lec.RefreshAllGrid();
+		LevelEditorController.instance.RefreshAllGrid();
 
-		lec.SetPatientSpawn(Data.patientSpawn);
-		lec.SetPlayerSpawn(Data.playerSpawn);
+		LevelEditorController.instance.SetPatientSpawn(Data.patientSpawn);
+		LevelEditorController.instance.SetPlayerSpawn(Data.playerSpawn);
 		PatientSpawnDirectionDropdown.value = PatientSpawnDirectionDropdown.options.FindIndex(o => o.text == Data.patientSpawnDirection);
 
-		ldc.DeleteAll();
+		LevelDiseasesController.instance.DeleteAll();
 		foreach (string s in Data.diseases)
-			ldc.TryAddDisease(s);
+			LevelDiseasesController.instance.TryAddDisease(s);
 	}
 
 	private string ReadFromFile(string fileName) {

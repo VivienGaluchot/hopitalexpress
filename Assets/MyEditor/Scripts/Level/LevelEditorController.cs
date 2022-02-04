@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class LevelEditorController : MonoBehaviour {
+
+	public static LevelEditorController instance;
+
 	public float size;
 	public int columns, rows;
 
@@ -37,8 +40,6 @@ public class LevelEditorController : MonoBehaviour {
 	private bool isWallFillerSelected;
 	[SerializeField] private Image wallFillerImage;
 
-	private LevelDiseasesController ldc;
-
 	public class Cell {
 		public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
 		public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
@@ -49,10 +50,11 @@ public class LevelEditorController : MonoBehaviour {
 	}
 
 	private void Start() {
+		instance = this;
+
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
 		grids = new Dictionary<(int, int), Cell>[2];
 		currentLayer = 0;
-		ldc = GetComponent<LevelDiseasesController>();
 		CellsParents = new Transform[2];
 		CellsParents[0] = transform.Find("FloorLayer");
 		CellsParents[1] = transform.Find("WallsLayer");
@@ -470,7 +472,7 @@ public class LevelEditorController : MonoBehaviour {
 		Destroy(PatientSpawn);
 		PlayerSpawn = null;
 		PatientSpawn = null;
-		ldc.DeleteAll();		
+		LevelDiseasesController.instance.DeleteAll();		
 	}
 
 	public void ClearGrid(int layer) {
@@ -528,7 +530,7 @@ public class LevelEditorController : MonoBehaviour {
 		GameObject newGO = new GameObject(i + "-" + j, typeof(SpriteRenderer), typeof(BoxCollider2D));
 		newGO.transform.SetParent(CellsParents[x]);
 		newGO.AddComponent<CellController>();
-		newGO.GetComponent<CellController>().Setup(this, i, j);
+		newGO.GetComponent<CellController>().Setup(i, j);
 		newGO.transform.position = new Vector3(j / size, -i / size, 0);
 		SpriteRenderer sr = newGO.GetComponent<SpriteRenderer>();
 		sr.sortingOrder = x-2;

@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class PopulateObjects : MonoBehaviour {
 
-    [SerializeField] private LevelObjectsController loc;
     [SerializeField] private GameObject Prefab;
 
     void Start() {
@@ -15,7 +14,7 @@ public class PopulateObjects : MonoBehaviour {
         foreach(GameObject p in Prefabs) {
             GameObject go = Instantiate(Prefab, transform);
             go.GetComponent<Image>().sprite = p.GetComponentInChildren<SpriteRenderer>().sprite;
-            go.GetComponent<ObjectController>().SetInformations(loc, p);
+            go.GetComponent<ObjectController>().SetInformations(p);
         }
     }
 

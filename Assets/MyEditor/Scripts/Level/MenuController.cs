@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 
-    [SerializeField] private LevelEditorController lec;
-    [SerializeField] private LevelObjectsController loc;
-
     private RectTransform rt;
     [SerializeField] private Text arrowText;
     private bool isVisible;
@@ -33,11 +30,11 @@ public class MenuController : MonoBehaviour {
 
         activeContent = 0;
         Content[0].SetActive(true);
-        lec.canDraw = false;
+        LevelEditorController.instance.canDraw = false;
 
         rt = GetComponent<RectTransform>();
         isVisible = true;
-        loc.StopDisplay();
+        LevelObjectsController.instance.StopDisplay();
     }
 
     private void Update() {
@@ -55,17 +52,17 @@ public class MenuController : MonoBehaviour {
 
             activeContent = index;
             if (activeContent == 1 || activeContent == 2) {
-                lec.canDraw = true;
-                lec.currentLayer = activeContent - 1;
-                loc.StopDisplay();
+                LevelEditorController.instance.canDraw = true;
+                LevelEditorController.instance.currentLayer = activeContent - 1;
+                LevelObjectsController.instance.StopDisplay();
             } else {
-                lec.canDraw = false;
-                loc.StartDisplay();
+                LevelEditorController.instance.canDraw = false;
+                LevelObjectsController.instance.StartDisplay();
             }
 
-            lec.UnclickFillers();
-            lec.StopSelectingSpawns();
-            lec.ShowWalls(activeContent != 3);
+            LevelEditorController.instance.UnclickFillers();
+            LevelEditorController.instance.StopSelectingSpawns();
+            LevelEditorController.instance.ShowWalls(activeContent != 3);
         }
     }
 

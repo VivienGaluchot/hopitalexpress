@@ -23,12 +23,10 @@ public class DiseaseDataController : MonoBehaviour {
 	[SerializeField] private Dropdown FilesDropdown;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
-	private DiseaseEditorController dec;
 
 	private bool clickedDelete;
 
 	private void Start() {
-		dec = GetComponent<DiseaseEditorController>();
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 	}
@@ -65,12 +63,12 @@ public class DiseaseDataController : MonoBehaviour {
 	}
 
 	public DiseaseData FetchDataToDiseaseData() {
-		string name = dec.Name.text;
-		float lifespan = ParseFromString(dec.Lifespan.text);
-		float points = ParseFromString(dec.Points.text);
-		string sprite = dec.SickFaceImage.sprite.name;
-		int faceID = dec.sickFaceID;
-		string treatment = dec.Treatment.options[dec.Treatment.value].text;
+		string name = DiseaseEditorController.instance.Name.text;
+		float lifespan = ParseFromString(DiseaseEditorController.instance.Lifespan.text);
+		float points = ParseFromString(DiseaseEditorController.instance.Points.text);
+		string sprite = DiseaseEditorController.instance.SickFaceImage.sprite.name;
+		int faceID = DiseaseEditorController.instance.sickFaceID;
+		string treatment = DiseaseEditorController.instance.Treatment.options[DiseaseEditorController.instance.Treatment.value].text;
 
 		return new DiseaseData(name, lifespan, points, sprite, faceID, treatment);
 	}
@@ -96,22 +94,22 @@ public class DiseaseDataController : MonoBehaviour {
 	}
 
 	private void DisplayLoadedData(DiseaseData Data) {
-		dec.Name.text = Data.name;
-		dec.Lifespan.text = Data.lifespan.ToString();
-		dec.Points.text = Data.points.ToString();
+		DiseaseEditorController.instance.Name.text = Data.name;
+		DiseaseEditorController.instance.Lifespan.text = Data.lifespan.ToString();
+		DiseaseEditorController.instance.Points.text = Data.points.ToString();
 
 		Sprite[] sickFaces = Resources.LoadAll<Sprite>("Illustrations/Perso/Faces");
 		for(int i = 0; i < sickFaces.Length; i++) {
 			if (sickFaces[i].name == Data.sprite) {
-				dec.SickFaceImage.sprite = sickFaces[i];
-				dec.sickFaceID = Data.faceID;
+				DiseaseEditorController.instance.SickFaceImage.sprite = sickFaces[i];
+				DiseaseEditorController.instance.sickFaceID = Data.faceID;
 				break;
 			}
 		}
 
-		for(int i = 0; i < dec.Treatment.options.Count; i++) {
-			if(dec.Treatment.options[i].text == Data.treatment) {
-				dec.Treatment.value = i;
+		for(int i = 0; i < DiseaseEditorController.instance.Treatment.options.Count; i++) {
+			if(DiseaseEditorController.instance.Treatment.options[i].text == Data.treatment) {
+				DiseaseEditorController.instance.Treatment.value = i;
 				break;
             }
         }

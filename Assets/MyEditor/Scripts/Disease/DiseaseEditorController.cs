@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.IO;
 
 public class DiseaseEditorController : MonoBehaviour {
+    public static DiseaseEditorController instance;
 
     public Dropdown Treatment;
     public InputField Name, Lifespan, Points;
@@ -12,6 +13,7 @@ public class DiseaseEditorController : MonoBehaviour {
     public Transform ScrollviewContent;
 
     private void Start() {
+        instance = this;
         FetchSickFaces();
         FetchTreatmentDDOptions();
     }

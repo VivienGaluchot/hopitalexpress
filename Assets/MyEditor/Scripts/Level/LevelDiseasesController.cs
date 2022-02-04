@@ -3,22 +3,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelDiseasesController : MonoBehaviour {
+    public static LevelDiseasesController instance;
 
     [SerializeField] private Transform parent;
 
     private GameObject TemplateElement;
     public Dictionary<string, GameObject> Elements { get; private set; }
 
-    private LevelEditorController lec;
-
     private void Start() {
+        instance = this;
         Elements = new Dictionary<string, GameObject>();
         TemplateElement = parent.Find("TemplateElement").gameObject;
-        lec = GetComponent<LevelEditorController>();
     }
 
     public void TryAddDisease(string name) {
-        lec.StopSelectingSpawns();
+        LevelEditorController.instance.StopSelectingSpawns();
         if (!Elements.ContainsKey(name)) {
             GameObject newGO = Instantiate(TemplateElement, parent);
             newGO.GetComponentInChildren<Text>().text = name;
@@ -35,7 +34,7 @@ public class LevelDiseasesController : MonoBehaviour {
     }
 
     public void TryDeleteDisease(Text text) {
-        lec.StopSelectingSpawns();
+        LevelEditorController.instance.StopSelectingSpawns();
         GameObject value;
         Elements.TryGetValue(text.text, out value);
         if(value) {
