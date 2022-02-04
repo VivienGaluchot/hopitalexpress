@@ -69,7 +69,18 @@ public class GameLoader : MonoBehaviour {
 			gc.DiseasesAvailable = new Infos[Data.diseases.Count];
 			for (int i = 0; i < Data.diseases.Count; i++) {
 				DiseaseData diseaseData = JsonUtility.FromJson<DiseaseData>(ReadFromFile(Path.Combine(Application.dataPath, "MyEditor/Data/Disease/" + Data.diseases[i] + ".json")));
-				Step firstStep = ComputeStep(ReadNextStep(diseaseData.treatment));
+
+				StepContainer container = ReadNextStep(diseaseData.treatment);
+
+                StepData starter = null;
+                foreach (StepData step in container.allSteps) {
+                    if (step.first) {
+                        starter = step;
+                        break;
+                    }
+                }
+
+                Step firstStep = ComputeStep(starter);
 				DiseaseTypes dt = (DiseaseTypes)diseaseData.faceID;
 				gc.DiseasesAvailable[i] = new Infos(dt, diseaseData.lifespan, (int)diseaseData.points, firstStep);
 			}
@@ -80,21 +91,19 @@ public class GameLoader : MonoBehaviour {
 		} else {
 			GetComponent<GameController>().StartGame();
 		}
-
 	}
 
 	private Step ComputeStep(StepData stepData) {
-		//(float, Step)[] next = new (float, Step)[stepData.Nexts.Nexts.Count]; 
-		//for(int i = 0; i < stepData.Nexts.Nexts.Count; i++) {
-		//	next[i] = (stepData.Nexts.Nexts[i].proba, ComputeStep(stepData.Nexts.Nexts[i].next));
-		//}
+		(float, Step)[] next = new (float, Step)[stepData.NextsList.Count];
+		for (int i = 0; i < stepData.NextsList.Count; i++) {
+			next[i] = (stepData.NextsList[i].proba, ComputeStep(stepData.NextsList[i].nextStep));
+		}
 
-		//return new Step(stepData.name, stepData.path, stepData.time, next);
-		return new Step();
-    }
+		return new Step(stepData.name, stepData.path, stepData.time, next);
+	}
 
-	private StepData ReadNextStep(string s) {
-		return JsonUtility.FromJson<StepData>(ReadFromFile(Path.Combine(Application.dataPath, "MyEditor/Data/Treatment/" + s + ".json")));
+	private StepContainer ReadNextStep(string s) {
+		return JsonUtility.FromJson<StepContainer>(ReadFromFile(Path.Combine(Application.dataPath, "MyEditor/Data/Treatment/" + s + ".json")));
 	}
 
 	private string ReadFromFile(string path) {
