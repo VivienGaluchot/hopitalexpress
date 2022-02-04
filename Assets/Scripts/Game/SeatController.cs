@@ -12,6 +12,7 @@ public class SeatController : MonoBehaviour {
 	public GameObject goHeld { get; protected set; }
 	public bool isHolding { get; protected set; }
 	private RigidbodyType2D holdRBType;
+	private bool holdIsSimulated;
 
 	protected static Vector3 epsilonY = new Vector3(0f, .0001f, 0f);
 
@@ -29,9 +30,11 @@ public class SeatController : MonoBehaviour {
 			goHeld.transform.parent = PlacerHolder;
 			goHeld.transform.position = PlacerHolder.position;
 			goHeld.transform.rotation = PlacerHolder.rotation;
-			holdRBType = goHeld.GetComponent<Rigidbody2D>().bodyType;
-			goHeld.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-			goHeld.GetComponent<Rigidbody2D>().simulated = true;
+			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
+			holdRBType = r2d.bodyType;
+			r2d.bodyType = RigidbodyType2D.Static;
+			holdIsSimulated = r2d.simulated;
+			r2d.simulated = false;
 
 			return true;
 		}
@@ -41,7 +44,9 @@ public class SeatController : MonoBehaviour {
 
 	public virtual GameObject GiveHold() {
 		if(isHolding) {
-			goHeld.GetComponent<Rigidbody2D>().bodyType = holdRBType;
+			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
+			r2d.bodyType = holdRBType;
+			r2d.simulated = holdIsSimulated;
 			GameObject returnGO = goHeld;
 			goHeld = null;
 			isHolding = false;

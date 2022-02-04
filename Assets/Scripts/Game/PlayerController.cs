@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 
 	private CapsuleCollider2D detectionCollider;
 
-	private PersoAnimator perso;
+	private WalkController perso;
 
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 		containerTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CapsuleCollider2D>();
-		perso = GetComponent<PersoAnimator>();
+		perso = GetComponent<WalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
 	}
 
@@ -110,16 +110,16 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		switch (perso.direction) {
-			case PersoAnimator.Dir.Down:
+			case WalkController.Dir.Down:
 				detectionCollider.offset = new Vector2(0f, -.25f);
 				break;
-			case PersoAnimator.Dir.Right:
+			case WalkController.Dir.Right:
 				detectionCollider.offset = new Vector2(.25f, 0);
 				break;
-			case PersoAnimator.Dir.Left:
+			case WalkController.Dir.Left:
 				detectionCollider.offset = new Vector2(-.25f, 0);
 				break;
-			case PersoAnimator.Dir.Up:
+			case WalkController.Dir.Up:
 				detectionCollider.offset = new Vector2(0, .25f);
 				break;
 		}

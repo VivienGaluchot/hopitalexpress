@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PersoAnimator : MonoBehaviour {
+public class WalkController : MonoBehaviour {
 
 	public enum Dir {
 		Down, Up, Left, Right
@@ -9,33 +9,45 @@ public class PersoAnimator : MonoBehaviour {
 	public Dir direction = Dir.Down;
 
 	// direction to apply when the perso is not moving
-	public Dir stoppedDirection = Dir.Down;
+	protected Dir stoppedDirection = Dir.Down;
+	protected bool hasStoppedDirection = false;
 
 
-	private Rigidbody2D rb2D;
+	protected Rigidbody2D rb2D;
 
-	private Animator animator;
+	protected Animator animator;
 
-	private void Start() {
+	protected void Start() {
 		rb2D = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 	}
 
-	private void FixedUpdate() {
+	protected void FixedUpdate() {
 		if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
 			animator.SetBool("isWalking", true);
 			SetDirection(AngleToDirection(rb2D.velocity));
 		} else {
 			animator.SetBool("isWalking", false);
-			SetDirection(stoppedDirection);
+			if (hasStoppedDirection) {
+				SetDirection(stoppedDirection);
+				hasStoppedDirection = false;
+			}
 		}
 	}
 
 	public void SetStoppedDirection(Vector2 dir) {
 		stoppedDirection = AngleToDirection(dir);
+		hasStoppedDirection = true;
 	}
 
-	private Dir AngleToDirection(Vector2 dir) {
+	protected void SetDirection(Dir newDirection) {
+		animator.SetBool("isUp", newDirection == Dir.Up);
+		animator.SetBool("isRight", newDirection == Dir.Right);
+		animator.SetBool("isLeft", newDirection == Dir.Left);
+		direction = newDirection;
+	}
+
+	protected Dir AngleToDirection(Vector2 dir) {
 		float angle = Vector2.SignedAngle(new Vector2(-1, -1), dir);
 		angle = angle - (angle + 360) % 90;
 		switch (angle) {
@@ -48,12 +60,5 @@ public class PersoAnimator : MonoBehaviour {
 			default:
 				return Dir.Up;
 		}
-	}
-
-	private void SetDirection(Dir newDirection) {
-		animator.SetBool("isUp", newDirection == Dir.Up);
-		animator.SetBool("isRight", newDirection == Dir.Right);
-		animator.SetBool("isLeft", newDirection == Dir.Left);
-		direction = newDirection;
 	}
 }

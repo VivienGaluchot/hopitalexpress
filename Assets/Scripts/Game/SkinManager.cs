@@ -26,7 +26,7 @@ public class SkinManager : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer = null;
 
-	private PersoAnimator persoAnimator = null;
+	private WalkController walkController = null;
 
 	private string loadedSpritePath = null;
 
@@ -39,7 +39,7 @@ public class SkinManager : MonoBehaviour {
 
 	private void Start() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		persoAnimator = perso.GetComponent<PersoAnimator>();
+		walkController = perso.GetComponent<WalkController>();
 		loadedSpritePath = null;
 		load();
 	}
@@ -95,16 +95,16 @@ public class SkinManager : MonoBehaviour {
 		string initialPrefix = match.Groups[1].ToString();
 
 		int dirIndex = 0;
-		if (persoAnimator.direction == PersoAnimator.Dir.Down) {
+		if (walkController.direction == WalkController.Dir.Down) {
 			dirIndex = 0;
 		}
-		if (persoAnimator.direction == PersoAnimator.Dir.Up) {
+		if (walkController.direction == WalkController.Dir.Up) {
 			dirIndex = 1;
 		}
-		if (persoAnimator.direction == PersoAnimator.Dir.Right) {
+		if (walkController.direction == WalkController.Dir.Right) {
 			dirIndex = 2;
 		}
-		if (persoAnimator.direction == PersoAnimator.Dir.Left) {
+		if (walkController.direction == WalkController.Dir.Left) {
 			dirIndex = 3;
 		}
 		foreach (GameObject child in annexLayers) {
