@@ -20,10 +20,12 @@ public class DiseaseData {
 
 public class DiseaseDataController : MonoBehaviour {
 
-	[SerializeField] private Dropdown dd;
+	[SerializeField] private Dropdown FilesDropdown;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
 	private DiseaseEditorController dec;
+
+	private bool clickedDelete;
 
 	private void Start() {
 		dec = GetComponent<DiseaseEditorController>();
@@ -31,15 +33,29 @@ public class DiseaseDataController : MonoBehaviour {
 		FetchDDOptions();
 	}
 
+	public void DeleteSave(Text text) {
+		if (!clickedDelete) {
+			clickedDelete = true;
+			text.text = "Sure?";
+		} else {
+			text.text = "Delete";
+			clickedDelete = false;
+			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
+			if (File.Exists(filePath))
+				File.Delete(filePath);
+			FetchDDOptions();
+		}
+	}
+
 	private void FetchDDOptions() {
 		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileName(s));
+				pathsList.Add(Path.GetFileNameWithoutExtension(s));
 		}
-		dd.ClearOptions();
-		dd.AddOptions(pathsList);
+		FilesDropdown.ClearOptions();
+		FilesDropdown.AddOptions(pathsList);
 	}
 
 
@@ -73,7 +89,7 @@ public class DiseaseDataController : MonoBehaviour {
 	}
 
 	public void LoadData() {
-		string filename = dd.options[dd.value].text;
+		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		DiseaseData Data = JsonUtility.FromJson<DiseaseData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
 		DisplayLoadedData(Data);

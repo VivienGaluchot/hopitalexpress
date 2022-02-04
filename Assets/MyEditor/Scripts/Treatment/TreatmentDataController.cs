@@ -28,10 +28,12 @@ public class NextStepData {
 
 public class TreatmentDataController : MonoBehaviour {
 
-	[SerializeField] private Dropdown dd;
+	[SerializeField] private Dropdown FilesDropdown;
 	[SerializeField] private InputField FileNameInputField;
 	[SerializeField] private string path;
     private TreatmentEditorController ec;
+
+	private bool clickedDelete;
 
     private void Start() {
         ec = GetComponent<TreatmentEditorController>();
@@ -39,15 +41,29 @@ public class TreatmentDataController : MonoBehaviour {
 		FetchDDOptions();
 	}
 
+	public void DeleteSave(Text text) {
+		if (!clickedDelete) {
+			clickedDelete = true;
+			text.text = "Sure?";
+		} else {
+			text.text = "Delete";
+			clickedDelete = false;
+			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
+			if (File.Exists(filePath))
+				File.Delete(filePath);
+			FetchDDOptions();
+		}
+	}
+
 	private void FetchDDOptions() {
 		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileName(s));
+				pathsList.Add(Path.GetFileNameWithoutExtension(s));
 		}
-		dd.ClearOptions();
-		dd.AddOptions(pathsList);
+		FilesDropdown.ClearOptions();
+		FilesDropdown.AddOptions(pathsList);
 	}
 
 	public void SaveData() {
@@ -92,7 +108,7 @@ public class TreatmentDataController : MonoBehaviour {
 
 	public void LoadData() {
 		ec.ClearScreen();
-		string filename = dd.options[dd.value].text;
+		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		StepData Data = JsonUtility.FromJson<StepData>(ReadFromFile(filename));
         FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
         nodes = new List<List<GameObject>>();
