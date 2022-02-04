@@ -43,6 +43,8 @@ public class LevelDataController : MonoBehaviour {
 	private LevelEditorController lec;
 	private LevelDiseasesController ldc;
 
+	private bool clickedDelete;
+
 	private void Start() {
 		lec = GetComponent<LevelEditorController>();
 		ldc = GetComponent<LevelDiseasesController>();
@@ -50,12 +52,26 @@ public class LevelDataController : MonoBehaviour {
 		FetchDDOptions();
 	}
 
+	public void DeleteSave(Text text) {
+		if(!clickedDelete) {
+			clickedDelete = true;
+			text.text = "Sure?";
+        } else {
+			text.text = "Delete";
+			clickedDelete = false;
+			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
+			if (File.Exists(filePath))
+				File.Delete(filePath);
+			FetchDDOptions();
+		}
+    }
+
 	private void FetchDDOptions() {
 		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileName(s));
+				pathsList.Add(Path.GetFileNameWithoutExtension(s));
 		}
 		FilesDropdown.ClearOptions();
 		FilesDropdown.AddOptions(pathsList);
@@ -103,7 +119,7 @@ public class LevelDataController : MonoBehaviour {
 
 	public void LoadData() {
 		lec.StopSelectingSpawns();
-		string filename = FilesDropdown.options[FilesDropdown.value].text;
+		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
 		DisplayLoadedData(Data);
