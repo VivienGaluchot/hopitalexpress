@@ -342,6 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294fc9c7467b48845b571ad391b03ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTime: 0
+  levelTimeImage: {fileID: 0}
   Player: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   playerSpeed: 4
   WelcomeSeats: []

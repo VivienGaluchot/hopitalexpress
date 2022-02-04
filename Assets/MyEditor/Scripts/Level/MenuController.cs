@@ -63,6 +63,7 @@ public class MenuController : MonoBehaviour {
                 loc.StartDisplay();
             }
 
+            lec.UnclickFillers();
             lec.StopSelectingSpawns();
             lec.ShowWalls();
         }
