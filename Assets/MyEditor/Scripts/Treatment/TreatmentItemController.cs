@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using System.IO;
 
 public class TreatmentItemController : TreatmentObjectController {
 
@@ -13,8 +13,8 @@ public class TreatmentItemController : TreatmentObjectController {
 	private Vector3 clickedPos, offset;
 
 	private void Start() {
-		startingLines = new List<LineController>();
-		endingLines = new List<LineController>();
+		if(startingLines == null) startingLines = new List<LineController>();
+		if(endingLines == null) endingLines = new List<LineController>();
 	}
 
 	private void Update() {
@@ -52,6 +52,7 @@ public class TreatmentItemController : TreatmentObjectController {
 			lc.ender.endingLines.Remove(lc);
 			Destroy(lc.gameObject);
 		}
+		TreatmentEditorController.instance.overTICs.RemoveAll(e => e == this);
 		TreatmentEditorController.instance.TreatmentItems.RemoveAll(e => e == this);
 
 		Destroy(gameObject);
@@ -65,7 +66,7 @@ public class TreatmentItemController : TreatmentObjectController {
 	// We try to add the item as next
 	public bool TryAddNext(LineController line, TreatmentItemController item) {
 		// Check if it's already our next or if cycle
-		if(!ConfirmedNoLoop(this, item))
+		if(!ConfirmedNoLoop(item, this))
 			return false;
 
 		// Check if we're not already its next
@@ -82,9 +83,10 @@ public class TreatmentItemController : TreatmentObjectController {
 	}
 
 	private bool ConfirmedNoLoop(TreatmentItemController current, TreatmentItemController target) {
-		foreach (LineController lc in current.startingLines)
+		foreach (LineController lc in current.startingLines) {
 			if (lc.ender == target || !ConfirmedNoLoop(lc.ender, target))
 				return false;
+		}
 
 		return true;
     }

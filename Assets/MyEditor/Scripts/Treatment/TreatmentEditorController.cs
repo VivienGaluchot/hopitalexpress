@@ -13,12 +13,12 @@ public class TreatmentEditorController : MonoBehaviour {
 	public string[] treatmentPaths;
 
 	public List<TreatmentItemController> TreatmentItems { get; private set; }
-	[SerializeField] private GameObject TreatmentItemPrefab;
+	public GameObject TreatmentItemPrefab;
+	public GameObject myLine;
 
 	public GameObject Follower, clickedObject;
 
 	private TreatmentItemController lineStart;
-	private GameObject myLine;
 	private SpriteRenderer followerSR;
 	private LineRenderer myLineLR;
 	private bool isDrawingLine;
@@ -64,6 +64,7 @@ public class TreatmentEditorController : MonoBehaviour {
 						GameObject newGo = Instantiate(TreatmentItemPrefab, worldPos, Quaternion.identity, transform);
 						newGo.GetComponent<TreatmentItemController>().path = followerPath;
 						newGo.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
+						TreatmentItems.Add(newGo.GetComponent<TreatmentItemController>());
 					}
 				}
 			} else if (isDrawingLine) {

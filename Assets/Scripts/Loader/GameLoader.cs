@@ -84,12 +84,13 @@ public class GameLoader : MonoBehaviour {
 	}
 
 	private Step ComputeStep(StepData stepData) {
-		(float, Step)[] next = new (float, Step)[stepData.Nexts.Nexts.Count]; 
-		for(int i = 0; i < stepData.Nexts.Nexts.Count; i++) {
-			next[i] = (stepData.Nexts.Nexts[i].proba, ComputeStep(stepData.Nexts.Nexts[i].next));
-		}
+		//(float, Step)[] next = new (float, Step)[stepData.Nexts.Nexts.Count]; 
+		//for(int i = 0; i < stepData.Nexts.Nexts.Count; i++) {
+		//	next[i] = (stepData.Nexts.Nexts[i].proba, ComputeStep(stepData.Nexts.Nexts[i].next));
+		//}
 
-		return new Step(stepData.name, stepData.path, stepData.time, next);
+		//return new Step(stepData.name, stepData.path, stepData.time, next);
+		return new Step();
     }
 
 	private StepData ReadNextStep(string s) {

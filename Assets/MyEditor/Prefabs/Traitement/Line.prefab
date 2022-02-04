@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCanvas: {fileID: 1570904952803562116}
+  inputField: {fileID: 2316026264529160667}
   starter: {fileID: 0}
   ender: {fileID: 0}
 --- !u!1 &8088108520542654567

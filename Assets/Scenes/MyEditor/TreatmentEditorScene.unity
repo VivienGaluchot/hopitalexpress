@@ -560,12 +560,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaea7f5eee7f7744b52ccaaa8d92c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overTICs: []
   LinePrefab: {fileID: 6339035237273098132, guid: e1218f7190a1b524293a215a0b67f6d4, type: 3}
   treatmentPaths:
   - Prefabs/Traitements/Items
   - Prefabs/Traitements/Machines
   TreatmentItemPrefab: {fileID: 796903368057987352, guid: 64e9777e6a326b347ad50c1f67e858a3, type: 3}
+  myLine: {fileID: 0}
   Follower: {fileID: 30892197}
+  clickedObject: {fileID: 0}
   m_Raycaster: {fileID: 2103553990}
   m_EventSystem: {fileID: 2035592722}
 --- !u!114 &297887750

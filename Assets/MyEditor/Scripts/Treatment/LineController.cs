@@ -5,16 +5,15 @@ public class LineController : TreatmentObjectController {
 
 
 	[SerializeField] private Transform myCanvas;
-	//[SerializeField] private InputField inputField;
-	public LineRenderer lr { get; private set; }
+    public InputField inputField;
+    public LineRenderer lr { get; private set; }
 	private MeshCollider mc;
 
 	public TreatmentItemController starter;
 	public TreatmentItemController ender;
 
 	private void Start() {
-		mc = GetComponent<MeshCollider>();
-		lr = GetComponent<LineRenderer>();
+		Init();
 	}
 
 	private void Update() {
@@ -30,6 +29,16 @@ public class LineController : TreatmentObjectController {
 		starter.startingLines.Remove(this);
 		ender.endingLines.Remove(this);
 		Destroy(gameObject);
+    }
+
+	public void Init() {
+		if (lr == null) lr = GetComponent<LineRenderer>();
+		if (mc == null) mc = GetComponent<MeshCollider>();
+	}
+
+	public void UpdateMeshAndPosition() {
+		lr.SetPositions(new Vector3[] { starter.transform.position, ender.transform.position });
+		Invoke("UpdateMesh", .1f);
     }
 
 	public void UpdateMesh() {
