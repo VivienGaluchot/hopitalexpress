@@ -5,15 +5,16 @@ public class ContentItemController : MonoBehaviour {
 
     private TreatmentEditorController ec;
     private string path;
-    private GameObject myObject;
+    private Sprite sprite;
 
-    public void SetInformations(TreatmentEditorController edCo, GameObject go, string _path) {
+    public void SetInformations(TreatmentEditorController edCo, Sprite sprite, string path) {
         ec = edCo;
-        myObject = go;
-        path = _path;
+        this.path = path;
+        this.sprite = sprite;
+        GetComponent<Image>().sprite = sprite;
     }
 
     public void SendInformations() {
-        ec.NewFollower(myObject, path);
+        ec.NewFollower(sprite, path);
     }
 }

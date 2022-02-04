@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LineController : MonoBehaviour {
+public class LineController : TreatmentObjectController {
 
-	private Transform myCanvas;
-	private LineRenderer lr;
+
+	[SerializeField] private Transform myCanvas;
+	//[SerializeField] private InputField inputField;
+	public LineRenderer lr { get; private set; }
+	private MeshCollider mc;
+
+	public TreatmentItemController starter;
+	public TreatmentItemController ender;
 
 	private void Start() {
-		if (myCanvas == null) {
-			myCanvas = transform.GetChild(0);
-			myCanvas.gameObject.SetActive(false);
-		}
-
+		mc = GetComponent<MeshCollider>();
 		lr = GetComponent<LineRenderer>();
 	}
 
@@ -24,14 +26,20 @@ public class LineController : MonoBehaviour {
 		}
 	}
 
-	public InputField ProbaDisplayedValue() {
-		return myCanvas.Find("InputField").GetComponent<InputField>();
+	public override void Delete() {
+		starter.startingLines.Remove(this);
+		ender.endingLines.Remove(this);
+		Destroy(gameObject);
+    }
+
+	public void UpdateMesh() {
+		Mesh mesh = new Mesh();
+		lr.BakeMesh(mesh, true);
+		mc.sharedMesh = mesh;
 	}
 
-	public void DisplayCanvas() {
-		if(myCanvas == null)
-			myCanvas = transform.GetChild(0);
+    private void OnMouseUpAsButton() {
+		TreatmentEditorController.instance.clickedObject = gameObject;
 
-		myCanvas.gameObject.SetActive(true);
 	}
 }

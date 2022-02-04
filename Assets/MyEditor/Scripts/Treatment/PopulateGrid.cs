@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class PopulateGrid : MonoBehaviour {
 
@@ -11,12 +12,17 @@ public class PopulateGrid : MonoBehaviour {
     }
 
     private void Populate() {
-        GameObject[] Prefabs = Resources.LoadAll<GameObject>("EditorPrefabs/Traitement/");
-        foreach (GameObject p in Prefabs) {
-            GameObject go = Instantiate(Prefab, transform);
-            string path = "EditorPrefabs/Traitement/" + p.name;
-            go.GetComponent<Image>().sprite = p.GetComponentInChildren<SpriteRenderer>().sprite;
-            go.GetComponent<ContentItemController>().SetInformations(ec, p, path);
+        foreach(string s in ec.treatmentPaths) {
+            GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
+            foreach (GameObject p in Prefabs) {
+                GameObject go = Instantiate(Prefab, transform).transform.GetChild(0).gameObject;
+                string path = Path.Combine(s, p.name);
+                SpriteRenderer sr = p.GetComponent<SpriteRenderer>();
+                if (sr == null)
+                    sr = p.GetComponentInChildren<SpriteRenderer>();
+                go.GetComponent<ContentItemController>().SetInformations(ec, sr.sprite, path);
+            }
         }
+        
     }
 }

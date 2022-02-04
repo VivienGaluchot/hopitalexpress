@@ -2,111 +2,82 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Windows;
+
 
 public class TreatmentEditorController : MonoBehaviour {
 
-	// IDEA : use monobehaviour.OnMouse...
-	[SerializeField] private Material defaultMat, outlineMat;
-	[SerializeField] private Transform canvas;
+	public static TreatmentEditorController instance;
+	public List<TreatmentItemController> overTICs;
 	public GameObject LinePrefab;
-	public GameObject ValueDisplayer;
+	public string[] treatmentPaths;
 
-	// Store prefabs to serialize them later
-	public List<PrefabItem> MyPrefabs { get; private set; }
-	public List<GameObject> everyObjects { get; private set; }
+	public List<TreatmentItemController> TreatmentItems { get; private set; }
+	[SerializeField] private GameObject TreatmentItemPrefab;
 
-	private GameObject followerGO, clickedDown, lineStart, myLine;
+	public GameObject Follower, clickedObject;
+
+	private TreatmentItemController lineStart;
+	private GameObject myLine;
+	private SpriteRenderer followerSR;
 	private LineRenderer myLineLR;
-	private bool isDrawingLine, hasMoved;
-
-	private Vector3 clickedDownPos;
+	private bool isDrawingLine;
+	private string followerPath;
 
 	[SerializeField] private GraphicRaycaster m_Raycaster;
 	[SerializeField] private PointerEventData m_PointerEventData;
 	[SerializeField] private EventSystem m_EventSystem;
 
-    private void Start() {
-		MyPrefabs = new List<PrefabItem>();
-		everyObjects = new List<GameObject>();
+	private void Start() {
+		instance = this;
+		overTICs = new List<TreatmentItemController>();
+		TreatmentItems = new List<TreatmentItemController>();
+		followerSR = Follower.GetComponent<SpriteRenderer>();
+		Follower.SetActive(false);
 	}
-    private void Update() {
+
+	private void Update() {
 		if (Input.GetKeyDown("escape")) {
 			StopDrawLine();
-			Destroy(followerGO);
-			followerGO = null;
+			Follower.SetActive(false);
 		}
 
-		if (Input.GetKeyDown("delete") && clickedDown != null) {
-			PrefabItem pi = clickedDown.GetComponent<PrefabItem>();
-			foreach(PrefabItem.Next next in pi.Nexts)
-				next.item.UnNext();
-
-			MyPrefabs.Remove(pi);
-			foreach (PrefabItem p in MyPrefabs)
-				p.DeleteIfNexted(pi);
-
-			clickedDown.GetComponent<PrefabItem>().Delete();
+		if (Input.GetKeyDown("delete") && clickedObject != null) {
+			TreatmentObjectController item = clickedObject.GetComponent<TreatmentObjectController>();
+			item.Delete();
 			StopDrawLine();
 		}
 
-		Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
-		if (followerGO != null)
-			followerGO.transform.position = worldPos + new Vector3(.5f, -.5f, 10f);
+		bool GMBD0 = Input.GetMouseButtonDown(0);
 
-		if (isDrawingLine)
-			myLineLR.SetPosition(1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		if (Follower.activeSelf || GMBD0 || isDrawingLine) {
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 
-		if(Input.GetMouseButtonUp(0)) {
-			// We didn't move, we have something to create, we're not over UI, we didn't clickeddownn something
-			if(!hasMoved && !DoesHitUI()) {
-				if (!clickedDown) {
-					if (followerGO != null) {
-						GameObject newGo = Instantiate(followerGO, worldPos, Quaternion.identity);
-						MyPrefabs.Add(newGo.GetComponent<PrefabItem>());
-						everyObjects.Add(newGo);
-					} else
+			if (Follower.activeSelf)
+				Follower.transform.position = worldPos + new Vector3(.5f, -.5f, 10f);
+
+			if (GMBD0) {
+				if(overTICs.Count == 0) {
+					if (isDrawingLine) {
 						StopDrawLine();
-				} else {
-					DrawLine();
-                }
+					} else if (!DoesHitUI() && Follower.activeSelf) {
+						GameObject newGo = Instantiate(TreatmentItemPrefab, worldPos, Quaternion.identity, transform);
+						newGo.GetComponent<TreatmentItemController>().path = followerPath;
+						newGo.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
+					}
+				}
+			} else if (isDrawingLine) {
+				myLineLR.SetPosition(1, worldPos);
 			}
-		} else if(Input.GetMouseButtonDown(0)) {
-			clickedDownPos = worldPos;
-			hasMoved = false;
-			TryRayCastClicked();
-		} else if(Input.GetMouseButton(0)) {
-			if (!hasMoved)
-				hasMoved = (clickedDownPos - worldPos).sqrMagnitude > .1f;
-			// Do we drag something?
-			if (!isDrawingLine && clickedDown && hasMoved) {
-				// WE MOVED! MOVE THE CLIKED ITEM
-				clickedDown.transform.position = worldPos;
-			}
-        }
+		}
 	}
 
 	public void ClearScreen() {
-		foreach(GameObject go in everyObjects) {
-			Destroy(go);
-		}
-		everyObjects.Clear();
-		MyPrefabs.Clear();
-	}
+		for (int i = 1; i < transform.childCount; i++)
+			Destroy(transform.GetChild(i).gameObject);
 
-	private void TryRayCastClicked() {
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit2D hit2D = Physics2D.GetRayIntersection(ray);
-
-		if(clickedDown != null) {
-			clickedDown.GetComponentInChildren<SpriteRenderer>().material = defaultMat;
-			clickedDown = null;
-		}
-		if (hit2D.collider) {
-			clickedDown = hit2D.collider.gameObject;
-			clickedDown.GetComponentInChildren<SpriteRenderer>().material = outlineMat;
-			Destroy(followerGO);
-			followerGO = null;
-		}
+		TreatmentItems.Clear();
+		Follower.SetActive(false);
 	}
 
 	private bool DoesHitUI() {
@@ -120,50 +91,38 @@ public class TreatmentEditorController : MonoBehaviour {
 	}
 
 	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
-	public void NewFollower(GameObject go, string path) {
-		if (followerGO)
-			Destroy(followerGO);
-
-		followerGO = Instantiate(go);
-		followerGO.AddComponent<PrefabItem>();
-		followerGO.GetComponent<PrefabItem>().path = path;
-		Instantiate(ValueDisplayer, followerGO.transform.position, Quaternion.identity, followerGO.transform);
+	public void NewFollower(Sprite sprite, string path) {
+		Follower.SetActive(true);
+		followerSR.sprite = sprite;
+		followerPath = path;
 	}
 
-	private void StopDrawLine() {
+	public void DrawLine(TreatmentItemController item) {
+		Follower.SetActive(false);
+		if (lineStart == null) {
+			// Start drawing a line
+			lineStart = item;
+			isDrawingLine = true;
+			myLine = Instantiate(LinePrefab, transform);
+			myLineLR = myLine.GetComponent<LineRenderer>();
+			myLineLR.SetPosition(0, lineStart.transform.position);
+		} else if (lineStart != item && !(item.endingLines.Count > 0) && lineStart.TryAddNext(myLine.GetComponent<LineController>(), item)) {
+			// Clicked another object, try to assign it to the end of the road (rope? line!)
+			myLineLR.SetPosition(1, item.transform.position);
+			myLine.GetComponent<LineController>().UpdateMesh();
+
+			lineStart = null;
+			myLine = null;
+			DrawLine(item);
+		} else {
+			StopDrawLine();
+		}
+	}
+
+	public void StopDrawLine() {
 		isDrawingLine = false;
 		lineStart = null;
 		Destroy(myLine);
-	}
-
-	// IDEA : CHECK FOR CICLES WHEN TARGETING SOMETHING
-	// CHECK NEXT -> NEXT -> NEXT ... if we find the starter then we abort
-
-	private void DrawLine() {
-		if (lineStart == null) {
-			// Start drawing a line from the clickedDown object!
-			lineStart = clickedDown;
-			isDrawingLine = true;
-			myLine = Instantiate(LinePrefab);
-			myLineLR = myLine.GetComponent<LineRenderer>();
-			myLineLR.SetPosition(0, lineStart.transform.position);
-		} else if (lineStart != clickedDown && !clickedDown.GetComponent<PrefabItem>().isNexted
-			&& lineStart.GetComponent<PrefabItem>().TryAddNext(myLineLR, clickedDown.GetComponent<PrefabItem>())) {
-			// Clicked another object, try to assign it to the end of the road (rope? line!)
-			myLineLR.SetPosition(1, clickedDown.transform.position);
-			myLine.GetComponent<LineController>().DisplayCanvas();
-
-			isDrawingLine = false;
-			lineStart = null;
-			everyObjects.Add(myLine);
-			myLine = null;
-			DrawLine();
-		} else {
-			// Clicked the starting object again
-			// or target is already nexted
-			// or we couldn't add target to clicked's next
-			// then delete the line, abort mission
-			StopDrawLine();
-		}	
+		myLine = null;
 	}
 }
