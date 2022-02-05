@@ -22,12 +22,16 @@ public class WalkController : MonoBehaviour {
 		animator = GetComponent<Animator>();
 	}
 
-	protected void FixedUpdate() {
+	protected void Update() {
 		if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
-			animator.SetBool("isWalking", true);
+			if (animator) {
+				animator.SetBool("isWalking", true);
+			}
 			SetDirection(AngleToDirection(rb2D.velocity));
 		} else {
-			animator.SetBool("isWalking", false);
+			if (animator) {
+				animator.SetBool("isWalking", false);
+			}
 			if (hasStoppedDirection) {
 				SetDirection(stoppedDirection);
 				hasStoppedDirection = false;
@@ -41,9 +45,11 @@ public class WalkController : MonoBehaviour {
 	}
 
 	protected void SetDirection(Dir newDirection) {
-		animator.SetBool("isUp", newDirection == Dir.Up);
-		animator.SetBool("isRight", newDirection == Dir.Right);
-		animator.SetBool("isLeft", newDirection == Dir.Left);
+		if (animator) {
+			animator.SetBool("isUp", newDirection == Dir.Up);
+			animator.SetBool("isRight", newDirection == Dir.Right);
+			animator.SetBool("isLeft", newDirection == Dir.Left);
+		}
 		direction = newDirection;
 	}
 

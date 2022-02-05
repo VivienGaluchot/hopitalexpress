@@ -5,6 +5,7 @@ public class FauteuilController : WalkController {
 	public GameObject placeholder;
 
 	private WalkController holder;
+	private FixedJoint2D holderJoint;
 
 	private Transform prevParent;
 
@@ -15,57 +16,75 @@ public class FauteuilController : WalkController {
 		seat = placeholder.GetComponent<SeatController>();
 	}
 
+	// Maybe reverse the logic by setting the FixedJoint2D in the player
 	public void SetHolder(GameObject target) {
 		if (target) {
 			if (holder  == null) {
 				holder = target.GetComponent<WalkController>();
-				rb2D.simulated = false;
+				holderJoint = target.GetComponent<FixedJoint2D>();
+				holderJoint.connectedBody = rb2D;
+				holderJoint.enabled = true;
 			}
 		} else {
 			if (holder  != null) {
 				holder = null;
-				rb2D.simulated = true;
+				holderJoint.connectedBody = null;
+				holderJoint.enabled = false;
+				holderJoint = null;
 			}
 		}
 	}
-
-	private void Update() {
+	private void FixedUpdate() {
 		if (holder) {
 			switch (holder.direction) {
 				case Dir.Up:
-					transform.position = holder.transform.position + .6f * Vector3.up;
+					holderJoint.anchor = .3f * Vector3.up;
 					break;
 				case Dir.Down:
-					transform.position = holder.transform.position + .2f * Vector3.down;
+					holderJoint.anchor = .3f * Vector3.down;
 					break;
 				case Dir.Left:
-					transform.position = holder.transform.position + .6f * Vector3.left;
+					holderJoint.anchor = .6f * Vector3.left;
 					break;
 				case Dir.Right:
-					transform.position = holder.transform.position + .6f * Vector3.right;
+					holderJoint.anchor = .6f * Vector3.right;
 					break;
 			}
 		}
 	}
 
-	// highly dependent on WalkController
-	// not really clean but work...
-	private new void FixedUpdate() {
+	private new void Update() {
 		if (holder) {
 			direction = holder.direction;
 		} else {
-			if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
-				direction = AngleToDirection(rb2D.velocity);
-			} else {
-				if (hasStoppedDirection) {
-					direction = stoppedDirection;
-					hasStoppedDirection = false;
-				}
-			}
+			base.Update();
 		}
 		if (seat.isHolding) {
 			seat.goHeld.GetComponent<WalkController>().direction = direction;
 		}
+	}
+
+	public bool IsHolding() {
+		return seat.isHolding;
+	}
+	public GameObject GetPatient() {
+		return seat.goHeld;
+	}
+
+	public bool ReceivePatient(GameObject patient) {
+		bool result = seat.ReceiveHold(patient);
+		if (result) {
+			patient.GetComponent<WalkController>().direction = GetComponent<WalkController>().direction;
+		}
+		return result;
+	}
+
+	public GameObject GivePatient() {
+		var target = seat.GiveHold();
+		if (target) {
+			target.GetComponent<WalkController>().direction = WalkController.Dir.Down;
+		}
+		return target;
 	}
 
 }

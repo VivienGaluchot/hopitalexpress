@@ -31,13 +31,10 @@ public class PatientController : MonoBehaviour {
 
 	private void Start() {
 		state = States.sick;
-
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
-
 		face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
-
 		DisplayNextNeed();
 	}
 
@@ -47,17 +44,17 @@ public class PatientController : MonoBehaviour {
 			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
 			if (lifetime < 0f)
 				DiseaseLifetimeElapsed();
-		}
 
-		if (noDiseaseDuration > 0 && diseaseDuration > 0) {
-			periodWithoutDiseaseAnimation += Time.deltaTime;
-			if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
-				periodWithoutDiseaseAnimation = 0;
-				face.GetComponent<SkinManager>().frameSelected = 0;
-				needBubble.SetActive(true);
-			} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
-				face.GetComponent<SkinManager>().frameSelected = 1;
-				needBubble.SetActive(false);
+			if (noDiseaseDuration > 0 && diseaseDuration > 0) {
+				periodWithoutDiseaseAnimation += Time.deltaTime;
+				if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
+					periodWithoutDiseaseAnimation = 0;
+					face.GetComponent<SkinManager>().frameSelected = 0;
+					needBubble.SetActive(true);
+				} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
+					face.GetComponent<SkinManager>().frameSelected = 1;
+					needBubble.SetActive(false);
+				}
 			}
 		}
 	}
@@ -97,12 +94,16 @@ public class PatientController : MonoBehaviour {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
 		need.gameObject.SetActive(false);
 		state = States.dead;
+		face.GetComponent<SkinManager>().skinSelected = 3;
+		needBubble.SetActive(false);
 		gc?.PatientDead(this);
 	}
 
 	public void DiseaseCured() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
 		need.gameObject.SetActive(false);
+		face.GetComponent<SkinManager>().skinSelected = 4;
+		needBubble.SetActive(false);
 		state = States.cured;
 	}
 

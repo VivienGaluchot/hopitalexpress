@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -62789472347888051, guid: 21272255296cf204e8f1fe57db30e0a7, type: 3}
+  m_Sprite: {fileID: 2117537750034948173, guid: 21272255296cf204e8f1fe57db30e0a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 2881606004975480091}
   - component: {fileID: 5804218259563716000}
   - component: {fileID: 3911864212793589820}
-  - component: {fileID: 4678788142825070912}
   - component: {fileID: 6181394274622440241}
   m_Layer: 0
   m_Name: Fauteuil
@@ -199,25 +198,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &4678788142825070912
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085243115455294966}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6181394274622440241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +355,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -6665807865020185993, guid: 8f15e7c1d1815014cbbcd58bbce99fd8, type: 3}
+  m_Sprite: {fileID: 6864378988517829478, guid: 8f15e7c1d1815014cbbcd58bbce99fd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
