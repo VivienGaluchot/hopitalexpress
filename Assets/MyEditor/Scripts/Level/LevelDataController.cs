@@ -39,7 +39,6 @@ public class LevelDataController : DataController {
 	[SerializeField] private Dropdown PatientSpawnDirectionDropdown;
 
 	public override void SaveData() {
-		LevelEditorController.instance.StopSelectingSpawns();
 		LevelData ld = FetchDataToLevelData();
 		if(ld != null) {
 			WriteToFile(JsonUtility.ToJson(ld));
@@ -51,7 +50,7 @@ public class LevelDataController : DataController {
 		List<LayerData> layers = new List<LayerData>();
 		for(int i = 0; i < LevelEditorController.instance.grids.Length; i++) {
 			List<CellData> cells = new List<CellData>();
-			foreach (KeyValuePair<(int, int), LevelEditorController.Cell> cell in LevelEditorController.instance.grids[i]) {
+			foreach (KeyValuePair<(int, int), Cell> cell in LevelEditorController.instance.grids[i]) {
 				if (cell.Value.value > 0)
 					cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
 			}
@@ -73,7 +72,10 @@ public class LevelDataController : DataController {
 	}
 
 	public override void LoadData() {
-		LevelEditorController.instance.StopSelectingSpawns();
+		if (FilesDropdown.options.Count == 0) {
+			Debug.LogWarning("Aucun fichier à charger");
+			return;
+		}
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
@@ -94,8 +96,8 @@ public class LevelDataController : DataController {
 
 		LevelEditorController.instance.RefreshAllGrid();
 
-		LevelEditorController.instance.SetPatientSpawn(Data.patientSpawn);
 		LevelEditorController.instance.SetPlayerSpawn(Data.playerSpawn);
+		LevelEditorController.instance.SetPatientSpawn(Data.patientSpawn);
 		PatientSpawnDirectionDropdown.value = PatientSpawnDirectionDropdown.options.FindIndex(o => o.text == Data.patientSpawnDirection);
 
 		LevelDiseasesController.instance.DeleteAll();

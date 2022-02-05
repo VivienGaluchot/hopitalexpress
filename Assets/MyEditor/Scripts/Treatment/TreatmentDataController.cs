@@ -124,6 +124,11 @@ public class TreatmentDataController : DataController {
 	private List<LineController> lines;
 
 	public override void LoadData() {
+		if (FilesDropdown.options.Count == 0) {
+			Debug.LogWarning("Aucun fichier à charger");
+			return;
+		}
+
 		TreatmentEditorController.instance.ClearScreen();
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		StepContainer Data = JsonUtility.FromJson<StepContainer>(ReadFromFile(filename));

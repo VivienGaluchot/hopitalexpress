@@ -11,21 +11,27 @@ public class MainEditorController : MonoBehaviour {
 
     [SerializeField] private Dropdown dropdown;
     [SerializeField] private GameObject[] EditorsPanels;
+    [SerializeField] private GameObject[] EditorsControllersPanels;
     public Editors currentEditor;
 
     private void Start() {
-        for (int i = 0; i < EditorsPanels.Length; i++)
+        for (int i = 0; i < EditorsPanels.Length; i++) {
             EditorsPanels[i].SetActive(false);
+            EditorsControllersPanels[i].SetActive(false);
+        }
 
         dropdown.value = (int)currentEditor;
         EditorsPanels[(int)currentEditor].SetActive(true);
+        EditorsControllersPanels[(int)currentEditor].SetActive(true);
     }
 
     public void ChangeEditor(Dropdown dd) {
         if (dd.value < EditorsPanels.Length) {
             EditorsPanels[(int)currentEditor].SetActive(false);
+            EditorsControllersPanels[(int)currentEditor].SetActive(false);
             currentEditor = (Editors)dd.value;
             EditorsPanels[(int)currentEditor].SetActive(true);
+            EditorsControllersPanels[(int)currentEditor].SetActive(true);
         }
     }
 }

@@ -11,7 +11,7 @@ public class PopulateObjects : MonoBehaviour {
     }
 
     private void Populate() {
-        foreach(string s in LevelObjectsController.instance.objectsPath) {
+        foreach(string s in LevelEditorController.instance.objectsPath) {
             GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
             foreach (GameObject p in Prefabs) {
                 GameObject go = Instantiate(Prefab, transform); 
