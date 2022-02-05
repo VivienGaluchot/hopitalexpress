@@ -9144,6 +9144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6859504251f936740be25a897ac6ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsPath:
+  - Prefabs/Env/Sieges
+  - Prefabs/Env/Misc
+  - Prefabs/Traitements/Machines
 --- !u!114 &967185744
 MonoBehaviour:
   m_ObjectHideFlags: 0

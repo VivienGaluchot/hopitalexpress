@@ -5,14 +5,21 @@ using UnityEngine;
 public class LevelObjectsController : MonoBehaviour {
 	public static LevelObjectsController instance;
 
+	public string[] objectsPath;
+
 	private Transform ObjectsParent, FullWallsParent;
 	private GameObject Follower;
+	private SpriteRenderer followerSR;
+
 	private bool hasFollower;
 
 	private Dictionary<GameObject, Vector3> objects;
 
 	private void Start() {
 		instance = this;
+
+		Follower = new GameObject("Follower", typeof(SpriteRenderer));
+		followerSR = Follower.GetComponent<SpriteRenderer>();
 
 		LevelEditorController.instance = GetComponent<LevelEditorController>();
 		ObjectsParent = transform.Find("ObjectsLayer");
@@ -29,9 +36,7 @@ public class LevelObjectsController : MonoBehaviour {
 			Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 			Follower.transform.position = worldMousePos;
 			if (Input.GetKeyDown("escape")) {
-				hasFollower = false;
-				Destroy(Follower);
-				Follower = null;
+				UnsetFollower();
 			} else if (Input.GetMouseButtonDown(0) && !LevelEditorController.instance.DoesHitUI()) {
 				objects.Add(Instantiate(Follower, ObjectsParent), worldMousePos);
 			}
@@ -44,19 +49,18 @@ public class LevelObjectsController : MonoBehaviour {
 	}
 
 	public void StopDisplay() {
-		Destroy(Follower);
-		Follower = null;
-		hasFollower = false;
+		UnsetFollower();
 		ObjectsParent.gameObject.SetActive(false);
 		FullWallsParent.gameObject.SetActive(false);
 	}
 
-	public void SetFollower(GameObject go) {
-		if(hasFollower)
-			Destroy(Follower);
-		else
-			hasFollower = true;
-
-		Follower = Instantiate(go);
+	public void SetFollower(Sprite followerSprite) {
+		hasFollower = true;
+		followerSR.sprite = followerSprite;
 	}
+
+	public void UnsetFollower() {
+		hasFollower = false;
+		followerSR.sprite = null;
+    }
 }

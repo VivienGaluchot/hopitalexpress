@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class PopulateObjects : MonoBehaviour {
 
@@ -10,12 +11,18 @@ public class PopulateObjects : MonoBehaviour {
     }
 
     private void Populate() {
-        GameObject[] Prefabs = Resources.LoadAll<GameObject>("EditorPrefabs/Objets/");
-        foreach(GameObject p in Prefabs) {
-            GameObject go = Instantiate(Prefab, transform);
-            go.GetComponent<Image>().sprite = p.GetComponentInChildren<SpriteRenderer>().sprite;
-            go.GetComponent<ObjectController>().SetInformations(p);
-        }
-    }
+        foreach(string s in LevelObjectsController.instance.objectsPath) {
+            GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
+            foreach (GameObject p in Prefabs) {
+                GameObject go = Instantiate(Prefab, transform); 
 
+                SpriteRenderer sr = p.GetComponent<SpriteRenderer>();
+                if (sr == null)
+                    sr = p.GetComponentInChildren<SpriteRenderer>();
+
+                go.GetComponent<Image>().sprite = sr.sprite;
+                go.GetComponent<ObjectController>().SetInformations(sr.sprite);
+            }
+        }        
+    }
 }
