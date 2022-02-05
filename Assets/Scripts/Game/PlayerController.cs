@@ -118,16 +118,16 @@ public class PlayerController : MonoBehaviour {
 		
 		switch (perso.direction) {
 			case WalkController.Dir.Down:
-				detectionCollider.offset = new Vector2(0f, -.25f);
+				detectionCollider.offset = .25f * Vector3.down;
 				break;
 			case WalkController.Dir.Right:
-				detectionCollider.offset = new Vector2(.25f, 0);
+				detectionCollider.offset = .25f * Vector3.right;
 				break;
 			case WalkController.Dir.Left:
-				detectionCollider.offset = new Vector2(-.25f, 0);
+				detectionCollider.offset = .25f * Vector3.left;
 				break;
 			case WalkController.Dir.Up:
-				detectionCollider.offset = new Vector2(0, .25f);
+				detectionCollider.offset = .25f * Vector3.up;
 				break;
 		}
 	}
@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryDropFauteuil() {
 		HeldGO.GetComponent<FauteuilController>().SetHolder(null);
+		HeldGO = null;
 		heldType = HeldTypes.none;
 		return true;
 	}

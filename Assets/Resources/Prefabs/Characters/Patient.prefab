@@ -446,7 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  stoppedDirection: 0
 --- !u!1 &3807074980244481042
 GameObject:
   m_ObjectHideFlags: 0
