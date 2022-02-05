@@ -34,51 +34,16 @@ public class CellData {
 	public int value;
 }
 
-public class LevelDataController : MonoBehaviour {
+public class LevelDataController : DataController {
 
-	[SerializeField] private Dropdown FilesDropdown;
 	[SerializeField] private Dropdown PatientSpawnDirectionDropdown;
-	[SerializeField] private InputField FileNameInputField;
-	[SerializeField] private string path;
 
-	private bool clickedDelete;
-
-	private void Start() {
-		path = Path.Combine(Application.dataPath, path);
-		FetchDDOptions();
-	}
-
-	public void DeleteSave(Text text) {
-		if(!clickedDelete) {
-			clickedDelete = true;
-			text.text = "Sure?";
-        } else {
-			text.text = "Delete";
-			clickedDelete = false;
-			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
-			if (File.Exists(filePath))
-				File.Delete(filePath);
-			FetchDDOptions();
-		}
-    }
-
-	private void FetchDDOptions() {
-		string[] paths = System.IO.Directory.GetFiles(path);
-		List<string> pathsList = new List<string>();
-		foreach (string s in paths) {
-			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileNameWithoutExtension(s));
-		}
-		FilesDropdown.ClearOptions();
-		FilesDropdown.AddOptions(pathsList);
-	}
-
-	public void SaveData() {
+	public override void SaveData() {
 		LevelEditorController.instance.StopSelectingSpawns();
 		LevelData ld = FetchDataToLevelData();
 		if(ld != null) {
 			WriteToFile(JsonUtility.ToJson(ld));
-			FetchDDOptions();
+			FetchFilesNamesToLoad();
 		}
 	}
 
@@ -107,13 +72,7 @@ public class LevelDataController : MonoBehaviour {
 		return new LevelData(LevelEditorController.instance.size, LevelEditorController.instance.rows, LevelEditorController.instance.columns, layers, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelEditorController.instance.PlayerSpawn.transform.position, LevelEditorController.instance.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
 	}
 
-	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".json"));
-		sw.WriteLine(content);
-		sw.Close();
-	}
-
-	public void LoadData() {
+	public override void LoadData() {
 		LevelEditorController.instance.StopSelectingSpawns();
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(filename));
@@ -137,10 +96,5 @@ public class LevelDataController : MonoBehaviour {
 		LevelDiseasesController.instance.DeleteAll();
 		foreach (string s in Data.diseases)
 			LevelDiseasesController.instance.TryAddDisease(s);
-	}
-
-	private string ReadFromFile(string fileName) {
-		StreamReader sr = new StreamReader(Path.Combine(path, fileName));
-		return sr.ReadToEnd();
 	}
 }
