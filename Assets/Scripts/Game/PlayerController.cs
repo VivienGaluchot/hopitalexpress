@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
 
 	enum HeldTypes {
 		none,
-		patient,
 		item,
 		fauteuil
 	}
@@ -73,13 +72,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButtonDown("Fire" + id)) {
 			// Are we already holding something?
 			switch (heldType) {
-				case HeldTypes.patient:
-					// We are holding a patient, we try to put him somewhere
-					if (!TryPutPatientToExit())
-						//if (!TryPutPatientToMachine())
-							if (!TryPutPatientOnSeat())
-								TryPutInTrash();
-					break;
 				case HeldTypes.item:
 					// We try to give the item, if we can't, then drop it
 					if (!TryGiveItemToPatient())
@@ -89,17 +81,19 @@ public class PlayerController : MonoBehaviour {
 									TryDropItem();
 					break;
 				case HeldTypes.fauteuil:
-					// We try to drop the faulteuil
-					TryDropFauteuil();
+					if (!TryTakePatientFromSeatToFauteuil())
+						if (!TryPutPatientFromFauteuilToSeat())
+							if (!TryPutFromFauteuilToTrash())
+								if (!TryPutPatientFromFauteuilToExit())
+									TryDropFauteuil();
 					break;
 				case HeldTypes.none:
 					// Holding nothing, can we grab something?
 					//if (!TryTakePatientFromMachine())
 						if (!TryTakeFauteuil())
-							if (!TryTakePatientFromSeat())
-								if (!TryTakeItemFromGround())
-										if (!TryTakeItemFromCraft())
-											TryTakeFromContainer();
+							if (!TryTakeItemFromGround())
+								if (!TryTakeItemFromCraft())
+									TryTakeFromContainer();
 					break;
 			}
 		}
@@ -286,7 +280,7 @@ public class PlayerController : MonoBehaviour {
 		heldType = HeldTypes.item;
 	}
 
-	private bool TryTakePatientFromSeat() {
+	private bool TryTakePatientFromSeatToFauteuil() {
 		// Look for a not empty seat in seatTargets
 		if (seatTargets.Count > 0) {
 			// Step 1 : sort by distance
@@ -302,11 +296,10 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// Step 3 : Take patient from seat if found
-			if (occupiedSeat != null) {
-				HoldMyBeer(occupiedSeat.GetComponent<SeatController>().GiveHold());
-				if (HeldGO != null) {
-					heldType = HeldTypes.patient;
-					return true;
+			if (occupiedSeat != null && !HeldGO.GetComponent<FauteuilController>().IsHolding()) {
+				var target = occupiedSeat.GetComponent<SeatController>().GiveHold();
+				if (target) {
+					return HeldGO.GetComponent<FauteuilController>().ReceivePatient(target);
 				}
 			}
 		}
@@ -332,7 +325,7 @@ public class PlayerController : MonoBehaviour {
 		return false;
 	}
 
-	private bool TryPutPatientOnSeat() {
+	private bool TryPutPatientFromFauteuilToSeat() {
 		// Look for an empty seat in seatTargets
 		if (seatTargets.Count > 0) {
 			// Step 1 : sort by distance
@@ -347,15 +340,45 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
-			// Step 3 : Allocate patient to seat if found
-			if (emptySeat != null && emptySeat.GetComponent<SeatController>().ReceiveHold(HeldGO)) {
-				HeldGO = null;
-				heldType = HeldTypes.none;
-
-				return true;
+			// Step 3 : Allocate patient to fauteuil seat if found
+			if (emptySeat != null) {
+				var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
+				if (target) {
+					return emptySeat.GetComponent<SeatController>().ReceiveHold(target);
+				}
 			}
 		}
 
+		return false;
+	}
+
+	private bool TryPutFromFauteuilToTrash() {
+		if (trashTarget != null) {
+			var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
+
+			PatientController pc = target.GetComponent<PatientController>();
+			if (pc != null)
+				gc.PatientDead(pc);
+
+			Destroy(target);
+			trashTarget.GetComponent<Animator>().SetTrigger("activate");
+
+			return true;
+		}
+
+		return false;
+	}
+
+	private bool TryPutPatientFromFauteuilToExit() {
+		if (exitTarget != null && HeldGO.GetComponent<PatientController>().state == PatientController.States.cured) {
+			var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
+			if (target && target.GetComponent<PatientController>().state == PatientController.States.cured) {
+				gc.PatientCured(target.GetComponent<PatientController>());
+				Destroy(target);
+				target = null;
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -382,19 +405,6 @@ public class PlayerController : MonoBehaviour {
 
 	//	return false;
 	//}
-
-	private bool TryPutPatientToExit() {
-		if (exitTarget != null && HeldGO.GetComponent<PatientController>().state == PatientController.States.cured) {
-			gc.PatientCured(HeldGO.GetComponent<PatientController>());
-			Destroy(HeldGO);
-			HeldGO = null;
-			heldType = HeldTypes.none;
-
-			return true;
-		}
-
-		return false;
-	}
 
 	private void HoldMyBeer(GameObject Beer) {
 		HeldGO = Beer;

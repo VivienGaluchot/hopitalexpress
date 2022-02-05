@@ -64,4 +64,24 @@ public class FauteuilController : WalkController {
 		}
 	}
 
+	public bool IsHolding() {
+		return seat.isHolding;
+	}
+
+	public bool ReceivePatient(GameObject patient) {
+		bool result = seat.ReceiveHold(patient);
+		if (result) {
+			patient.GetComponent<WalkController>().direction = GetComponent<WalkController>().direction;
+		}
+		return result;
+	}
+
+	public GameObject GivePatient() {
+		var target = seat.GiveHold();
+		if (target) {
+			target.GetComponent<WalkController>().direction = WalkController.Dir.Down;
+		}
+		return target;
+	}
+
 }
