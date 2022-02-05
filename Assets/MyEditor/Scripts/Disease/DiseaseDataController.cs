@@ -18,48 +18,11 @@ public class DiseaseData {
 	public string treatment;
 }
 
-public class DiseaseDataController : MonoBehaviour {
+public class DiseaseDataController : DataController {
 
-	[SerializeField] private Dropdown FilesDropdown;
-	[SerializeField] private InputField FileNameInputField;
-	[SerializeField] private string path;
-
-	private bool clickedDelete;
-
-	private void Start() {
-		path = Path.Combine(Application.dataPath, path);
-		FetchDDOptions();
-	}
-
-	public void DeleteSave(Text text) {
-		if (!clickedDelete) {
-			clickedDelete = true;
-			text.text = "Sure?";
-		} else {
-			text.text = "Delete";
-			clickedDelete = false;
-			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
-			if (File.Exists(filePath))
-				File.Delete(filePath);
-			FetchDDOptions();
-		}
-	}
-
-	private void FetchDDOptions() {
-		string[] paths = System.IO.Directory.GetFiles(path);
-		List<string> pathsList = new List<string>();
-		foreach (string s in paths) {
-			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileNameWithoutExtension(s));
-		}
-		FilesDropdown.ClearOptions();
-		FilesDropdown.AddOptions(pathsList);
-	}
-
-
-	public void SaveData() {
+	public override void SaveData() {
 		WriteToFile(JsonUtility.ToJson(FetchDataToDiseaseData()));
-		FetchDDOptions();
+		FetchFilesNamesToLoad();
 	}
 
 	public DiseaseData FetchDataToDiseaseData() {
@@ -80,13 +43,7 @@ public class DiseaseDataController : MonoBehaviour {
 		return float.Parse(value);
     }
 
-	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".json"));
-		sw.WriteLine(content);
-		sw.Close();
-	}
-
-	public void LoadData() {
+	public override void LoadData() {
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		DiseaseData Data = JsonUtility.FromJson<DiseaseData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
@@ -113,10 +70,5 @@ public class DiseaseDataController : MonoBehaviour {
 				break;
             }
         }
-	}
-
-	private string ReadFromFile(string fileName) {
-		StreamReader sr = new StreamReader(Path.Combine(path, fileName));
-		return sr.ReadToEnd();
 	}
 }

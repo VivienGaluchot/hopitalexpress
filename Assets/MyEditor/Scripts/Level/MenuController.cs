@@ -15,6 +15,9 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private Color passiveColor;
 
     private void Start() {
+        rt = GetComponent<RectTransform>();
+        isVisible = true;
+
         Transform content = transform.Find("Content");
         Content = new GameObject[content.childCount];
         for (int i = 0; i < Content.Length; i++) {
@@ -28,13 +31,8 @@ public class MenuController : MonoBehaviour {
             Buttons[i] = tabs.GetChild(i).GetComponent<Image>();
         }
 
-        activeContent = 0;
-        Content[0].SetActive(true);
-        LevelEditorController.instance.canDraw = false;
-
-        rt = GetComponent<RectTransform>();
-        isVisible = true;
-        LevelObjectsController.instance.StopDisplay();
+        activeContent = 1;
+        ChangeActiveContent(0);
     }
 
     private void Update() {
@@ -62,7 +60,7 @@ public class MenuController : MonoBehaviour {
 
             LevelEditorController.instance.UnclickFillers();
             LevelEditorController.instance.StopSelectingSpawns();
-            LevelEditorController.instance.ShowWalls(activeContent != 3);
+            LevelEditorController.instance.ShowWalls(activeContent == 1 || activeContent == 2);
         }
     }
 

@@ -1596,7 +1596,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 3113006062946934288, guid: 356bf400eb011ae4995885ce2bf8c621, type: 3}
-  ec: {fileID: 1749184607}
 --- !u!114 &178455073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7695,8 +7694,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1160784812}
-        m_TargetAssemblyTypeName: DiseaseDataController, Assembly-CSharp
-        m_MethodName: DeleteSave
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: DeleteFile
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 910797785}
@@ -9145,6 +9144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6859504251f936740be25a897ac6ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsPath:
+  - Prefabs/Env/Sieges
+  - Prefabs/Env/Misc
+  - Prefabs/Traitements/Machines
 --- !u!114 &967185744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9171,9 +9174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FilesDropdown: {fileID: 549960344}
-  PatientSpawnDirectionDropdown: {fileID: 864838177}
   FileNameInputField: {fileID: 748307740}
   path: MyEditor/Data/Level
+  PatientSpawnDirectionDropdown: {fileID: 864838177}
 --- !u!114 &967185746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12320,8 +12323,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1749184608}
-        m_TargetAssemblyTypeName: TreatmentDataController, Assembly-CSharp
-        m_MethodName: DeleteSave
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: DeleteFile
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1241308821}
@@ -15366,8 +15369,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 967185745}
-        m_TargetAssemblyTypeName: LevelDataController, Assembly-CSharp
-        m_MethodName: DeleteSave
+        m_TargetAssemblyTypeName: DataController, Assembly-CSharp
+        m_MethodName: DeleteFile
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 431855546}
@@ -17541,7 +17544,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0
-  dragSpeed: 0
 --- !u!1 &2044767636
 GameObject:
   m_ObjectHideFlags: 0

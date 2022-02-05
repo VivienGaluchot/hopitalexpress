@@ -63,45 +63,9 @@ public class StepContainer : ISerializationCallbackReceiver {
 	}
 }
 
-public class TreatmentDataController : MonoBehaviour {
+public class TreatmentDataController : DataController {
 
-	[SerializeField] private Dropdown FilesDropdown;
-	[SerializeField] private InputField FileNameInputField;
-	[SerializeField] private string path;
-
-	private bool clickedDelete;
-
-	private void Start() {
-		path = Path.Combine(Application.dataPath, path);
-		FetchDDOptions();
-	}
-
-	public void DeleteSave(Text text) {
-		if (!clickedDelete) {
-			clickedDelete = true;
-			text.text = "Sure?";
-		} else {
-			text.text = "Delete";
-			clickedDelete = false;
-			string filePath = Path.Combine(path, FilesDropdown.options[FilesDropdown.value].text + ".json");
-			if (File.Exists(filePath))
-				File.Delete(filePath);
-			FetchDDOptions();
-		}
-	}
-
-	private void FetchDDOptions() {
-		string[] paths = System.IO.Directory.GetFiles(path);
-		List<string> pathsList = new List<string>();
-		foreach (string s in paths) {
-			if (!s.EndsWith(".meta"))
-				pathsList.Add(Path.GetFileNameWithoutExtension(s));
-		}
-		FilesDropdown.ClearOptions();
-		FilesDropdown.AddOptions(pathsList);
-	}
-
-	public void SaveData() {
+	public override void SaveData() {
 		TreatmentItemController starter = null;
 		foreach (TreatmentItemController item in TreatmentEditorController.instance.TreatmentItems) {
 			if (item.endingLines.Count == 0) {
@@ -115,7 +79,7 @@ public class TreatmentDataController : MonoBehaviour {
 		else
 			Debug.Log("NO STARTER FOUND -- Un objet ne doit pas avoir de parent pour être le point de départ du traitement");
 
-		FetchDDOptions();
+		FetchFilesNamesToLoad();
 	}
 
 	private StepContainer TreatmentItemToStepDataContainer(TreatmentItemController starter) {
@@ -156,16 +120,10 @@ public class TreatmentDataController : MonoBehaviour {
 		return float.Parse(proba);
 	}
 
-	private void WriteToFile(string content) {
-		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".json"));
-		sw.WriteLine(content);
-		sw.Close();
-	}
-
 	private List<List<GameObject>> nodes;
 	private List<LineController> lines;
 
-	public void LoadData() {
+	public override void LoadData() {
 		TreatmentEditorController.instance.ClearScreen();
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		StepContainer Data = JsonUtility.FromJson<StepContainer>(ReadFromFile(filename));
@@ -183,12 +141,6 @@ public class TreatmentDataController : MonoBehaviour {
 
 		CreateGameObjectsFromStepData(starter);
 		OrganizeTree(starter);
-	}
-
-
-	private string ReadFromFile(string fileName) {
-		StreamReader sr = new StreamReader(Path.Combine(path, fileName));
-		return sr.ReadToEnd();
 	}
 
 	public GameObject CreateGameObjectsFromStepData(StepData data, int layer = 0) {
@@ -219,15 +171,6 @@ public class TreatmentDataController : MonoBehaviour {
 	}
 
 	private void OrganizeTree(StepData first) {
-
-		//nodes[0][0].transform.position = new Vector3(0f, 4f, 0f);
-
-		//StepData[] nexts = new StepData[nodes[1].Count];
-		//foreach(NextStepData next in first.NextsList) {
-
-  //      }
-
-
         for (int i = 0; i < nodes.Count; i++) {
             for (int j = 0; j < nodes[i].Count; j++) {
                 nodes[i][j].transform.position = new Vector3(-nodes[i].Count + 2 * j, 4 - 2 * i, 0f);

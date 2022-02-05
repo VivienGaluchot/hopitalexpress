@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour {
 
-    private GameObject myObject;
+    private Sprite sprite;
 
-    public void SetInformations(GameObject go) {
-        myObject = go;
+    public void SetInformations(Sprite sprite) {
+        this.sprite = sprite;
     }
 
     public void SendInformations() {
-        LevelObjectsController.instance.SetFollower(myObject);
+        LevelObjectsController.instance.SetFollower(sprite);
     }
 }
