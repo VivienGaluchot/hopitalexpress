@@ -372,12 +372,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientFromFauteuilToExit() {
-		if (exitTarget != null && HeldGO.GetComponent<PatientController>().state == PatientController.States.cured) {
-			var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
-			if (target && target.GetComponent<PatientController>().state == PatientController.States.cured) {
+		if (exitTarget && HeldGO.GetComponent<FauteuilController>().IsHolding()) {
+			var target = HeldGO.GetComponent<FauteuilController>().GetPatient();
+			if (target.GetComponent<PatientController>().state == PatientController.States.cured) {
+				HeldGO.GetComponent<FauteuilController>().GivePatient();
 				gc.PatientCured(target.GetComponent<PatientController>());
 				Destroy(target);
-				target = null;
 				return true;
 			}
 		}
