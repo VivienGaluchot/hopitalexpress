@@ -67,6 +67,9 @@ public class FauteuilController : WalkController {
 	public bool IsHolding() {
 		return seat.isHolding;
 	}
+	public GameObject GetPatient() {
+		return seat.goHeld;
+	}
 
 	public bool ReceivePatient(GameObject patient) {
 		bool result = seat.ReceiveHold(patient);
