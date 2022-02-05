@@ -3,213 +3,172 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class LevelEditorController : MonoBehaviour {
+public enum DrawType { 
+	floor,
+	walls,
+	fillFloor,
+	fillWalls,
+	playerSpawn,
+	patientSpawn,
+	levelObject,
+	none
+}
 
+public class Cell {
+	public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
+	public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
+
+	public GameObject go;
+	public int value;
+	public SpriteRenderer sr;
+}
+
+public class LevelEditorController : MonoBehaviour {
 	public static LevelEditorController instance;
 
 	public float size;
 	public int columns, rows;
+	public DrawType drawType;
 
 	public Sprite[] floorSprites, wallSprites, fullWallSprites;
 	public Sprite[][] sprites;
 	public Dictionary<(int, int), Cell>[] grids { get; private set; }
 	public Dictionary<(int, int), SpriteRenderer> fullWallsGrid { get; private set; }
-	public int currentLayer;
-	public bool canDraw;
-	private Transform[] CellsParents;
-	private Transform FullWallsParent;
 
-	[SerializeField] private GraphicRaycaster m_Raycaster;
-	[SerializeField] private PointerEventData m_PointerEventData;
-	[SerializeField] private EventSystem m_EventSystem;
-
-
-	private bool selectingPatientSpawn, selectingPlayerSpawn;
-	[SerializeField] private Image patientButtonImage;
-	[SerializeField] private Image playerButtonImage;
-	[SerializeField] private GameObject PatientSpawnPrefab;
-	[SerializeField] private GameObject PlayerSpawnPrefab;
-	public GameObject PlayerSpawn { get; private set; }
-	public GameObject PatientSpawn { get; private set; }
-
-	private bool isHiddingWalls;
-	[SerializeField] private Image hideWallsImage;
-
-	private bool isFloorFillerSelected;
-	[SerializeField] private Image floorFillerImage;
-	private bool isWallFillerSelected;
-	[SerializeField] private Image wallFillerImage;
-
-	public class Cell {
-		public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
-		public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
-
-		public GameObject go;
-		public int value;
-		public SpriteRenderer sr;
+	private Transform[] CellsParents, WallsParents;
+	private Transform ObjectsParent;
+	
+	private enum WallVisibility {
+		none,
+		flat,
+		not_flat
 	}
+	private WallVisibility wallVisibility;
 
-	private void Start() {
+	public GameObject PlayerSpawn { get; set; }
+	public GameObject PatientSpawn { get; set; }
+	public Sprite PlayerSpawnSprite, PatientSpawnSprite;
+
+	//Objects
+	public string[] objectsPath;
+	private GameObject Follower;
+	private SpriteRenderer followerSR;
+
+	private void Awake() { 
 		instance = this;
-
+		drawType = DrawType.none;
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
 		grids = new Dictionary<(int, int), Cell>[2];
-		currentLayer = 0;
 		CellsParents = new Transform[2];
 		CellsParents[0] = transform.Find("FloorLayer");
 		CellsParents[1] = transform.Find("WallsLayer");
-		InitGrid();
 
-		FullWallsParent = transform.Find("FullWallsLayer");
+		WallsParents = new Transform[2];
+		WallsParents[0] = CellsParents[1];
+		WallsParents[1] = transform.Find("FullWallsLayer");
 		fullWallsGrid = new Dictionary<(int, int), SpriteRenderer>();
-		for(int i = 0; i < rows; i++) {
-			for(int j = 0; j < columns; j++) {
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
 				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
-				newCell.transform.SetParent(FullWallsParent);
+				newCell.transform.SetParent(WallsParents[1]);
 				newCell.transform.position = new Vector3(j / size, -i / size, 0);
 				fullWallsGrid.Add((i, j), newCell.GetComponent<SpriteRenderer>());
-            }
-        }
+			}
+		}
+
+		wallVisibility = WallVisibility.flat;
+		SwitchWallsVisibility();
+
+		PlayerSpawn = new GameObject("PlayerSpawn", typeof(SpriteRenderer));
+		PlayerSpawn.transform.SetParent(transform);
+		PlayerSpawn.GetComponent<SpriteRenderer>().sprite = PlayerSpawnSprite;
+		PlayerSpawn.SetActive(false);
+		PatientSpawn = new GameObject("PatientSpawn", typeof(SpriteRenderer));
+		PatientSpawn.transform.SetParent(transform);
+		PatientSpawn.GetComponent<SpriteRenderer>().sprite = PatientSpawnSprite;
+		PatientSpawn.SetActive(false);
+
+		ObjectsParent = transform.Find("ObjectsLayer");
+		Follower = new GameObject("Follower", typeof(SpriteRenderer));
+		Follower.transform.SetParent(transform);
+		followerSR = Follower.GetComponent<SpriteRenderer>();
+	}
+	private void Start() {
+		InitGrid();
 	}
 
 	private void Update() {
-		if(Input.GetMouseButtonDown(0) && !DoesHitUI()) {
-			if(selectingPatientSpawn) {
-				if (!PatientSpawn)
-					PatientSpawn = Instantiate(PatientSpawnPrefab);
-				PatientSpawn.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
-				SetPatientSpawnButton(false);
-			} else if(selectingPlayerSpawn) {
-				if (!PlayerSpawn)
-					PlayerSpawn = Instantiate(PlayerSpawnPrefab);
-				PlayerSpawn.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
-				SetPlayerSpawnButton(false);
+		if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
+			Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+			switch (drawType) {
+				case DrawType.playerSpawn:
+					if (!PlayerSpawn.activeSelf)
+						PlayerSpawn.SetActive(true);
+					SetPlayerSpawn(worldMousePos);
+					break;
+				case DrawType.patientSpawn:
+					if (!PatientSpawn.activeSelf)
+						PatientSpawn.SetActive(true);
+					SetPatientSpawn(worldMousePos);
+					break;
+				case DrawType.levelObject:
+					Follower.transform.position = worldMousePos;
+					Instantiate(Follower, ObjectsParent);
+					break;
 			}
 		}
 	}
 
-	public void ShowWalls(bool visible = true) {
-		if(visible) {
-			if (isHiddingWalls) {
-				isHiddingWalls = false;
-				hideWallsImage.color = Color.white;
-				CellsParents[1].gameObject.SetActive(true);
-			}
-		} else {
-            if (!isHiddingWalls) {
-                isHiddingWalls = true;
-                hideWallsImage.color = Color.green;
-                CellsParents[1].gameObject.SetActive(false);
-            }
-        }		
-	}
+	public void SetPlayerSpawn(Vector3 pos) { PlayerSpawn.transform.position = pos; }
+	public void SetPatientSpawn(Vector3 pos) { PatientSpawn.transform.position = pos; }
+
+	public void SwitchObjectsVisibility() {
+		ObjectsParent.gameObject.SetActive(!ObjectsParent.gameObject.activeSelf);
+    }
 
 	public void SwitchWallsVisibility() {
-		isHiddingWalls = !isHiddingWalls;
-		hideWallsImage.color = isHiddingWalls ? Color.green : Color.white;
-		CellsParents[1].gameObject.SetActive(!isHiddingWalls);
-	}
-
-	public void FloorFillerClicked() {
-		isFloorFillerSelected = !isFloorFillerSelected;
-		floorFillerImage.color = isFloorFillerSelected ? Color.green : Color.white;
-	}
-
-	public void WallFillerClicked() {
-		isWallFillerSelected = !isWallFillerSelected;
-		wallFillerImage.color = isWallFillerSelected ? Color.green : Color.white;
-	}
-
-	public void UnclickFillers() {
-		isWallFillerSelected = false;
-		wallFillerImage.color = Color.white;
-		isFloorFillerSelected = false;
-		floorFillerImage.color = Color.white;
-	}
-
-	public void SetPlayerSpawn(Vector3 pos) {
-		if (!PlayerSpawn)
-			PlayerSpawn = Instantiate(PlayerSpawnPrefab);
-		PlayerSpawn.transform.position = pos;
-	}
-
-	public void SetPatientSpawn(Vector3 pos) {
-		if (!PatientSpawn)
-			PatientSpawn = Instantiate(PatientSpawnPrefab);
-		PatientSpawn.transform.position = pos;
-	}
-
-	public void StopSelectingSpawns() {
-		SetPatientSpawnButton(false);
-		SetPlayerSpawnButton(false);
-	}
-
-	private void SetPatientSpawnButton(bool oui) {
-		if (oui) {
-			patientButtonImage.color = Color.green;
-			selectingPatientSpawn = true;
-			playerButtonImage.color = Color.white;
-			selectingPlayerSpawn = false;
-		} else {
-			patientButtonImage.color = Color.white;
-			selectingPatientSpawn = false;
+		// Enum.GetNames(typeof(WallVisibility)).Length
+		wallVisibility = (WallVisibility)(((int)wallVisibility + 1) % 3);
+		switch (wallVisibility) {
+			case WallVisibility.none:
+				WallsParents[1].gameObject.SetActive(false);
+				break;
+			case WallVisibility.flat:
+				WallsParents[0].gameObject.SetActive(true);
+				break;
+			case WallVisibility.not_flat:
+				WallsParents[0].gameObject.SetActive(false);
+				WallsParents[1].gameObject.SetActive(true);
+				break;
 		}
-	}
-
-	private void SetPlayerSpawnButton(bool oui) {
-		if (oui) {
-			playerButtonImage.color = Color.green;
-			selectingPlayerSpawn = true;
-			patientButtonImage.color = Color.white;
-			selectingPatientSpawn = false;
-		} else {
-			playerButtonImage.color = Color.white;
-			selectingPlayerSpawn = false;
-		}
-	}
-
-	public void SelectPatientSpawn() {
-		selectingPatientSpawn = !selectingPatientSpawn;
-		SetPatientSpawnButton(selectingPatientSpawn);
-	}
-
-	public void SelectPlayerSpawn() {
-		selectingPlayerSpawn = !selectingPlayerSpawn;
-		SetPlayerSpawnButton(selectingPlayerSpawn);
-	}
-
-	public bool DoesHitUI() {
-		m_PointerEventData = new PointerEventData(m_EventSystem);
-		m_PointerEventData.position = Input.mousePosition;
-
-		List<RaycastResult> results = new List<RaycastResult>();
-		m_Raycaster.Raycast(m_PointerEventData, results);
-
-		return results.Count != 0;
 	}
 
 	public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
-		if(canDraw && !selectingPatientSpawn && !selectingPlayerSpawn) {
-			Cell cell;
-			if(grids[currentLayer].TryGetValue((i, j), out cell)) {
-				if(!reset) {
-					if (isWallFillerSelected) {
+		if (drawType == DrawType.floor || drawType == DrawType.walls || drawType == DrawType.fillFloor || drawType == DrawType.fillWalls) {
+			int targetLayer = 0;
+			if(drawType == DrawType.walls || drawType == DrawType.fillWalls) {
+				targetLayer = 1;
+				if (wallVisibility == WallVisibility.none) SwitchWallsVisibility();
+            }
+			if (grids[targetLayer].TryGetValue((i, j), out Cell cell)) {
+				if (!reset) {
+					if (drawType == DrawType.fillWalls) {
 						WallFill(i, j);
-					} else if (isFloorFillerSelected) {
+					} else if (drawType == DrawType.fillFloor) {
 						FloorFill(i, j, cell);
 					} else if ((cell.value != 0 || clicked)) {
-						int newValue = ComputeCellValue(i, j);
+						int newValue = ComputeCellValue(i, j, targetLayer);
 						if (newValue != cell.value) {
 							cell.value = newValue;
-							ChangeSprite(cell, currentLayer);
-							if(currentLayer == 1 && newValue > 1) fullWallsGrid[(i, j)].sprite = fullWallSprites[newValue-2];
+							ChangeSprite(cell, targetLayer);
+							if (targetLayer == 1 && newValue > 0) fullWallsGrid[(i, j)].sprite = fullWallSprites[newValue - 1];
 							Propagate(i, j);
 						}
 					}
 				} else if (cell.value != 0) {
 					cell.value = 0;
-					ChangeSprite(cell, currentLayer);
-					if (currentLayer == 1) fullWallsGrid[(i, j)].sprite = null;
+					ChangeSprite(cell, targetLayer);
+					if (targetLayer == 1) fullWallsGrid[(i, j)].sprite = null;
 					Propagate(i, j);
 				}
 			}
@@ -221,10 +180,10 @@ public class LevelEditorController : MonoBehaviour {
 		if (cell.value > 0)
 			return;
 
-		int newValue = ComputeCellValue(i, j);
+		int newValue = ComputeCellValue(i, j, 0);
 		if (cell.value != newValue) {
 			cell.value = newValue;
-			ChangeSprite(cell, currentLayer);
+			ChangeSprite(cell, 0);
 
 			Propagate(i, j);
 		}
@@ -257,8 +216,8 @@ public class LevelEditorController : MonoBehaviour {
 				first = false;
 			else
 				return;
-        }
-        if (!grids[0].TryGetValue((i+1, j), out Cell cell) || cell.value == 0) {
+		}
+		if (!grids[0].TryGetValue((i+1, j), out Cell cell) || cell.value == 0) {
 			tryCells((i, j-1), (i, j+1), (i-1, j), i, j, oldI, oldJ);
 		} else if (!grids[0].TryGetValue((i, j-1), out cell) || cell.value == 0) {
 			tryCells((i+1, j), (i-1, j), (i, j+1), i, j, oldI, oldJ);
@@ -275,7 +234,7 @@ public class LevelEditorController : MonoBehaviour {
 		if (grids[0].TryGetValue((i+1, j+1), out Cell cell) && cell.value == 0) {
 			if(!tryDirection(i+1, j, oldI, oldJ, i, j))
 				tryDirection(i, j+1, oldI, oldJ, i, j);
-        } else if (grids[0].TryGetValue((i+1, j-1), out cell) && cell.value == 0) {
+		} else if (grids[0].TryGetValue((i+1, j-1), out cell) && cell.value == 0) {
 			if (!tryDirection(i + 1, j, oldI, oldJ, i, j))
 				tryDirection(i, j - 1, oldI, oldJ, i, j);
 		} else if (grids[0].TryGetValue((i - 1, j - 1), out cell) && cell.value == 0) {
@@ -296,13 +255,12 @@ public class LevelEditorController : MonoBehaviour {
 
 	private bool tryDirection(int newI, int newJ, int oldI, int oldJ, int currentI, int currentJ) {
 		if(newI != oldI || newJ != oldJ) {
-			Debug.Log((newI, newJ) + " layer 1, value 1");
 			grids[1][(newI, newJ)].value = 1;
 			StepByStep(newI, newJ, currentI, currentJ);
 			return true;
-        }
+		}
 		return false;
-    }
+	}
 
 	private void Propagate(int i, int j) {
 		ClickedCell(i + 1, j, false, false);
@@ -408,56 +366,56 @@ public class LevelEditorController : MonoBehaviour {
 
 	// 16   X	// 17 X empty NE // 18 X Empty 270 // 19 X empty 180 // 20 X empty 90
 
-	private int ComputeCellValue(int i, int j) {
+	private int ComputeCellValue(int i, int j, int layer) {
 		// ça peut être sympa de faire un joli algo ici
 		Cell cell;
-		int neighbours = CountNeighbours(i, j);
+		int neighbours = CountNeighbours(i, j, layer);
 		switch (neighbours) {
 			case 0:
 				return 1;
 			case 1:
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
-				if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
-				if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
+				if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
+				if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
 				return 5;
 			case 2:
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
-				if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
-				if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
+				if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
+				if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
 				return 11;
 			case 3:
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
-				if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
-				if (grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
+				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
+				if (grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
 				return 15;
 			case 4:
-				if(currentLayer == 1)
+				if(layer == 1)
 					return 16;
 
 				// Check diag neighbours to see if empty corner
 				// We can't NOT find diag neighbours because cell has 4 neighbours and grid is rect-shape
-				if (grids[currentLayer][(i - 1, j + 1)].value == 0)
+				if (grids[layer][(i - 1, j + 1)].value == 0)
 					return 17;
-				if (grids[currentLayer][(i - 1, j - 1)].value == 0)
+				if (grids[layer][(i - 1, j - 1)].value == 0)
 					return 18;
-				if (grids[currentLayer][(i + 1, j - 1)].value == 0)
+				if (grids[layer][(i + 1, j - 1)].value == 0)
 					return 19;
-				if (grids[currentLayer][(i + 1, j + 1)].value == 0)
+				if (grids[layer][(i + 1, j + 1)].value == 0)
 					return 20;
 				return 16;
 		}
 		return 0;
 	}
 
-	private int CountNeighbours(int i, int j) {
+	private int CountNeighbours(int i, int j, int layer) {
 		Cell cell;
 		int sum = 0;
-		if (grids[currentLayer].TryGetValue((i, j + 1), out cell) && cell.value != 0) sum++;
-		if (grids[currentLayer].TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
-		if (grids[currentLayer].TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
-		if (grids[currentLayer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
+		if (grids[layer].TryGetValue((i, j + 1), out cell) && cell.value != 0) sum++;
+		if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
+		if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
+		if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
 		return sum;
 	}
 
@@ -465,11 +423,8 @@ public class LevelEditorController : MonoBehaviour {
 		for (int i = 0; i < grids.Length; i++)
 			ClearGrid(i);
 
-
-		Destroy(PlayerSpawn);
-		Destroy(PatientSpawn);
-		PlayerSpawn = null;
-		PatientSpawn = null;
+		PlayerSpawn.SetActive(false);
+		PatientSpawn.SetActive(false);
 		LevelDiseasesController.instance.DeleteAll();		
 	}
 
@@ -490,10 +445,10 @@ public class LevelEditorController : MonoBehaviour {
 	public void RefreshGrid(int layer, bool recompute = false) {
 		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
 			if (recompute && cell.Value.value > 0)
-				cell.Value.value = ComputeCellValue(cell.Key.Item1, cell.Key.Item2);
+				cell.Value.value = ComputeCellValue(cell.Key.Item1, cell.Key.Item2, layer);
 			ChangeSprite(cell.Value, layer);
-			if (layer == 1 && cell.Value.value > 1)
-				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].sprite = fullWallSprites[cell.Value.value - 2];
+			if (layer == 1 && cell.Value.value > 0)
+				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].sprite = fullWallSprites[cell.Value.value - 1];
 		}
 	}
 
@@ -512,7 +467,7 @@ public class LevelEditorController : MonoBehaviour {
 
 		this.rows = rows;
 		this.columns = columns;
-		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);
+		ResetCamera();
 	}
 
 	private void InitGrid() {
@@ -522,8 +477,8 @@ public class LevelEditorController : MonoBehaviour {
 				for (int j = 0; j < columns; j++)
 					InitCell(x, i, j);
 		}
-		
-		Camera.main.transform.position = new Vector3((columns-1)/2f/size, (1-rows)/2f/size, -10f);
+
+		ResetCamera();
 	}
 
 	private void InitCell(int x, int i, int j) {
@@ -546,5 +501,24 @@ public class LevelEditorController : MonoBehaviour {
 			Destroy(cell.go);
 			grids[x].Remove((i, j));
 		}
+	}
+
+	public void SetFollower(Sprite followerSprite) {
+		drawType = DrawType.levelObject;
+		followerSR.sprite = followerSprite;
+	}
+
+	public void UnsetFollower() {
+		drawType = DrawType.none;
+		followerSR.sprite = null;
+	}
+
+	private void ResetCamera() {
+		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);
+	}
+
+	void OnEnable() {
+		ResetCamera();
+
 	}
 }

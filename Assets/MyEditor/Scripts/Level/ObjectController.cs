@@ -11,6 +11,6 @@ public class ObjectController : MonoBehaviour {
     }
 
     public void SendInformations() {
-        LevelObjectsController.instance.SetFollower(sprite);
+        LevelEditorController.instance.SetFollower(sprite);
     }
 }

@@ -10,7 +10,7 @@ public abstract class DataController : MonoBehaviour {
 	[SerializeField] protected string path;
 	protected bool clickedDelete;
 
-	protected void Start() {
+	protected void Awake() {
 		path = Path.Combine(Application.dataPath, path);
 		FetchFilesNamesToLoad();
 	}
@@ -18,8 +18,8 @@ public abstract class DataController : MonoBehaviour {
 	public abstract void LoadData();
     public abstract void SaveData();
 
-	protected virtual void FetchFilesNamesToLoad() {
-		string[] paths = System.IO.Directory.GetFiles(path);
+	protected void FetchFilesNamesToLoad() {
+		string[] paths = Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
@@ -30,6 +30,11 @@ public abstract class DataController : MonoBehaviour {
 	}
 
 	protected void WriteToFile(string content) {
+		if (FileNameInputField.text == "") {
+			Debug.LogWarning("Impossible de sauvegarder sans entrer un nom");
+			return;
+		}
+
 		StreamWriter sw = new StreamWriter(Path.Combine(path, FileNameInputField.text + ".json"));
 		sw.WriteLine(content);
 		sw.Close();
@@ -55,5 +60,9 @@ public abstract class DataController : MonoBehaviour {
 				File.Delete(filePath);
 			FetchFilesNamesToLoad();
 		}
+	}
+
+	void OnEnable() {
+		FetchFilesNamesToLoad();
 	}
 }

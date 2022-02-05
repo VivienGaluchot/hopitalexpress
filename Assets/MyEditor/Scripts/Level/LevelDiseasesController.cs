@@ -10,14 +10,14 @@ public class LevelDiseasesController : MonoBehaviour {
     private GameObject TemplateElement;
     public Dictionary<string, GameObject> Elements { get; private set; }
 
+    private void Awake() { instance = this; }
+
     private void Start() {
-        instance = this;
         Elements = new Dictionary<string, GameObject>();
         TemplateElement = parent.Find("TemplateElement").gameObject;
     }
 
     public void TryAddDisease(string name) {
-        LevelEditorController.instance.StopSelectingSpawns();
         if (!Elements.ContainsKey(name)) {
             GameObject newGO = Instantiate(TemplateElement, parent);
             newGO.GetComponentInChildren<Text>().text = name;
@@ -34,7 +34,6 @@ public class LevelDiseasesController : MonoBehaviour {
     }
 
     public void TryDeleteDisease(Text text) {
-        LevelEditorController.instance.StopSelectingSpawns();
         GameObject value;
         Elements.TryGetValue(text.text, out value);
         if(value) {

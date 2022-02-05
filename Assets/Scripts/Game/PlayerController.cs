@@ -108,7 +108,9 @@ public class PlayerController : MonoBehaviour {
 				perso.SetStoppedDirection(input);
 			}
 			rb2D.velocity = input * speed;
+			//rb2D.MovePosition()
 		}
+
 		
 		switch (perso.direction) {
 			case WalkController.Dir.Down:

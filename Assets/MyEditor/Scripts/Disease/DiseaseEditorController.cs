@@ -12,13 +12,13 @@ public class DiseaseEditorController : MonoBehaviour {
     public int sickFaceID;
     public Transform ScrollviewContent;
 
+    private void Awake() { instance = this; }
     private void Start() {
-        instance = this;
         FetchSickFaces();
-        FetchTreatmentDDOptions();
+        FetchFromFiles();
     }
 
-    private void FetchTreatmentDDOptions() {
+    private void FetchFromFiles() {
         string[] treatments = Directory.GetFiles(Path.Combine(Application.dataPath, "MyEditor/Data/Treatment"));
         List<string> treatmentsList = new List<string>();
         foreach (string s in treatments) {

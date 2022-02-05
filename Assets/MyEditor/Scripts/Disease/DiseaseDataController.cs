@@ -44,6 +44,11 @@ public class DiseaseDataController : DataController {
     }
 
 	public override void LoadData() {
+		if (FilesDropdown.options.Count == 0) {
+			Debug.LogWarning("Aucun fichier à charger");
+			return;
+		}
+
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		DiseaseData Data = JsonUtility.FromJson<DiseaseData>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
