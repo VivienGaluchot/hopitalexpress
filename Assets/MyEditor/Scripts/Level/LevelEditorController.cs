@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
+using System;
 
 public enum DrawType { 
 	floor,
@@ -26,6 +27,10 @@ public class Cell {
 public class LevelEditorController : MonoBehaviour {
 	public static LevelEditorController instance;
 
+	[SerializeField] private InputField sizeIF;
+	[SerializeField] private InputField rowsIF;
+	[SerializeField] private InputField columnsIF;
+
 	public float size;
 	public int columns, rows;
 	public DrawType drawType;
@@ -33,7 +38,7 @@ public class LevelEditorController : MonoBehaviour {
 	public Sprite[] floorSprites, wallSprites, fullWallSprites;
 	public Sprite[][] sprites;
 	public Dictionary<(int, int), Cell>[] grids { get; private set; }
-	public Dictionary<(int, int), SpriteRenderer> fullWallsGrid { get; private set; }
+	public Dictionary<(int, int), GameObject> fullWallsGrid { get; private set; }
 
 	private Transform[] CellsParents, WallsParents;
 	private Transform ObjectsParent;
@@ -57,6 +62,11 @@ public class LevelEditorController : MonoBehaviour {
 	private void Awake() { 
 		instance = this;
 		drawType = DrawType.none;
+
+		size = Single.Parse(sizeIF.text);
+		rows = Int32.Parse(rowsIF.text);
+		columns = Int32.Parse(columnsIF.text);
+
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
 		grids = new Dictionary<(int, int), Cell>[2];
 		CellsParents = new Transform[2];
@@ -66,13 +76,13 @@ public class LevelEditorController : MonoBehaviour {
 		WallsParents = new Transform[2];
 		WallsParents[0] = CellsParents[1];
 		WallsParents[1] = transform.Find("FullWallsLayer");
-		fullWallsGrid = new Dictionary<(int, int), SpriteRenderer>();
+		fullWallsGrid = new Dictionary<(int, int), GameObject>();
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
 				newCell.transform.SetParent(WallsParents[1]);
 				newCell.transform.position = new Vector3(j / size, -i / size, 0);
-				fullWallsGrid.Add((i, j), newCell.GetComponent<SpriteRenderer>());
+				fullWallsGrid.Add((i, j), newCell);
 			}
 		}
 
@@ -100,13 +110,9 @@ public class LevelEditorController : MonoBehaviour {
 			Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 			switch (drawType) {
 				case DrawType.playerSpawn:
-					if (!PlayerSpawn.activeSelf)
-						PlayerSpawn.SetActive(true);
 					SetPlayerSpawn(worldMousePos);
 					break;
 				case DrawType.patientSpawn:
-					if (!PatientSpawn.activeSelf)
-						PatientSpawn.SetActive(true);
 					SetPatientSpawn(worldMousePos);
 					break;
 				case DrawType.levelObject:
@@ -118,8 +124,16 @@ public class LevelEditorController : MonoBehaviour {
 	}
 
 	// -------------- SPAWNS
-	public void SetPlayerSpawn(Vector3 pos) { PlayerSpawn.transform.position = pos; }
-	public void SetPatientSpawn(Vector3 pos) { PatientSpawn.transform.position = pos; }
+	public void SetPlayerSpawn(Vector3 pos) {
+		if (!PlayerSpawn.activeSelf)
+			PlayerSpawn.SetActive(true); 
+		PlayerSpawn.transform.position = pos; 
+	}
+	public void SetPatientSpawn(Vector3 pos) {
+		if (!PatientSpawn.activeSelf)
+			PatientSpawn.SetActive(true); 
+		PatientSpawn.transform.position = pos; 
+	}
 	// -------------- END SPAWNS
 	// -------------- VISIBILITY SWITCHERS
 	public void SwitchObjectsVisibility() { ObjectsParent.gameObject.SetActive(!ObjectsParent.gameObject.activeSelf); }
@@ -159,14 +173,14 @@ public class LevelEditorController : MonoBehaviour {
 						if (newValue != cell.value) {
 							cell.value = newValue;
 							ChangeSprite(cell, targetLayer);
-							if (targetLayer == 1 && newValue > 0) fullWallsGrid[(i, j)].sprite = fullWallSprites[newValue - 1];
+							if (targetLayer == 1 && newValue > 0) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue - 1];
 							Propagate(i, j);
 						}
 					}
 				} else if (cell.value != 0) {
 					cell.value = 0;
 					ChangeSprite(cell, targetLayer);
-					if (targetLayer == 1) fullWallsGrid[(i, j)].sprite = null;
+					if (targetLayer == 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
 					Propagate(i, j);
 				}
 			}
@@ -437,7 +451,7 @@ public class LevelEditorController : MonoBehaviour {
 		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
 			cell.Value.value = 0;
 			ChangeSprite(cell.Value, layer);
-			if (layer == 1) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].sprite = null;
+			if (layer == 1) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = null;
 		}
 	}
 	public void RefreshAllGrid(bool recompute = false) {
@@ -451,10 +465,16 @@ public class LevelEditorController : MonoBehaviour {
 				cell.Value.value = ComputeCellValue(cell.Key.Item1, cell.Key.Item2, layer);
 			ChangeSprite(cell.Value, layer);
 			if (layer == 1 && cell.Value.value > 0)
-				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].sprite = fullWallSprites[cell.Value.value - 1];
+				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value - 1];
 		}
 	}
+	public void ResizeGrid() {
+		int newRows = Int32.Parse(rowsIF.text);
+		int newColumns = Int32.Parse(columnsIF.text);
+		ResizeGrid(newRows, newColumns);
+	}
 	public void ResizeGrid(int rows, int columns) {
+		ClearAllGrid();
 		for (int i = 0; i < Mathf.Max(rows, this.rows); i++)
 			for (int j = 0; j < Mathf.Max(columns, this.columns); j++)
 				if (i >= rows || j >= columns)
@@ -473,9 +493,14 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	private void DeleteCell(int x, int i, int j) {
 		Cell cell;
-		if(grids[x].TryGetValue((i, j), out cell)) {
+		GameObject fullWallGO;
+		if (grids[x].TryGetValue((i, j), out cell)) {
 			Destroy(cell.go);
 			grids[x].Remove((i, j));
+			if(fullWallsGrid.TryGetValue((i, j), out fullWallGO)) {
+				Destroy(fullWallGO);
+				fullWallsGrid.Remove((i, j));
+            }
 		}
 	}
 	// -------------- END GRID MANAGEMENT

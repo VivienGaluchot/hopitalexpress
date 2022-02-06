@@ -33,7 +33,7 @@ public class DiseasesDropdown : MonoBehaviour {
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta")) {
 				GameObject newElem = Instantiate(TemplateElement, ElementsParent.transform);
-				newElem.transform.localPosition = new Vector3(0, templateHeight * 2f *  Elements.Count, 0f);
+				newElem.transform.localPosition = new Vector3(0, -templateHeight * Elements.Count, 0f);
 				newElem.GetComponentInChildren<Text>().text = Path.GetFileNameWithoutExtension(s);
 				newElem.SetActive(true);
 				Elements.Add(newElem);

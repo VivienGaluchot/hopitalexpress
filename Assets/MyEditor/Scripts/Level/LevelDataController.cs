@@ -84,15 +84,12 @@ public class LevelDataController : DataController {
 
 	private void DisplayLoadedData(LevelData Data) {
 		LevelEditorController.instance.ResizeGrid(Data.rows, Data.columns);
-		LevelEditorController.instance.ClearAllGrid();
 		for(int i = 0; i < Data.layers.Count; i++)
 			foreach (CellData cell in Data.layers[i].cells) {
 				LevelEditorController.instance.grids[i][(cell.x, cell.y)].value = cell.value; 
 				if (i == 1 && cell.value > 1) 
-					LevelEditorController.instance.fullWallsGrid[(cell.x, cell.y)].sprite = LevelEditorController.instance.fullWallSprites[cell.value - 2];
+					LevelEditorController.instance.fullWallsGrid[(cell.x, cell.y)].GetComponent<SpriteRenderer>().sprite = LevelEditorController.instance.fullWallSprites[cell.value - 2];
 			}
-
-
 
 		LevelEditorController.instance.RefreshAllGrid();
 
