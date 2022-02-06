@@ -43,6 +43,7 @@ public class SeatController : MonoBehaviour {
 				} else {
 					targetWc.direction = WalkController.Dir.Down;
 				}
+				targetWc.isSeated = true;
 			}
 
 			return true;
@@ -57,6 +58,12 @@ public class SeatController : MonoBehaviour {
 			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
 			r2d.bodyType = holdRBType;
 			r2d.simulated = holdIsSimulated;
+			
+			var targetWc = goHeld.GetComponent<WalkController>();
+			if (targetWc) {
+				targetWc.isSeated = false;
+			}
+
 			GameObject returnGO = goHeld;
 			goHeld = null;
 			isHolding = false;

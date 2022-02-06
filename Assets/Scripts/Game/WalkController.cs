@@ -7,6 +7,8 @@ public class WalkController : MonoBehaviour {
 	}
 
 	public Dir direction = Dir.Down;
+	
+	public bool isSeated = false;
 
 	// direction to apply when the perso is not moving
 	protected Dir stoppedDirection = Dir.Down;
