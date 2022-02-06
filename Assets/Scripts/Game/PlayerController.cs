@@ -78,9 +78,10 @@ public class PlayerController : MonoBehaviour {
 			{ (HeldTypes.item, "Trash"), new List<TryTargetedAction>() { TryPutItemInTrash } },
 
 			// fauteuil in hand
-			{ (HeldTypes.fauteuil, "Seat"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
-			{ (HeldTypes.fauteuil, "Fauteuil"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
-			{ (HeldTypes.fauteuil, "Machine"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Player"), new List<TryTargetedAction>() { TryTakePlayerToFauteuil } },
+			{ (HeldTypes.fauteuil, "Seat"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Fauteuil"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Machine"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
 			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutFromFauteuilToTrash } },
 			{ (HeldTypes.fauteuil, "Exit"), new List<TryTargetedAction>() { TryPutPatientFromFauteuilToExit } },
 		};
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 			{ HeldTypes.item, new List<TryUntargetedAction>() { TryDropItem } },
 
 			// fauteuil in hand
-			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFauteuil } },
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { DropPlayerFromFauteuil, TryDropFauteuil } },
 		};
 	}
 
@@ -119,7 +120,10 @@ public class PlayerController : MonoBehaviour {
 			if (input.sqrMagnitude > (0.1 * 0.1)) {
 				walk.SetStoppedDirection(input);
 			}
-			rb2D.velocity = input * speed;
+			// may not be simulated if in a fauteuil
+			if (rb2D.simulated) {
+				rb2D.velocity = input * speed;
+			}
 		}
 		Vector3 vDir = Vector3.down;
 		switch (walk.direction) {
@@ -309,12 +313,24 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
-	private bool TryTakePatientFromSeatToFauteuil(GameObject target) {
+	private bool TryTakeFromSeatToFauteuil(GameObject target) {
 		return target.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<FauteuilController>().seat);
 	}
 
-	private bool TryPutPatientFromFauteuilToSeat(GameObject target) {
+	private bool TryPutFromFauteuilToSeat(GameObject target) {
 		return HeldGO.GetComponent<FauteuilController>().seat.TryTansfertTo(target.GetComponent<SeatController>());
+	}
+
+	private bool TryTakePlayerToFauteuil(GameObject target) {
+		return HeldGO.GetComponent<FauteuilController>().seat.ReceiveHold(target);
+	}
+
+	private bool DropPlayerFromFauteuil() {
+		var player = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+		if (player) {
+			return true;
+		}
+		return false;
 	}
 
 	private bool TryPutFromFauteuilToTrash(GameObject target) {
