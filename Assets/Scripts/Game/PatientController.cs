@@ -7,7 +7,6 @@ public class PatientController : MonoBehaviour {
 
 	[SerializeField] private GameObject face;
 	[SerializeField] private GameObject body;
-	[SerializeField] private SpriteRenderer need;
 	[SerializeField] private GameObject needBubble;
 	[SerializeField] private Image TimeBarImage;
 
@@ -28,6 +27,7 @@ public class PatientController : MonoBehaviour {
 	public int patientValue { get; private set; }
 
 	private float periodWithoutDiseaseAnimation = 0;
+	private GameObject needIcon = null;
 
 	private void Start() {
 		state = States.sick;
@@ -64,7 +64,15 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public void DisplayNextNeed() {
-		need.GetComponent<SpriteRenderer>().sprite = myDisease.GetNeedSprite();
+		if (needIcon) {
+			Destroy(needIcon);
+			needIcon = null;
+		}
+		GameObject icon = myDisease.GetNeedIcon();
+		if (icon != null) {
+			icon.transform.SetParent(needBubble.transform);
+			needIcon = icon;
+		}
 	}
 
 	public void TakeItem(GameObject item) {
@@ -92,7 +100,6 @@ public class PatientController : MonoBehaviour {
 
 	public void DiseaseLifetimeElapsed() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
-		need.gameObject.SetActive(false);
 		state = States.dead;
 		face.GetComponent<SkinManager>().skinSelected = 3;
 		needBubble.SetActive(false);
@@ -101,7 +108,6 @@ public class PatientController : MonoBehaviour {
 
 	public void DiseaseCured() {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
-		need.gameObject.SetActive(false);
 		face.GetComponent<SkinManager>().skinSelected = 4;
 		needBubble.SetActive(false);
 		state = States.cured;
