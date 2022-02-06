@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reaper
       objectReference: {fileID: 0}
+    - target: {fileID: 3508764698176005534, guid: 385536262fcfacc4a8405a90425c7dee, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155283708339216236, guid: 385536262fcfacc4a8405a90425c7dee, type: 3}
       propertyPath: m_Sprite
       value: 
