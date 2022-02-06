@@ -178,8 +178,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reaper Vivien
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3974185313395031887, guid: 385536262fcfacc4a8405a90425c7dee, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 385536262fcfacc4a8405a90425c7dee, type: 3}
 --- !u!1 &519420028
 GameObject:
@@ -975,7 +974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d797dc6d283354d9a92421dc694235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
 --- !u!114 &4471882129421653230
 MonoBehaviour:
   m_ObjectHideFlags: 0
