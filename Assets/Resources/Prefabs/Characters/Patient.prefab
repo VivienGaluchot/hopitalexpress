@@ -557,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   face: {fileID: 2301655207604851932}
   body: {fileID: 1402126273352743420}
+  needGO: {fileID: 3807074980244481042}
   needBubble: {fileID: 3807074980244481042}
   TimeBarImage: {fileID: 6337524270730507428}
   noDiseaseDuration: 5
@@ -1187,6 +1188,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4954382836697478401, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -1274,6 +1279,10 @@ PrefabInstance:
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870510030251126658, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7882407810255483111, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_PresetInfoIsWorld

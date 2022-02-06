@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
+	public static GameController instance;
+
 
 	[SerializeField] private float levelTime;
 	[SerializeField] private Image levelTimeImage;
@@ -42,7 +44,11 @@ public class GameController : MonoBehaviour {
 
 	public Infos[] DiseasesAvailable;
 
-	private void Start() {
+    private void Awake() {
+		instance = this;
+    }
+
+    private void Start() {
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
 		isLoaded = false;
@@ -151,7 +157,6 @@ public class GameController : MonoBehaviour {
 		if (emptySeat != null) {
 			newPatient = Instantiate(Patient, emptySeat.transform.position, emptySeat.transform.rotation);
 			newPatient.name = "patient " + counter++;
-			newPatient.GetComponent<PatientController>().Initialize(this);
 			emptySeat.GetComponent<SeatController>().ReceiveHold(newPatient);
 
 			return true;
@@ -166,7 +171,6 @@ public class GameController : MonoBehaviour {
 						: patientQueueDirection == "DOWN" ? new Vector3(0, -i, 0) : new Vector3(-i, 0, 0);
 					PatientQueue[i].transform.localPosition = nextPos;
 					PatientQueue[i].name = "patient " + counter++;
-					PatientQueue[i].GetComponent<PatientController>().Initialize(this);
 
 					return true;
 				}
@@ -189,7 +193,7 @@ public class GameController : MonoBehaviour {
 
 	private void NewPlayer(int id) {
 		GameObject newPlayer = Instantiate(Player, playerSpawn, Quaternion.identity);
-		newPlayer.GetComponent<PlayerController>().Initialize(id, this, playerSpeed);
+		newPlayer.GetComponent<PlayerController>().Initialize(id, playerSpeed);
 		Players.Add(id, newPlayer);
 
 		if (!isPlaying) {
@@ -202,8 +206,8 @@ public class GameController : MonoBehaviour {
 		elapsedTime = currentSpawnRate;
 	}
 
-	public void PatientCured(PatientController patient) {
-		score += patient.patientValue * multiplicator++;
+	public void PatientCured(int patientValue) {
+		score += patientValue * multiplicator++;
 		if (scoreText)
 			scoreText.text = score.ToString();
 		if (coin) {
@@ -211,8 +215,8 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void PatientDead(PatientController patient) {
-		score -= patient.patientValue;
+	public void PatientDead(int patientValue) {
+		score -= patientValue;
 		multiplicator = 1;
 		if (scoreText)
 			scoreText.text = score.ToString();
