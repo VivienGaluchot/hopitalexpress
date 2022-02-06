@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private float speed;
 	private Rigidbody2D rb2D;
 	private CapsuleCollider2D detectionCollider;
+	private float range;
 	private WalkController walk;
 
 	// Hold object
@@ -51,13 +52,14 @@ public class PlayerController : MonoBehaviour {
 		speed = _speed;
 	}
 
-	private void Start() {
+    private void Awake() {
 		action = Actions.nothing;
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CapsuleCollider2D>();
 		walk = GetComponent<WalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
-				
+		range = Vector3.Distance(transform.position, detectionCollider.offset * 2);
+
 		targets = new HashSet<GameObject>();
 		targetedActions = new Dictionary<(HeldTypes, string), List<TryTargetedAction>>() {
 			// nothing in hand
@@ -82,7 +84,6 @@ public class PlayerController : MonoBehaviour {
 			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutFromFauteuilToTrash } },
 			{ (HeldTypes.fauteuil, "Exit"), new List<TryTargetedAction>() { TryPutPatientFromFauteuilToExit } },
 		};
-
 		untargetedActions = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
 			// item in hand
 			{ HeldTypes.item, new List<TryUntargetedAction>() { TryDropItem } },
@@ -263,7 +264,15 @@ public class PlayerController : MonoBehaviour {
 	private bool TryDropItem() {
 		HeldGO.transform.parent = null;
 		HeldGO.transform.rotation = Quaternion.identity;
-		HeldGO.transform.position = transform.position + (Vector3)detectionCollider.offset * 2;
+
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, detectionCollider.offset, range, LayerMask.GetMask("Wall"));
+
+		if(hit.collider) {
+			HeldGO.transform.position = hit.point;
+		} else {
+			HeldGO.transform.position = transform.position + (Vector3)detectionCollider.offset * 2;
+		}
+
 		HeldGO.GetComponent<Rigidbody2D>().simulated = true;
 		HeldGO = null;
 		heldType = HeldTypes.none;
