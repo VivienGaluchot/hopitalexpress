@@ -35,21 +35,21 @@ public class ReaperController : MonoBehaviour
 		int random = Random.Range(0, 10);
 		switch (random) {
 			case 0:
-				currentDecision.x += .5f;
+				currentDecision.x = 1;
 				break;
 			case 1:
-				currentDecision.x -= .5f;
+				currentDecision.x = -1;
 				break;
 			case 2:
-				currentDecision.y += .5f;
+				currentDecision.y = 1;
 				break;
 			case 3:
-				currentDecision.y -= .5f;
+				currentDecision.y = -1;
 				break;
 			case 4:
 				currentDecision.Set(0, 0);
 				break;
 	   }
-	   currentDecision = Vector2.ClampMagnitude(currentDecision, 1.5f);
+	   currentDecision = Vector2.ClampMagnitude(currentDecision, 1);
 	}
 }
