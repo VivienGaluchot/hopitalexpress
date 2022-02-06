@@ -10,11 +10,12 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private Transform PlaceHolder;
 	private float speed;
 	private Rigidbody2D rb2D;
+	private CapsuleCollider2D detectionCollider;
+	private WalkController walk;
 
-	private List<GameObject> seatTargets, itemTargets, containerTargets, fauteuilTargets;
-	private GameObject trashTarget, exitTarget, craftingTableTarget;
+	// Hold object
+
 	private GameObject HeldGO;
-
 
 	enum HeldTypes {
 		none,
@@ -23,6 +24,19 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private HeldTypes heldType;
+
+	// Actions
+
+	public delegate bool TryTargetedAction(GameObject target);
+
+	HashSet<GameObject> targets = new HashSet<GameObject>();
+
+	Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions;
+
+	public delegate bool TryUntargetedAction();
+
+	Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions;
+	
 
 	enum Actions {
 		nothing,
@@ -33,9 +47,6 @@ public class PlayerController : MonoBehaviour {
 	private CraftingTableController craftTable;
 	private ContainerController containerGathered;
 
-	private CapsuleCollider2D detectionCollider;
-
-	private WalkController perso;
 
 	public void Initialize(int _id, GameController parent, float _speed) {
 		id = _id;
@@ -45,14 +56,42 @@ public class PlayerController : MonoBehaviour {
 
 	private void Start() {
 		action = Actions.nothing;
-		seatTargets = new List<GameObject>();
-		itemTargets = new List<GameObject>();
-		containerTargets = new List<GameObject>();
-		fauteuilTargets = new List<GameObject>();
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CapsuleCollider2D>();
-		perso = GetComponent<WalkController>();
+		walk = GetComponent<WalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
+				
+		targets = new HashSet<GameObject>();
+		targetedActions = new Dictionary<(HeldTypes, string), List<TryTargetedAction>>() {
+			// nothing in hand
+			{ (HeldTypes.none, "Container"), new List<TryTargetedAction>() { TryTakeFromContainer } },
+			{ (HeldTypes.none, "Item"), new List<TryTargetedAction>() { TryTakeItemFromGround } },
+			{ (HeldTypes.none, "Fauteuil"), new List<TryTargetedAction>() { TryTakeFauteuil } },
+			{ (HeldTypes.none, "CraftingTable"), new List<TryTargetedAction>() { TryTakeItemFromCraft } },
+
+			// item in hand
+			{ (HeldTypes.item, "Seat"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
+			{ (HeldTypes.item, "Fauteuil"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
+			{ (HeldTypes.item, "Machine"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
+			{ (HeldTypes.item, "Container"), new List<TryTargetedAction>() { TryExchangeFromContainer } },
+			{ (HeldTypes.item, "CraftingTable"), new List<TryTargetedAction>() { TryPutItemInCraft } },
+			{ (HeldTypes.item, "Trash"), new List<TryTargetedAction>() { TryPutItemInTrash } },
+
+			// fauteuil in hand
+			{ (HeldTypes.fauteuil, "Seat"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Fauteuil"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Machine"), new List<TryTargetedAction>() { TryTakePatientFromSeatToFauteuil, TryPutPatientFromFauteuilToSeat } },
+			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutFromFauteuilToTrash } },
+			{ (HeldTypes.fauteuil, "Exit"), new List<TryTargetedAction>() { TryPutPatientFromFauteuilToExit } },
+		};
+
+		untargetedActions = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
+			// item in hand
+			{ HeldTypes.item, new List<TryUntargetedAction>() { TryDropItem } },
+
+			// fauteuil in hand
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFauteuil } },
+		};
 	}
 
 	private void Update() {
@@ -68,31 +107,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Fire" + id)) {
-			// Are we already holding something?
-			switch (heldType) {
-				case HeldTypes.item:
-					// We try to give the item, if we can't, then drop it
-					if (!TryGiveItemToPatient())
-						if (!TryTakeFromContainer(true))
-							if (!TryPutItemInCraft())
-								if (!TryPutInTrash())
-									TryDropItem();
-					break;
-				case HeldTypes.fauteuil:
-					if (!TryTakePatientFromSeatToFauteuil())
-						if (!TryPutPatientFromFauteuilToSeat())
-							if (!TryPutFromFauteuilToTrash())
-								if (!TryPutPatientFromFauteuilToExit())
-									TryDropFauteuil();
-					break;
-				case HeldTypes.none:
-					// Holding nothing, can we grab something?
-					if (!TryTakeFauteuil())
-						if (!TryTakeItemFromGround())
-							if (!TryTakeItemFromCraft())
-								TryTakeFromContainer();
-					break;
-			}
+			PerformAction();
 		}
 	}
 
@@ -102,12 +117,12 @@ public class PlayerController : MonoBehaviour {
 			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
 			Vector3 input = Vector2.ClampMagnitude(new Vector2(horiz, vert), 1);
 			if (input.sqrMagnitude > (0.1 * 0.1)) {
-				perso.SetStoppedDirection(input);
+				walk.SetStoppedDirection(input);
 			}
 			rb2D.velocity = input * speed;
 		}
 		Vector3 vDir = Vector3.down;
-		switch (perso.direction) {
+		switch (walk.direction) {
 			case WalkController.Dir.Down:
 				vDir = Vector3.down;
 				break;
@@ -124,6 +139,14 @@ public class PlayerController : MonoBehaviour {
 		float detectionOffset = (heldType != HeldTypes.fauteuil) ? 0.25f : 1f;
 		detectionCollider.offset = detectionOffset * vDir;
 	}
+	
+	private void OnTriggerEnter2D(Collider2D collision) {
+		targets.Add(collision.gameObject);
+	}
+
+	private void OnTriggerExit2D(Collider2D collision) {
+		targets.Remove(collision.gameObject);
+	}
 
 	// Sort list items by distance from the player (closer first)
 	private void SortListByDistance(List<GameObject> theList) {
@@ -135,17 +158,101 @@ public class PlayerController : MonoBehaviour {
 		});
 	}
 
-	private bool TryTakeItemFromGround() {
-		// Look for item nearby
-		if (itemTargets.Count > 0) {
-			// Sort by distance
-			SortListByDistance(itemTargets);
-			HoldMyBeer(itemTargets[0]);
-			heldType = HeldTypes.item;
+	// Actions
+
+	private void PerformAction() {
+		// Targeted actions
+		List<GameObject> objects = new List<GameObject>();
+		foreach (GameObject go in targets) {
+			objects.Add(go);
+		}
+		SortListByDistance(objects);
+		bool isDone = false;
+		foreach (GameObject go in objects) {
+			var key = (heldType, go.tag);
+			if (targetedActions.ContainsKey(key)) {
+				foreach (TryTargetedAction action in targetedActions[key]) {
+					isDone = action(go);
+					if (isDone) {
+						break;
+					}
+				}
+			}
+			if (isDone) {
+				break;
+			}
+		}
+		// Non targeted actions
+		if (!isDone) {
+			var key = heldType;
+			if (untargetedActions.ContainsKey(key)) {
+				foreach (TryUntargetedAction action in untargetedActions[key]) {
+					isDone = action();
+					if (isDone) {
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	private bool TryTakeFromContainer(GameObject target) {
+		var containerAnswer = target.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
+		if (containerAnswer.givenItem != null) {
+			ReceiveItemFromContainer(containerAnswer.givenItem);
 			return true;
+		} else {
+			if (containerAnswer.gathering) {
+				action = Actions.gathering;
+				containerGathered = target.GetComponent<ContainerController>();
+
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private bool TryGiveItemToPatient(GameObject target) {
+		var patient = target.GetComponent<SeatController>().goHeld;
+		if (patient != null) {
+			patient.GetComponent<PatientController>().TakeItem(HeldGO);
+			HeldGO = null;
+			heldType = HeldTypes.none;
+			return true;
+		}
+		return false;
+	}
+
+	private bool TryExchangeFromContainer(GameObject target) {
+		// check the container accepts the current item then exchange
+		ItemController ic = HeldGO.GetComponent<ItemController>();
+		if (ic == null)
+			return false;
+
+		string itemName = ic.itemType.ToString();
+		if (target.GetComponent<ContainerController>().askedItemName != itemName) {
+			return false;
+		}
+
+		var containerAnswer = target.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
+		if (containerAnswer.givenItem != null) {
+			ReceiveItemFromContainer(containerAnswer.givenItem);
+			return true;
+		} else {
+			if (containerAnswer.gathering) {
+				action = Actions.gathering;
+				containerGathered = target.GetComponent<ContainerController>();
+				return true;
+			}
 		}
 
 		return false;
+	}
+
+	private bool TryTakeItemFromGround(GameObject target) {
+		HoldMyBeer(target);
+		heldType = HeldTypes.item;
+		return true;
 	}
 
 	private bool TryDropItem() {
@@ -158,17 +265,11 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
-	private bool TryTakeFauteuil() {
-		// Look for item nearby
-		if (fauteuilTargets.Count > 0) {
-			// Sort by distance
-			SortListByDistance(fauteuilTargets);
-			fauteuilTargets[0].GetComponent<FauteuilController>().SetHolder(transform.gameObject);
-			HeldGO = fauteuilTargets[0];
-			heldType = HeldTypes.fauteuil;
-			return true;
-		}
-		return false;
+	private bool TryTakeFauteuil(GameObject target) {
+		target.GetComponent<FauteuilController>().SetHolder(transform.gameObject);
+		HeldGO = target;
+		heldType = HeldTypes.fauteuil;
+		return true;
 	}
 
 	private bool TryDropFauteuil() {
@@ -178,97 +279,67 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
-	private bool TryGiveItemToPatient() {
-		// Look for closer patient to give item
-		if (seatTargets.Count > 0) {
-			SortListByDistance(seatTargets);
-
-			GameObject occupiedSeat = null;
-			for (int i = 0; i < seatTargets.Count; i++) {
-				if (seatTargets[i].GetComponent<SeatController>().isHolding) {
-					occupiedSeat = seatTargets[i];
-					break;
-				}
-			}
-
-			if (occupiedSeat != null) {
-				occupiedSeat.GetComponent<SeatController>().goHeld.GetComponent<PatientController>().TakeItem(HeldGO);
-				HeldGO = null;
-				heldType = HeldTypes.none;
-
-				return true;
-			}
+	private bool TryPutItemInCraft(GameObject target) {
+		if (target.GetComponent<CraftingTableController>().ReceiveItem(HeldGO)) {
+			Destroy(HeldGO);
+			heldType = HeldTypes.none;
+			return true;
 		}
 		return false;
 	}
 
-	private bool TryPutItemInCraft() {
-		if (craftingTableTarget != null) {
-			if (craftingTableTarget.GetComponent<CraftingTableController>().ReceiveItem(HeldGO)) {
-				Destroy(HeldGO);
-				heldType = HeldTypes.none;
-
-				return true;
+	private bool TryTakeItemFromCraft(GameObject target) {
+		var craftAnswer = target.GetComponent<CraftingTableController>().StartCraftingItem(this);
+		if (craftAnswer.craftedItem != null) {
+			ReceiveItemFromContainer(craftAnswer.craftedItem);
+		} else {
+			if (craftAnswer.isCrafting) {
+				action = Actions.crafting;
+				craftTable = target.GetComponent<CraftingTableController>();
 			}
 		}
+		return true;
+	}
 
+	private bool TryPutItemInTrash(GameObject target) {
+		Destroy(HeldGO);
+		HeldGO = null;
+		heldType = HeldTypes.none;
+		target.GetComponent<Animator>().SetTrigger("activate");
+		return true;
+	}
+
+	private bool TryTakePatientFromSeatToFauteuil(GameObject target) {
+		return target.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<FauteuilController>().seat);
+	}
+
+	private bool TryPutPatientFromFauteuilToSeat(GameObject target) {
+		return HeldGO.GetComponent<FauteuilController>().seat.TryTansfertTo(target.GetComponent<SeatController>());
+	}
+
+	private bool TryPutFromFauteuilToTrash(GameObject target) {
+		var patient = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+		if (patient) {
+			PatientController pc = patient.GetComponent<PatientController>();
+			if (pc != null)
+				gc.PatientDead(pc);
+			Destroy(patient);
+			target.GetComponent<Animator>().SetTrigger("activate");
+			return true;
+		}
 		return false;
 	}
 
-	private bool TryTakeItemFromCraft() {
-		if (craftingTableTarget != null) {
-			var craftAnswer = craftingTableTarget.GetComponent<CraftingTableController>().StartCraftingItem(this);
-			if (craftAnswer.craftedItem != null) {
-				ReceiveItemFromContainer(craftAnswer.craftedItem);
+	private bool TryPutPatientFromFauteuilToExit(GameObject target) {
+		if (HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
+			var patient = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
+			if (patient.GetComponent<PatientController>().state == PatientController.States.cured) {
+				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+				gc.PatientCured(patient.GetComponent<PatientController>());
+				Destroy(patient);
 				return true;
-			} else {
-				if (craftAnswer.isCrafting) {
-					action = Actions.crafting;
-					craftTable = craftingTableTarget.GetComponent<CraftingTableController>();
-					return true;
-				}
 			}
 		}
-
-		return false;
-	}
-
-	private bool TryTakeFromContainer(bool hasItem = false) {
-		if (containerTargets.Count > 0) {
-			SortListByDistance(containerTargets);
-
-			GameObject container = null;
-			if (hasItem) {
-				ItemController ic = HeldGO.GetComponent<ItemController>();
-				if (ic == null)
-					return false;
-				string itemName = ic.itemType.ToString();
-				for (int i = 0; i < containerTargets.Count; i++) {
-					if (containerTargets[i].GetComponent<ContainerController>().askedItemName == itemName) {
-						container = containerTargets[i];
-						break;
-					}
-				}
-			} else
-				container = containerTargets[0];
-
-			if (container) {
-				var containerAnswer = container.GetComponent<ContainerController>().StartGatherItem(this, HeldGO);
-				if (containerAnswer.givenItem != null) {
-					ReceiveItemFromContainer(containerAnswer.givenItem);
-
-					return true;
-				} else {
-					if (containerAnswer.gathering) {
-						action = Actions.gathering;
-						containerGathered = container.GetComponent<ContainerController>();
-
-						return true;
-					}
-				}
-			}
-		}
-
 		return false;
 	}
 
@@ -279,150 +350,11 @@ public class PlayerController : MonoBehaviour {
 		heldType = HeldTypes.item;
 	}
 
-	private bool TryTakePatientFromSeatToFauteuil() {
-		// Look for a not empty seat in seatTargets
-		if (seatTargets.Count > 0) {
-			// Step 1 : sort by distance
-			SortListByDistance(seatTargets);
-
-			// Step 2 : look for occupied seat
-			GameObject occupiedSeat = null;
-			for (int i = 0; i < seatTargets.Count; i++) {
-				if (seatTargets[i].GetComponent<SeatController>().isHolding) {
-					occupiedSeat = seatTargets[i];
-					break;
-				}
-			}
-
-			// Step 3 : Take patient from seat if found
-			if (occupiedSeat != null)  {
-				return occupiedSeat.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<FauteuilController>().seat);
-			}
-		}
-
-		return false;
-	}
-
-	private bool TryPutPatientFromFauteuilToSeat() {
-		// Look for an empty seat in seatTargets
-		if (seatTargets.Count > 0) {
-			// Step 1 : sort by distance
-			SortListByDistance(seatTargets);
-
-			// Step 2 : look for empty seat
-			GameObject emptySeat = null;
-			for (int i = 0; i < seatTargets.Count; i++) {
-				if (!seatTargets[i].GetComponent<SeatController>().isHolding) {
-					emptySeat = seatTargets[i];
-					break;
-				}
-			}
-
-			// Step 3 : Allocate patient to fauteuil seat if found
-			if (emptySeat != null) {
-				return HeldGO.GetComponent<FauteuilController>().seat.TryTansfertTo(emptySeat.GetComponent<SeatController>());
-			}
-		}
-
-		return false;
-	}
-
-	private bool TryPutFromFauteuilToTrash() {
-		if (trashTarget != null) {
-			var target = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
-			if (target) {
-				PatientController pc = target.GetComponent<PatientController>();
-				if (pc != null)
-					gc.PatientDead(pc);
-				Destroy(target);
-				trashTarget.GetComponent<Animator>().SetTrigger("activate");
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private bool TryPutPatientFromFauteuilToExit() {
-		if (exitTarget && HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
-			var target = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
-			if (target.GetComponent<PatientController>().state == PatientController.States.cured) {
-				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
-				gc.PatientCured(target.GetComponent<PatientController>());
-				Destroy(target);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private bool TryPutInTrash() {
-		if (trashTarget != null) {
-			PatientController pc = HeldGO.GetComponent<PatientController>();
-			if (pc != null)
-				gc.PatientDead(pc);
-
-			Destroy(HeldGO);
-			HeldGO = null;
-			heldType = HeldTypes.none;
-
-			trashTarget.GetComponent<Animator>().SetTrigger("activate");
-
-			return true;
-		}
-
-		return false;
-	}
-
 	private void HoldMyBeer(GameObject Beer) {
 		HeldGO = Beer;
 		HeldGO.GetComponent<Rigidbody2D>().simulated = false;
 		HeldGO.transform.parent = PlaceHolder;
 		HeldGO.transform.localRotation = Quaternion.identity;
 		HeldGO.transform.localPosition = Vector3.zero;
-	}
-
-	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "Seat" || collision.gameObject.tag == "Machine" || collision.gameObject.tag == "Fauteuil") {
-			if (!seatTargets.Contains(collision.gameObject))
-				seatTargets.Add(collision.gameObject);
-		}
-		if (collision.gameObject.tag == "Item") {
-			if (!itemTargets.Contains(collision.gameObject))
-				itemTargets.Add(collision.gameObject);
-		}
-		if (collision.gameObject.tag == "Container") {
-			if (!containerTargets.Contains(collision.gameObject))
-				containerTargets.Add(collision.gameObject);
-		}
-		if (collision.gameObject.tag == "Trash") {
-			trashTarget = collision.gameObject;
-		}
-		if (collision.gameObject.tag == "Exit") {
-			exitTarget = collision.gameObject;
-		}
-		if (collision.gameObject.tag == "CraftingTable") {
-			craftingTableTarget = collision.gameObject;
-		}
-		if (collision.gameObject.tag == "Fauteuil") {
-			if (!fauteuilTargets.Contains(collision.gameObject))
-				fauteuilTargets.Add(collision.gameObject);
-		}
-	}
-
-	private void OnTriggerExit2D(Collider2D collision) {
-		if (seatTargets.Contains(collision.gameObject))
-			seatTargets.Remove(collision.gameObject);
-		if (itemTargets.Contains(collision.gameObject))
-			itemTargets.Remove(collision.gameObject);
-		if (containerTargets.Contains(collision.gameObject))
-			containerTargets.Remove(collision.gameObject);
-		if (trashTarget = collision.gameObject)
-			trashTarget = null;
-		if (exitTarget = collision.gameObject)
-			exitTarget = null;
-		if (craftingTableTarget = collision.gameObject)
-			craftingTableTarget = null;
-		if (fauteuilTargets.Contains(collision.gameObject))
-			fauteuilTargets.Remove(collision.gameObject);
 	}
 }
