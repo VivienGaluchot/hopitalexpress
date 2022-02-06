@@ -326,9 +326,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool DropPlayerFromFauteuil() {
-		var player = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
-		if (player) {
-			return true;
+		if (HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
+			var target = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
+			if (target.tag == "Player") {
+				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+				return true;
+			}
 		}
 		return false;
 	}
