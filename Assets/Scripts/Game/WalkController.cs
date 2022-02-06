@@ -12,17 +12,16 @@ public class WalkController : MonoBehaviour {
 	protected Dir stoppedDirection = Dir.Down;
 	protected bool hasStoppedDirection = false;
 
-
 	protected Rigidbody2D rb2D;
 
 	protected Animator animator;
 
-	protected void Start() {
+	protected virtual void Start() {
 		rb2D = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 	}
 
-	protected void Update() {
+	protected virtual void Update() {
 		if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
 			if (animator) {
 				animator.SetBool("isWalking", true);

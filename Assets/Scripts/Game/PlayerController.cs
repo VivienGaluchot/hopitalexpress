@@ -106,28 +106,23 @@ public class PlayerController : MonoBehaviour {
 			}
 			rb2D.velocity = input * speed;
 		}
+		Vector3 vDir = Vector3.down;
 		switch (perso.direction) {
 			case WalkController.Dir.Down:
-				detectionCollider.offset = .25f * Vector3.down;
+				vDir = Vector3.down;
 				break;
 			case WalkController.Dir.Right:
-				if (heldType != HeldTypes.fauteuil) {
-					detectionCollider.offset = .25f * Vector3.right;
-				} else {
-					detectionCollider.offset = 1 * Vector3.right;
-				}
+				vDir = Vector3.right;
 				break;
 			case WalkController.Dir.Left:
-				if (heldType != HeldTypes.fauteuil) {
-					detectionCollider.offset = .25f * Vector3.left;
-				} else {
-					detectionCollider.offset = 1 * Vector3.left;
-				}
+				vDir = Vector3.left;
 				break;
 			case WalkController.Dir.Up:
-				detectionCollider.offset = .25f * Vector3.up;
+				vDir = Vector3.up;
 				break;
 		}
+		float detectionOffset = (heldType != HeldTypes.fauteuil) ? 0.25f : 1f;
+		detectionCollider.offset = detectionOffset * vDir;
 	}
 
 	// Sort list items by distance from the player (closer first)
@@ -300,30 +295,9 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			// Step 3 : Take patient from seat if found
-			if (occupiedSeat != null && !HeldGO.GetComponent<FauteuilController>().IsHolding()) {
-				var target = occupiedSeat.GetComponent<SeatController>().GiveHold();
-				if (target) {
-					return HeldGO.GetComponent<FauteuilController>().ReceivePatient(target);
-				}
+			if (occupiedSeat != null)  {
+				return occupiedSeat.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<FauteuilController>().seat);
 			}
-		}
-
-		return false;
-	}
-
-	private bool TryPutInTrash() {
-		if (trashTarget != null) {
-			PatientController pc = HeldGO.GetComponent<PatientController>();
-			if (pc != null)
-				gc.PatientDead(pc);
-
-			Destroy(HeldGO);
-			HeldGO = null;
-			heldType = HeldTypes.none;
-
-			trashTarget.GetComponent<Animator>().SetTrigger("activate");
-
-			return true;
 		}
 
 		return false;
@@ -346,10 +320,7 @@ public class PlayerController : MonoBehaviour {
 
 			// Step 3 : Allocate patient to fauteuil seat if found
 			if (emptySeat != null) {
-				var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
-				if (target) {
-					return emptySeat.GetComponent<SeatController>().ReceiveHold(target);
-				}
+				return HeldGO.GetComponent<FauteuilController>().seat.TryTansfertTo(emptySeat.GetComponent<SeatController>());
 			}
 		}
 
@@ -358,31 +329,47 @@ public class PlayerController : MonoBehaviour {
 
 	private bool TryPutFromFauteuilToTrash() {
 		if (trashTarget != null) {
-			var target = HeldGO.GetComponent<FauteuilController>().GivePatient();
-
-			PatientController pc = target.GetComponent<PatientController>();
-			if (pc != null)
-				gc.PatientDead(pc);
-
-			Destroy(target);
-			trashTarget.GetComponent<Animator>().SetTrigger("activate");
-
-			return true;
+			var target = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+			if (target) {
+				PatientController pc = target.GetComponent<PatientController>();
+				if (pc != null)
+					gc.PatientDead(pc);
+				Destroy(target);
+				trashTarget.GetComponent<Animator>().SetTrigger("activate");
+				return true;
+			}
 		}
-
 		return false;
 	}
 
 	private bool TryPutPatientFromFauteuilToExit() {
-		if (exitTarget && HeldGO.GetComponent<FauteuilController>().IsHolding()) {
-			var target = HeldGO.GetComponent<FauteuilController>().GetPatient();
+		if (exitTarget && HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
+			var target = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
 			if (target.GetComponent<PatientController>().state == PatientController.States.cured) {
-				HeldGO.GetComponent<FauteuilController>().GivePatient();
+				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
 				gc.PatientCured(target.GetComponent<PatientController>());
 				Destroy(target);
 				return true;
 			}
 		}
+		return false;
+	}
+
+	private bool TryPutInTrash() {
+		if (trashTarget != null) {
+			PatientController pc = HeldGO.GetComponent<PatientController>();
+			if (pc != null)
+				gc.PatientDead(pc);
+
+			Destroy(HeldGO);
+			HeldGO = null;
+			heldType = HeldTypes.none;
+
+			trashTarget.GetComponent<Animator>().SetTrigger("activate");
+
+			return true;
+		}
+
 		return false;
 	}
 
@@ -395,7 +382,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "Seat" || collision.gameObject.tag == "Machine") {
+		if (collision.gameObject.tag == "Seat" || collision.gameObject.tag == "Machine" || collision.gameObject.tag == "Fauteuil") {
 			if (!seatTargets.Contains(collision.gameObject))
 				seatTargets.Add(collision.gameObject);
 		}

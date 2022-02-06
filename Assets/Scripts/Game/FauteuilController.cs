@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class FauteuilController : WalkController {
 
-	public GameObject placeholder;
-
 	private WalkController holder;
 	private FixedJoint2D holderJoint;
 
 	private Transform prevParent;
 
-	private SeatController seat;
+	public SeatController seat { get; protected set; }
 
-	private new void Start() {
+	protected override void Start() {
 		base.Start();
-		seat = placeholder.GetComponent<SeatController>();
+		seat = GetComponent<SeatController>();
 	}
 
 	// Maybe reverse the logic by setting the FixedJoint2D in the player
@@ -34,6 +32,7 @@ public class FauteuilController : WalkController {
 			}
 		}
 	}
+
 	private void FixedUpdate() {
 		if (holder) {
 			switch (holder.direction) {
@@ -53,7 +52,7 @@ public class FauteuilController : WalkController {
 		}
 	}
 
-	private new void Update() {
+	protected override void Update() {
 		if (holder) {
 			direction = holder.direction;
 		} else {
@@ -62,29 +61,6 @@ public class FauteuilController : WalkController {
 		if (seat.isHolding) {
 			seat.goHeld.GetComponent<WalkController>().direction = direction;
 		}
-	}
-
-	public bool IsHolding() {
-		return seat.isHolding;
-	}
-	public GameObject GetPatient() {
-		return seat.goHeld;
-	}
-
-	public bool ReceivePatient(GameObject patient) {
-		bool result = seat.ReceiveHold(patient);
-		if (result) {
-			patient.GetComponent<WalkController>().direction = GetComponent<WalkController>().direction;
-		}
-		return result;
-	}
-
-	public GameObject GivePatient() {
-		var target = seat.GiveHold();
-		if (target) {
-			target.GetComponent<WalkController>().direction = WalkController.Dir.Down;
-		}
-		return target;
 	}
 
 }
