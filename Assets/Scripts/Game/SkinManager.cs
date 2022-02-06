@@ -23,6 +23,14 @@ public class SkinManager : MonoBehaviour {
 
 	public List<GameObject> annexLayers;
 
+	public int seatFrame;
+
+	public bool hasSeatFrame = false;
+
+	public bool onlyWhenSeated = false;
+
+	public bool onlyWhenNonSeated = false;
+
 
 	private SpriteRenderer spriteRenderer = null;
 
@@ -104,13 +112,23 @@ public class SkinManager : MonoBehaviour {
 		} else if (walkController.direction == WalkController.Dir.Left) {
 			dirIndex = 3;
 		}
+		int frame = frameSelected;
+		if (hasSeatFrame && walkController.isSeated) {
+			frame = seatFrame;
+		}
+		if (onlyWhenNonSeated) {
+			spriteRenderer.enabled = !walkController.isSeated;
+		}
+		if (onlyWhenSeated) {
+			spriteRenderer.enabled = walkController.isSeated;
+		}
 		foreach (GameObject child in annexLayers) {
 			var cmp = child.GetComponent<SkinManager>();
-			cmp.frameSelected = frameSelected;
+			cmp.frameSelected = frame;
 			cmp.skinSelected = skinSelected;
 			cmp.applyReplacement();
 		}
-		int index = frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4;
+		int index = frame + dirIndex * framePerDirection + skinSelected * framePerDirection * 4;
 		string selectedSpriteName = initialPrefix + index.ToString();
 
 		if (spriteSheet.ContainsKey(selectedSpriteName)) {
