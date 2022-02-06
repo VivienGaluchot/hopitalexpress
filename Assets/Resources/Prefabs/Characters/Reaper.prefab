@@ -104,6 +104,10 @@ MonoBehaviour:
   spritePath: Illustrations/Perso/Reaper
   perso: {fileID: 3508764698176005531}
   annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 0
 --- !u!114 &3803036310602100784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  isSeated: 0
 --- !u!114 &128902937196316122
 MonoBehaviour:
   m_ObjectHideFlags: 0

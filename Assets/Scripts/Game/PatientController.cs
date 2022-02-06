@@ -21,16 +21,19 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public States state { get; private set; }
-	private float lifetime;
+	public float lifetime { get; private set; }
 
 	public int patientValue { get; private set; }
 
 	private float periodWithoutDiseaseAnimation = 0;
 	private GameObject needIcon = null;
 
-    private void Awake() {
+	public float timeEffect;
+
+	private void Awake() {
 		state = States.sick;
 		needBubble.SetActive(false);
+		timeEffect = 1f;
 	}
     private void Start() {
 		myDisease = new Disease(this);
@@ -42,7 +45,7 @@ public class PatientController : MonoBehaviour {
 
 	void Update() {
 		if (state == States.sick) {
-			lifetime -= Time.deltaTime;
+			lifetime -= Time.deltaTime * timeEffect;
 			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
 			if (lifetime < 0f)
 				DiseaseLifetimeElapsed();

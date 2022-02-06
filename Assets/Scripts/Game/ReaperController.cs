@@ -13,7 +13,6 @@ public class ReaperController : MonoBehaviour
 
 	private Vector2 currentDecision;
 
-
 	void Start() {
 		r2d = GetComponent<Rigidbody2D>();
 		currentDecision = new Vector2(0, 0);

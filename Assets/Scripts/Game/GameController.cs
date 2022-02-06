@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour {
 
 	private GameObject[] PatientQueue;
 
+	public List<PatientController> patientsList;
+
 	private float elapsedTime, currentSpawnRate;
 
 	[SerializeField] private Text scoreText;
@@ -44,11 +46,9 @@ public class GameController : MonoBehaviour {
 
 	public Infos[] DiseasesAvailable;
 
-    private void Awake() {
+	private void Awake() {
 		instance = this;
-    }
-
-    private void Start() {
+		patientsList = new List<PatientController>();
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
 		isLoaded = false;
@@ -56,12 +56,12 @@ public class GameController : MonoBehaviour {
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
 		multiplicator = 1;
-		if(scoreText)
-			scoreText.text = "0";
 		PatientQueue = new GameObject[patientQueueSize];
-		if(coin != null)
-			coinAnimator = coin.GetComponent<Animator>();
 		currentLevelTime = levelTime;
+		if (scoreText)
+			scoreText.text = "0";
+		if (coin != null)
+			coinAnimator = coin.GetComponent<Animator>();
 	}
 
 	private const float clockStartHue = 100f / 255f;
@@ -166,6 +166,8 @@ public class GameController : MonoBehaviour {
 			newPatient.name = "patient " + counter++;
 			emptySeat.GetComponent<SeatController>().ReceiveHold(newPatient);
 
+			patientsList.Add(newPatient.GetComponent<PatientController>());
+
 			return true;
 		} else {
 			// No welcome seat, try to add to queue
@@ -178,6 +180,8 @@ public class GameController : MonoBehaviour {
 						: patientQueueDirection == "DOWN" ? new Vector3(0, -i, 0) : new Vector3(-i, 0, 0);
 					PatientQueue[i].transform.localPosition = nextPos;
 					PatientQueue[i].name = "patient " + counter++;
+
+					patientsList.Add(PatientQueue[i].GetComponent<PatientController>());
 
 					return true;
 				}
