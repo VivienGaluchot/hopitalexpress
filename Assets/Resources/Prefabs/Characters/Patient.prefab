@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -428,7 +428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   face: {fileID: 2301655207604851932}
   body: {fileID: 1402126273352743420}
-  need: {fileID: 1718445427611651231}
   needBubble: {fileID: 3807074980244481042}
   TimeBarImage: {fileID: 6337524270730507428}
   noDiseaseDuration: 5
@@ -455,7 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7510458666819467206}
-  - component: {fileID: 1718445427611651231}
+  - component: {fileID: 7223476480573389171}
   m_Layer: 3
   m_Name: Need
   m_TagString: Untagged
@@ -479,57 +478,17 @@ Transform:
   m_Father: {fileID: 3508764698176005528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1718445427611651231
-SpriteRenderer:
+--- !u!210 &7223476480573389171
+SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3807074980244481042}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.61, y: 0.22}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SortingOrder: 1
 --- !u!1 &4558647280124325500
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +799,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1083,15 +1042,11 @@ PrefabInstance:
       value: TimeBarPatient
       objectReference: {fileID: 0}
     - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
-      propertyPath: m_Color.r
+    - target: {fileID: 4954382836697478401, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
@@ -1160,11 +1115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.172
+      value: -0.235
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.162
+      value: 1.135
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

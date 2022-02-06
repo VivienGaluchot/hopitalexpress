@@ -91,23 +91,9 @@ public class Disease {
 	}
 
 	// Return the sprite to display the current need
-	public Sprite GetNeedSprite() {
-		GameObject tmp = Resources.Load<GameObject>(currentStep._path);
-		if(tmp != null) {
-			SpriteRenderer sr;
-			if (tmp.TryGetComponent<SpriteRenderer>(out sr))
-				return sr.sprite;
-
-			sr = tmp.GetComponentInChildren<SpriteRenderer>();
-			if (sr != null)
-				return sr.sprite;
-
-			Debug.LogError("UNABLE TO GET NEED SPRITE FROM " + currentStep._path);
-			return null;
-		} else {
-			Debug.LogError("UNABLE TO GET GAMEOBJECT AT " + currentStep._path);
-			return null;
-		}
+	public GameObject GetNeedIcon() {
+		// TODO return the prefab icon
+		return null;
 	}
 
 	// Say that we took this item
