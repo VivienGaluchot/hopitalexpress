@@ -67,19 +67,25 @@ public class GameController : MonoBehaviour {
 	private const float clockStartHue = 100f / 255f;
 	private const float clockEndHue = 0f;
 
+	public bool isPaused { get; private set; }
+
 	private void Update() {
-		if(isLoaded) {
-			CheckNewPlayers();
+		if (Input.GetKeyDown("escape"))
+			isPaused = !isPaused;
+		if(!isPaused) {
+			if (isLoaded) {
+				CheckNewPlayers();
 
-			if (isPlaying) {
-				currentLevelTime -= Time.deltaTime;
-				UpdateClock(currentLevelTime);
+				if (isPlaying) {
+					currentLevelTime -= Time.deltaTime;
+					UpdateClock(currentLevelTime);
 
-				if (elapsedTime > currentSpawnRate) {
-					if (TrySpawnNewPatient())
-						elapsedTime -= currentSpawnRate;
-				} else
-					elapsedTime += Time.deltaTime;
+					if (elapsedTime > currentSpawnRate) {
+						if (TrySpawnNewPatient())
+							elapsedTime -= currentSpawnRate;
+					} else
+						elapsedTime += Time.deltaTime;
+				}
 			}
 		}
 	}
@@ -96,6 +102,7 @@ public class GameController : MonoBehaviour {
 
 	public void StartGame() {
 		isLoaded = true;
+		isPaused = false;
 		playerSpawn = Vector3.zero;
 		patientQueueDirection = "UP";
 	}

@@ -93,52 +93,56 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
-			// Button released, we stop gathering
-			action = Actions.nothing;
-			containerGathered.StopGatherItem();
-		}
+		if(!GameController.instance.isPaused) {
+			if (action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
+				// Button released, we stop gathering
+				action = Actions.nothing;
+				containerGathered.StopGatherItem();
+			}
 
-		if (action == Actions.crafting && Input.GetButtonUp("Fire" + id)) {
-			action = Actions.nothing;
-			craftTable.StopCraftItem();
-		}
+			if (action == Actions.crafting && Input.GetButtonUp("Fire" + id)) {
+				action = Actions.nothing;
+				craftTable.StopCraftItem();
+			}
 
-		if (Input.GetButtonDown("Fire" + id)) {
-			PerformAction();
+			if (Input.GetButtonDown("Fire" + id)) {
+				PerformAction();
+			}
 		}
 	}
 
 	void FixedUpdate() {
-		if (action == Actions.nothing) {
-			// Can only move if doing nothing
-			float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
-			Vector3 input = Vector2.ClampMagnitude(new Vector2(horiz, vert), 1);
-			if (input.sqrMagnitude > (0.1 * 0.1)) {
-				walk.SetStoppedDirection(input);
+		if (!GameController.instance.isPaused) {
+			if (action == Actions.nothing) {
+				// Can only move if doing nothing
+				float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
+				Vector3 input = Vector2.ClampMagnitude(new Vector2(horiz, vert), 1);
+				if (input.sqrMagnitude > (0.1 * 0.1)) {
+					walk.SetStoppedDirection(input);
+				}
+				// may not be simulated if in a fauteuil
+				if (rb2D.simulated) {
+					rb2D.velocity = input * speed;
+				}
 			}
-			// may not be simulated if in a fauteuil
-			if (rb2D.simulated) {
-				rb2D.velocity = input * speed;
+			Vector3 vDir = Vector3.down;
+			switch (walk.direction) {
+				case WalkController.Dir.Down:
+					vDir = Vector3.down;
+					break;
+				case WalkController.Dir.Right:
+					vDir = Vector3.right;
+					break;
+				case WalkController.Dir.Left:
+					vDir = Vector3.left;
+					break;
+				case WalkController.Dir.Up:
+					vDir = Vector3.up;
+					break;
 			}
+			float detectionOffset = (heldType != HeldTypes.fauteuil) ? 0.25f : 1f;
+			detectionCollider.offset = detectionOffset * vDir;
 		}
-		Vector3 vDir = Vector3.down;
-		switch (walk.direction) {
-			case WalkController.Dir.Down:
-				vDir = Vector3.down;
-				break;
-			case WalkController.Dir.Right:
-				vDir = Vector3.right;
-				break;
-			case WalkController.Dir.Left:
-				vDir = Vector3.left;
-				break;
-			case WalkController.Dir.Up:
-				vDir = Vector3.up;
-				break;
-		}
-		float detectionOffset = (heldType != HeldTypes.fauteuil) ? 0.25f : 1f;
-		detectionCollider.offset = detectionOffset * vDir;
 	}
 	
 	private void OnTriggerEnter2D(Collider2D collision) {
