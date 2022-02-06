@@ -175,17 +175,21 @@ public class PlayerController : MonoBehaviour {
 		SortListByDistance(objects);
 		bool isDone = false;
 		foreach (GameObject go in objects) {
-			var key = (heldType, go.tag);
-			if (targetedActions.ContainsKey(key)) {
-				foreach (TryTargetedAction action in targetedActions[key]) {
-					isDone = action(go);
-					if (isDone) {
-						break;
+			Vector2 direction = go.transform.position - transform.position;
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, direction.magnitude, LayerMask.GetMask("Wall"));
+			if(!hit.collider) {
+				var key = (heldType, go.tag);
+				if (targetedActions.ContainsKey(key)) {
+					foreach (TryTargetedAction action in targetedActions[key]) {
+						isDone = action(go);
+						if (isDone) {
+							break;
+						}
 					}
 				}
-			}
-			if (isDone) {
-				break;
+				if (isDone) {
+					break;
+				}
 			}
 		}
 		// Non targeted actions
