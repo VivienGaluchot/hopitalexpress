@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 0.61, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ece6d05785a72408878a3373a4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: PiluleBleue
+  itemType: 0
 --- !u!50 &-3639596632757802435
 Rigidbody2D:
   serializedVersion: 4
