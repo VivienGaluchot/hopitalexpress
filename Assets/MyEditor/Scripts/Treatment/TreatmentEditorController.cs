@@ -4,7 +4,7 @@ using UnityEngine;
 public class TreatmentEditorController : MonoBehaviour {
 	public static TreatmentEditorController instance;
 
-	public string[] treatmentPaths;
+	public string treatmentPath;
 
 	public List<TreatmentItemController> TreatmentItems { get; private set; }
 	public List<TreatmentItemController> overTICs { get; set; }

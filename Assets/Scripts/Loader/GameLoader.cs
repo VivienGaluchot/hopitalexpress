@@ -98,7 +98,7 @@ public class GameLoader : MonoBehaviour {
 			next[i] = (stepData.NextsList[i].proba, ComputeStep(stepData.NextsList[i].nextStep));
 		}
 
-		return new Step(stepData.name, stepData.path, stepData.time, next);
+		return new Step(stepData.name, Resources.Load<GameObject>(stepData.path), stepData.time, next);
 	}
 
 	private StepContainer ReadNextStep(string s) {

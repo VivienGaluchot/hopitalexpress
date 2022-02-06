@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
-	private GameController gc;
 	private int id;
 	[SerializeField] private Transform PlaceHolder;
 	private float speed;
@@ -47,10 +46,8 @@ public class PlayerController : MonoBehaviour {
 	private CraftingTableController craftTable;
 	private ContainerController containerGathered;
 
-
-	public void Initialize(int _id, GameController parent, float _speed) {
+	public void Initialize(int _id, float _speed) {
 		id = _id;
-		gc = parent;
 		speed = _speed;
 	}
 
@@ -339,9 +336,7 @@ public class PlayerController : MonoBehaviour {
 	private bool TryPutFromFauteuilToTrash(GameObject target) {
 		var patient = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
 		if (patient) {
-			PatientController pc = patient.GetComponent<PatientController>();
-			if (pc != null)
-				gc.PatientDead(pc);
+			patient.GetComponent<PatientController>().Exited();
 			Destroy(patient);
 			target.GetComponent<Animator>().SetTrigger("activate");
 			return true;
@@ -354,7 +349,7 @@ public class PlayerController : MonoBehaviour {
 			var patient = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
 			if (patient.GetComponent<PatientController>().state == PatientController.States.cured) {
 				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
-				gc.PatientCured(patient.GetComponent<PatientController>());
+				patient.GetComponent<PatientController>().Exited();
 				Destroy(patient);
 				return true;
 			}

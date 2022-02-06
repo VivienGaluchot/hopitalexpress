@@ -82,6 +82,126 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1384627592292176342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7619205210615723282}
+  - component: {fileID: 8928655443221648219}
+  - component: {fileID: 4643231620679502135}
+  - component: {fileID: 6630608808712894468}
+  m_Layer: 3
+  m_Name: ClothesSeated
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7619205210615723282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384627592292176342}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.347, z: 0}
+  m_LocalScale: {x: 1, y: 0.615918, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3508764698176005528}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &8928655443221648219
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384627592292176342}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -6475819047146179335, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.79625475, y: 0.6636752}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &4643231620679502135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384627592292176342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameSelected: 0
+  framePerDirection: 1
+  skinSelected: 1
+  skinMin: 1
+  skinMax: 18
+  spritePath: Illustrations/Perso/Clothes
+  perso: {fileID: 3508764698176005531}
+  annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 1
+  onlyWhenNonSeated: 0
+--- !u!114 &6630608808712894468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384627592292176342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85580fe5013445f4eacff2349e6d1455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1402126273352743420
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +276,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7357550112948327227, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: -3150668318277133405, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameSelected: 0
-  framePerDirection: 4
+  framePerDirection: 5
   skinSelected: 2
   skinMin: 0
   skinMax: 9
@@ -188,6 +308,10 @@ MonoBehaviour:
   perso: {fileID: 3508764698176005531}
   annexLayers:
   - {fileID: 6880701722253073697}
+  seatFrame: 4
+  hasSeatFrame: 1
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 0
 --- !u!114 &3803036310602100784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1695668161033391852
 SpriteRenderer:
@@ -303,6 +427,10 @@ MonoBehaviour:
   spritePath: Illustrations/Perso/Faces
   perso: {fileID: 3508764698176005531}
   annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 0
 --- !u!1 &3508764698176005531
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +469,7 @@ Transform:
   - {fileID: 6965162300062012296}
   - {fileID: 6479815067793919130}
   - {fileID: 1139188637426422189}
+  - {fileID: 7619205210615723282}
   - {fileID: 2500938050345342631}
   - {fileID: 520271034182124823}
   - {fileID: 4645712757895182434}
@@ -428,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   face: {fileID: 2301655207604851932}
   body: {fileID: 1402126273352743420}
+  needGO: {fileID: 3807074980244481042}
   needBubble: {fileID: 3807074980244481042}
   TimeBarImage: {fileID: 6337524270730507428}
   noDiseaseDuration: 5
@@ -445,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  isSeated: 0
 --- !u!1 &3807074980244481042
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +724,10 @@ MonoBehaviour:
   spritePath: Illustrations/Perso/Clothes
   perso: {fileID: 3508764698176005531}
   annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 1
 --- !u!114 &908056040074118087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,7 +851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85.089}
 --- !u!210 &9008669462824845255
 SortingGroup:
@@ -842,7 +977,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3508764698176005528}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7846585628549479094
 SpriteRenderer:
@@ -915,6 +1050,10 @@ MonoBehaviour:
   spritePath: Illustrations/Perso/Hair
   perso: {fileID: 3508764698176005531}
   annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 0
 --- !u!114 &1730942402994220613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,7 +1138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -4502599915332463521, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
+  m_Sprite: {fileID: 6877629330500538932, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1023,13 +1162,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameSelected: 0
-  framePerDirection: 4
+  framePerDirection: 5
   skinSelected: 2
   skinMin: 0
   skinMax: 9
   spritePath: Illustrations/Perso/Hands
   perso: {fileID: 3508764698176005531}
   annexLayers: []
+  seatFrame: 0
+  hasSeatFrame: 0
+  onlyWhenSeated: 0
+  onlyWhenNonSeated: 0
 --- !u!1001 &7641416007629185829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,6 +1186,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+      propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4954382836697478401, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
@@ -1132,6 +1279,10 @@ PrefabInstance:
     - target: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870510030251126658, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7882407810255483111, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
       propertyPath: m_PresetInfoIsWorld

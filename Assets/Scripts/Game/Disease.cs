@@ -29,29 +29,29 @@ public readonly struct Infos {
 // We need "name" during "time" seconds to go to next step
 // if time == 0, it's instantaneous
 public readonly struct Step {
-	public Step(Items name, string path, float time = 0f, (float, Step)[] next = null) {
+	public Step(Items name, GameObject needPrefab, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = path;
+		_needPrefab = needPrefab;
 		_time = time;
 		_next = next;
 	}
 
-	public Step(MachineTypes name, string path, float time = 0f, (float, Step)[] next = null) {
+	public Step(MachineTypes name, GameObject needPrefab, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = path;
+		_needPrefab = needPrefab;
 		_time = time;
 		_next = next;
 	}
 
-	public Step(string name, string path, float time = 0f, (float, Step)[] next = null) {
+	public Step(string name, GameObject needPrefab, float time = 0f, (float, Step)[] next = null) {
 		_name = name.ToString();
-		_path = path;
+		_needPrefab = needPrefab;
 		_time = time;
 		_next = next;
 	}
 
 	public readonly string _name;
-	public readonly string _path;
+	public readonly GameObject _needPrefab;
 	public readonly float _time;
 	public readonly (float, Step)[] _next;
 }
@@ -79,7 +79,7 @@ public class Disease {
 		patient = parent;
 		isOver = false;
 
-		myInfos = patient.gc.DiseasesAvailable[Random.Range(0, patient.gc.DiseasesAvailable.Length)];
+		myInfos = GameController.instance.DiseasesAvailable[Random.Range(0, GameController.instance.DiseasesAvailable.Length)];
 
 		lifetime = myInfos._lifespan;
 		sickFace = Resources.Load<Sprite>("Sprites/Faces/" + myInfos._name + "Face");
@@ -92,8 +92,7 @@ public class Disease {
 
 	// Return the sprite to display the current need
 	public GameObject GetNeedIcon() {
-		// TODO return the prefab icon
-		return null;
+		return currentStep._needPrefab;
 	}
 
 	// Say that we took this item
