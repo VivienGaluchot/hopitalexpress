@@ -97,14 +97,11 @@ public class SkinManager : MonoBehaviour {
 		int dirIndex = 0;
 		if (walkController.direction == WalkController.Dir.Down) {
 			dirIndex = 0;
-		}
-		if (walkController.direction == WalkController.Dir.Up) {
+		} else if (walkController.direction == WalkController.Dir.Up) {
 			dirIndex = 1;
-		}
-		if (walkController.direction == WalkController.Dir.Right) {
+		} else if (walkController.direction == WalkController.Dir.Right) {
 			dirIndex = 2;
-		}
-		if (walkController.direction == WalkController.Dir.Left) {
+		} else if (walkController.direction == WalkController.Dir.Left) {
 			dirIndex = 3;
 		}
 		foreach (GameObject child in annexLayers) {
@@ -113,12 +110,13 @@ public class SkinManager : MonoBehaviour {
 			cmp.skinSelected = skinSelected;
 			cmp.applyReplacement();
 		}
-		string selectedSpriteName = initialPrefix + (frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4).ToString();
+		int index = frameSelected + dirIndex * framePerDirection + skinSelected * framePerDirection * 4;
+		string selectedSpriteName = initialPrefix + index.ToString();
 
 		if (spriteSheet.ContainsKey(selectedSpriteName)) {
 			spriteRenderer.sprite = spriteSheet[selectedSpriteName];
 		} else {
-			Debug.LogWarning(("skin sprite not found ", selectedSpriteName, this, loadedSpritePath));
+			Debug.LogWarning(("skin sprite not found ", selectedSpriteName, walkController.direction, frameSelected, skinSelected, framePerDirection));
 		}
 	}
 }

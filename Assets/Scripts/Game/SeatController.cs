@@ -35,6 +35,15 @@ public class SeatController : MonoBehaviour {
 			r2d.bodyType = RigidbodyType2D.Static;
 			holdIsSimulated = r2d.simulated;
 			r2d.simulated = false;
+			
+			var targetWc = target.GetComponent<WalkController>();
+			if (targetWc) {
+				if (GetComponent<WalkController>()) {
+					targetWc.direction = GetComponent<WalkController>().direction;
+				} else {
+					targetWc.direction = WalkController.Dir.Down;
+				}
+			}
 
 			return true;
 		}
@@ -42,6 +51,7 @@ public class SeatController : MonoBehaviour {
 		return false;
 	}
 
+	// TODO set direction
 	public virtual GameObject GiveHold() {
 		if(isHolding) {
 			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
@@ -55,5 +65,13 @@ public class SeatController : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	public bool TryTansfertTo(SeatController other) {
+		if (isHolding && !other.isHolding) {
+			other.ReceiveHold(GiveHold());
+			return true;
+		}
+		return false;
 	}
 }
