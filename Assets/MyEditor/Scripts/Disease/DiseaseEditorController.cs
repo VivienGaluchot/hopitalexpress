@@ -17,6 +17,9 @@ public class DiseaseEditorController : MonoBehaviour {
         FetchSickFaces();
         FetchFromFiles();
     }
+    void OnEnable() {
+        FetchFromFiles();
+    }
 
     private void FetchFromFiles() {
         string[] treatments = Directory.GetFiles(Path.Combine(Application.dataPath, "MyEditor/Data/Treatment"));

@@ -3,10 +3,8 @@ using UnityEngine.UI;
 
 public class PatientController : MonoBehaviour {
 
-	public GameController gc { get; private set; }
-
 	[SerializeField] private GameObject face;
-	[SerializeField] private GameObject body;
+	//[SerializeField] private GameObject body;
 	[SerializeField] private GameObject needBubble;
 	[SerializeField] private Image TimeBarImage;
 
@@ -14,6 +12,7 @@ public class PatientController : MonoBehaviour {
 	public float diseaseDuration;
 
 	private Disease myDisease;
+	private bool needDisplayed;
 
 	public enum States { 
 		sick,
@@ -29,13 +28,16 @@ public class PatientController : MonoBehaviour {
 	private float periodWithoutDiseaseAnimation = 0;
 	private GameObject needIcon = null;
 
-	private void Start() {
+    private void Awake() {
 		state = States.sick;
+		needBubble.SetActive(false);
+	}
+    private void Start() {
 		myDisease = new Disease(this);
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 		face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
-		DisplayNextNeed();
+		//DisplayNextNeed();
 	}
 
 	void Update() {
@@ -50,7 +52,7 @@ public class PatientController : MonoBehaviour {
 				if (periodWithoutDiseaseAnimation > (noDiseaseDuration + diseaseDuration)) {
 					periodWithoutDiseaseAnimation = 0;
 					face.GetComponent<SkinManager>().frameSelected = 0;
-					needBubble.SetActive(true);
+					needBubble.SetActive(needDisplayed);
 				} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
 					face.GetComponent<SkinManager>().frameSelected = 1;
 					needBubble.SetActive(false);
@@ -59,20 +61,17 @@ public class PatientController : MonoBehaviour {
 		}
 	}
 
-	public void Initialize(GameController parent) {
-		gc = parent;
-	}
-
 	public void DisplayNextNeed() {
+		if (!needBubble.activeSelf) needBubble.SetActive(true);
 		if (needIcon) {
 			Destroy(needIcon);
 			needIcon = null;
 		}
 		GameObject icon = myDisease.GetNeedIcon();
-		if (icon != null) {
-			icon.transform.SetParent(needBubble.transform);
-			needIcon = icon;
-		}
+		if (icon != null)
+			needIcon = Instantiate(icon, needBubble.transform);
+
+		needDisplayed = true;
 	}
 
 	public void TakeItem(GameObject item) {
@@ -103,7 +102,7 @@ public class PatientController : MonoBehaviour {
 		state = States.dead;
 		face.GetComponent<SkinManager>().skinSelected = 3;
 		needBubble.SetActive(false);
-		gc?.PatientDead(this);
+		GameController.instance.PatientDead(patientValue);
 	}
 
 	public void DiseaseCured() {
@@ -113,4 +112,10 @@ public class PatientController : MonoBehaviour {
 		state = States.cured;
 	}
 
+	public void Exited() {
+		if (state == States.cured)
+			GameController.instance.PatientCured(patientValue);
+		else
+			GameController.instance.PatientDead(patientValue);
+	}
 }
