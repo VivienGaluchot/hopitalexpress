@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   face: {fileID: 2301655207604851932}
+  clothes: {fileID: 4558647280124325500}
   needBubble: {fileID: 3807074980244481042}
   TimeBarImage: {fileID: 6337524270730507428}
   noDiseaseDuration: 5

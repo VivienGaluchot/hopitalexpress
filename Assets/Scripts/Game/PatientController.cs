@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PatientController : MonoBehaviour {
 
 	[SerializeField] private GameObject face;
+	[SerializeField] private GameObject clothes;
 	//[SerializeField] private GameObject body;
 	[SerializeField] private GameObject needBubble;
 	[SerializeField] private Image TimeBarImage;
@@ -16,6 +17,7 @@ public class PatientController : MonoBehaviour {
 
 	private Disease myDisease;
 	private bool needDisplayed;
+	private (bool isSet, int value) initialClothesSkinIndex = (false, 0);
 
 	public enum States { 
 		sick,
@@ -102,6 +104,12 @@ public class PatientController : MonoBehaviour {
 
 	// We used the machine during time, tell the disease about it!
 	public void MachineDone(string machineName, float time) {
+		// select the blouse skin
+		if (machineName == "Diagnostable") {
+			initialClothesSkinIndex.isSet = true;
+			initialClothesSkinIndex.value = clothes.GetComponent<SkinManager>().skinSelected;
+			clothes.GetComponent<SkinManager>().skinSelected = 0;
+		}
 		myDisease.UsedMachine(machineName, time);
 	}
 
@@ -118,6 +126,10 @@ public class PatientController : MonoBehaviour {
 		face.GetComponent<SkinManager>().skinSelected = 4;
 		needBubble.SetActive(false);
 		state = States.cured;
+		if (initialClothesSkinIndex.isSet) {
+			clothes.GetComponent<SkinManager>().skinSelected = initialClothesSkinIndex.value;
+			initialClothesSkinIndex.isSet = false;
+		}
 	}
 
 	public void Exited() {

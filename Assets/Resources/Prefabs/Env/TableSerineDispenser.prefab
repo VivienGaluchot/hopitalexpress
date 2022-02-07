@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5142847914458942288}
   - component: {fileID: 8130226295927118232}
   m_Layer: 0
-  m_Name: SerineDispenserTable
+  m_Name: TableSerineDispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
