@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class PatientController : MonoBehaviour {
 	//[SerializeField] private GameObject body;
 	[SerializeField] private GameObject needBubble;
 	[SerializeField] private Image TimeBarImage;
+
+	private List<GameObject> PlayersNearby;
 
 	public float noDiseaseDuration;
 	public float diseaseDuration;
@@ -34,6 +37,7 @@ public class PatientController : MonoBehaviour {
 		state = States.sick;
 		needBubble.SetActive(false);
 		timeEffect = 1f;
+		PlayersNearby = new List<GameObject>();
 	}
     private void Start() {
 		myDisease = new Disease(this);
@@ -58,7 +62,7 @@ public class PatientController : MonoBehaviour {
 					needBubble.SetActive(needDisplayed);
 				} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
 					face.GetComponent<SkinManager>().frameSelected = 1;
-					needBubble.SetActive(false);
+					//needBubble.SetActive(false);
 				}
 			}
 		}
@@ -121,4 +125,19 @@ public class PatientController : MonoBehaviour {
 		else
 			GameController.instance.PatientDead(patientValue);
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag == "Player") {
+			PlayersNearby.Add(collision.gameObject);
+			needBubble.SetActive(needDisplayed);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+		if (PlayersNearby.Contains(collision.gameObject)) {
+			PlayersNearby.Remove(collision.gameObject);
+			if (PlayersNearby.Count == 0)
+				needBubble.SetActive(false);
+        }
+    }
 }

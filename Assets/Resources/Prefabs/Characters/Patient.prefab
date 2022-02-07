@@ -441,6 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3508764698176005528}
   - component: {fileID: 2166465081157493619}
+  - component: {fileID: 1601738470745107001}
   - component: {fileID: 3906777537559676649}
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
@@ -487,6 +488,22 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!70 &1601738470745107001
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508764698176005531}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 3.5, y: 3}
+  m_Direction: 1
 --- !u!58 &3906777537559676649
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -494,7 +511,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3508764698176005531}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -556,12 +573,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   face: {fileID: 2301655207604851932}
-  body: {fileID: 1402126273352743420}
-  needGO: {fileID: 3807074980244481042}
   needBubble: {fileID: 3807074980244481042}
   TimeBarImage: {fileID: 6337524270730507428}
   noDiseaseDuration: 5
   diseaseDuration: 1
+  timeEffect: 0
 --- !u!114 &4471882130300888735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,11 +1306,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
---- !u!224 &2522776602699281772 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
-  m_PrefabInstance: {fileID: 7641416007629185829}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6337524270730507428 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4465508010641741697, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
@@ -1306,3 +1317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2522776602699281772 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5262861520512357961, guid: ee1c0704fd4c1524096b11dc654a2f4e, type: 3}
+  m_PrefabInstance: {fileID: 7641416007629185829}
+  m_PrefabAsset: {fileID: 0}

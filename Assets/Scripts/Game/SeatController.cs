@@ -19,6 +19,7 @@ public class SeatController : MonoBehaviour {
 
 	protected virtual void Start() {
 		gameObject.layer = seatLayer;
+		//gameObject.layer = LayerMask.NameToLayer("Seats");
 		isHolding = false;
 	}
 
@@ -32,9 +33,7 @@ public class SeatController : MonoBehaviour {
 			goHeld.transform.rotation = PlacerHolder.rotation;
 			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
 			holdRBType = r2d.bodyType;
-			r2d.bodyType = RigidbodyType2D.Static;
-			holdIsSimulated = r2d.simulated;
-			r2d.simulated = false;
+			r2d.bodyType = RigidbodyType2D.Kinematic;
 			
 			var targetWc = target.GetComponent<WalkController>();
 			if (targetWc) {
@@ -57,7 +56,6 @@ public class SeatController : MonoBehaviour {
 		if(isHolding) {
 			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
 			r2d.bodyType = holdRBType;
-			r2d.simulated = holdIsSimulated;
 			
 			var targetWc = goHeld.GetComponent<WalkController>();
 			if (targetWc) {
