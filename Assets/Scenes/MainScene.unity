@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294fc9c7467b48845b571ad391b03ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayFirstNeed: 0
   levelTime: 180
   levelTimeImage: {fileID: 1180426685}
   Player: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
@@ -316,7 +317,7 @@ MonoBehaviour:
   - {fileID: 1845620948}
   - {fileID: 1153479329}
   Patient: {fileID: 3508764698176005531, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-  spawnRate: 1
+  spawnRate: 15
   PatientQueueParent: {fileID: 1140363381}
   patientQueueSize: 5
   targetFrameRate: 120
