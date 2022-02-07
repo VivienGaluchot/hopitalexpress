@@ -44,7 +44,8 @@ public class PatientController : MonoBehaviour {
 		lifetime = myDisease.myInfos._lifespan;
 		patientValue = myDisease.myInfos._points;
 		face.GetComponent<SkinManager>().skinSelected = myDisease.GetFaceSkinIndex();
-		//DisplayNextNeed();
+
+		if(GameController.instance.displayFirstNeed) DisplayNextNeed();
 	}
 
 	void Update() {
@@ -62,7 +63,7 @@ public class PatientController : MonoBehaviour {
 					needBubble.SetActive(needDisplayed);
 				} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
 					face.GetComponent<SkinManager>().frameSelected = 1;
-					//needBubble.SetActive(false);
+					needBubble.SetActive(false);
 				}
 			}
 		}

@@ -74,6 +74,21 @@ public class LevelDataController : DataController {
 
 		(float x, float y, float size) camParams = LevelCameraController.instance.GetCamParams();
 
+		Debug.Log(camParams.x);
+		Debug.Log(camParams.y);
+		Debug.Log(camParams.size);
+		Debug.Log(
+			lec.rows);
+		Debug.Log(lec.columns);
+		Debug.Log(
+			layers);
+		Debug.Log(new List<string>(LevelDiseasesController.instance.Elements.Keys));
+		Debug.Log(
+			lec.PlayerSpawn.transform.position);
+		Debug.Log(lec.PatientSpawn.transform.position);
+		Debug.Log( PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
+		Debug.Log(Int32.Parse(PatientQueueSize.text));
+
 		return new LevelData(camParams.x, camParams.y, camParams.size,
 			lec.rows, lec.columns,
 			layers, new List<string>(LevelDiseasesController.instance.Elements.Keys),

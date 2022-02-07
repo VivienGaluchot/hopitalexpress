@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class ContentItemController : MonoBehaviour {
 
     private string path;
-    private Sprite sprite;
+    private GameObject prefab;
 
-    public void SetInformations(Sprite sprite, string path) {
+    public void SetInformations(GameObject prefab, string path) {
         this.path = path;
-        this.sprite = sprite;
-        GetComponent<Image>().sprite = sprite;
+        this.prefab = prefab;
+        GetComponent<Image>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
     }
 
     public void SendInformations() {
-        TreatmentEditorController.instance.NewFollower(sprite, path);
+        TreatmentEditorController.instance.NewFollower(prefab, path);
     }
 }

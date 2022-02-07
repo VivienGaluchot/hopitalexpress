@@ -20,7 +20,7 @@ public class TreatmentEditorController : MonoBehaviour {
 
 	public GameObject clickedObject { get; set; }
 
-	private GameObject Follower;
+	private GameObject Follower, FollowerPrefab; 
 	private SpriteRenderer followerSR;
 	private bool hasFollower;
 
@@ -53,7 +53,7 @@ public class TreatmentEditorController : MonoBehaviour {
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 
 			if (hasFollower)
-				Follower.transform.position = worldPos + new Vector3(.5f, -.5f, 10f);
+				Follower.transform.position = worldPos + new Vector3(0f, 0f, 10f);
 
 			if (GMBD0) {
 				if(overTICs.Count == 0) {
@@ -61,8 +61,11 @@ public class TreatmentEditorController : MonoBehaviour {
 						StopDrawLine();
 					} else if (!GlobalFunctions.DoesHitUI() && hasFollower) {
 						GameObject newGo = Instantiate(TreatmentItemPrefab, worldPos, Quaternion.identity, transform);
+						Transform Parent = newGo.GetComponent<TreatmentItemController>().PlaceHolder;
+						GameObject icon = Instantiate(FollowerPrefab);
+						icon.transform.position = Parent.position;
+						icon.transform.SetParent(Parent);
 						newGo.GetComponent<TreatmentItemController>().path = followerPath;
-						newGo.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
 						TreatmentItems.Add(newGo.GetComponent<TreatmentItemController>());
 					}
 				}
@@ -81,14 +84,15 @@ public class TreatmentEditorController : MonoBehaviour {
 	}
 
 	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
-	public void NewFollower(Sprite sprite, string path) {
-		if(sprite != followerSR.sprite) {
-			followerSR.sprite = sprite;
+	public void NewFollower(GameObject follower, string path) {
+		Sprite newSprite = follower.GetComponent<SpriteRenderer>().sprite;
+		if (followerSR.sprite != newSprite) {
+			followerSR.sprite = newSprite;
 			hasFollower = true;
+			FollowerPrefab = follower;
 			followerPath = path;
 		} else {
-			followerSR.sprite = null;
-			hasFollower = false;
+			UnsetFollower();
 		}
 	}
 

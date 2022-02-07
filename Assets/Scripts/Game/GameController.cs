@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public static GameController instance;
 
+	public bool displayFirstNeed;
 
 	[SerializeField] private float levelTime;
 	[SerializeField] private Image levelTimeImage;

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class TreatmentItemController : TreatmentObjectController {
 
+	public Transform PlaceHolder;
+
 	public string path;
 	public List<LineController> startingLines, endingLines;
 	public InputField valueField;

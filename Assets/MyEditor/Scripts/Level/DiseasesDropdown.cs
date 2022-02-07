@@ -7,7 +7,7 @@ public class DiseasesDropdown : MonoBehaviour {
 
 	[SerializeField] private string path;
 
-	private GameObject ElementsParent, TemplateElement;
+	public GameObject ElementsParent, TemplateElement;
 	private float templateHeight;
 	private bool isScrolledDown;
 
@@ -15,7 +15,7 @@ public class DiseasesDropdown : MonoBehaviour {
 
 	private void Awake() {
 		isScrolledDown = false;
-		ElementsParent = transform.Find("Elements").gameObject;
+		//ElementsParent = transform.Find("Elements").gameObject;
 		TemplateElement = transform.Find("TemplateElement").gameObject;
 		templateHeight = TemplateElement.GetComponent<RectTransform>().sizeDelta.y;
 		path = Path.Combine(Application.dataPath, path);
