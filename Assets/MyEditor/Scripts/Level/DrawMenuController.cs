@@ -3,21 +3,10 @@ using UnityEngine.UI;
 using System;
 
 public class DrawMenuController : MonoBehaviour {
+	public static DrawMenuController instance;
 
 	[SerializeField] private Dropdown LayersDropdown;
 
-	//public enum DrawType {
-	//	none,
-	//	floor,
-	//	eraseFloor,
-	//	fillFloor,
-	//	walls,
-	//	eraseWalls,
-	//	fillWalls,
-	//	playerSpawn,
-	//	patientSpawn,
-	//	levelObject
-	//}
 	private int layer;
 	private int button;
 
@@ -25,8 +14,18 @@ public class DrawMenuController : MonoBehaviour {
 
 	private Color oldColor;
 
-	private void UpdateDrawType() { 
-		LevelEditorController.instance.drawType = button > 0 ? (DrawType)(layer*3 + button) : DrawType.none;
+    private void Awake() {
+		instance = this;
+    }
+
+    private void UpdateDrawType() { 
+		LevelEditorController.instance.SetDrawType(button > 0 ? (DrawType)(layer*3 + button) : DrawType.none);
+	}
+
+	public void Unclick() {
+		if (button > 0) Buttons[button - 1].color = oldColor;
+		button = 0;
+		UpdateDrawType();
 	}
 
 	public void Clicked(int index) {

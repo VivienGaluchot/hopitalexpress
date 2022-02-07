@@ -98,9 +98,13 @@ public class LevelEditorController : MonoBehaviour {
 	private void Start() { InitGrid(); }
 
 	private void Update() {
+		if(Input.GetKeyDown("escape")) {
+			UnsetFollower();
+			DrawMenuController.instance.Unclick();
+		}
 
 		if(drawType == DrawType.levelObject) {
-            Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(1f, -1f, 10f);
+            Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 		}
 
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && !GlobalFunctions.DoesHitUI()) {
@@ -556,7 +560,9 @@ public class LevelEditorController : MonoBehaviour {
 	// -------------- END GRID MANAGEMENT
 	// -------------- MISC
 	public void SetFollower(Sprite followerSprite) {
-		if(followerSR.sprite != followerSprite) {
+		Sprite oldSprite = followerSR.sprite;
+		DrawMenuController.instance.Unclick();
+		if(oldSprite != followerSprite) {
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
 		} else {
@@ -567,6 +573,10 @@ public class LevelEditorController : MonoBehaviour {
 	public void UnsetFollower() {
 		drawType = DrawType.none;
 		followerSR.sprite = null;
+	}
+	public void SetDrawType(DrawType newDT) {
+		UnsetFollower();
+		drawType = newDT;
 	}
 	private void ResetCamera() {
 		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);
