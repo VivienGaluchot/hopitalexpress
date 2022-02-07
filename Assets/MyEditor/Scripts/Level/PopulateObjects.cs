@@ -19,9 +19,10 @@ public class PopulateObjects : MonoBehaviour {
                 SpriteRenderer sr = p.GetComponent<SpriteRenderer>();
                 if (sr == null)
                     sr = p.GetComponentInChildren<SpriteRenderer>();
-
                 go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
-                go.GetComponent<ObjectController>().SetInformations(sr.sprite);
+
+                string path = Path.Combine(s, p.name);
+                go.GetComponent<ObjectController>().SetInformations(sr.sprite, path);
             }
         }        
     }

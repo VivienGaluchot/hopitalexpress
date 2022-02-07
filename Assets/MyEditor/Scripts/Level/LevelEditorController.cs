@@ -41,7 +41,7 @@ public class LevelEditorController : MonoBehaviour {
 	public Dictionary<(int, int), GameObject> fullWallsGrid { get; private set; }
 
 	private Transform[] CellsParents, WallsParents;
-	private Transform ObjectsParent;
+	public Transform ObjectsParent { get; private set; }
 	
 	private enum WallVisibility {
 		none,
@@ -58,6 +58,8 @@ public class LevelEditorController : MonoBehaviour {
 	public string[] objectsPath;
 	private GameObject Follower;
 	private SpriteRenderer followerSR;
+	private string followerPath;
+	public Dictionary<GameObject, string> ObjectsList { get; private set; }
 
 	private void Awake() { 
 		instance = this;
@@ -94,6 +96,7 @@ public class LevelEditorController : MonoBehaviour {
 		Follower = new GameObject("Follower", typeof(SpriteRenderer));
 		Follower.transform.SetParent(transform);
 		followerSR = Follower.GetComponent<SpriteRenderer>();
+		ObjectsList = new Dictionary<GameObject, string>();
 	}
 	private void Start() { InitGrid(); }
 
@@ -159,6 +162,7 @@ public class LevelEditorController : MonoBehaviour {
 									GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
 									newGO.AddComponent<BoxCollider2D>();
 									newGO.layer = LayerMask.NameToLayer("LevelObjects");
+									ObjectsList.Add(newGO, followerPath);
 								} else {
 									// We clicked on an object, shall we select it?
                                 }
@@ -497,7 +501,8 @@ public class LevelEditorController : MonoBehaviour {
 
 		PlayerSpawn.SetActive(false);
 		PatientSpawn.SetActive(false);
-		LevelDiseasesController.instance.DeleteAll();		
+		LevelDiseasesController.instance.DeleteAll();
+		ClearLevelObjects();
 	}
 	public void ClearGrid(int layer) {
 		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
@@ -558,13 +563,14 @@ public class LevelEditorController : MonoBehaviour {
 		}
 	}
 	// -------------- END GRID MANAGEMENT
-	// -------------- MISC
-	public void SetFollower(Sprite followerSprite) {
+	// -------------- LEVEL OBJECTS
+	public void SetFollower(Sprite followerSprite, string path) {
 		Sprite oldSprite = followerSR.sprite;
 		DrawMenuController.instance.Unclick();
 		if(oldSprite != followerSprite) {
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
+			followerPath = path;
 		} else {
 			followerSR.sprite = null;
 			drawType = DrawType.none;
@@ -574,6 +580,14 @@ public class LevelEditorController : MonoBehaviour {
 		drawType = DrawType.none;
 		followerSR.sprite = null;
 	}
+	public void ClearLevelObjects() {
+		foreach (KeyValuePair<GameObject, string> lo in ObjectsList) {
+			Destroy(lo.Key);
+		}
+		ObjectsList.Clear();
+	}
+	// -------------- END GRID MANAGEMENT
+	// -------------- MISC
 	public void SetDrawType(DrawType newDT) {
 		UnsetFollower();
 		drawType = newDT;

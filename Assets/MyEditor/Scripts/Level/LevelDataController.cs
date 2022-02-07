@@ -6,8 +6,12 @@ using System.IO;
 
 [Serializable]
 public class LevelData {
-	public LevelData(float camX, float camY, float camSize, int rows, int columns, List<LayerData> layers, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection, int patientQueueSize)
-		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns; this.layers = layers; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; this.patientQueueSize = patientQueueSize; }
+	public LevelData(float camX, float camY, float camSize, int rows, int columns,
+		List<LayerData> layers, List<string> diseases, List<LevelObject> LevelObjects,
+		Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection, int patientQueueSize)
+		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns; 
+		this.layers = layers; this.diseases = diseases; this.LevelObjects = LevelObjects;
+		this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; this.patientQueueSize = patientQueueSize; }
 
 	public float camX, camY, camSize;
 	public int rows, columns;
@@ -16,6 +20,15 @@ public class LevelData {
 	public Vector3 playerSpawn, patientSpawn;
 	public string patientSpawnDirection;
 	public int patientQueueSize;
+	public List<LevelObject> LevelObjects;
+}
+
+[Serializable]
+public class LevelObject {
+	public LevelObject(Vector3 pos, string path) { this.pos = pos; this.path = path; }
+
+	public Vector3 pos;
+	public string path;
 }
 
 [Serializable]
@@ -40,9 +53,9 @@ public class LevelDataController : DataController {
 
 	private LevelEditorController lec;
 
-    private void Start() { lec = LevelEditorController.instance; }
+	private void Start() { lec = LevelEditorController.instance; }
 
-    public override void SaveData() {
+	public override void SaveData() {
 		LevelData ld = FetchDataToLevelData();
 		if(ld != null) {
 			WriteToFile(JsonUtility.ToJson(ld));
@@ -74,24 +87,13 @@ public class LevelDataController : DataController {
 
 		(float x, float y, float size) camParams = LevelCameraController.instance.GetCamParams();
 
-		Debug.Log(camParams.x);
-		Debug.Log(camParams.y);
-		Debug.Log(camParams.size);
-		Debug.Log(
-			lec.rows);
-		Debug.Log(lec.columns);
-		Debug.Log(
-			layers);
-		Debug.Log(new List<string>(LevelDiseasesController.instance.Elements.Keys));
-		Debug.Log(
-			lec.PlayerSpawn.transform.position);
-		Debug.Log(lec.PatientSpawn.transform.position);
-		Debug.Log( PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
-		Debug.Log(Int32.Parse(PatientQueueSize.text));
+		List<LevelObject> LevelObjects = new List<LevelObject>();
+		foreach(KeyValuePair<GameObject, string> lo in lec.ObjectsList) {
+			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value));
+        }
 
-		return new LevelData(camParams.x, camParams.y, camParams.size,
-			lec.rows, lec.columns,
-			layers, new List<string>(LevelDiseasesController.instance.Elements.Keys),
+		return new LevelData(camParams.x, camParams.y, camParams.size, lec.rows, lec.columns,
+			layers, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelObjects,
 			lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position,
 			PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text, Int32.Parse(PatientQueueSize.text));
 	}
@@ -128,5 +130,16 @@ public class LevelDataController : DataController {
 
 		LevelCameraController.instance.SetCamParams(Data.camX, Data.camY, Data.camSize);
 		PatientQueueSize.text = Data.patientQueueSize.ToString();
+
+		foreach(LevelObject lo in Data.LevelObjects) {
+			GameObject loaded = Resources.Load<GameObject>(lo.path);
+			if(loaded) {
+				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
+				newGO.AddComponent<BoxCollider2D>();
+				newGO.layer = LayerMask.NameToLayer("LevelObjects");
+			} else {
+				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
+			}
+        }
 	}
 }
