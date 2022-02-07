@@ -137,6 +137,7 @@ public class LevelDataController : DataController {
 				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
 				newGO.AddComponent<BoxCollider2D>();
 				newGO.layer = LayerMask.NameToLayer("LevelObjects");
+				lec.ObjectsList.Add(newGO, lo.path);
 			} else {
 				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
 			}

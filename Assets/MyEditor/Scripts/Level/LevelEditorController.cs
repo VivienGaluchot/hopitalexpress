@@ -33,7 +33,7 @@ public class LevelEditorController : MonoBehaviour {
 	public const float size = 2f;
 	public int rows { get; private set; }
 	public int columns { get; private set; }
-	public DrawType drawType;
+	public DrawType drawType = DrawType.none;
 
 	public Sprite[] floorSprites, wallSprites, fullWallSprites;
 	public Sprite[][] sprites;
@@ -60,10 +60,11 @@ public class LevelEditorController : MonoBehaviour {
 	private SpriteRenderer followerSR;
 	private string followerPath;
 	public Dictionary<GameObject, string> ObjectsList { get; private set; }
+	private GameObject clickedGO;
+	private Vector3 clickedGOffset = Vector3.zero;
 
 	private void Awake() { 
 		instance = this;
-		drawType = DrawType.none;
 
 		rows = Int32.Parse(rowsIF.text);
 		columns = Int32.Parse(columnsIF.text);
@@ -110,6 +111,14 @@ public class LevelEditorController : MonoBehaviour {
             Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 		}
 
+		if(clickedGO) {
+			if (Input.GetMouseButtonUp(0)) {
+				clickedGO = null;
+			} else if (Input.GetMouseButton(0) && drawType == DrawType.none) {
+				clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
+			}
+		}
+
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && !GlobalFunctions.DoesHitUI()) {
 			switch (drawType) {
 				case DrawType.floor:
@@ -147,6 +156,7 @@ public class LevelEditorController : MonoBehaviour {
 				case DrawType.playerSpawn:
 				case DrawType.patientSpawn:
 				case DrawType.levelObject:
+				case DrawType.none:
 					if (Input.GetMouseButtonDown(0)) {
 						Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 						switch (drawType) {
@@ -157,15 +167,17 @@ public class LevelEditorController : MonoBehaviour {
 								SetPatientSpawn(worldMousePos);
 								break;
 							case DrawType.levelObject:
+							case DrawType.none:
 								RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
-								if(!hit.collider) {
+								if(!hit.collider && drawType == DrawType.levelObject) {
 									GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
 									newGO.AddComponent<BoxCollider2D>();
 									newGO.layer = LayerMask.NameToLayer("LevelObjects");
 									ObjectsList.Add(newGO, followerPath);
-								} else {
-									// We clicked on an object, shall we select it?
-                                }
+								} else if(hit.collider && drawType == DrawType.none) {
+									clickedGO = hit.collider.gameObject;
+									clickedGOffset = hit.transform.position - worldMousePos;
+								}
 								break;
 						}
 					}
@@ -184,6 +196,10 @@ public class LevelEditorController : MonoBehaviour {
 		if (!PatientSpawn.activeSelf)
 			PatientSpawn.SetActive(true); 
 		PatientSpawn.transform.position = pos; 
+	}
+	public void DrawTypeToSpawn(int newDT) {
+		UnsetFollower();
+		drawType = (DrawType) newDT;
 	}
 	// -------------- END SPAWNS
 	// -------------- VISIBILITY SWITCHERS
