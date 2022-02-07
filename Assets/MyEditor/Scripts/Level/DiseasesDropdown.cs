@@ -7,7 +7,8 @@ public class DiseasesDropdown : MonoBehaviour {
 
 	[SerializeField] private string path;
 
-	public GameObject ElementsParent, TemplateElement;
+	public GameObject ElementsGO, TemplateElement;
+	public Transform ElementsParent;
 	private float templateHeight;
 	private bool isScrolledDown;
 
@@ -15,7 +16,6 @@ public class DiseasesDropdown : MonoBehaviour {
 
 	private void Awake() {
 		isScrolledDown = false;
-		//ElementsParent = transform.Find("Elements").gameObject;
 		TemplateElement = transform.Find("TemplateElement").gameObject;
 		templateHeight = TemplateElement.GetComponent<RectTransform>().sizeDelta.y;
 		path = Path.Combine(Application.dataPath, path);
@@ -32,8 +32,8 @@ public class DiseasesDropdown : MonoBehaviour {
 		string[] paths = Directory.GetFiles(path);
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta")) {
-				GameObject newElem = Instantiate(TemplateElement, ElementsParent.transform);
-				newElem.transform.localPosition = new Vector3(0, -templateHeight * Elements.Count, 0f);
+				GameObject newElem = Instantiate(TemplateElement, ElementsParent);
+				//newElem.transform.localPosition = new Vector3(0, -templateHeight * Elements.Count, 0f);
 				newElem.GetComponentInChildren<Text>().text = Path.GetFileNameWithoutExtension(s);
 				newElem.SetActive(true);
 				Elements.Add(newElem);
@@ -46,8 +46,8 @@ public class DiseasesDropdown : MonoBehaviour {
 	}
 
 	public void ScrollDropdown() {
-		ElementsParent.SetActive(!isScrolledDown);
 		isScrolledDown = !isScrolledDown;
+		ElementsGO.SetActive(isScrolledDown);
 	}
 
 	private void OnEnable() {
