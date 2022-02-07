@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 
 	private GameObject[] PatientQueue;
 
-	public List<PatientController> patientsList;
+	public List<PatientController> patientsList { get; private set; }
 
 	private float elapsedTime, currentSpawnRate;
 
@@ -46,8 +46,13 @@ public class GameController : MonoBehaviour {
 
 	public Infos[] DiseasesAvailable;
 
+	public bool isPaused { get; private set; }
+	[SerializeField] private GameObject PauseText;
+
 	private void Awake() {
 		instance = this;
+		isPaused = false;
+		PauseText.SetActive(isPaused);
 		patientsList = new List<PatientController>();
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
@@ -67,12 +72,11 @@ public class GameController : MonoBehaviour {
 	private const float clockStartHue = 100f / 255f;
 	private const float clockEndHue = 0f;
 
-	public bool isPaused { get; private set; }
-
 	private void Update() {
 		if (Input.GetKeyDown("escape"))
 			isPaused = !isPaused;
-		if(!isPaused) {
+			PauseText.SetActive(isPaused);
+		if (!isPaused) {
 			if (isLoaded) {
 				CheckNewPlayers();
 

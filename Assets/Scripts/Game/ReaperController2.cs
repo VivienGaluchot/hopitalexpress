@@ -25,7 +25,7 @@ public class ReaperController2 : MonoBehaviour {
 
     private void FixedUpdate() {
 		if(target)
-			rb2D.velocity = (target.transform.position - transform.position) * .25f;
+			rb2D.velocity = (target.transform.position - transform.position) * .25f * (GameController.instance.isPaused ? .1f : 1f);
 		CheckForDirection();
 	}
 

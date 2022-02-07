@@ -29,9 +29,8 @@ public class GameLoader : MonoBehaviour {
 		path = Path.Combine(Application.dataPath, path);
 		FetchDDOptions();
 
-		if(instantLoad) {
-			LoadLevel();
-		}
+		if(instantLoad)
+			LoadLevel(true);
 	}
 
 	private void FetchDDOptions() {
@@ -45,11 +44,13 @@ public class GameLoader : MonoBehaviour {
 		dd.AddOptions(pathsList);
 	}
 
-	public void LoadLevel() {
-
+	public void LoadLevel(bool random = false) {
 		dd.transform.parent.parent.gameObject.SetActive(false);
 
 		string filename = dd.options[dd.value].text + ".json";
+		if (random)
+			filename = dd.options[Random.Range(0, dd.options.Count)].text + ".json";
+		Debug.Log("load : " + filename);
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
 		
 		if(loadLevel) {
