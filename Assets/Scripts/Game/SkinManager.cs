@@ -23,13 +23,18 @@ public class SkinManager : MonoBehaviour {
 
 	public List<GameObject> annexLayers;
 
-	public int seatFrame;
 
-	public bool hasSeatFrame = false;
+	public bool enableSeatFrame = false;
 
-	public bool onlyWhenSeated = false;
+	public int seatFrame = 0;
 
-	public bool onlyWhenNonSeated = false;
+	public bool enableSeatTransform = false;
+
+	public Vector2 seatPosition = new Vector2(0, 0);
+
+	public Vector2 seatScale = new Vector2(1, 1);
+
+	private (bool isPending, Vector2 pos, Vector2 scale) preSteatTransform = (false, new Vector2(), new Vector2());
 
 
 	private SpriteRenderer spriteRenderer = null;
@@ -69,6 +74,22 @@ public class SkinManager : MonoBehaviour {
 		skinSelected=skinSelected-1;
 		if (skinSelected<skinMin) {
 			skinSelected=skinMax;
+		}
+	}
+
+	public void Update() {
+		if (walkController.isSeated && enableSeatTransform) {
+			if (!preSteatTransform.isPending) {
+				preSteatTransform.pos = transform.localPosition;
+				preSteatTransform.scale = transform.localScale;
+				preSteatTransform.isPending = true;
+			}
+			transform.localPosition = seatPosition;
+			transform.localScale = seatScale;
+		} else if (preSteatTransform.isPending) {
+			transform.localPosition = preSteatTransform.pos;
+			transform.localScale = preSteatTransform.scale;
+			preSteatTransform.isPending = false;
 		}
 	}
 
@@ -112,22 +133,19 @@ public class SkinManager : MonoBehaviour {
 		} else if (walkController.direction == WalkController.Dir.Left) {
 			dirIndex = 3;
 		}
+
 		int frame = frameSelected;
-		if (hasSeatFrame && walkController.isSeated) {
+		if (walkController.isSeated && enableSeatFrame) {
 			frame = seatFrame;
 		}
-		if (onlyWhenNonSeated) {
-			spriteRenderer.enabled = !walkController.isSeated;
-		}
-		if (onlyWhenSeated) {
-			spriteRenderer.enabled = walkController.isSeated;
-		}
+
 		foreach (GameObject child in annexLayers) {
 			var cmp = child.GetComponent<SkinManager>();
 			cmp.frameSelected = frame;
 			cmp.skinSelected = skinSelected;
 			cmp.applyReplacement();
 		}
+
 		int index = frame + dirIndex * framePerDirection + skinSelected * framePerDirection * 4;
 		string selectedSpriteName = initialPrefix + index.ToString();
 

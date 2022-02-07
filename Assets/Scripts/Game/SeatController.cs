@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SeatController : MonoBehaviour {
 
-
 	// LAYER 6 = SEATS
 	private static int seatLayer = 6;
 
 	[SerializeField] private Transform PlacerHolder;
+	[SerializeField] private bool isSeatingPerso;
+
 	public GameObject goHeld { get; protected set; }
 	public bool isHolding { get; protected set; }
 	private RigidbodyType2D holdRBType;
@@ -42,7 +43,9 @@ public class SeatController : MonoBehaviour {
 				} else {
 					targetWc.direction = WalkController.Dir.Down;
 				}
-				targetWc.isSeated = true;
+				if (isSeatingPerso) {
+					targetWc.isSeated = true;
+				}
 			}
 
 			return true;
@@ -51,15 +54,16 @@ public class SeatController : MonoBehaviour {
 		return false;
 	}
 
-	// TODO set direction
 	public virtual GameObject GiveHold() {
 		if(isHolding) {
 			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
 			r2d.bodyType = holdRBType;
 			
-			var targetWc = goHeld.GetComponent<WalkController>();
-			if (targetWc) {
-				targetWc.isSeated = false;
+			if (isSeatingPerso) {
+				var targetWc = goHeld.GetComponent<WalkController>();
+				if (targetWc) {
+					targetWc.isSeated = false;
+				}
 			}
 
 			GameObject returnGO = goHeld;

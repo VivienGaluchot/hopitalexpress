@@ -103,6 +103,11 @@ MonoBehaviour:
   spritePath: Illustrations/Objets/Fauteuils_1
   perso: {fileID: 2085243115455294966}
   annexLayers: []
+  enableSeatFrame: 0
+  seatFrame: 0
+  enableSeatTransform: 0
+  seatPosition: {x: 0, y: 0}
+  seatScale: {x: 1, y: 1}
 --- !u!1 &2085243115455294966
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
+  isSeated: 0
 --- !u!114 &4032919600854944897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacerHolder: {fileID: 3782346983457192508}
+  isSeatingPerso: 1
 --- !u!1 &4199172716486784791
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,3 +365,8 @@ MonoBehaviour:
   spritePath: Illustrations/Objets/Fauteuils_0
   perso: {fileID: 2085243115455294966}
   annexLayers: []
+  enableSeatFrame: 0
+  seatFrame: 0
+  enableSeatTransform: 0
+  seatPosition: {x: 0, y: 0}
+  seatScale: {x: 1, y: 1}
