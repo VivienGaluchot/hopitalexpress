@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.EventSystems;
 using System;
 
-public enum DrawType { 
+public enum DrawType {
+	none,
 	floor,
-	walls,
+	eraseFloor,
 	fillFloor,
+	walls,
+	eraseWalls,
 	fillWalls,
 	playerSpawn,
 	patientSpawn,
-	levelObject,
-	none
+	levelObject
 }
 
 public class Cell {
-	public Cell(GameObject go) { this.go = go; sr = this.go.GetComponent<SpriteRenderer>(); value = 0; }
 	public Cell(GameObject go, SpriteRenderer sr) { this.go = go; this.sr = sr; value = 0; }
 
 	public GameObject go;
@@ -27,12 +27,12 @@ public class Cell {
 public class LevelEditorController : MonoBehaviour {
 	public static LevelEditorController instance;
 
-	[SerializeField] private InputField sizeIF;
 	[SerializeField] private InputField rowsIF;
 	[SerializeField] private InputField columnsIF;
 
-	public float size;
-	public int columns, rows;
+	public const float size = 2f;
+	public int rows { get; private set; }
+	public int columns { get; private set; }
 	public DrawType drawType;
 
 	public Sprite[] floorSprites, wallSprites, fullWallSprites;
@@ -63,28 +63,20 @@ public class LevelEditorController : MonoBehaviour {
 		instance = this;
 		drawType = DrawType.none;
 
-		size = Single.Parse(sizeIF.text);
 		rows = Int32.Parse(rowsIF.text);
 		columns = Int32.Parse(columnsIF.text);
 
 		sprites = new Sprite[2][] { floorSprites, wallSprites };
+
 		grids = new Dictionary<(int, int), Cell>[2];
+		fullWallsGrid = new Dictionary<(int, int), GameObject>();
+
 		CellsParents = new Transform[2];
 		CellsParents[0] = transform.Find("FloorLayer");
 		CellsParents[1] = transform.Find("WallsLayer");
-
 		WallsParents = new Transform[2];
 		WallsParents[0] = CellsParents[1];
 		WallsParents[1] = transform.Find("FullWallsLayer");
-		fullWallsGrid = new Dictionary<(int, int), GameObject>();
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < columns; j++) {
-				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
-				newCell.transform.SetParent(WallsParents[1]);
-				newCell.transform.position = new Vector3(j / size, -i / size, 0);
-				fullWallsGrid.Add((i, j), newCell);
-			}
-		}
 
 		wallVisibility = WallVisibility.flat;
 		SwitchWallsVisibility();
@@ -106,19 +98,70 @@ public class LevelEditorController : MonoBehaviour {
 	private void Start() { InitGrid(); }
 
 	private void Update() {
-		if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
-			Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+
+		if(drawType == DrawType.levelObject) {
+            Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(1f, -1f, 10f);
+		}
+
+		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && !GlobalFunctions.DoesHitUI()) {
 			switch (drawType) {
+				case DrawType.floor:
+				case DrawType.eraseFloor:
+				case DrawType.fillFloor:
+				case DrawType.walls:
+				case DrawType.eraseWalls:
+				case DrawType.fillWalls:
+					RaycastHit2D hit2D = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("Cell")); ;
+					if (hit2D.collider != null) {
+						int i = hit2D.collider.gameObject.GetComponent<CellController>().row;
+						int j = hit2D.collider.gameObject.GetComponent<CellController>().column;
+						switch (drawType) {
+							case DrawType.floor:
+								ClickedCell(0, i, j, true);
+                                break;
+							case DrawType.eraseFloor:
+								ClickedCell(0, i, j, true, true);
+								break;
+							case DrawType.fillFloor:
+								FloorFill(i, j);
+								break;
+							case DrawType.walls:
+								ClickedCell(1, i, j, true);
+								break;
+							case DrawType.eraseWalls:
+								ClickedCell(1, i, j, true, true);
+								break;
+							case DrawType.fillWalls:
+								WallFill(i, j);
+								break;
+						}
+					}
+					break;
 				case DrawType.playerSpawn:
-					SetPlayerSpawn(worldMousePos);
-					break;
 				case DrawType.patientSpawn:
-					SetPatientSpawn(worldMousePos);
-					break;
 				case DrawType.levelObject:
-					Follower.transform.position = worldMousePos;
-					Instantiate(Follower, ObjectsParent);
-					break;
+					if (Input.GetMouseButtonDown(0)) {
+						Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+						switch (drawType) {
+							case DrawType.playerSpawn:
+								SetPlayerSpawn(worldMousePos);
+								break;
+							case DrawType.patientSpawn:
+								SetPatientSpawn(worldMousePos);
+								break;
+							case DrawType.levelObject:
+								RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
+								if(!hit.collider) {
+									GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
+									newGO.AddComponent<BoxCollider2D>();
+									newGO.layer = LayerMask.NameToLayer("LevelObjects");
+								} else {
+									// We clicked on an object, shall we select it?
+                                }
+								break;
+						}
+					}
+					break;			
 			}
 		}
 	}
@@ -155,34 +198,25 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END VISIBILITY SWITCHERS
 	// -------------- CELL CLICK
-	public void ClickedCell(int i, int j, bool clicked = false, bool reset = false) {
-		if (drawType == DrawType.floor || drawType == DrawType.walls || drawType == DrawType.fillFloor || drawType == DrawType.fillWalls) {
-			int targetLayer = 0;
-			if(drawType == DrawType.walls || drawType == DrawType.fillWalls) {
-				targetLayer = 1;
-				if (wallVisibility == WallVisibility.none) SwitchWallsVisibility();
-			}
-			if (grids[targetLayer].TryGetValue((i, j), out Cell cell)) {
-				if (!reset) {
-					if (drawType == DrawType.fillWalls) {
-						WallFill(i, j);
-					} else if (drawType == DrawType.fillFloor) {
-						FloorFill(i, j, cell);
-					} else if ((cell.value != 0 || clicked)) {
-						int newValue = ComputeCellValue(i, j, targetLayer);
-						if (newValue != cell.value) {
-							cell.value = newValue;
-							ChangeSprite(cell, targetLayer);
-							if (targetLayer == 1 && newValue > 0) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue - 1];
-							Propagate(i, j);
-						}
+	public void ClickedCell(int layer, int i, int j, bool clicked = false, bool reset = false) {
+		if (grids[layer].TryGetValue((i, j), out Cell cell)) {
+			if ((drawType == DrawType.walls || drawType == DrawType.eraseWalls || drawType == DrawType.fillWalls) 
+				&& wallVisibility == WallVisibility.none) SwitchWallsVisibility();
+			if (!reset) {
+				if ((cell.value != 0 || clicked)) {
+					int newValue = ComputeCellValue(i, j, layer);
+					if (newValue != cell.value) {
+						cell.value = newValue;
+						ChangeSprite(cell, layer);
+						if (layer == 1 && newValue > 0) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue - 1];
+						Propagate(layer, i, j);
 					}
-				} else if (cell.value != 0) {
-					cell.value = 0;
-					ChangeSprite(cell, targetLayer);
-					if (targetLayer == 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
-					Propagate(i, j);
 				}
+			} else if (cell.value != 0) {
+				cell.value = 0;
+				ChangeSprite(cell, layer);
+				if (layer == 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
+				Propagate(layer, i, j);
 			}
 		}
 	}   
@@ -237,11 +271,11 @@ public class LevelEditorController : MonoBehaviour {
 		if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
 		return sum;
 	}
-	private void Propagate(int i, int j) {
-		ClickedCell(i + 1, j, false, false);
-		ClickedCell(i - 1, j, false, false);
-		ClickedCell(i, j + 1, false, false);
-		ClickedCell(i, j - 1, false, false);
+	private void Propagate(int layer, int i, int j) {
+		ClickedCell(layer, i + 1, j, false, false);
+		ClickedCell(layer, i - 1, j, false, false);
+		ClickedCell(layer, i, j + 1, false, false);
+		ClickedCell(layer, i, j - 1, false, false);
 	}
 	private void ChangeSprite(Cell cell, int layer) {
 		switch(cell.value) {
@@ -330,17 +364,21 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END CELL CLICK
 	// -------------- FILLERS
-	private void FloorFill(int i, int j, Cell cell) {
-		// Onnly work if we clicked on an empty cell
-		if (cell.value > 0)
+	private void FloorFill(int i, int j) {
+		// Only work if we clicked on an empty cell
+		if (!grids[0].TryGetValue((i, j), out Cell cell) || cell.value > 0)
 			return;
 
 		int newValue = ComputeCellValue(i, j, 0);
 		if (cell.value != newValue) {
 			cell.value = newValue;
-			ChangeSprite(cell, 0);
+			//ChangeSprite(cell, 0);
 
-			Propagate(i, j);
+			// Propagate
+			FloorFill(i + 1, j);
+			FloorFill(i - 1, j);
+			FloorFill(i, j + 1);
+			FloorFill(i, j - 1);
 		}
 
 		RefreshGrid(0, true);
@@ -419,15 +457,25 @@ public class LevelEditorController : MonoBehaviour {
 	private void InitGrid() {
 		for (int x = 0; x < grids.Length; x++) {
 			grids[x] = new Dictionary<(int, int), Cell>();
-			for (int i = 0; i < rows; i++)
-				for (int j = 0; j < columns; j++)
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < columns; j++) {
 					InitCell(x, i, j);
+
+					if(x == 1) {
+						GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
+						newCell.transform.SetParent(WallsParents[1]);
+						newCell.transform.position = new Vector3(j / size, -i / size, 0);
+						fullWallsGrid.Add((i, j), newCell);
+					}
+				}
+			}
 		}
 
 		ResetCamera();
 	}
 	private void InitCell(int x, int i, int j) {
 		GameObject newGO = new GameObject(i + "-" + j, typeof(SpriteRenderer), typeof(BoxCollider2D));
+		newGO.layer = LayerMask.NameToLayer("Cell");
 		newGO.transform.SetParent(CellsParents[x]);
 		newGO.AddComponent<CellController>();
 		newGO.GetComponent<CellController>().Setup(i, j);
@@ -471,7 +519,9 @@ public class LevelEditorController : MonoBehaviour {
 	public void ResizeGrid() {
 		int newRows = Int32.Parse(rowsIF.text);
 		int newColumns = Int32.Parse(columnsIF.text);
-		ResizeGrid(newRows, newColumns);
+		if(newRows != rows || newColumns != columns) {
+			ResizeGrid(newRows, newColumns);
+		}
 	}
 	public void ResizeGrid(int rows, int columns) {
 		ClearAllGrid();
@@ -500,14 +550,19 @@ public class LevelEditorController : MonoBehaviour {
 			if(fullWallsGrid.TryGetValue((i, j), out fullWallGO)) {
 				Destroy(fullWallGO);
 				fullWallsGrid.Remove((i, j));
-            }
+			}
 		}
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- MISC
 	public void SetFollower(Sprite followerSprite) {
-		drawType = DrawType.levelObject;
-		followerSR.sprite = followerSprite;
+		if(followerSR.sprite != followerSprite) {
+			drawType = DrawType.levelObject;
+			followerSR.sprite = followerSprite;
+		} else {
+			followerSR.sprite = null;
+			drawType = DrawType.none;
+        }
 	}
 	public void UnsetFollower() {
 		drawType = DrawType.none;

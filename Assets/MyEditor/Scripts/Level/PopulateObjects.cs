@@ -20,7 +20,7 @@ public class PopulateObjects : MonoBehaviour {
                 if (sr == null)
                     sr = p.GetComponentInChildren<SpriteRenderer>();
 
-                go.GetComponent<Image>().sprite = sr.sprite;
+                go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
                 go.GetComponent<ObjectController>().SetInformations(sr.sprite);
             }
         }        

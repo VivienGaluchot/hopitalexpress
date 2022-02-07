@@ -1,43 +1,53 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class DrawMenuController : MonoBehaviour {
-	public static DrawMenuController instance;
 
-	public Image[] DrawButtons;
-	private int currentButtonIndex;
-	private bool anyClicked;
+	[SerializeField] private Dropdown LayersDropdown;
 
-	private void Awake() {
-		instance = this;
-		currentButtonIndex = 1;
-		anyClicked = false;
+	//public enum DrawType {
+	//	none,
+	//	floor,
+	//	eraseFloor,
+	//	fillFloor,
+	//	walls,
+	//	eraseWalls,
+	//	fillWalls,
+	//	playerSpawn,
+	//	patientSpawn,
+	//	levelObject
+	//}
+	private int layer;
+	private int button;
+
+	[SerializeField] private Image[] Buttons;
+
+	private Color oldColor;
+
+	private void UpdateDrawType() { 
+		LevelEditorController.instance.drawType = button > 0 ? (DrawType)(layer*3 + button) : DrawType.none;
 	}
 
-    private void Update() {
-		if (Input.GetKeyDown("escape"))
-			Unclick();
-	}
-
-	public void Unclick() {
-		if (anyClicked) {
-			DrawButtons[currentButtonIndex].color = Color.white;
-			anyClicked = false;
-		}
-	}
-
-    // Check enum DrawType dans LevelEditorController.cs
-    public void ClickedButton(int index) {
-		if(anyClicked) DrawButtons[currentButtonIndex].color = Color.white;
-
-		if(!anyClicked || index != currentButtonIndex) {
-			anyClicked = true;
-			currentButtonIndex = index;
-			DrawButtons[currentButtonIndex].color = Color.green;
+	public void Clicked(int index) {
+		if (button != index) {
+			if(button > 0) Buttons[button-1].color = oldColor;
+			oldColor = Buttons[index - 1].color;
+			Buttons[index-1].color = Color.green;
+			button = index;
 		} else {
-			anyClicked = false;
+			Buttons[index-1].color = oldColor;
+			button = 0;
 		}
-		LevelEditorController.instance.drawType = (DrawType)currentButtonIndex;
+		UpdateDrawType();
+	}
+
+	public void LayerChanged() {
+		layer = LayersDropdown.value;
+		UpdateDrawType();
+	}
+
+	public void Clear() {
+		LevelEditorController.instance.ClearGrid(LayersDropdown.value);
 	}
 }

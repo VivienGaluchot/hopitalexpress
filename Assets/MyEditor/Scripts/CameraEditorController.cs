@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class CameraEditorController : MonoBehaviour {
+	public static CameraEditorController instance;
 
     [SerializeField] private float scrollSpeed;
     private Camera cam;
@@ -9,6 +10,7 @@ public class CameraEditorController : MonoBehaviour {
 	private bool isDragging;
 
     private void Awake() {
+		instance = this;
 		cam = Camera.main;
     }
 

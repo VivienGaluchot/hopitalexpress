@@ -6,17 +6,16 @@ using System.IO;
 
 [Serializable]
 public class LevelData {
-	public LevelData(float size, int rows, int columns, List<LayerData> layers, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection)
-		{ this.size = size; this.rows = rows; this.columns = columns; this.layers = layers; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; }
+	public LevelData(float camX, float camY, float camSize, int rows, int columns, List<LayerData> layers, List<string> diseases, Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection, int patientQueueSize)
+		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns; this.layers = layers; this.diseases = diseases; this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; this.patientQueueSize = patientQueueSize; }
 
-	public float size;
-	public int rows;
-	public int columns;
+	public float camX, camY, camSize;
+	public int rows, columns;
 	public List<LayerData> layers;
 	public List<string> diseases;
-	public Vector3 playerSpawn;
-	public Vector3 patientSpawn;
+	public Vector3 playerSpawn, patientSpawn;
 	public string patientSpawnDirection;
+	public int patientQueueSize;
 }
 
 [Serializable]
@@ -37,8 +36,13 @@ public class CellData {
 public class LevelDataController : DataController {
 
 	[SerializeField] private Dropdown PatientSpawnDirectionDropdown;
+	[SerializeField] private InputField PatientQueueSize;
 
-	public override void SaveData() {
+	private LevelEditorController lec;
+
+    private void Start() { lec = LevelEditorController.instance; }
+
+    public override void SaveData() {
 		LevelData ld = FetchDataToLevelData();
 		if(ld != null) {
 			WriteToFile(JsonUtility.ToJson(ld));
@@ -48,9 +52,9 @@ public class LevelDataController : DataController {
 
 	public LevelData FetchDataToLevelData() {
 		List<LayerData> layers = new List<LayerData>();
-		for(int i = 0; i < LevelEditorController.instance.grids.Length; i++) {
+		for(int i = 0; i < lec.grids.Length; i++) {
 			List<CellData> cells = new List<CellData>();
-			foreach (KeyValuePair<(int, int), Cell> cell in LevelEditorController.instance.grids[i]) {
+			foreach (KeyValuePair<(int, int), Cell> cell in lec.grids[i]) {
 				if (cell.Value.value > 0)
 					cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
 			}
@@ -58,17 +62,23 @@ public class LevelDataController : DataController {
 			layers.Add(new LayerData(cells));
 		}
 
-		if (LevelEditorController.instance.PlayerSpawn == null) {
+		if (lec.PlayerSpawn == null) {
 			Debug.Log("Erreur pas de spawn Player");
 			return null;
 		}
 			
-		if (LevelEditorController.instance.PatientSpawn == null) {
+		if (lec.PatientSpawn == null) {
 			Debug.Log("Erreur pas de spawn Patient");
 			return null;
 		}
 
-		return new LevelData(LevelEditorController.instance.size, LevelEditorController.instance.rows, LevelEditorController.instance.columns, layers, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelEditorController.instance.PlayerSpawn.transform.position, LevelEditorController.instance.PatientSpawn.transform.position, PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text);
+		(float x, float y, float size) camParams = LevelCameraController.instance.GetCamParams();
+
+		return new LevelData(camParams.x, camParams.y, camParams.size,
+			lec.rows, lec.columns,
+			layers, new List<string>(LevelDiseasesController.instance.Elements.Keys),
+			lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position,
+			PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text, Int32.Parse(PatientQueueSize.text));
 	}
 
 	public override void LoadData() {
@@ -83,22 +93,25 @@ public class LevelDataController : DataController {
 	}
 
 	private void DisplayLoadedData(LevelData Data) {
-		LevelEditorController.instance.ResizeGrid(Data.rows, Data.columns);
+		lec.ResizeGrid(Data.rows, Data.columns);
 		for(int i = 0; i < Data.layers.Count; i++)
 			foreach (CellData cell in Data.layers[i].cells) {
-				LevelEditorController.instance.grids[i][(cell.x, cell.y)].value = cell.value; 
+				lec.grids[i][(cell.x, cell.y)].value = cell.value; 
 				if (i == 1 && cell.value > 1) 
-					LevelEditorController.instance.fullWallsGrid[(cell.x, cell.y)].GetComponent<SpriteRenderer>().sprite = LevelEditorController.instance.fullWallSprites[cell.value - 2];
+					lec.fullWallsGrid[(cell.x, cell.y)].GetComponent<SpriteRenderer>().sprite = lec.fullWallSprites[cell.value - 2];
 			}
 
-		LevelEditorController.instance.RefreshAllGrid();
+		lec.RefreshAllGrid();
 
-		LevelEditorController.instance.SetPlayerSpawn(Data.playerSpawn);
-		LevelEditorController.instance.SetPatientSpawn(Data.patientSpawn);
+		lec.SetPlayerSpawn(Data.playerSpawn);
+		lec.SetPatientSpawn(Data.patientSpawn);
 		PatientSpawnDirectionDropdown.value = PatientSpawnDirectionDropdown.options.FindIndex(o => o.text == Data.patientSpawnDirection);
 
 		LevelDiseasesController.instance.DeleteAll();
 		foreach (string s in Data.diseases)
 			LevelDiseasesController.instance.TryAddDisease(s);
+
+		LevelCameraController.instance.SetCamParams(Data.camX, Data.camY, Data.camSize);
+		PatientQueueSize.text = Data.patientQueueSize.ToString();
 	}
 }

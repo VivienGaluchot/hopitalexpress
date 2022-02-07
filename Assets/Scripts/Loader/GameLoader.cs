@@ -58,10 +58,10 @@ public class GameLoader : MonoBehaviour {
 				foreach (CellData cell in Data.layers[i].cells) {
 					GameObject newGO = Instantiate(Prefabs[i][cell.value - 1], PrefabsParents[i]);
 					newGO.GetComponent<SpriteRenderer>().sortingOrder = i - 2;
-					newGO.transform.position = new Vector3(cell.y / Data.size, -cell.x / Data.size, 0f);
+					newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 				}
 			}
-			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / Data.size, (1 - Data.rows) / 2f / Data.size, -10f);
+			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
 		}
 
 		if(loadDiseases) {

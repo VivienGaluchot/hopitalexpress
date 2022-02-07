@@ -23,9 +23,9 @@ TagManager:
   - Seats
   - Wall
   - Reaper
-  - Player
-  - PlayerHand
+  - LevelObjects
   - 
+  - Cell
   - 
   - 
   - 
