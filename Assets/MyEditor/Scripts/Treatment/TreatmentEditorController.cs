@@ -82,9 +82,14 @@ public class TreatmentEditorController : MonoBehaviour {
 
 	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
 	public void NewFollower(Sprite sprite, string path) {
-		followerSR.sprite = sprite;
-		hasFollower = true;
-		followerPath = path;
+		if(sprite != followerSR.sprite) {
+			followerSR.sprite = sprite;
+			hasFollower = true;
+			followerPath = path;
+		} else {
+			followerSR.sprite = null;
+			hasFollower = false;
+		}
 	}
 
 	private void UnsetFollower() {
