@@ -119,15 +119,15 @@ public class LevelEditorController : MonoBehaviour {
 				clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
 			}
 		}
-
-		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && !GlobalFunctions.DoesHitUI()) {
-			switch (drawType) {
-				case DrawType.floor:
-				case DrawType.eraseFloor:
-				case DrawType.fillFloor:
-				case DrawType.walls:
-				case DrawType.eraseWalls:
-				case DrawType.fillWalls:
+		
+		switch (drawType) {
+			case DrawType.floor:
+			case DrawType.eraseFloor:
+			case DrawType.fillFloor:
+			case DrawType.walls:
+			case DrawType.eraseWalls:
+			case DrawType.fillWalls:
+				if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && !GlobalFunctions.DoesHitUI()) {
 					RaycastHit2D hit2D = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("Cell")); ;
 					if (hit2D.collider != null) {
 						int i = hit2D.collider.gameObject.GetComponent<CellController>().row;
@@ -153,37 +153,43 @@ public class LevelEditorController : MonoBehaviour {
 								break;
 						}
 					}
-					break;
-				case DrawType.playerSpawn:
-				case DrawType.patientSpawn:
-				case DrawType.levelObject:
-				case DrawType.none:
-					if (Input.GetMouseButtonDown(0)) {
-						Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
-						switch (drawType) {
-							case DrawType.playerSpawn:
-								SetPlayerSpawn(worldMousePos);
-								break;
-							case DrawType.patientSpawn:
-								SetPatientSpawn(worldMousePos);
-								break;
-							case DrawType.levelObject:
-							case DrawType.none:
-								RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
-								if(!hit.collider && drawType == DrawType.levelObject) {
-									GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
-									newGO.AddComponent<BoxCollider2D>();
-									newGO.layer = LayerMask.NameToLayer("LevelObjects");
-									ObjectsList.Add(newGO, followerPath);
-								} else if(hit.collider && drawType == DrawType.none) {
-									clickedGO = hit.collider.gameObject;
-									clickedGOffset = hit.transform.position - worldMousePos;
-								}
-								break;
-						}
+				}
+				break;
+			case DrawType.playerSpawn:
+			case DrawType.patientSpawn:
+				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
+					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+					if (drawType == DrawType.playerSpawn) SetPlayerSpawn(worldMousePos);
+					else if (drawType == DrawType.patientSpawn) SetPatientSpawn(worldMousePos);
+				}
+				break;
+			case DrawType.levelObject:
+				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
+					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
+					if (!hit.collider && drawType == DrawType.levelObject) {
+						GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
+						newGO.AddComponent<BoxCollider2D>();
+						newGO.layer = LayerMask.NameToLayer("LevelObjects");
+						ObjectsList.Add(newGO, followerPath);
 					}
-					break;			
-			}
+				}
+				break;
+			case DrawType.none:
+				if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !GlobalFunctions.DoesHitUI()) {
+					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
+					if (hit.collider) {
+						if(Input.GetMouseButtonDown(0)) {
+							clickedGO = hit.collider.gameObject;
+							clickedGOffset = hit.transform.position - worldMousePos;
+						} else {
+							// RIGHT CLICK ON OBJECT - DISPLAY CONTEXTUAL?
+							Debug.Log("RIGHT CLICKED RIGHT CLICKED WOOOOOOOOOO");
+                        }
+					}
+				}
+				break;
 		}
 	}
 

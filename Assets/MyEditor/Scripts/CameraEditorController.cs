@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CameraEditorController : MonoBehaviour {
 	public static CameraEditorController instance;
-
-    [SerializeField] private float scrollSpeed;
     private Camera cam;
 	private Vector3 lastPos;
 
@@ -26,7 +24,7 @@ public class CameraEditorController : MonoBehaviour {
 
 		float scroll = Input.mouseScrollDelta.y;
 		if(scroll != 0 && !GlobalFunctions.DoesHitUI()) {
-			cam.orthographicSize = Mathf.Min(40, Mathf.Max(1f, cam.orthographicSize - scroll * scrollSpeed));
+			cam.orthographicSize = Mathf.Min(40, Mathf.Max(1f, cam.orthographicSize - scroll));
         }
 	}
 }
