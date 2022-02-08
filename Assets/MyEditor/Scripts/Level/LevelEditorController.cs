@@ -186,7 +186,8 @@ public class LevelEditorController : MonoBehaviour {
 						} else {
 							// RIGHT CLICK ON OBJECT - DISPLAY CONTEXTUAL?
 							Debug.Log("RIGHT CLICKED RIGHT CLICKED WOOOOOOOOOO");
-                        }
+
+						}
 					}
 				}
 				break;
@@ -276,7 +277,7 @@ public class LevelEditorController : MonoBehaviour {
 					UpdateWallNeighbours(i, j);
 				}
 			} else {
-				UpdateWallCellSprite(cell, i, j);
+				UpdateWallCellSprite(cell, i, j, true);
 			}
 		}
 	}
@@ -287,15 +288,26 @@ public class LevelEditorController : MonoBehaviour {
 		if (wallGrid.TryGetValue((i, j - 1), out cell) && cell.value > 0) { UpdateWallCellSprite(cell, i, j - 1); }
 	}
 	// Cette fonction peut faire apparaître un sprite sur une case vide, attention à ce qu'on lui donne !
-	private void UpdateWallCellSprite(Cell cell, int i, int j) {
+	private void UpdateWallCellSprite(Cell cell, int i, int j, bool colorUpdate = false) {
 		int newValue = ComputeCellValue(wallGrid, i, j);
-		if (cell.value != newValue + wallColor) {
-			cell.value = newValue + wallColor;
-			cell.sr.sprite = wallSprites[newValue-1];
-			fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + wallColor-1];
-			// Update neighbours sprites
-			UpdateWallNeighbours(i, j);
-		}
+		if(colorUpdate) {
+			if (cell.value != newValue + wallColor) {
+				int oldValue = cell.value;
+				cell.value = newValue + wallColor;
+				cell.sr.sprite = wallSprites[newValue - 1];
+				fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + wallColor - 1];
+				// Update neighbours sprites
+				if (oldValue % 16 != newValue)
+					UpdateWallNeighbours(i, j);
+			}
+		} else {
+			if(cell.value%16 != newValue) {
+				int myWallColor = (cell.value / 16);
+				cell.value = newValue + myWallColor;
+				cell.sr.sprite = wallSprites[newValue - 1];
+				fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
+			}
+        }		
 	}
 	private int ComputeCellValue(Dictionary<(int, int), Cell> grid, int i, int j, bool checkDiag = false) {
 		// ça peut être sympa de faire un joli algo ici
@@ -381,13 +393,13 @@ public class LevelEditorController : MonoBehaviour {
 			x = i;
 			y = j;
 
-			if (!wallGrid.TryGetValue((i + 1, j), out cell) || cell.value == 0)
+			if (!floorGrid.TryGetValue((i + 1, j), out cell) || cell.value == 0)
 				(i, j) = tryCells((i, j - 1), (i, j + 1), (i - 1, j), i, j, oldI, oldJ);
-			else if (!wallGrid.TryGetValue((i, j - 1), out cell) || cell.value == 0)
+			else if (!floorGrid.TryGetValue((i, j - 1), out cell) || cell.value == 0)
 				(i, j) = tryCells((i + 1, j), (i - 1, j), (i, j + 1), i, j, oldI, oldJ);
-			else if (!wallGrid.TryGetValue((i - 1, j), out cell) || cell.value == 0)
+			else if (!floorGrid.TryGetValue((i - 1, j), out cell) || cell.value == 0)
 				(i, j) = tryCells((i, j - 1), (i, j + 1), (i + 1, j), i, j, oldI, oldJ);
-			else if (!wallGrid.TryGetValue((i, j + 1), out cell) || cell.value == 0)
+			else if (!floorGrid.TryGetValue((i, j + 1), out cell) || cell.value == 0)
 				(i, j) = tryCells((i - 1, j), (i + 1, j), (i, j + 1), i, j, oldI, oldJ);
 			else
 				(i, j) = CheckDiagonals(i, j, oldI, oldJ);
@@ -401,25 +413,25 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	private (int, int) tryCells((int i, int j) first, (int i, int j) second, (int i, int j) third, int i, int j, int oldI, int oldJ) {
 		int x = -1, y = -1;
-		if (!wallGrid.TryGetValue((first.i, first.j), out Cell cell) || cell.value == 0 || !tryDirection(first.i, first.j, oldI, oldJ, i, j, out x, out y))
-			if (!wallGrid.TryGetValue((second.i, second.j), out cell) || cell.value == 0 || !tryDirection(second.i, second.j, oldI, oldJ, i, j, out x, out y))
-				if (!wallGrid.TryGetValue((third.i, third.j), out cell) || cell.value == 0 || !tryDirection(third.i, third.j, oldI, oldJ, i, j, out x, out y))
+		if (!floorGrid.TryGetValue((first.i, first.j), out Cell cell) || cell.value == 0 || !tryDirection(first.i, first.j, oldI, oldJ, i, j, out x, out y))
+			if (!floorGrid.TryGetValue((second.i, second.j), out cell) || cell.value == 0 || !tryDirection(second.i, second.j, oldI, oldJ, i, j, out x, out y))
+				if (!floorGrid.TryGetValue((third.i, third.j), out cell) || cell.value == 0 || !tryDirection(third.i, third.j, oldI, oldJ, i, j, out x, out y))
 					Debug.Log("No correct path found");
 
 		return (x, y);
 	}
 	private (int, int) CheckDiagonals(int i, int j, int oldI, int oldJ) {
 		int x = -1, y = -1;
-		if (wallGrid.TryGetValue((i + 1, j + 1), out Cell cell) && cell.value == 0) {
+		if (floorGrid.TryGetValue((i + 1, j + 1), out Cell cell) && cell.value == 0) {
 			if (!tryDirection(i + 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j + 1, oldI, oldJ, i, j, out x, out y);
-		} else if (wallGrid.TryGetValue((i + 1, j - 1), out cell) && cell.value == 0) {
+		} else if (floorGrid.TryGetValue((i + 1, j - 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i + 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j - 1, oldI, oldJ, i, j, out x, out y);
-		} else if (wallGrid.TryGetValue((i - 1, j - 1), out cell) && cell.value == 0) {
+		} else if (floorGrid.TryGetValue((i - 1, j - 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i - 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j - 1, oldI, oldJ, i, j, out x, out y);
-		} else if (wallGrid.TryGetValue((i - 1, j + 1), out cell) && cell.value == 0) {
+		} else if (floorGrid.TryGetValue((i - 1, j + 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i - 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j + 1, oldI, oldJ, i, j, out x, out y);
 		}
