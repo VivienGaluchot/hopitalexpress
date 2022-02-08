@@ -6,9 +6,11 @@ public class DrawMenuController : MonoBehaviour {
 	public static DrawMenuController instance;
 
 	[SerializeField] private Dropdown LayersDropdown;
+	[SerializeField] private Dropdown ColorsDropdown;
 
 	private int layer;
 	private int button;
+	private int color;
 
 	[SerializeField] private Image[] Buttons;
 
@@ -16,10 +18,11 @@ public class DrawMenuController : MonoBehaviour {
 
     private void Awake() {
 		instance = this;
-    }
+		ColorsDropdown.gameObject.SetActive(false);
+	}
 
     private void UpdateDrawType() { 
-		LevelEditorController.instance.SetDrawType(button > 0 ? (DrawType)(layer*3 + button) : DrawType.none);
+		LevelEditorController.instance.SetDrawType(button > 0 ? (DrawType)(layer*3 + button) : DrawType.none, color);
 	}
 
 	public void Unclick() {
@@ -43,10 +46,22 @@ public class DrawMenuController : MonoBehaviour {
 
 	public void LayerChanged() {
 		layer = LayersDropdown.value;
+		if(layer == 1)
+			ColorsDropdown.gameObject.SetActive(true);
+		else
+			ColorsDropdown.gameObject.SetActive(false);
+		UpdateDrawType();
+	}
+
+	public void ColorChanged() {
+		color = ColorsDropdown.value;
 		UpdateDrawType();
 	}
 
 	public void Clear() {
-		LevelEditorController.instance.ClearGrid(LayersDropdown.value);
+		if(LayersDropdown.value == 0)
+			LevelEditorController.instance.ClearGrid(LevelEditorController.instance.floorGrid);
+		else if (LayersDropdown.value == 1)
+			LevelEditorController.instance.ClearGrid(LevelEditorController.instance.wallGrid, true);
 	}
 }

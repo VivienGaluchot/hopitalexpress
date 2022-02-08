@@ -33,14 +33,17 @@ public class LevelEditorController : MonoBehaviour {
 	public const float size = 2f;
 	public int rows { get; private set; }
 	public int columns { get; private set; }
-	public DrawType drawType = DrawType.none;
+	public DrawType drawType { get; private set; }
 
-	public Sprite[] floorSprites, wallSprites, fullWallSprites;
-	public Sprite[][] sprites;
-	public Dictionary<(int, int), Cell>[] grids { get; private set; }
+	public Sprite[] floorSprites, wallSprites;
+	public Sprite[] fullWallSprites;
+	public Dictionary<(int, int), Cell> floorGrid { get; private set; }
+	public Dictionary<(int, int), Cell> wallGrid { get; private set; }
 	public Dictionary<(int, int), GameObject> fullWallsGrid { get; private set; }
+	private int wallColor;
 
-	private Transform[] CellsParents, WallsParents;
+	private Transform FloorCellsParent, WallCellsParent;
+	private Transform[] WallsParents;
 	public Transform ObjectsParent { get; private set; }
 	
 	private enum WallVisibility {
@@ -65,20 +68,18 @@ public class LevelEditorController : MonoBehaviour {
 
 	private void Awake() { 
 		instance = this;
-
+		drawType = DrawType.none;
 		rows = Int32.Parse(rowsIF.text);
 		columns = Int32.Parse(columnsIF.text);
 
-		sprites = new Sprite[2][] { floorSprites, wallSprites };
-
-		grids = new Dictionary<(int, int), Cell>[2];
+		floorGrid = new Dictionary<(int, int), Cell>();
+		wallGrid = new Dictionary<(int, int), Cell>();
 		fullWallsGrid = new Dictionary<(int, int), GameObject>();
 
-		CellsParents = new Transform[2];
-		CellsParents[0] = transform.Find("FloorLayer");
-		CellsParents[1] = transform.Find("WallsLayer");
+		FloorCellsParent = transform.Find("FloorLayer");
+		WallCellsParent = transform.Find("WallsLayer");
 		WallsParents = new Transform[2];
-		WallsParents[0] = CellsParents[1];
+		WallsParents[0] = WallCellsParent;
 		WallsParents[1] = transform.Find("FullWallsLayer");
 
 		wallVisibility = WallVisibility.flat;
@@ -99,7 +100,7 @@ public class LevelEditorController : MonoBehaviour {
 		followerSR = Follower.GetComponent<SpriteRenderer>();
 		ObjectsList = new Dictionary<GameObject, string>();
 	}
-	private void Start() { InitGrid(); }
+	private void Start() { InitGrids(); }
 
 	private void Update() {
 		if(Input.GetKeyDown("escape")) {
@@ -108,7 +109,7 @@ public class LevelEditorController : MonoBehaviour {
 		}
 
 		if(drawType == DrawType.levelObject) {
-            Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+			Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 		}
 
 		if(clickedGO) {
@@ -133,19 +134,19 @@ public class LevelEditorController : MonoBehaviour {
 						int j = hit2D.collider.gameObject.GetComponent<CellController>().column;
 						switch (drawType) {
 							case DrawType.floor:
-								ClickedCell(0, i, j, true);
-                                break;
+								FloorClicked(i, j);
+								break;
 							case DrawType.eraseFloor:
-								ClickedCell(0, i, j, true, true);
+								FloorClicked(i, j, true);
 								break;
 							case DrawType.fillFloor:
-								FloorFill(i, j);
+								FloorFill(i, j, true);
 								break;
 							case DrawType.walls:
-								ClickedCell(1, i, j, true);
+								WallClicked(i, j);
 								break;
 							case DrawType.eraseWalls:
-								ClickedCell(1, i, j, true, true);
+								WallClicked(i, j, true);
 								break;
 							case DrawType.fillWalls:
 								WallFill(i, j);
@@ -201,6 +202,10 @@ public class LevelEditorController : MonoBehaviour {
 		UnsetFollower();
 		drawType = (DrawType) newDT;
 	}
+	private void UnsetSpawns() {
+		PlayerSpawn.SetActive(false);
+		PatientSpawn.SetActive(false);
+	}
 	// -------------- END SPAWNS
 	// -------------- VISIBILITY SWITCHERS
 	public void SwitchObjectsVisibility() { ObjectsParent.gameObject.SetActive(!ObjectsParent.gameObject.activeSelf); }
@@ -222,181 +227,129 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END VISIBILITY SWITCHERS
 	// -------------- CELL CLICK
-	public void ClickedCell(int layer, int i, int j, bool clicked = false, bool reset = false) {
-		if (grids[layer].TryGetValue((i, j), out Cell cell)) {
-			if ((drawType == DrawType.walls || drawType == DrawType.eraseWalls || drawType == DrawType.fillWalls) 
-				&& wallVisibility == WallVisibility.none) SwitchWallsVisibility();
-			if (!reset) {
-				if ((cell.value != 0 || clicked)) {
-					int newValue = ComputeCellValue(i, j, layer);
-					if (newValue != cell.value) {
-						cell.value = newValue;
-						ChangeSprite(cell, layer);
-						if (layer == 1 && newValue > 0) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue - 1];
-						Propagate(layer, i, j);
-					}
+	private void FloorClicked(int i, int j, bool erase = false) {
+		if (floorGrid.TryGetValue((i, j), out Cell cell)) {
+			// We found a cell, what do we do?
+			if(erase) {
+				if(cell.value != 0) {
+					cell.value = 0;
+					cell.sr.sprite = null;
+					// Update neighbours sprites
+					UpdateFloorNeighbours(i, j);
 				}
-			} else if (cell.value != 0) {
-				cell.value = 0;
-				ChangeSprite(cell, layer);
-				if (layer == 1) fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
-				Propagate(layer, i, j);
+			} else {
+				UpdateFloorCellSprite(cell, i, j);
 			}
 		}
-	}   
-	private int ComputeCellValue(int i, int j, int layer) {
+	}
+	private void UpdateFloorNeighbours(int i, int j) {
+		if (floorGrid.TryGetValue((i + 1, j), out Cell cell) && cell.value > 0) { UpdateFloorCellSprite(cell, i + 1, j); }
+		if (floorGrid.TryGetValue((i - 1, j), out cell) && cell.value > 0) { UpdateFloorCellSprite(cell, i - 1, j); }
+		if (floorGrid.TryGetValue((i, j + 1), out cell) && cell.value > 0) { UpdateFloorCellSprite(cell, i, j + 1); }
+		if (floorGrid.TryGetValue((i, j - 1), out cell) && cell.value > 0) { UpdateFloorCellSprite(cell, i, j - 1); }
+	}
+	private void UpdateFloorCellSprite(Cell cell, int i, int j) {
+		int newValue = ComputeCellValue(floorGrid, i, j, true); // floor need to check corners
+		if (cell.value != newValue) {
+			cell.value = newValue;
+			cell.sr.sprite = floorSprites[cell.value-1];
+			// Update neighbours sprites
+			UpdateFloorNeighbours(i, j);
+		}
+	}
+	private void WallClicked(int i, int j, bool erase = false) {
+		if (wallGrid.TryGetValue((i, j), out Cell cell)) {
+			// We found a cell, what do we do?
+			if(wallVisibility == WallVisibility.none) SwitchWallsVisibility();
+			if (erase) {
+				if (cell.value != 0) {
+					cell.value = 0;
+					cell.sr.sprite = null;
+					fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = null;
+					// Update neighbours sprites
+					UpdateWallNeighbours(i, j);
+				}
+			} else {
+				UpdateWallCellSprite(cell, i, j);
+			}
+		}
+	}
+	private void UpdateWallNeighbours(int i, int j) {
+		if (wallGrid.TryGetValue((i + 1, j), out Cell cell) && cell.value > 0) { UpdateWallCellSprite(cell, i + 1, j); }
+		if (wallGrid.TryGetValue((i - 1, j), out cell) && cell.value > 0) { UpdateWallCellSprite(cell, i - 1, j); }
+		if (wallGrid.TryGetValue((i, j + 1), out cell) && cell.value > 0) { UpdateWallCellSprite(cell, i, j + 1); }
+		if (wallGrid.TryGetValue((i, j - 1), out cell) && cell.value > 0) { UpdateWallCellSprite(cell, i, j - 1); }
+	}
+	// Cette fonction peut faire apparaître un sprite sur une case vide, attention à ce qu'on lui donne !
+	private void UpdateWallCellSprite(Cell cell, int i, int j) {
+		int newValue = ComputeCellValue(wallGrid, i, j);
+		if (cell.value != newValue + wallColor) {
+			cell.value = newValue + wallColor;
+			cell.sr.sprite = wallSprites[newValue-1];
+			fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + wallColor-1];
+			// Update neighbours sprites
+			UpdateWallNeighbours(i, j);
+		}
+	}
+	private int ComputeCellValue(Dictionary<(int, int), Cell> grid, int i, int j, bool checkDiag = false) {
 		// ça peut être sympa de faire un joli algo ici
 		Cell cell;
-		int neighbours = CountNeighbours(i, j, layer);
+		int neighbours = CountNeighbours(grid, i, j);
 		switch (neighbours) {
 			case 0:
 				return 1;
 			case 1:
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
-				if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
-				if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0) return 2;
+				if (grid.TryGetValue((i, j - 1), out cell) && cell.value > 0) return 3;
+				if (grid.TryGetValue((i - 1, j), out cell) && cell.value > 0) return 4;
 				return 5;
 			case 2:
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
-				if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
-				if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i - 1, j), out cell) && cell.value > 0) return 6;
+				if (grid.TryGetValue((i, j - 1), out cell) && cell.value > 0 && grid.TryGetValue((i, j + 1), out cell) && cell.value > 0) return 7;
+				if (grid.TryGetValue((i - 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j + 1), out cell) && cell.value > 0) return 8;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j + 1), out cell) && cell.value > 0) return 9;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j - 1), out cell) && cell.value > 0) return 10;
 				return 11;
 			case 3:
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
-				if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
-				if (grids[layer].TryGetValue((i, j + 1), out cell) && cell.value > 0 && grids[layer].TryGetValue((i - 1, j), out cell) && cell.value > 0 && grids[layer].TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j + 1), out cell) && cell.value > 0 && grid.TryGetValue((i, j - 1), out cell) && cell.value > 0) return 12;
+				if (grid.TryGetValue((i + 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i - 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j - 1), out cell) && cell.value > 0) return 13;
+				if (grid.TryGetValue((i, j + 1), out cell) && cell.value > 0 && grid.TryGetValue((i - 1, j), out cell) && cell.value > 0 && grid.TryGetValue((i, j - 1), out cell) && cell.value > 0) return 14;
 				return 15;
-			case 4:
-				if (layer == 1)
+			default:
+				if (!checkDiag)
 					return 16;
 
 				// Check diag neighbours to see if empty corner
 				// We can't NOT find diag neighbours because cell has 4 neighbours and grid is rect-shape
-				if (grids[layer][(i - 1, j + 1)].value == 0)
+				if (grid[(i - 1, j + 1)].value == 0)
 					return 17;
-				if (grids[layer][(i - 1, j - 1)].value == 0)
+				if (grid[(i - 1, j - 1)].value == 0)
 					return 18;
-				if (grids[layer][(i + 1, j - 1)].value == 0)
+				if (grid[(i + 1, j - 1)].value == 0)
 					return 19;
-				if (grids[layer][(i + 1, j + 1)].value == 0)
+				if (grid[(i + 1, j + 1)].value == 0)
 					return 20;
 				return 16;
 		}
-		return 0;
 	}
-	private int CountNeighbours(int i, int j, int layer) {
-		Cell cell;
+	private int CountNeighbours(Dictionary<(int, int), Cell> grid, int i, int j) {
 		int sum = 0;
-		if (grids[layer].TryGetValue((i, j + 1), out cell) && cell.value != 0) sum++;
-		if (grids[layer].TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
-		if (grids[layer].TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
-		if (grids[layer].TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
+		if (grid.TryGetValue((i, j + 1), out Cell cell) && cell.value != 0) sum++;
+		if (grid.TryGetValue((i, j - 1), out cell) && cell.value != 0) sum++;
+		if (grid.TryGetValue((i + 1, j), out cell) && cell.value != 0) sum++;
+		if (grid.TryGetValue((i - 1, j), out cell) && cell.value != 0) sum++;
 		return sum;
-	}
-	private void Propagate(int layer, int i, int j) {
-		ClickedCell(layer, i + 1, j, false, false);
-		ClickedCell(layer, i - 1, j, false, false);
-		ClickedCell(layer, i, j + 1, false, false);
-		ClickedCell(layer, i, j - 1, false, false);
-	}
-	private void ChangeSprite(Cell cell, int layer) {
-		switch(cell.value) {
-			case 0:
-				cell.sr.sprite = null;
-				break;
-			case 1:
-				cell.sr.sprite = sprites[layer][0];
-				break;
-			case 2:
-				cell.sr.sprite = sprites[layer][1];
-				cell.sr.transform.rotation = Quaternion.identity;
-				break;
-			case 3:
-				cell.sr.sprite = sprites[layer][1];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
-				break;
-			case 4:
-				cell.sr.sprite = sprites[layer][1];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-				break;
-			case 5:
-				cell.sr.sprite = sprites[layer][1];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-				break;
-			case 6:
-				cell.sr.sprite = sprites[layer][2];
-				cell.sr.transform.rotation = Quaternion.identity;
-				break;
-			case 7:
-				cell.sr.sprite = sprites[layer][2];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-				break;
-			case 8:
-				cell.sr.sprite = sprites[layer][3];
-				cell.sr.transform.rotation = Quaternion.identity;
-				break;
-			case 9:
-				cell.sr.sprite = sprites[layer][3];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
-				break;
-			case 10:
-				cell.sr.sprite = sprites[layer][3];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-				break;
-			case 11:
-				cell.sr.sprite = sprites[layer][3];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-				break;
-			case 12:
-				cell.sr.sprite = sprites[layer][4];
-				cell.sr.transform.rotation = Quaternion.identity;
-				break;
-			case 13:
-				cell.sr.sprite = sprites[layer][4];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
-				break;
-			case 14:
-				cell.sr.sprite = sprites[layer][4];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-				break;
-			case 15:
-				cell.sr.sprite = sprites[layer][4];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-				break;
-			case 16:
-				cell.sr.sprite = sprites[layer][5];
-				break;
-			case 17:
-				cell.sr.sprite = sprites[layer][6];
-				cell.sr.transform.rotation = Quaternion.identity;
-				break;
-			case 18:
-				cell.sr.sprite = sprites[layer][6];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-				break;
-			case 19:
-				cell.sr.sprite = sprites[layer][6];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-				break;
-			case 20:
-				cell.sr.sprite = sprites[layer][6];
-				cell.sr.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
-				break;
-		}
 	}
 	// -------------- END CELL CLICK
 	// -------------- FILLERS
-	private void FloorFill(int i, int j) {
+	private void FloorFill(int i, int j, bool first = false) {
 		// Only work if we clicked on an empty cell
-		if (!grids[0].TryGetValue((i, j), out Cell cell) || cell.value > 0)
+		if (!floorGrid.TryGetValue((i, j), out Cell cell) || cell.value > 0)
 			return;
 
-		int newValue = ComputeCellValue(i, j, 0);
+		int newValue = ComputeCellValue(floorGrid, i, j, true);
 		if (cell.value != newValue) {
 			cell.value = newValue;
-			//ChangeSprite(cell, 0);
 
 			// Propagate
 			FloorFill(i + 1, j);
@@ -405,60 +358,62 @@ public class LevelEditorController : MonoBehaviour {
 			FloorFill(i, j - 1);
 		}
 
-		RefreshGrid(0, true);
+		if(first)
+			RefreshFloorGrid(true);
 	}
 	private void WallFill(int i, int j) {
 		// If we clicked on void cell, abort mission
-		if (!grids[0].TryGetValue((i, j), out Cell cell) || cell.value == 0)
+		if (!floorGrid.TryGetValue((i, j), out Cell cell) || cell.value == 0)
 			return;
 
-		while (grids[0].TryGetValue((i-1, j), out cell) && cell.value > 0) { i--; }
-		// We found an edge!! Save it for later
+		// looking for an edge
+		while (floorGrid.TryGetValue((i-1, j), out cell) && cell.value > 0) { i--; }
 		int startingX = i, startingY = j, oldI = -1, oldJ = -1, x, y;
 		do {
-			grids[1][(i, j)].value = 1;
+			wallGrid[(i, j)].value = 1;
 
 			x = i;
 			y = j;
 
-			if (!grids[0].TryGetValue((i + 1, j), out cell) || cell.value == 0) 
+			if (!wallGrid.TryGetValue((i + 1, j), out cell) || cell.value == 0)
 				(i, j) = tryCells((i, j - 1), (i, j + 1), (i - 1, j), i, j, oldI, oldJ);
-			 else if (!grids[0].TryGetValue((i, j - 1), out cell) || cell.value == 0) 
+			else if (!wallGrid.TryGetValue((i, j - 1), out cell) || cell.value == 0)
 				(i, j) = tryCells((i + 1, j), (i - 1, j), (i, j + 1), i, j, oldI, oldJ);
-			 else if (!grids[0].TryGetValue((i - 1, j), out cell) || cell.value == 0) 
+			else if (!wallGrid.TryGetValue((i - 1, j), out cell) || cell.value == 0)
 				(i, j) = tryCells((i, j - 1), (i, j + 1), (i + 1, j), i, j, oldI, oldJ);
-			 else if (!grids[0].TryGetValue((i, j + 1), out cell) || cell.value == 0) 
+			else if (!wallGrid.TryGetValue((i, j + 1), out cell) || cell.value == 0)
 				(i, j) = tryCells((i - 1, j), (i + 1, j), (i, j + 1), i, j, oldI, oldJ);
-			 else
+			else
 				(i, j) = CheckDiagonals(i, j, oldI, oldJ);
-			
+
 			oldI = x;
 			oldJ = y;
 
 		} while (!(i == startingX && j == startingY) && !(i == -1 && j == -1));
-		RefreshGrid(1, true);
+
+		RefreshWallGrid(true);
 	}
 	private (int, int) tryCells((int i, int j) first, (int i, int j) second, (int i, int j) third, int i, int j, int oldI, int oldJ) {
 		int x = -1, y = -1;
-		if (!grids[0].TryGetValue((first.i, first.j), out Cell cell) || cell.value == 0 || !tryDirection(first.i, first.j, oldI, oldJ, i, j, out x, out y))
-			if (!grids[0].TryGetValue((second.i, second.j), out cell) || cell.value == 0 || !tryDirection(second.i, second.j, oldI, oldJ, i, j, out x, out y))
-				if (!grids[0].TryGetValue((third.i, third.j), out cell) || cell.value == 0 || !tryDirection(third.i, third.j, oldI, oldJ, i, j, out x, out y))
+		if (!wallGrid.TryGetValue((first.i, first.j), out Cell cell) || cell.value == 0 || !tryDirection(first.i, first.j, oldI, oldJ, i, j, out x, out y))
+			if (!wallGrid.TryGetValue((second.i, second.j), out cell) || cell.value == 0 || !tryDirection(second.i, second.j, oldI, oldJ, i, j, out x, out y))
+				if (!wallGrid.TryGetValue((third.i, third.j), out cell) || cell.value == 0 || !tryDirection(third.i, third.j, oldI, oldJ, i, j, out x, out y))
 					Debug.Log("No correct path found");
 
 		return (x, y);
 	}
 	private (int, int) CheckDiagonals(int i, int j, int oldI, int oldJ) {
 		int x = -1, y = -1;
-		if (grids[0].TryGetValue((i + 1, j + 1), out Cell cell) && cell.value == 0) {
+		if (wallGrid.TryGetValue((i + 1, j + 1), out Cell cell) && cell.value == 0) {
 			if (!tryDirection(i + 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j + 1, oldI, oldJ, i, j, out x, out y);
-		} else if (grids[0].TryGetValue((i + 1, j - 1), out cell) && cell.value == 0) {
+		} else if (wallGrid.TryGetValue((i + 1, j - 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i + 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j - 1, oldI, oldJ, i, j, out x, out y);
-		} else if (grids[0].TryGetValue((i - 1, j - 1), out cell) && cell.value == 0) {
+		} else if (wallGrid.TryGetValue((i - 1, j - 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i - 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j - 1, oldI, oldJ, i, j, out x, out y);
-		} else if (grids[0].TryGetValue((i - 1, j + 1), out cell) && cell.value == 0) {
+		} else if (wallGrid.TryGetValue((i - 1, j + 1), out cell) && cell.value == 0) {
 			if (!tryDirection(i - 1, j, oldI, oldJ, i, j, out x, out y))
 				tryDirection(i, j + 1, oldI, oldJ, i, j, out x, out y);
 		}
@@ -478,67 +433,70 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END FILLERS
 	// -------------- GRID MANAGEMENT
-	private void InitGrid() {
-		for (int x = 0; x < grids.Length; x++) {
-			grids[x] = new Dictionary<(int, int), Cell>();
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < columns; j++) {
-					InitCell(x, i, j);
+	private void InitGrids() {
+		floorGrid = new Dictionary<(int, int), Cell>();
+		wallGrid = new Dictionary<(int, int), Cell>();
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				floorGrid.Add((i, j), InitCell(i, j, FloorCellsParent, -2));
+				wallGrid.Add((i, j), InitCell(i, j, WallCellsParent, -1));
 
-					if(x == 1) {
-						GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
-						newCell.transform.SetParent(WallsParents[1]);
-						newCell.transform.position = new Vector3(j / size, -i / size, 0);
-						fullWallsGrid.Add((i, j), newCell);
-					}
-				}
+				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
+				newCell.transform.SetParent(WallsParents[1]);
+				newCell.transform.position = new Vector3(j / size, -i / size, 0);
+				fullWallsGrid.Add((i, j), newCell);
 			}
 		}
 
 		ResetCamera();
 	}
-	private void InitCell(int x, int i, int j) {
+	private Cell InitCell(int i, int j, Transform parent, int order) {
 		GameObject newGO = new GameObject(i + "-" + j, typeof(SpriteRenderer), typeof(BoxCollider2D));
 		newGO.layer = LayerMask.NameToLayer("Cell");
-		newGO.transform.SetParent(CellsParents[x]);
+		newGO.transform.SetParent(parent);
 		newGO.AddComponent<CellController>();
 		newGO.GetComponent<CellController>().Setup(i, j);
 		newGO.transform.position = new Vector3(j / size, -i / size, 0);
 		SpriteRenderer sr = newGO.GetComponent<SpriteRenderer>();
-		sr.sortingOrder = x - 2;
+		sr.sortingOrder = order;
 
 		newGO.GetComponent<BoxCollider2D>().size = new Vector2(1f / size, 1f / size);
 
-		grids[x].Add((i, j), new Cell(newGO, sr));
+		return new Cell(newGO, sr);
 	}
 	public void ClearAllGrid() {
-		for (int i = 0; i < grids.Length; i++)
-			ClearGrid(i);
-
-		PlayerSpawn.SetActive(false);
-		PatientSpawn.SetActive(false);
-		LevelDiseasesController.instance.DeleteAll();
+		ClearGrid(floorGrid);
+		ClearGrid(wallGrid, true);
 		ClearLevelObjects();
 	}
-	public void ClearGrid(int layer) {
-		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
+	public void ClearGrid(Dictionary<(int, int), Cell> grid, bool wall = false) {
+		foreach (KeyValuePair<(int, int), Cell> cell in grid) {
 			cell.Value.value = 0;
-			ChangeSprite(cell.Value, layer);
-			if (layer == 1) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = null;
+			cell.Value.sr.sprite = null;
+			if(wall) fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = null;
 		}
 	}
 	public void RefreshAllGrid(bool recompute = false) {
-		for (int i = 0; i < grids.Length; i++) {
-			RefreshGrid(i, recompute);
+		RefreshFloorGrid(recompute);
+		RefreshWallGrid(recompute);
+	}
+	private void RefreshFloorGrid(bool recompute = false) {
+		foreach (KeyValuePair<(int, int), Cell> cell in floorGrid) {
+			if (cell.Value.value > 0) {
+				if (recompute) cell.Value.value = ComputeCellValue(floorGrid, cell.Key.Item1, cell.Key.Item2);
+				cell.Value.sr.sprite = floorSprites[cell.Value.value-1];
+			} else
+				cell.Value.sr.sprite = null;
 		}
 	}
-	public void RefreshGrid(int layer, bool recompute = false) {
-		foreach (KeyValuePair<(int, int), Cell> cell in grids[layer]) {
-			if (recompute && cell.Value.value > 0)
-				cell.Value.value = ComputeCellValue(cell.Key.Item1, cell.Key.Item2, layer);
-			ChangeSprite(cell.Value, layer);
-			if (layer == 1 && cell.Value.value > 0)
-				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value - 1];
+	private void RefreshWallGrid(bool recompute = false) {
+		foreach (KeyValuePair<(int, int), Cell> cell in wallGrid) {
+			if (cell.Value.value > 0) {
+				if (recompute) cell.Value.value = ComputeCellValue(wallGrid, cell.Key.Item1, cell.Key.Item2);
+				cell.Value.sr.sprite = wallSprites[(cell.Value.value - 1) % 16];
+				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value-1];
+			} else
+				cell.Value.sr.sprite = null;
 		}
 	}
 	public void ResizeGrid() {
@@ -550,32 +508,38 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void ResizeGrid(int rows, int columns) {
 		ClearAllGrid();
-		for (int i = 0; i < Mathf.Max(rows, this.rows); i++)
-			for (int j = 0; j < Mathf.Max(columns, this.columns); j++)
-				if (i >= rows || j >= columns)
-					for (int x = 0; x < grids.Length; x++)
-						DeleteCell(x, i, j);
+		for (int i = 0; i < Mathf.Max(rows, this.rows); i++) {
+			for (int j = 0; j < Mathf.Max(columns, this.columns); j++) {
+				if (i >= rows || j >= columns) {
+					DeleteCells(i, j);
+				} else if (i >= this.rows || j >= this.columns) {
+					InitCell(i, j, FloorCellsParent, -2);
+					InitCell(i, j, WallCellsParent, -1);
 
-		for (int i = 0; i < Mathf.Max(rows, this.rows); i++)
-			for (int j = 0; j < Mathf.Max(columns, this.columns); j++)
-				if (i >= this.rows || j >= this.columns)
-					for (int x = 0; x < grids.Length; x++)
-						InitCell(x, i, j);
+					GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
+					newCell.transform.SetParent(WallsParents[1]);
+					newCell.transform.position = new Vector3(j / size, -i / size, 0);
+					fullWallsGrid.Add((i, j), newCell);
+				}
+			}
+		}
 
 		this.rows = rows;
 		this.columns = columns;
 		ResetCamera();
 	}
-	private void DeleteCell(int x, int i, int j) {
-		Cell cell;
-		GameObject fullWallGO;
-		if (grids[x].TryGetValue((i, j), out cell)) {
+	private void DeleteCells(int i, int j) {
+		if (floorGrid.TryGetValue((i, j), out Cell cell)) {
 			Destroy(cell.go);
-			grids[x].Remove((i, j));
-			if(fullWallsGrid.TryGetValue((i, j), out fullWallGO)) {
-				Destroy(fullWallGO);
-				fullWallsGrid.Remove((i, j));
-			}
+			floorGrid.Remove((i, j));
+		}
+		if (wallGrid.TryGetValue((i, j), out cell)) {
+			Destroy(cell.go);
+			wallGrid.Remove((i, j));
+		}
+		if (fullWallsGrid.TryGetValue((i, j), out GameObject fullWallGO)) {
+			Destroy(fullWallGO);
+			fullWallsGrid.Remove((i, j));
 		}
 	}
 	// -------------- END GRID MANAGEMENT
@@ -590,7 +554,7 @@ public class LevelEditorController : MonoBehaviour {
 		} else {
 			followerSR.sprite = null;
 			drawType = DrawType.none;
-        }
+		}
 	}
 	public void UnsetFollower() {
 		drawType = DrawType.none;
@@ -604,9 +568,18 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- MISC
-	public void SetDrawType(DrawType newDT) {
+	public void ClearAllLevel() {
+		UnsetSpawns();
+		ClearAllGrid();
+
+
+		LevelDiseasesController.instance.DeleteAll();
+	}
+	public void SetDrawType(DrawType newDT, int color = 0) {
 		UnsetFollower();
 		drawType = newDT;
+		// number of wall sprites per color? 16 I think
+		wallColor = color * 16;
 	}
 	private void ResetCamera() {
 		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);

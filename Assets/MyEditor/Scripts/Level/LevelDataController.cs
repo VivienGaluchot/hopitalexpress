@@ -7,15 +7,16 @@ using System.IO;
 [Serializable]
 public class LevelData {
 	public LevelData(float camX, float camY, float camSize, int rows, int columns,
-		List<LayerData> layers, List<string> diseases, List<LevelObject> LevelObjects,
+		List<CellData> floorCells, List<CellData> wallCells, List<string> diseases, List<LevelObject> LevelObjects,
 		Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection, int patientQueueSize)
-		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns; 
-		this.layers = layers; this.diseases = diseases; this.LevelObjects = LevelObjects;
+		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns;
+		this.floorCells = floorCells; this.wallCells = wallCells; this.diseases = diseases; this.LevelObjects = LevelObjects;
 		this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; this.patientQueueSize = patientQueueSize; }
 
 	public float camX, camY, camSize;
 	public int rows, columns;
-	public List<LayerData> layers;
+	public List<CellData> floorCells;
+	public List<CellData> wallCells;
 	public List<string> diseases;
 	public Vector3 playerSpawn, patientSpawn;
 	public string patientSpawnDirection;
@@ -29,13 +30,6 @@ public class LevelObject {
 
 	public Vector3 pos;
 	public string path;
-}
-
-[Serializable]
-public class LayerData {
-	public LayerData(List<CellData> cells) { this.cells = cells; }
-
-	public List<CellData> cells;
 }
 
 [Serializable]
@@ -64,25 +58,27 @@ public class LevelDataController : DataController {
 	}
 
 	public LevelData FetchDataToLevelData() {
-		List<LayerData> layers = new List<LayerData>();
-		for(int i = 0; i < lec.grids.Length; i++) {
-			List<CellData> cells = new List<CellData>();
-			foreach (KeyValuePair<(int, int), Cell> cell in lec.grids[i]) {
-				if (cell.Value.value > 0)
-					cells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
-			}
+		bool error = false;
 
-			layers.Add(new LayerData(cells));
+		List<CellData> floorCells = new List<CellData>();
+		foreach (KeyValuePair<(int, int), Cell> cell in lec.floorGrid) {
+			if (cell.Value.value > 0)
+				floorCells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
+		}
+		List<CellData> wallCells = new List<CellData>();
+		foreach (KeyValuePair<(int, int), Cell> cell in lec.wallGrid) {
+			if (cell.Value.value > 0)
+				wallCells.Add(new CellData(cell.Key.Item1, cell.Key.Item2, cell.Value.value));
 		}
 
 		if (lec.PlayerSpawn == null) {
-			Debug.Log("Erreur pas de spawn Player");
-			return null;
+			Debug.LogWarning("Erreur pas de spawn Player");
+			error = true;
 		}
 			
 		if (lec.PatientSpawn == null) {
-			Debug.Log("Erreur pas de spawn Patient");
-			return null;
+			Debug.LogWarning("Erreur pas de spawn Patient");
+			error = true;
 		}
 
 		(float x, float y, float size) camParams = LevelCameraController.instance.GetCamParams();
@@ -92,8 +88,11 @@ public class LevelDataController : DataController {
 			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value));
         }
 
+		// Abort if error was found
+		if (error) return null;
+
 		return new LevelData(camParams.x, camParams.y, camParams.size, lec.rows, lec.columns,
-			layers, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelObjects,
+			floorCells, wallCells, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelObjects,
 			lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position,
 			PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text, Int32.Parse(PatientQueueSize.text));
 	}
@@ -111,12 +110,11 @@ public class LevelDataController : DataController {
 
 	private void DisplayLoadedData(LevelData Data) {
 		lec.ResizeGrid(Data.rows, Data.columns);
-		for(int i = 0; i < Data.layers.Count; i++)
-			foreach (CellData cell in Data.layers[i].cells) {
-				lec.grids[i][(cell.x, cell.y)].value = cell.value; 
-				if (i == 1 && cell.value > 1) 
-					lec.fullWallsGrid[(cell.x, cell.y)].GetComponent<SpriteRenderer>().sprite = lec.fullWallSprites[cell.value - 2];
-			}
+
+		foreach (CellData cell in Data.floorCells)
+			lec.floorGrid[(cell.x, cell.y)].value = cell.value;
+		foreach (CellData cell in Data.wallCells)
+			lec.wallGrid[(cell.x, cell.y)].value = cell.value;
 
 		lec.RefreshAllGrid();
 

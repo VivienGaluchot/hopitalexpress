@@ -10,30 +10,24 @@ public class GameLoader : MonoBehaviour {
 
 	[SerializeField] private Transform FloorParent;
 	[SerializeField] private Transform WallsParent;
-	[SerializeField] private GameObject[] Walls;
-	public bool useTest;
-	public GameObject[] WallsTest;
 	[SerializeField] private GameObject[] Floor;
+	[SerializeField] private GameObject[] Walls;
 
 	public bool instantLoad, loadLevel, loadSpawns, loadDiseases;
-
-	private Transform[] PrefabsParents;
-	private GameObject[][] Prefabs;
+	private GameObject[] FloorPrefabs, WallPrefabs;
 
 	private GameController gc;
 
 	private void Start() {
 		gc = GetComponent<GameController>();
-		PrefabsParents = new Transform[2] { FloorParent, WallsParent };
-		Prefabs = new GameObject[2][] { Floor, useTest ? WallsTest : Walls };
 		path = Path.Combine(Application.dataPath, path);
-		FetchDDOptions();
+		FetchFilesNames();
 
 		if(instantLoad)
 			LoadLevel(true);
 	}
 
-	private void FetchDDOptions() {
+	private void FetchFilesNames() {
 		string[] paths = System.IO.Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
@@ -54,12 +48,15 @@ public class GameLoader : MonoBehaviour {
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
 		
 		if(loadLevel) {
-			for (int i = 0; i < Data.layers.Count; i++) {
-				foreach (CellData cell in Data.layers[i].cells) {
-					GameObject newGO = Instantiate(Prefabs[i][cell.value - 1], PrefabsParents[i]);
-					newGO.GetComponent<SpriteRenderer>().sortingOrder = i - 2;
-					newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
-				}
+			foreach (CellData cell in Data.floorCells) {
+				GameObject newGO = Instantiate(FloorPrefabs[cell.value - 1], FloorParent);
+				newGO.GetComponent<SpriteRenderer>().sortingOrder = -2;
+				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
+			}
+			foreach (CellData cell in Data.wallCells) {
+				GameObject newGO = Instantiate(WallPrefabs[cell.value - 1], WallsParent);
+				newGO.GetComponent<SpriteRenderer>().sortingOrder = -1;
+				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
 			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
 		}
