@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Linq;
 
 public class PopulateObjects : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class PopulateObjects : MonoBehaviour {
                 go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
 
                 string path = Path.Combine(s, p.name);
-                go.GetComponent<ObjectController>().SetInformations(sr.sprite, path);
+                go.GetComponent<ObjectController>().SetInformations(sr.sprite, path, s.Split('/').Last() == "Seats");
             }
         }        
     }

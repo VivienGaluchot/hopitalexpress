@@ -26,10 +26,11 @@ public class LevelData {
 
 [Serializable]
 public class LevelObject {
-	public LevelObject(Vector3 pos, string path) { this.pos = pos; this.path = path; }
+	public LevelObject(Vector3 pos, string path, bool isSeat) { this.pos = pos; this.path = path; this.isSeat = isSeat; }
 
 	public Vector3 pos;
 	public string path;
+	public bool isSeat;
 }
 
 [Serializable]
@@ -84,8 +85,8 @@ public class LevelDataController : DataController {
 		(float x, float y, float size) camParams = LevelCameraController.instance.GetCamParams();
 
 		List<LevelObject> LevelObjects = new List<LevelObject>();
-		foreach(KeyValuePair<GameObject, string> lo in lec.ObjectsList) {
-			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value));
+		foreach(KeyValuePair<GameObject, LevelObjectController> lo in lec.ObjectsList) {
+			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value.path, lo.Value.isSeat));
         }
 
 		// Abort if error was found
@@ -135,7 +136,7 @@ public class LevelDataController : DataController {
 				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
 				newGO.AddComponent<BoxCollider2D>();
 				newGO.layer = LayerMask.NameToLayer("LevelObjects");
-				lec.ObjectsList.Add(newGO, lo.path);
+				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat));
 			} else {
 				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
 			}

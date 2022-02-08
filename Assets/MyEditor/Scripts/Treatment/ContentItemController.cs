@@ -9,7 +9,8 @@ public class ContentItemController : MonoBehaviour {
     public void SetInformations(GameObject prefab, string path) {
         this.path = path;
         this.prefab = prefab;
-        GetComponent<Image>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+        if(prefab.GetComponent<SpriteRenderer>())
+            GetComponent<Image>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
     }
 
     public void SendInformations() {

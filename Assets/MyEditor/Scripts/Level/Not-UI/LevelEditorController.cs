@@ -61,10 +61,13 @@ public class LevelEditorController : MonoBehaviour {
 	public string[] objectsPath;
 	private GameObject Follower;
 	private SpriteRenderer followerSR;
-	private string followerPath;
-	public Dictionary<GameObject, string> ObjectsList { get; private set; }
+	private LevelObjectController followerController;
+	public Dictionary<GameObject, LevelObjectController> ObjectsList { get; private set; }
 	private GameObject clickedGO;
 	private Vector3 clickedGOffset = Vector3.zero;
+
+	private bool infosDisplayed;
+	[SerializeField] private InfosDisplayer Infos;
 
 	private void Awake() { 
 		instance = this;
@@ -98,7 +101,8 @@ public class LevelEditorController : MonoBehaviour {
 		Follower = new GameObject("Follower", typeof(SpriteRenderer));
 		Follower.transform.SetParent(transform);
 		followerSR = Follower.GetComponent<SpriteRenderer>();
-		ObjectsList = new Dictionary<GameObject, string>();
+		ObjectsList = new Dictionary<GameObject, LevelObjectController>();
+		Infos.gameObject.SetActive(false);
 	}
 	private void Start() { InitGrids(); }
 
@@ -171,7 +175,7 @@ public class LevelEditorController : MonoBehaviour {
 						GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
 						newGO.AddComponent<BoxCollider2D>();
 						newGO.layer = LayerMask.NameToLayer("LevelObjects");
-						ObjectsList.Add(newGO, followerPath);
+						ObjectsList.Add(newGO, followerController);
 					}
 				}
 				break;
@@ -184,9 +188,12 @@ public class LevelEditorController : MonoBehaviour {
 							clickedGO = hit.collider.gameObject;
 							clickedGOffset = hit.transform.position - worldMousePos;
 						} else {
-							// RIGHT CLICK ON OBJECT - DISPLAY CONTEXTUAL?
-							Debug.Log("RIGHT CLICKED RIGHT CLICKED WOOOOOOOOOO");
-
+							if (ObjectsList.TryGetValue(hit.collider.gameObject, out LevelObjectController loc) && loc.isSeat) {
+								Infos.transform.position = Input.mousePosition;
+								Infos.gameObject.SetActive(true);
+								infosDisplayed = true;
+								Debug.Log("youwou");
+							}
 						}
 					}
 				}
@@ -307,7 +314,7 @@ public class LevelEditorController : MonoBehaviour {
 				cell.sr.sprite = wallSprites[newValue - 1];
 				fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
 			}
-        }		
+		}		
 	}
 	private int ComputeCellValue(Dictionary<(int, int), Cell> grid, int i, int j, bool checkDiag = false) {
 		// ça peut être sympa de faire un joli algo ici
@@ -562,13 +569,12 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
-	public void SetFollower(Sprite followerSprite, string path) {
-		Sprite oldSprite = followerSR.sprite;
-		DrawMenuController.instance.Unclick();
-		if(oldSprite != followerSprite) {
+	public void SetFollower(Sprite followerSprite, string path, bool isSeat) {
+		if(followerSR.sprite != followerSprite) {
+			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
-			followerPath = path;
+			followerController = new LevelObjectController(path, isSeat);
 		} else {
 			followerSR.sprite = null;
 			drawType = DrawType.none;
@@ -579,7 +585,7 @@ public class LevelEditorController : MonoBehaviour {
 		followerSR.sprite = null;
 	}
 	public void ClearLevelObjects() {
-		foreach (KeyValuePair<GameObject, string> lo in ObjectsList) {
+		foreach (KeyValuePair<GameObject, LevelObjectController> lo in ObjectsList) {
 			Destroy(lo.Key);
 		}
 		ObjectsList.Clear();
