@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.0627451}
   m_FlipX: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8138231150593323950}
   - component: {fileID: 7330736947734008963}
   - component: {fileID: 3920929335372629467}
+  - component: {fileID: 3390246922080565315}
   m_Layer: 0
   m_Name: SwabDispenser
   m_TagString: Container
@@ -181,6 +182,17 @@ MonoBehaviour:
   givenItem: {fileID: 1937063911249367467, guid: 074ad40842193a9408b196312e279676, type: 3}
   askedTime: 0
   TimeBar: {fileID: 4533746814888017767}
+--- !u!210 &3390246922080565315
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054907280480881919}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &8536853120906364038
 GameObject:
   m_ObjectHideFlags: 0

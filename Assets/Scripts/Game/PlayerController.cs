@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(!GameController.instance.isPaused) {
+		if(GameController.instance == null || !GameController.instance.isPaused) {
 			if (action == Actions.gathering && Input.GetButtonUp("Fire" + id)) {
 				// Button released, we stop gathering
 				action = Actions.nothing;
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (!GameController.instance.isPaused) {
+		if (GameController.instance == null || !GameController.instance.isPaused) {
 			if (action == Actions.nothing) {
 				// Can only move if doing nothing
 				float horiz = Input.GetAxis("Joy" + id + "X"), vert = Input.GetAxis("Joy" + id + "Y");
