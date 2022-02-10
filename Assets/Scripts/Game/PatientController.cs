@@ -51,7 +51,7 @@ public class PatientController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (state == States.sick) {
+		if (state == States.sick && !GameController.instance.isPaused) {
 			lifetime -= Time.deltaTime * timeEffect;
 			TimeBarImage.fillAmount = lifetime / myDisease.myInfos._lifespan;
 			if (lifetime < 0f)

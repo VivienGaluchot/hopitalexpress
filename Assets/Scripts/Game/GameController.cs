@@ -66,11 +66,12 @@ public class GameController : MonoBehaviour {
 		if (coin != null)
 			coinAnimator = coin.GetComponent<Animator>();
 
-		WelcomeSeats = new List<GameObject>();
 
 		if (!waitForLoad) {
 			PatientQueue = new GameObject[patientQueueSize];
 			currentLevelTime = levelTime;
+		} else {
+			WelcomeSeats = new List<GameObject>();
 		}
 	}
 
