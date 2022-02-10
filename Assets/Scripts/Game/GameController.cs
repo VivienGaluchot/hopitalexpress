@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public static GameController instance;
 
-	public bool displayFirstNeed;
+	public bool waitForLoad, displayFirstNeed;
 
 	[SerializeField] private float levelTime;
 	[SerializeField] private Image levelTimeImage;
@@ -16,13 +16,12 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private float playerSpeed;
 	
 	// new patient can only spawn on welcome seats
-	[SerializeField] private GameObject[] WelcomeSeats;
+	[SerializeField] private List<GameObject> WelcomeSeats;
 	[SerializeField] private GameObject Patient;
 	[SerializeField] private float spawnRate;
 	[SerializeField] private Transform PatientQueueParent;
 	[SerializeField] private int patientQueueSize;
 	[SerializeField] public int targetFrameRate = 120;
-
 
 	private string patientQueueDirection;
 
@@ -62,12 +61,17 @@ public class GameController : MonoBehaviour {
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
 		multiplicator = 1;
-		PatientQueue = new GameObject[patientQueueSize];
-		currentLevelTime = levelTime;
 		if (scoreText)
 			scoreText.text = "0";
 		if (coin != null)
 			coinAnimator = coin.GetComponent<Animator>();
+
+		WelcomeSeats = new List<GameObject>();
+
+		if (!waitForLoad) {
+			PatientQueue = new GameObject[patientQueueSize];
+			currentLevelTime = levelTime;
+		}
 	}
 
 	private const float clockStartHue = 100f / 255f;
@@ -112,18 +116,23 @@ public class GameController : MonoBehaviour {
 		patientQueueDirection = "UP";
 	}
 
-	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction) {
+	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction, int queueSize, float levelTime, List<GameObject> welcomeSeats) {
 		isLoaded = true;
 		this.playerSpawn = playerSpawn;
 		PatientQueueParent.position = patientSpawn;
 		patientQueueDirection = direction;
+		PatientQueue = new GameObject[queueSize];
+		currentLevelTime = levelTime;
+		foreach(GameObject seat in welcomeSeats)
+			if (seat.GetComponent<SeatController>() && !WelcomeSeats.Contains(seat))
+				WelcomeSeats.Add(seat);
 	}
 
 	// One at a time
 	private void AdvancePatientQueue() {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
-		for (int i = 0; i < WelcomeSeats.Length; i++) {
+		for (int i = 0; i < WelcomeSeats.Count; i++) {
 			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
 				emptySeat = WelcomeSeats[i];
 				break;
@@ -157,7 +166,7 @@ public class GameController : MonoBehaviour {
 	private bool TrySpawnNewPatient() {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
-		for (int i = 0; i < WelcomeSeats.Length; i++) {
+		for (int i = 0; i < WelcomeSeats.Count; i++) {
 			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
 				emptySeat = WelcomeSeats[i];
 				break;

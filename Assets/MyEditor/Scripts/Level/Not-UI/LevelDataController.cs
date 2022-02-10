@@ -26,11 +26,13 @@ public class LevelData {
 
 [Serializable]
 public class LevelObject {
-	public LevelObject(Vector3 pos, string path, bool isSeat) { this.pos = pos; this.path = path; this.isSeat = isSeat; }
+	public LevelObject(Vector3 pos, string path, bool isSeat, bool isWelcomeSeat) 
+		{ this.pos = pos; this.path = path; this.isSeat = isSeat; this.isWelcomeSeat = isWelcomeSeat; }
 
 	public Vector3 pos;
 	public string path;
 	public bool isSeat;
+	public bool isWelcomeSeat;
 }
 
 [Serializable]
@@ -86,7 +88,7 @@ public class LevelDataController : DataController {
 
 		List<LevelObject> LevelObjects = new List<LevelObject>();
 		foreach(KeyValuePair<GameObject, LevelObjectController> lo in lec.ObjectsList) {
-			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value.path, lo.Value.isSeat));
+			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value.path, lo.Value.isSeat, lo.Value.isWelcomeSeat));
         }
 
 		// Abort if error was found
@@ -132,14 +134,32 @@ public class LevelDataController : DataController {
 
 		foreach(LevelObject lo in Data.LevelObjects) {
 			GameObject loaded = Resources.Load<GameObject>(lo.path);
-			if(loaded) {
-				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
-				newGO.AddComponent<BoxCollider2D>();
+            if (loaded) {
+				GameObject newGO = new GameObject(loaded.name, typeof(SpriteRenderer), typeof(BoxCollider2D));
+				newGO.transform.SetParent(lec.ObjectsParent);
+				newGO.transform.position = lo.pos;
 				newGO.layer = LayerMask.NameToLayer("LevelObjects");
-				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat));
-			} else {
-				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
-			}
-        }
+
+				SpriteRenderer sr = loaded.GetComponent<SpriteRenderer>();
+				if (!sr)
+					sr = loaded.GetComponentInChildren<SpriteRenderer>();
+				if (sr)
+					newGO.GetComponent<SpriteRenderer>().sprite = sr.sprite;
+				else
+					Debug.Log("gameobject " + loaded.name + " at " + lo.path + " -> unable to get sprite");
+
+				// Adjust boxcollider2D size to sprite size
+				BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
+				bc2D.size = newGO.GetComponent<SpriteRenderer>().size;
+				Sprite sprite = newGO.GetComponent<SpriteRenderer>().sprite;
+				Vector2 pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+				Vector2 offset = pivot - new Vector2(.5f, .5f);
+				bc2D.offset = -offset;
+
+                lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
+            } else {
+                Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
+            }
+		}
 	}
 }

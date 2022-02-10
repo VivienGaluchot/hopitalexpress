@@ -5,16 +5,16 @@ using System.IO;
 
 public class GameLoader : MonoBehaviour {
 
-	[SerializeField] private Dropdown dd;
+	[SerializeField] private Dropdown FileNamesDropdown;
 	[SerializeField] private string path;
 
 	[SerializeField] private Transform FloorParent;
 	[SerializeField] private Transform WallsParent;
-	[SerializeField] private GameObject[] Floor;
-	[SerializeField] private GameObject[] Walls;
+	[SerializeField] private Transform LevelObjectsParent;
+	[SerializeField] private GameObject[] FloorPrefabs;
+	[SerializeField] private GameObject[] WallPrefabs;
 
 	public bool instantLoad, loadLevel, loadSpawns, loadDiseases;
-	private GameObject[] FloorPrefabs, WallPrefabs;
 
 	private GameController gc;
 
@@ -28,26 +28,29 @@ public class GameLoader : MonoBehaviour {
 	}
 
 	private void FetchFilesNames() {
-		string[] paths = System.IO.Directory.GetFiles(path);
+		string[] paths = Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
 				pathsList.Add(Path.GetFileNameWithoutExtension(s));
 		}
-		dd.ClearOptions();
-		dd.AddOptions(pathsList);
+		FileNamesDropdown.ClearOptions();
+		FileNamesDropdown.AddOptions(pathsList);
 	}
 
 	public void LoadLevel(bool random = false) {
-		dd.transform.parent.parent.gameObject.SetActive(false);
+		FileNamesDropdown.transform.parent.parent.gameObject.SetActive(false);
 
-		string filename = dd.options[dd.value].text + ".json";
-		if (random)
-			filename = dd.options[Random.Range(0, dd.options.Count)].text + ".json";
-		Debug.Log("load : " + filename);
+		string filename = FileNamesDropdown.options[FileNamesDropdown.value].text + ".json";
+		if (random) {
+			filename = FileNamesDropdown.options[Random.Range(0, FileNamesDropdown.options.Count)].text + ".json";
+			Debug.Log("load : " + filename);
+		}
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
-		
-		if(loadLevel) {
+
+		List<GameObject> WelcomeSeats = new List<GameObject>();
+
+		if (loadLevel) {
 			foreach (CellData cell in Data.floorCells) {
 				GameObject newGO = Instantiate(FloorPrefabs[cell.value - 1], FloorParent);
 				newGO.GetComponent<SpriteRenderer>().sortingOrder = -2;
@@ -58,6 +61,13 @@ public class GameLoader : MonoBehaviour {
 				newGO.GetComponent<SpriteRenderer>().sortingOrder = -1;
 				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
+
+			foreach (LevelObject lo in Data.LevelObjects) {
+				GameObject newGO = Instantiate(Resources.Load<GameObject>(lo.path), lo.pos, Quaternion.identity, LevelObjectsParent);
+				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat)
+					WelcomeSeats.Add(newGO);
+			}
+
 			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
 		}
 
@@ -69,25 +79,24 @@ public class GameLoader : MonoBehaviour {
 
 				StepContainer container = ReadNextStep(diseaseData.treatment);
 
-                StepData starter = null;
-                foreach (StepData step in container.allSteps) {
-                    if (step.first) {
-                        starter = step;
-                        break;
-                    }
-                }
+				StepData starter = null;
+				foreach (StepData step in container.allSteps) {
+					if (step.first) {
+						starter = step;
+						break;
+					}
+				}
 
-                Step firstStep = ComputeStep(starter);
+				Step firstStep = ComputeStep(starter);
 				DiseaseTypes dt = (DiseaseTypes)diseaseData.faceID;
 				gc.DiseasesAvailable[i] = new Infos(dt, diseaseData.lifespan, (int)diseaseData.points, firstStep);
 			}
 		}
 		
-		if(loadSpawns) {
-			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection);
-		} else {
+		if(loadSpawns)
+			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection, Data.patientQueueSize, 120f, WelcomeSeats);
+		else
 			GetComponent<GameController>().StartGame();
-		}
 	}
 
 	private Step ComputeStep(StepData stepData) {

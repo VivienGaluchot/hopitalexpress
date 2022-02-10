@@ -66,7 +66,7 @@ public class LevelEditorController : MonoBehaviour {
 	private GameObject clickedGO;
 	private Vector3 clickedGOffset = Vector3.zero;
 
-	private bool infosDisplayed;
+	//private bool infosDisplayed;
 	[SerializeField] private InfosDisplayer Infos;
 
 	private void Awake() { 
@@ -110,6 +110,7 @@ public class LevelEditorController : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			UnsetFollower();
 			DrawMenuController.instance.Unclick();
+			Infos.gameObject.SetActive(false);
 		}
 
 		if(drawType == DrawType.levelObject) {
@@ -173,9 +174,11 @@ public class LevelEditorController : MonoBehaviour {
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (!hit.collider && drawType == DrawType.levelObject) {
 						GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
+						newGO.name = followerSR.sprite.name;
 						newGO.AddComponent<BoxCollider2D>();
 						newGO.layer = LayerMask.NameToLayer("LevelObjects");
 						ObjectsList.Add(newGO, followerController);
+						followerController = new LevelObjectController(followerController);
 					}
 				}
 				break;
@@ -189,10 +192,12 @@ public class LevelEditorController : MonoBehaviour {
 							clickedGOffset = hit.transform.position - worldMousePos;
 						} else {
 							if (ObjectsList.TryGetValue(hit.collider.gameObject, out LevelObjectController loc) && loc.isSeat) {
+								Infos.GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
+								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
 								Infos.transform.position = Input.mousePosition;
 								Infos.gameObject.SetActive(true);
-								infosDisplayed = true;
-								Debug.Log("youwou");
+								//infosDisplayed = true;
+								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
 							}
 						}
 					}
@@ -214,6 +219,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void DrawTypeToSpawn(int newDT) {
 		UnsetFollower();
+		Infos.gameObject.SetActive(false);
 		drawType = (DrawType) newDT;
 	}
 	private void UnsetSpawns() {
@@ -308,8 +314,8 @@ public class LevelEditorController : MonoBehaviour {
 					UpdateWallNeighbours(i, j);
 			}
 		} else {
-			if(cell.value%16 != newValue) {
-				int myWallColor = (cell.value / 16);
+			if(cell.value%16 != newValue%16) {
+				int myWallColor = ((cell.value-1) / 16)*16;
 				cell.value = newValue + myWallColor;
 				cell.sr.sprite = wallSprites[newValue - 1];
 				fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
@@ -395,7 +401,7 @@ public class LevelEditorController : MonoBehaviour {
 		while (floorGrid.TryGetValue((i-1, j), out cell) && cell.value > 0) { i--; }
 		int startingX = i, startingY = j, oldI = -1, oldJ = -1, x, y;
 		do {
-			wallGrid[(i, j)].value = 1;
+			wallGrid[(i, j)].value = wallColor+1;
 
 			x = i;
 			y = j;
@@ -517,9 +523,16 @@ public class LevelEditorController : MonoBehaviour {
 	private void RefreshWallGrid(bool recompute = false) {
 		foreach (KeyValuePair<(int, int), Cell> cell in wallGrid) {
 			if (cell.Value.value > 0) {
-				if (recompute) cell.Value.value = ComputeCellValue(wallGrid, cell.Key.Item1, cell.Key.Item2);
-				cell.Value.sr.sprite = wallSprites[(cell.Value.value - 1) % 16];
-				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value-1];
+				if (recompute) {
+					int newValue = ComputeCellValue(wallGrid, cell.Key.Item1, cell.Key.Item2);
+					int myWallColor = ((cell.Value.value - 1) / 16) * 16;
+					cell.Value.value = newValue + myWallColor;
+					cell.Value.sr.sprite = wallSprites[newValue - 1];
+					fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
+				} else {
+					cell.Value.sr.sprite = wallSprites[(cell.Value.value - 1) % 16];
+					fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value - 1];
+				}
 			} else
 				cell.Value.sr.sprite = null;
 		}
@@ -570,7 +583,8 @@ public class LevelEditorController : MonoBehaviour {
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
 	public void SetFollower(Sprite followerSprite, string path, bool isSeat) {
-		if(followerSR.sprite != followerSprite) {
+		Infos.gameObject.SetActive(false);
+		if (followerSR.sprite != followerSprite) {
 			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
@@ -589,6 +603,7 @@ public class LevelEditorController : MonoBehaviour {
 			Destroy(lo.Key);
 		}
 		ObjectsList.Clear();
+		Infos.gameObject.SetActive(false);
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- MISC
@@ -601,6 +616,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void SetDrawType(DrawType newDT, int color = 0) {
 		UnsetFollower();
+		Infos.gameObject.SetActive(false);
 		drawType = newDT;
 		// number of wall sprites per color? 16 I think
 		wallColor = color * 16;
