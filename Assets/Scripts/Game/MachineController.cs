@@ -62,6 +62,7 @@ public class MachineController : SeatController {
 	public override GameObject GiveHold() {
 		TimeBar.transform.parent.gameObject.SetActive(false);
 		isWorking = false;
+		goHeld.GetComponent<PatientController>().LeavingMachine();
 		return base.GiveHold();
 	}
 

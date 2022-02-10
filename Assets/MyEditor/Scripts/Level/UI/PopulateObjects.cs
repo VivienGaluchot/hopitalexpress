@@ -5,26 +5,37 @@ using System.Linq;
 
 public class PopulateObjects : MonoBehaviour {
 
-    [SerializeField] private GameObject Prefab;
+	[SerializeField] private GameObject Prefab;
 
-    void Start() {
-        Populate();
-    }
+	void Start() {
+		Populate();
+	}
 
-    private void Populate() {
-        foreach(string s in LevelEditorController.instance.objectsPath) {
-            GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
-            foreach (GameObject p in Prefabs) {
-                GameObject go = Instantiate(Prefab, transform); 
+	private void Populate() {
+		foreach(string s in LevelEditorController.instance.objectsPath) {
+			GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
+			foreach (GameObject p in Prefabs) {
+				GameObject go = Instantiate(Prefab, transform);
 
-                SpriteRenderer sr = p.GetComponent<SpriteRenderer>();
-                if (sr == null)
-                    sr = p.GetComponentInChildren<SpriteRenderer>();
-                go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
+				SpriteRenderer sr = null;
+				Vector3 childPos = Vector3.zero;
+				for(int i = 0; i < p.transform.childCount; i++) {
+					if(p.transform.GetChild(i).name == "Sprite") {
+						sr = p.transform.GetChild(i).GetComponent<SpriteRenderer>();
+						childPos = p.transform.GetChild(i).localPosition;
+						break;
+					}
+				}
+				if(sr == null) {
+					Debug.LogWarning(p.name + " error while getting SpriteRenderer from Sprite child");
+					break;
+				}
+				   
+				go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
 
-                string path = Path.Combine(s, p.name);
-                go.GetComponent<ObjectController>().SetInformations(sr.sprite, path, s.Split('/').Last() == "Seats");
-            }
-        }        
-    }
+				string path = Path.Combine(s, p.name);
+				go.GetComponent<ObjectController>().SetInformations(sr.sprite, path, s.Split('/').Last() == "Seats", childPos);
+			}
+		}        
+	}
 }

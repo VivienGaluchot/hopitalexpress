@@ -59,7 +59,8 @@ public class LevelEditorController : MonoBehaviour {
 
 	//Objects
 	public string[] objectsPath;
-	private GameObject Follower;
+	private GameObject Follower, FollowerChild;
+	private Vector3 followerOffset;
 	private SpriteRenderer followerSR;
 	private LevelObjectController followerController;
 	public Dictionary<GameObject, LevelObjectController> ObjectsList { get; private set; }
@@ -98,9 +99,13 @@ public class LevelEditorController : MonoBehaviour {
 		PatientSpawn.SetActive(false);
 
 		ObjectsParent = transform.Find("ObjectsLayer");
-		Follower = new GameObject("Follower", typeof(SpriteRenderer));
+		Follower = new GameObject("Follower");
 		Follower.transform.SetParent(transform);
-		followerSR = Follower.GetComponent<SpriteRenderer>();
+		FollowerChild = new GameObject("Sprite", typeof(SpriteRenderer));
+		FollowerChild.transform.SetParent(Follower.transform);
+		followerSR = FollowerChild.GetComponent<SpriteRenderer>();
+		followerOffset = Vector3.zero;
+
 		ObjectsList = new Dictionary<GameObject, LevelObjectController>();
 		Infos.gameObject.SetActive(false);
 	}
@@ -114,7 +119,7 @@ public class LevelEditorController : MonoBehaviour {
 		}
 
 		if(drawType == DrawType.levelObject) {
-			Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+			Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + followerOffset;
 		}
 
 		if(clickedGO) {
@@ -173,10 +178,19 @@ public class LevelEditorController : MonoBehaviour {
 					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (!hit.collider && drawType == DrawType.levelObject) {
-						GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
-						newGO.name = followerSR.sprite.name;
-						newGO.AddComponent<BoxCollider2D>();
+						GameObject newGO = new GameObject(followerSR.sprite.name, typeof(BoxCollider2D));
+						newGO.transform.SetParent(ObjectsParent);
 						newGO.layer = LayerMask.NameToLayer("LevelObjects");
+						newGO.transform.position = worldMousePos - FollowerChild.transform.localPosition;
+						GameObject childForSprite = Instantiate(FollowerChild, newGO.transform);
+						childForSprite.GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
+						childForSprite.transform.localPosition = FollowerChild.transform.localPosition;
+
+						// Adjust boxcollider2D size to sprite size and position
+						BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
+						bc2D.size = followerSR.size;
+						bc2D.offset = (Vector2)FollowerChild.transform.localPosition;
+
 						ObjectsList.Add(newGO, followerController);
 						followerController = new LevelObjectController(followerController);
 					}
@@ -473,6 +487,7 @@ public class LevelEditorController : MonoBehaviour {
 				wallGrid.Add((i, j), InitCell(i, j, WallCellsParent, -1));
 
 				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
+				newCell.GetComponent<SpriteRenderer>().sortingOrder = -1;
 				newCell.transform.SetParent(WallsParents[1]);
 				newCell.transform.position = new Vector3(j / size, -i / size, 0);
 				fullWallsGrid.Add((i, j), newCell);
@@ -582,13 +597,15 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
-	public void SetFollower(Sprite followerSprite, string path, bool isSeat) {
+	public void SetFollower(Sprite followerSprite, string path, bool isSeat, Vector3 childPos) {
 		Infos.gameObject.SetActive(false);
 		if (followerSR.sprite != followerSprite) {
 			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
-			followerController = new LevelObjectController(path, isSeat);
+			followerController = new LevelObjectController(path, isSeat, false);
+			FollowerChild.transform.localPosition = childPos;
+			followerOffset = -childPos;
 		} else {
 			followerSR.sprite = null;
 			drawType = DrawType.none;

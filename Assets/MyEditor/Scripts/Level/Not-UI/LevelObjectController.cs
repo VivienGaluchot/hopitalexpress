@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelObjectController {
 
-    public LevelObjectController(string path, bool isSeat, bool isWelcomeSeat = false) {
+    public LevelObjectController(string path, bool isSeat, bool isWelcomeSeat) {
         this.path = path; 
         this.isSeat = isSeat;
         this.isWelcomeSeat = isWelcomeSeat;

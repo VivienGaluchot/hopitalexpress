@@ -24,7 +24,7 @@ public class CameraEditorController : MonoBehaviour {
 
 		float scroll = Input.mouseScrollDelta.y;
 		if(scroll != 0 && !GlobalFunctions.DoesHitUI()) {
-			cam.orthographicSize = Mathf.Min(40, Mathf.Max(1f, cam.orthographicSize - scroll));
+			cam.orthographicSize = Mathf.Min(40, Mathf.Max(1f, cam.orthographicSize - scroll * .1f));
         }
 	}
 }
