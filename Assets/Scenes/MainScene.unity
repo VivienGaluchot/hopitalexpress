@@ -799,6 +799,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reaper Adrien
       objectReference: {fileID: 0}
+    - target: {fileID: 2079454709275363488, guid: c1eec24eeecfee84d87f369b9bbb7298, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2079454709275363491, guid: c1eec24eeecfee84d87f369b9bbb7298, type: 3}
       propertyPath: m_RootOrder
       value: 7

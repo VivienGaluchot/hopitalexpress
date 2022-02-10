@@ -16,7 +16,7 @@ public class PatientController : MonoBehaviour {
 	public float diseaseDuration;
 
 	private Disease myDisease;
-	private bool needDisplayed;
+	private bool needDisplayed, doingAnim;
 	private (bool isSet, int value) initialClothesSkinIndex = (false, 0);
 
 	public enum States { 
@@ -63,9 +63,11 @@ public class PatientController : MonoBehaviour {
 					periodWithoutDiseaseAnimation = 0;
 					face.GetComponent<SkinManager>().frameSelected = 0;
 					needBubble.SetActive(needDisplayed);
+					doingAnim = false;
 				} else if (periodWithoutDiseaseAnimation > noDiseaseDuration) {
 					face.GetComponent<SkinManager>().frameSelected = 1;
 					needBubble.SetActive(false);
+					doingAnim = true;
 				}
 			}
 		}
@@ -96,10 +98,19 @@ public class PatientController : MonoBehaviour {
 		// If yes, then return true and time needed
 		var step = myDisease.GetCurrentStep();
 		if (machineName == step.name) {
+			// Stop displayed need because we're in good machine
+			needDisplayed = false;
+			needBubble.SetActive(false);
+
 			return (true, step.time);
 		}
 
 		return (false, 0f);
+	}
+
+	public void LeavingMachine() {
+		needDisplayed = true;
+		needBubble.SetActive(!doingAnim);
 	}
 
 	// We used the machine during time, tell the disease about it!
@@ -135,8 +146,9 @@ public class PatientController : MonoBehaviour {
 	public void Exited() {
 		if (state == States.cured)
 			GameController.instance.PatientCured(patientValue);
-		else
+		else if(state == States.sick)
 			GameController.instance.PatientDead(patientValue);
+		// if state == States.dead then we already lost points
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
