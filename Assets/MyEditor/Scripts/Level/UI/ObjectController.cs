@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour {
 
-    private Sprite sprite;
-    private string path;
+	private Sprite sprite;
+	private string path;
+	private bool isSeat;
+	private Vector3 childPos;
 
-    public bool isSeat { get; private set; }
+	public void SetInformations(Sprite sprite, string path, bool isSeat, Vector3 childPos) {
+		this.sprite = sprite;
+		this.path = path;
+		this.isSeat = isSeat;
+		this.childPos = childPos;
+	}
 
-    public void SetInformations(Sprite sprite, string path, bool isSeat = false) {
-        this.sprite = sprite;
-        this.path = path;
-        this.isSeat = isSeat;
-    }
-
-    public void SendInformations() {
-        LevelEditorController.instance.SetFollower(sprite, path, isSeat);
-    }
+	public void SendInformations() {
+		LevelEditorController.instance.SetFollower(sprite, path, isSeat, childPos);
+	}
 }
