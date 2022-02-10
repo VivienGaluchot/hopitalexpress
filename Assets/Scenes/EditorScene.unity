@@ -6393,7 +6393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -71190}
+  m_AnchoredPosition: {x: 0, y: -73540}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &604896705
@@ -12683,7 +12683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rowsIF: {fileID: 1354417648}
   columnsIF: {fileID: 417040162}
-  levelTime: {fileID: 0}
+  levelTime: {fileID: 758126363}
   floorSprites:
   - {fileID: 21300000, guid: a1650af74dedbda44b17bde091bcbd43, type: 3}
   - {fileID: 21300000, guid: 7f06e763c36f612479d91bad61685193, type: 3}
@@ -28412,7 +28412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -257205}
+  m_AnchoredPosition: {x: 0, y: -281430}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2140876834
