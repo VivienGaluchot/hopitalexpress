@@ -174,6 +174,7 @@ public class LevelEditorController : MonoBehaviour {
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (!hit.collider && drawType == DrawType.levelObject) {
 						GameObject newGO = Instantiate(Follower, worldMousePos, Quaternion.identity, ObjectsParent);
+						newGO.name = followerSR.sprite.name;
 						newGO.AddComponent<BoxCollider2D>();
 						newGO.layer = LayerMask.NameToLayer("LevelObjects");
 						ObjectsList.Add(newGO, followerController);
@@ -400,7 +401,7 @@ public class LevelEditorController : MonoBehaviour {
 		while (floorGrid.TryGetValue((i-1, j), out cell) && cell.value > 0) { i--; }
 		int startingX = i, startingY = j, oldI = -1, oldJ = -1, x, y;
 		do {
-			wallGrid[(i, j)].value = 1;
+			wallGrid[(i, j)].value = wallColor+1;
 
 			x = i;
 			y = j;
@@ -522,9 +523,16 @@ public class LevelEditorController : MonoBehaviour {
 	private void RefreshWallGrid(bool recompute = false) {
 		foreach (KeyValuePair<(int, int), Cell> cell in wallGrid) {
 			if (cell.Value.value > 0) {
-				if (recompute) cell.Value.value = ComputeCellValue(wallGrid, cell.Key.Item1, cell.Key.Item2);
-				cell.Value.sr.sprite = wallSprites[(cell.Value.value - 1) % 16];
-				fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value-1];
+				if (recompute) {
+					int newValue = ComputeCellValue(wallGrid, cell.Key.Item1, cell.Key.Item2);
+					int myWallColor = ((cell.Value.value - 1) / 16) * 16;
+					cell.Value.value = newValue + myWallColor;
+					cell.Value.sr.sprite = wallSprites[newValue - 1];
+					fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
+				} else {
+					cell.Value.sr.sprite = wallSprites[(cell.Value.value - 1) % 16];
+					fullWallsGrid[(cell.Key.Item1, cell.Key.Item2)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[cell.Value.value - 1];
+				}
 			} else
 				cell.Value.sr.sprite = null;
 		}

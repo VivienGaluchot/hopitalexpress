@@ -134,14 +134,24 @@ public class LevelDataController : DataController {
 
 		foreach(LevelObject lo in Data.LevelObjects) {
 			GameObject loaded = Resources.Load<GameObject>(lo.path);
-			if(loaded) {
-				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
-				newGO.AddComponent<BoxCollider2D>();
+            if (loaded) {
+				GameObject newGO = new GameObject(loaded.name, typeof(SpriteRenderer), typeof(BoxCollider2D));
+				newGO.transform.SetParent(lec.ObjectsParent);
+				newGO.transform.position = lo.pos;
 				newGO.layer = LayerMask.NameToLayer("LevelObjects");
+
+				SpriteRenderer sr = loaded.GetComponent<SpriteRenderer>();
+				if (!sr)
+					sr = loaded.GetComponentInChildren<SpriteRenderer>();
+				if (sr)
+					newGO.GetComponent<SpriteRenderer>().sprite = sr.sprite;
+				else
+					Debug.Log("gameobject " + loaded.name + " at " + lo.path + " -> unable to get sprite");
+
 				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
-			} else {
-				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
-			}
-        }
+            } else {
+                Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
+            }
+		}
 	}
 }
