@@ -66,7 +66,7 @@ public class LevelEditorController : MonoBehaviour {
 	private GameObject clickedGO;
 	private Vector3 clickedGOffset = Vector3.zero;
 
-	private bool infosDisplayed;
+	//private bool infosDisplayed;
 	[SerializeField] private InfosDisplayer Infos;
 
 	private void Awake() { 
@@ -196,7 +196,7 @@ public class LevelEditorController : MonoBehaviour {
 								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
 								Infos.transform.position = Input.mousePosition;
 								Infos.gameObject.SetActive(true);
-								infosDisplayed = true;
+								//infosDisplayed = true;
 								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
 							}
 						}

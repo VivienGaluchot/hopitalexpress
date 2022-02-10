@@ -5,7 +5,7 @@ using System.IO;
 
 public class GameLoader : MonoBehaviour {
 
-	[SerializeField] private Dropdown dd;
+	[SerializeField] private Dropdown FileNamesDropdown;
 	[SerializeField] private string path;
 
 	[SerializeField] private Transform FloorParent;
@@ -28,25 +28,26 @@ public class GameLoader : MonoBehaviour {
 	}
 
 	private void FetchFilesNames() {
-		string[] paths = System.IO.Directory.GetFiles(path);
+		string[] paths = Directory.GetFiles(path);
 		List<string> pathsList = new List<string>();
 		foreach (string s in paths) {
 			if (!s.EndsWith(".meta"))
 				pathsList.Add(Path.GetFileNameWithoutExtension(s));
 		}
-		dd.ClearOptions();
-		dd.AddOptions(pathsList);
+		FileNamesDropdown.ClearOptions();
+		FileNamesDropdown.AddOptions(pathsList);
 	}
 
 	public void LoadLevel(bool random = false) {
-		dd.transform.parent.parent.gameObject.SetActive(false);
+		FileNamesDropdown.transform.parent.parent.gameObject.SetActive(false);
 
-		string filename = dd.options[dd.value].text + ".json";
-		if (random)
-			filename = dd.options[Random.Range(0, dd.options.Count)].text + ".json";
-		Debug.Log("load : " + filename);
+		string filename = FileNamesDropdown.options[FileNamesDropdown.value].text + ".json";
+		if (random) {
+			filename = FileNamesDropdown.options[Random.Range(0, FileNamesDropdown.options.Count)].text + ".json";
+			Debug.Log("load : " + filename);
+		}
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
-		
+
 		if(loadLevel) {
 			foreach (CellData cell in Data.floorCells) {
 				GameObject newGO = Instantiate(FloorPrefabs[cell.value - 1], FloorParent);

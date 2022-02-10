@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public static GameController instance;
 
-	public bool displayFirstNeed;
+	public bool waitForLoad, displayFirstNeed;
 
 	[SerializeField] private float levelTime;
 	[SerializeField] private Image levelTimeImage;
@@ -61,12 +61,15 @@ public class GameController : MonoBehaviour {
 		Players = new Dictionary<int, GameObject>();
 		score = 0;
 		multiplicator = 1;
-		PatientQueue = new GameObject[patientQueueSize];
-		currentLevelTime = levelTime;
 		if (scoreText)
 			scoreText.text = "0";
 		if (coin != null)
 			coinAnimator = coin.GetComponent<Animator>();
+
+		if (!waitForLoad) {
+			PatientQueue = new GameObject[patientQueueSize];
+			currentLevelTime = levelTime;
+		}
 	}
 
 	private const float clockStartHue = 100f / 255f;
