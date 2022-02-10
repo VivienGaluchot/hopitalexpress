@@ -66,6 +66,8 @@ public class GameController : MonoBehaviour {
 		if (coin != null)
 			coinAnimator = coin.GetComponent<Animator>();
 
+		WelcomeSeats = new List<GameObject>();
+
 		if (!waitForLoad) {
 			PatientQueue = new GameObject[patientQueueSize];
 			currentLevelTime = levelTime;
@@ -97,14 +99,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void AddWelcomeSeat(GameObject newWelcomeSeat) {
-		// If no seat controller or if already inn the list, then abort mission
-		if (!newWelcomeSeat.GetComponent<SeatController>() || WelcomeSeats.Contains(newWelcomeSeat))
-			return;
-
-		WelcomeSeats.Add(newWelcomeSeat);
-    }
-
 	private void UpdateClock(float currentTime) {
 		float ratio = Mathf.Max(currentTime / levelTime, 0);
 		float newH = clockEndHue + ratio * (clockStartHue - clockEndHue);
@@ -122,11 +116,16 @@ public class GameController : MonoBehaviour {
 		patientQueueDirection = "UP";
 	}
 
-	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction) {
+	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction, int queueSize, float levelTime, List<GameObject> welcomeSeats) {
 		isLoaded = true;
 		this.playerSpawn = playerSpawn;
 		PatientQueueParent.position = patientSpawn;
 		patientQueueDirection = direction;
+		PatientQueue = new GameObject[queueSize];
+		currentLevelTime = levelTime;
+		foreach(GameObject seat in welcomeSeats)
+			if (seat.GetComponent<SeatController>() && !WelcomeSeats.Contains(seat))
+				WelcomeSeats.Add(seat);
 	}
 
 	// One at a time

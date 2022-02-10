@@ -148,7 +148,15 @@ public class LevelDataController : DataController {
 				else
 					Debug.Log("gameobject " + loaded.name + " at " + lo.path + " -> unable to get sprite");
 
-				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
+				// Adjust boxcollider2D size to sprite size
+				BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
+				bc2D.size = newGO.GetComponent<SpriteRenderer>().size;
+				Sprite sprite = newGO.GetComponent<SpriteRenderer>().sprite;
+				Vector2 pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+				Vector2 offset = pivot - new Vector2(.5f, .5f);
+				bc2D.offset = -offset;
+
+                lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
             } else {
                 Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
             }

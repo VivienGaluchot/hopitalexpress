@@ -11,10 +11,10 @@ public class Kyantest : MonoBehaviour {
         for(int i = 0; i < sprites.Length; i++) {
             GameObject second = new GameObject(sprites[i].name, typeof(SpriteRenderer), typeof(BoxCollider2D));
             second.transform.SetParent(transform);
-            Vector2 pivot = new Vector2(sprites[i].pivot.x / sprites[i].rect.width, sprites[i].pivot.y / sprites[i].rect.height);
             second.transform.position = new Vector3(i, 0f, 0f);
             SpriteRenderer sr = second.GetComponent<SpriteRenderer>();
             sr.sprite = sprites[i];
+            Vector2 pivot = new Vector2(sprites[i].pivot.x / sprites[i].rect.width, sprites[i].pivot.y / sprites[i].rect.height);
             Vector2 offset = pivot - new Vector2(.5f, .5f);
             second.transform.position += (Vector3) offset;
             sr.drawMode = SpriteDrawMode.Sliced;
