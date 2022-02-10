@@ -110,6 +110,7 @@ public class LevelEditorController : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			UnsetFollower();
 			DrawMenuController.instance.Unclick();
+			Infos.gameObject.SetActive(false);
 		}
 
 		if(drawType == DrawType.levelObject) {
@@ -176,6 +177,7 @@ public class LevelEditorController : MonoBehaviour {
 						newGO.AddComponent<BoxCollider2D>();
 						newGO.layer = LayerMask.NameToLayer("LevelObjects");
 						ObjectsList.Add(newGO, followerController);
+						followerController = new LevelObjectController(followerController);
 					}
 				}
 				break;
@@ -189,10 +191,12 @@ public class LevelEditorController : MonoBehaviour {
 							clickedGOffset = hit.transform.position - worldMousePos;
 						} else {
 							if (ObjectsList.TryGetValue(hit.collider.gameObject, out LevelObjectController loc) && loc.isSeat) {
+								Infos.GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
+								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
 								Infos.transform.position = Input.mousePosition;
 								Infos.gameObject.SetActive(true);
 								infosDisplayed = true;
-								Debug.Log("youwou");
+								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
 							}
 						}
 					}
@@ -214,6 +218,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void DrawTypeToSpawn(int newDT) {
 		UnsetFollower();
+		Infos.gameObject.SetActive(false);
 		drawType = (DrawType) newDT;
 	}
 	private void UnsetSpawns() {
@@ -308,8 +313,8 @@ public class LevelEditorController : MonoBehaviour {
 					UpdateWallNeighbours(i, j);
 			}
 		} else {
-			if(cell.value%16 != newValue) {
-				int myWallColor = (cell.value / 16);
+			if(cell.value%16 != newValue%16) {
+				int myWallColor = ((cell.value-1) / 16)*16;
 				cell.value = newValue + myWallColor;
 				cell.sr.sprite = wallSprites[newValue - 1];
 				fullWallsGrid[(i, j)].GetComponent<SpriteRenderer>().sprite = fullWallSprites[newValue + myWallColor - 1];
@@ -570,7 +575,8 @@ public class LevelEditorController : MonoBehaviour {
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
 	public void SetFollower(Sprite followerSprite, string path, bool isSeat) {
-		if(followerSR.sprite != followerSprite) {
+		Infos.gameObject.SetActive(false);
+		if (followerSR.sprite != followerSprite) {
 			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
@@ -589,6 +595,7 @@ public class LevelEditorController : MonoBehaviour {
 			Destroy(lo.Key);
 		}
 		ObjectsList.Clear();
+		Infos.gameObject.SetActive(false);
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- MISC
@@ -601,6 +608,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void SetDrawType(DrawType newDT, int color = 0) {
 		UnsetFollower();
+		Infos.gameObject.SetActive(false);
 		drawType = newDT;
 		// number of wall sprites per color? 16 I think
 		wallColor = color * 16;

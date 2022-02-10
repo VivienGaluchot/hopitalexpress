@@ -26,11 +26,13 @@ public class LevelData {
 
 [Serializable]
 public class LevelObject {
-	public LevelObject(Vector3 pos, string path, bool isSeat) { this.pos = pos; this.path = path; this.isSeat = isSeat; }
+	public LevelObject(Vector3 pos, string path, bool isSeat, bool isWelcomeSeat) 
+		{ this.pos = pos; this.path = path; this.isSeat = isSeat; this.isWelcomeSeat = isWelcomeSeat; }
 
 	public Vector3 pos;
 	public string path;
 	public bool isSeat;
+	public bool isWelcomeSeat;
 }
 
 [Serializable]
@@ -86,7 +88,7 @@ public class LevelDataController : DataController {
 
 		List<LevelObject> LevelObjects = new List<LevelObject>();
 		foreach(KeyValuePair<GameObject, LevelObjectController> lo in lec.ObjectsList) {
-			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value.path, lo.Value.isSeat));
+			LevelObjects.Add(new LevelObject(lo.Key.transform.position, lo.Value.path, lo.Value.isSeat, lo.Value.isWelcomeSeat));
         }
 
 		// Abort if error was found
@@ -136,7 +138,7 @@ public class LevelDataController : DataController {
 				GameObject newGO = Instantiate(loaded, lo.pos, Quaternion.identity, lec.ObjectsParent);
 				newGO.AddComponent<BoxCollider2D>();
 				newGO.layer = LayerMask.NameToLayer("LevelObjects");
-				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat));
+				lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
 			} else {
 				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
 			}

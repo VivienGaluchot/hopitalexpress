@@ -16,13 +16,12 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private float playerSpeed;
 	
 	// new patient can only spawn on welcome seats
-	[SerializeField] private GameObject[] WelcomeSeats;
+	[SerializeField] private List<GameObject> WelcomeSeats;
 	[SerializeField] private GameObject Patient;
 	[SerializeField] private float spawnRate;
 	[SerializeField] private Transform PatientQueueParent;
 	[SerializeField] private int patientQueueSize;
 	[SerializeField] public int targetFrameRate = 120;
-
 
 	private string patientQueueDirection;
 
@@ -95,6 +94,14 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void AddWelcomeSeat(GameObject newWelcomeSeat) {
+		// If no seat controller or if already inn the list, then abort mission
+		if (!newWelcomeSeat.GetComponent<SeatController>() || WelcomeSeats.Contains(newWelcomeSeat))
+			return;
+
+		WelcomeSeats.Add(newWelcomeSeat);
+    }
+
 	private void UpdateClock(float currentTime) {
 		float ratio = Mathf.Max(currentTime / levelTime, 0);
 		float newH = clockEndHue + ratio * (clockStartHue - clockEndHue);
@@ -123,7 +130,7 @@ public class GameController : MonoBehaviour {
 	private void AdvancePatientQueue() {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
-		for (int i = 0; i < WelcomeSeats.Length; i++) {
+		for (int i = 0; i < WelcomeSeats.Count; i++) {
 			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
 				emptySeat = WelcomeSeats[i];
 				break;
@@ -157,7 +164,7 @@ public class GameController : MonoBehaviour {
 	private bool TrySpawnNewPatient() {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
-		for (int i = 0; i < WelcomeSeats.Length; i++) {
+		for (int i = 0; i < WelcomeSeats.Count; i++) {
 			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
 				emptySeat = WelcomeSeats[i];
 				break;
