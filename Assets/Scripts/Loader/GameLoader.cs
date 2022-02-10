@@ -13,6 +13,7 @@ public class GameLoader : MonoBehaviour {
 	[SerializeField] private Transform LevelObjectsParent;
 	[SerializeField] private GameObject[] FloorPrefabs;
 	[SerializeField] private GameObject[] WallPrefabs;
+	[SerializeField] private Sprite[] WallSprites;
 
 	public bool instantLoad, loadLevel, loadSpawns, loadDiseases;
 
@@ -57,8 +58,8 @@ public class GameLoader : MonoBehaviour {
 				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
 			foreach (CellData cell in Data.wallCells) {
-				GameObject newGO = Instantiate(WallPrefabs[cell.value - 1], WallsParent);
-				newGO.GetComponent<SpriteRenderer>().sortingOrder = -1;
+				GameObject newGO = Instantiate(WallPrefabs[(cell.value - 1)%16], WallsParent);
+				newGO.GetComponent<SpriteRenderer>().sprite = WallSprites[cell.value - 1];
 				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
 
