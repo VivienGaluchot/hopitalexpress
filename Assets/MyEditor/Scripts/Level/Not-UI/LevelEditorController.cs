@@ -29,6 +29,7 @@ public class LevelEditorController : MonoBehaviour {
 
 	[SerializeField] private InputField rowsIF;
 	[SerializeField] private InputField columnsIF;
+	public InputField levelTime;
 
 	public const float size = 2f;
 	public int rows { get; private set; }
@@ -579,6 +580,8 @@ public class LevelEditorController : MonoBehaviour {
 
 		this.rows = rows;
 		this.columns = columns;
+		rowsIF.text = rows.ToString();
+		columnsIF.text = columns.ToString();
 		ResetCamera();
 	}
 	private void DeleteCells(int i, int j) {

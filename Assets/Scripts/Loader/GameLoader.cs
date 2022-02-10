@@ -95,7 +95,7 @@ public class GameLoader : MonoBehaviour {
 		}
 		
 		if(loadSpawns)
-			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection, Data.patientQueueSize, 120f, WelcomeSeats);
+			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection, Data.patientQueueSize, Data.levelTime, WelcomeSeats);
 		else
 			GetComponent<GameController>().StartGame();
 	}

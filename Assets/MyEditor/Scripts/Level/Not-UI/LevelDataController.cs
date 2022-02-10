@@ -6,14 +6,15 @@ using System.IO;
 
 [Serializable]
 public class LevelData {
-	public LevelData(float camX, float camY, float camSize, int rows, int columns,
+	public LevelData(float camX, float camY, float camSize, float levelTime, int rows, int columns,
 		List<CellData> floorCells, List<CellData> wallCells, List<string> diseases, List<LevelObject> LevelObjects,
 		Vector3 playerSpawn, Vector3 patientSpawn, string patientSpawnDirection, int patientQueueSize)
-		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.rows = rows; this.columns = columns;
+		{ this.camX = camX; this.camY = camY; this.camSize = camSize;  this.levelTime = levelTime; this.rows = rows; this.columns = columns;
 		this.floorCells = floorCells; this.wallCells = wallCells; this.diseases = diseases; this.LevelObjects = LevelObjects;
 		this.playerSpawn = playerSpawn; this.patientSpawn = patientSpawn; this.patientSpawnDirection = patientSpawnDirection; this.patientQueueSize = patientQueueSize; }
 
 	public float camX, camY, camSize;
+	public float levelTime;
 	public int rows, columns;
 	public List<CellData> floorCells;
 	public List<CellData> wallCells;
@@ -94,7 +95,7 @@ public class LevelDataController : DataController {
 		// Abort if error was found
 		if (error) return null;
 
-		return new LevelData(camParams.x, camParams.y, camParams.size, lec.rows, lec.columns,
+		return new LevelData(camParams.x, camParams.y, camParams.size, Int32.Parse(lec.levelTime.text), lec.rows, lec.columns,
 			floorCells, wallCells, new List<string>(LevelDiseasesController.instance.Elements.Keys), LevelObjects,
 			lec.PlayerSpawn.transform.position, lec.PatientSpawn.transform.position,
 			PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text, Int32.Parse(PatientQueueSize.text));
@@ -120,6 +121,8 @@ public class LevelDataController : DataController {
 			lec.wallGrid[(cell.x, cell.y)].value = cell.value;
 
 		lec.RefreshAllGrid();
+
+		lec.levelTime.text = Data.levelTime.ToString();
 
 		lec.SetPlayerSpawn(Data.playerSpawn);
 		lec.SetPatientSpawn(Data.patientSpawn);
