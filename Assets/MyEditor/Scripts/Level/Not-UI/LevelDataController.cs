@@ -154,7 +154,7 @@ public class LevelDataController : DataController {
 				Sprite sprite = newGO.GetComponent<SpriteRenderer>().sprite;
 				Vector2 pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
 				Vector2 offset = pivot - new Vector2(.5f, .5f);
-				bc2D.offset = -offset;
+				bc2D.offset = -offset * bc2D.size;
 
                 lec.ObjectsList.Add(newGO, new LevelObjectController(lo.path, lo.isSeat, lo.isWelcomeSeat));
             } else {
