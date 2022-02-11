@@ -189,19 +189,11 @@ public class LevelEditorController : MonoBehaviour {
 			case DrawType.none:
 				if (clickedGO) {
 					if (Input.GetKeyDown("delete")) {
-						LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
-						if (locParent) locParent.RemoveChild(clickedGO);
-						Destroy(clickedGO);
-						clickedGO = null;
+						DeleteClickedGO();
 					} else if (Input.GetMouseButtonUp(0)) {
 						isDragging = false;
-						if (GlobalFunctions.DoesHitUI()) {
-							// We dragged an object to the ui, I guess that mean we want to remove it
-							LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
-							if (locParent) locParent.RemoveChild(clickedGO);
-							Destroy(clickedGO);
-							clickedGO = null;
-						}
+						// We dragged an object to the ui, I guess that mean we want to remove it
+						if (GlobalFunctions.DoesHitUI()) { DeleteClickedGO(); }
 					} else if (Input.GetMouseButton(0) && isDragging) {
 						clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
 						if (clickedGO.GetComponent<LevelObjectController>().isChild) {
@@ -678,6 +670,13 @@ public class LevelEditorController : MonoBehaviour {
 			newGO.transform.SetParent(ObjectsParent);
 			ObjectsList.Add(newGO);
 		}
+	}
+	private void DeleteClickedGO() {
+		LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
+		if (locParent) locParent.RemoveChild(clickedGO);
+		if (ObjectsList.Contains(clickedGO)) ObjectsList.Remove(clickedGO);
+		Destroy(clickedGO);
+		clickedGO = null;
 	}
 	public void ClearLevelObjects() {
 		foreach (GameObject go in ObjectsList) {

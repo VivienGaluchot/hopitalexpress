@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Patient: {fileID: 3508764698176005531, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-  spawnRate: 15
+  spawnRate: 10
   PatientQueueParent: {fileID: 1140363381}
   patientQueueSize: 5
   targetFrameRate: 120
@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 525836799943738224, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -4554386960479461837, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -124772053130453694, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
-  instantLoad: 0
+  instantLoad: 1
   loadLevel: 1
   loadSpawns: 1
   loadDiseases: 1

@@ -80,7 +80,8 @@ public class GameLoader : MonoBehaviour {
 				}
 			}
 
-			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
+			Camera.main.transform.position = new Vector3(Data.camX, Data.camY, -10f);
+			Camera.main.orthographicSize = Data.camSize;
 		}
 
 		if(loadDiseases) {
