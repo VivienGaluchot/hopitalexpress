@@ -28,45 +28,51 @@ public class LevelData {
 
 [Serializable]
 public class LevelObject {
-	public LevelObject(Vector3 pos, string path, bool isSeat, bool isWelcomeSeat, int sortingOrder, LevelObject parent = null) 
-		{ this.pos = pos; this.path = path; this.isSeat = isSeat; this.isWelcomeSeat = isWelcomeSeat; this.sortingOrder = sortingOrder; this.parent = parent; }
+	public LevelObject(Vector3 pos, string path, bool isSeat, bool isWelcomeSeat, int sortingOrder, List<LevelObject> childs = null) 
+		{ this.pos = pos; this.path = path; this.isSeat = isSeat; this.isWelcomeSeat = isWelcomeSeat; 
+		this.sortingOrder = sortingOrder; this.childs = childs; }
 
 	public Vector3 pos;
 	public string path;
 	public bool isSeat;
 	public bool isWelcomeSeat;
 	public int sortingOrder;
-	public LevelObject parent;
+	[NonSerialized] public List<LevelObject> childs;
 }
 
 [Serializable]
 public class LevelObjectsContainer : ISerializationCallbackReceiver {
 
 	public List<LevelObject> LevelObjects;
+	public List<LevelObject> ChildLevelObjects;
 	public List<serializationInfo> serializationInfos;
 
 	public void OnBeforeSerialize() {
 		serializationInfos = new List<serializationInfo>();
 		foreach (LevelObject lo in LevelObjects) {
-			if(lo.parent != null) {
-				serializationInfo info = new serializationInfo();
-				info.childIndex = LevelObjects.FindIndex(e => e == lo);
-				info.parentIndex = LevelObjects.FindIndex(e => e == lo.parent);
-				serializationInfos.Add(info);
-			}
+			serializationInfo info = new serializationInfo();
+			info.parentIndex = LevelObjects.FindIndex(e => e == lo);
+			info.childsIndex = new List<int>();
+			foreach (LevelObject child in lo.childs)
+				info.childsIndex.Add(ChildLevelObjects.FindIndex(e => e == child));
+
+			serializationInfos.Add(info);
 		}
 	}
 
 	public void OnAfterDeserialize() {
 		foreach (serializationInfo info in serializationInfos) {
-			LevelObjects[info.childIndex].parent = LevelObjects[info.parentIndex];
+			List<LevelObject> childs = new List<LevelObject>();
+			foreach (int index in info.childsIndex)
+				childs.Add(ChildLevelObjects[index]);
+			LevelObjects[info.parentIndex].childs = childs;
 		}
 	}
 
 	[Serializable]
 	public struct serializationInfo {
-		public int childIndex;
 		public int parentIndex;
+		public List<int> childsIndex;
 	}
 }
 
@@ -123,18 +129,9 @@ public class LevelDataController : DataController {
 
 		LevelObjectsContainer loContainer = new LevelObjectsContainer();
 		loContainer.LevelObjects = new List<LevelObject>();
-		foreach(GameObject go in lec.ObjectsList) {
-			// Remplir la liste de LevelObjects du container
-			LevelObjectController loc = go.GetComponent<LevelObjectController>();
-			LevelObject lo = new LevelObject(go.transform.position, loc.path, loc.isSeat, loc.isWelcomeSeat, go.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder);
-
-			loContainer.LevelObjects.Add(lo);
-			// Object added, then we add children
-			foreach (LevelObjectController child in loc.childs) {
-				loContainer.LevelObjects.Add(new LevelObject(child.transform.position, child.path, child.isSeat, child.isWelcomeSeat,
-					child.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder, lo));
-			}
-		}
+		loContainer.ChildLevelObjects = new List<LevelObject>();
+		foreach (GameObject go in lec.ObjectsList)
+			loContainer.LevelObjects.Add(GameObjectToLevelObject(go, loContainer));
 
 		// Abort if error was found
 		if (error) return null;
@@ -145,6 +142,24 @@ public class LevelDataController : DataController {
 			PatientSpawnDirectionDropdown.options[PatientSpawnDirectionDropdown.value].text, Int32.Parse(PatientQueueSize.text));
 	}
 
+	private LevelObject GameObjectToLevelObject(GameObject go, LevelObjectsContainer container) {
+
+		LevelObjectController loc = go.GetComponent<LevelObjectController>();
+
+		List<LevelObject> childs = new List<LevelObject>();
+		foreach (LevelObjectController child in loc.childs) {
+			LevelObject newLO = new LevelObject(child.transform.position, child.path, child.isSeat, child.isWelcomeSeat,
+			child.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder);
+
+			childs.Add(newLO);
+            container.ChildLevelObjects.Add(newLO);
+		}
+
+		LevelObject lo = new LevelObject(go.transform.position, loc.path, loc.isSeat, loc.isWelcomeSeat, 
+			go.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder, childs);
+
+		return lo;
+    }
 
 
 	public override void LoadData() {
@@ -183,53 +198,36 @@ public class LevelDataController : DataController {
 
 		// Load level objects
 		lec.ClearLevelObjects();
-        List<(LevelObject, GameObject)> orphans = new List<(LevelObject, GameObject)> ();
-		Dictionary<LevelObject, GameObject> maybeParentsList = new Dictionary<LevelObject, GameObject>();
+
         foreach (LevelObject lo in Data.loContainer.LevelObjects) {
 			GameObject loaded = Resources.Load<GameObject>(lo.path);
 			if (loaded) {
                 GameObject newGO = CreateLevelObject(loaded, lo);
+				newGO.transform.SetParent(lec.ObjectsParent);
+				lec.ObjectsList.Add(newGO);
 
-				if (lo.parent != null) {
-					if(maybeParentsList.TryGetValue(lo.parent, out GameObject parent)) {
-						newGO.transform.SetParent(parent.transform);
-						parent.GetComponent<LevelObjectController>().childs.Add(newGO.GetComponent<LevelObjectController>());
-                    } else {
-						orphans.Add((lo, newGO));
-                    }
-				} else {
-					maybeParentsList.Add(lo, newGO);
-					newGO.transform.SetParent(lec.ObjectsParent);
-					lec.ObjectsList.Add(newGO);
+				if (lo.childs != null && lo.childs.Count > 0) {
+					// Add the SortingGroup to each parent
+					newGO.AddComponent<SortingGroup>();
+					newGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
+
+					foreach(LevelObject child in lo.childs) {
+						GameObject childLoaded = Resources.Load<GameObject>(child.path);
+						if(childLoaded) {
+							GameObject newChild = CreateLevelObject(childLoaded, child);
+							newChild.transform.SetParent(newGO.transform);
+							newGO.GetComponent<LevelObjectController>().childs.Add(newChild.GetComponent<LevelObjectController>());
+							newChild.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newChild.transform.position.y * -100);
+
+						} else {
+							Debug.Log("ERREUR CHARGEMENT DE CHILD " + child.path);
+						}
+					}
 				}
 			} else {
 				Debug.Log("ERREUR CHARGEMENT DE " + lo.path);
 			}
 		}
-
-		// We check if we have orphans :(
-		Debug.Log("Orphans : " + orphans.Count);
-		foreach((LevelObject lo, GameObject go) orphan in orphans) {
-			if (maybeParentsList.TryGetValue(orphan.lo.parent, out GameObject parent)) {
-				orphan.go.transform.SetParent(parent.transform);
-				parent.GetComponent<LevelObjectController>().childs.Add(orphan.go.GetComponent<LevelObjectController>());
-			} else {
-				Debug.LogWarning(orphan.go.name + " - AUCUN PARENT TROUVE APRES CHARGEMENT :'( #sad");
-            }
-		}
-
-		// Ordering the parenting
-		foreach(GameObject go in lec.ObjectsList) {
-			// Add the SortingGroup to each parent
-			if(go.GetComponent<LevelObjectController>().childs.Count > 0) {
-				go.AddComponent<SortingGroup>();
-				go.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
-				// Set the sortingorder of each child
-				foreach(LevelObjectController loc in go.GetComponent<LevelObjectController>().childs) {
-					loc.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(loc.transform.position.y * -100);
-				}
-			}
-        }
 	}
 	private GameObject CreateLevelObject(GameObject loaded, LevelObject lo) {
 

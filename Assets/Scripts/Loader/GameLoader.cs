@@ -65,8 +65,10 @@ public class GameLoader : MonoBehaviour {
 
 			foreach (LevelObject lo in Data.loContainer.LevelObjects) {
 				GameObject newGO = Instantiate(Resources.Load<GameObject>(lo.path), lo.pos, Quaternion.identity, LevelObjectsParent);
-				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat)
-					WelcomeSeats.Add(newGO);
+				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat) WelcomeSeats.Add(newGO);
+
+				// Load childs
+
 			}
 
 			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
