@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using System.IO;
 
@@ -68,7 +69,15 @@ public class GameLoader : MonoBehaviour {
 				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat) WelcomeSeats.Add(newGO);
 
 				// Load childs
-
+				if(lo.childs != null && lo.childs.Count > 0) {
+					newGO.AddComponent<SortingGroup>();
+					newGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
+					foreach (LevelObject child in lo.childs) {
+						GameObject newChild = Instantiate(Resources.Load<GameObject>(child.path), child.pos, Quaternion.identity, newGO.transform);
+						if (newChild.GetComponent<SeatController>() && child.isWelcomeSeat) WelcomeSeats.Add(newChild);
+						newChild.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newChild.transform.position.y * -100);
+					}
+				}
 			}
 
 			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);

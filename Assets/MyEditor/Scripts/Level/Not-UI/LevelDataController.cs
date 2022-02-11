@@ -218,7 +218,6 @@ public class LevelDataController : DataController {
 							newChild.transform.SetParent(newGO.transform);
 							newGO.GetComponent<LevelObjectController>().childs.Add(newChild.GetComponent<LevelObjectController>());
 							newChild.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newChild.transform.position.y * -100);
-
 						} else {
 							Debug.Log("ERREUR CHARGEMENT DE CHILD " + child.path);
 						}
