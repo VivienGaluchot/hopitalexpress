@@ -71,14 +71,13 @@ public class LevelEditorController : MonoBehaviour {
 		public objectsParams(string path, bool isSeat) { this.path = path; this.isSeat = isSeat; }
 		public string path;
 		public bool isSeat;
-		//public bool
 	}
 
 	public List<GameObject> ObjectsList { get; private set; }
 	private GameObject clickedGO;
 	private Vector3 clickedGOffset = Vector3.zero;
+	private bool isDragging;
 
-	//private bool infosDisplayed;
 	[SerializeField] private InfosDisplayer Infos;
 
 	private void Awake() { 
@@ -130,21 +129,10 @@ public class LevelEditorController : MonoBehaviour {
 			Infos.gameObject.SetActive(false);
 		}
 
-		if(drawType == DrawType.levelObject) {
-			Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + followerOffset;
-		}
+		if (clickedGO && drawType != DrawType.none) clickedGO = null;
 
-		if(clickedGO) {
-			if (Input.GetMouseButtonUp(0)) {
-				clickedGO = null;
-			} else if (Input.GetMouseButton(0) && drawType == DrawType.none) {
-				clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
-				if(clickedGO.GetComponent<LevelObjectController>().isChild) {
-					clickedGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(clickedGO.transform.localPosition.y * -100);
-				}
-			}
-		}
-		
+		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+
 		switch (drawType) {
 			case DrawType.floor:
 			case DrawType.eraseFloor:
@@ -183,16 +171,15 @@ public class LevelEditorController : MonoBehaviour {
 			case DrawType.playerSpawn:
 			case DrawType.patientSpawn:
 				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 					if (drawType == DrawType.playerSpawn) SetPlayerSpawn(worldMousePos);
 					else if (drawType == DrawType.patientSpawn) SetPatientSpawn(worldMousePos);
 				}
 				break;
 			case DrawType.levelObject:
+				Follower.transform.position = worldMousePos + followerOffset;
 				bool ctrled = Input.GetKey("left ctrl");
 				followerSR.sortingOrder = ctrled ? 10 : 0;
 				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 					RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (hits.Length == 0 || ctrled) {
 						CreateLevelObject(worldMousePos, ctrled, hits);
@@ -200,13 +187,36 @@ public class LevelEditorController : MonoBehaviour {
 				}
 				break;
 			case DrawType.none:
+				if (clickedGO) {
+					if (Input.GetKeyDown("delete")) {
+						LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
+						if (locParent) locParent.RemoveChild(clickedGO);
+						Destroy(clickedGO);
+						clickedGO = null;
+					} else if (Input.GetMouseButtonUp(0)) {
+						isDragging = false;
+						if (GlobalFunctions.DoesHitUI()) {
+							// We dragged an object to the ui, I guess that mean we want to remove it
+							LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
+							if (locParent) locParent.RemoveChild(clickedGO);
+							Destroy(clickedGO);
+							clickedGO = null;
+						}
+					} else if (Input.GetMouseButton(0) && isDragging) {
+						clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
+						if (clickedGO.GetComponent<LevelObjectController>().isChild) {
+							clickedGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(clickedGO.transform.localPosition.y * -100);
+						}
+					}
+				}
+
 				if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (hit.collider) {
 						if(Input.GetMouseButtonDown(0)) {
 							clickedGO = hit.collider.gameObject;
 							clickedGOffset = hit.transform.position - worldMousePos;
+							isDragging = true;
 						} else {
 							LevelObjectController loc = hit.collider.gameObject.GetComponent<LevelObjectController>();
 							if (ObjectsList.Contains(hit.collider.gameObject)  && loc && loc.isSeat) {
@@ -214,11 +224,13 @@ public class LevelEditorController : MonoBehaviour {
 								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
 								Infos.transform.position = Input.mousePosition;
 								Infos.gameObject.SetActive(true);
-								//infosDisplayed = true;
 								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
 							}
 						}
-					}
+					} else {
+						//Clicked on nothing
+						clickedGO = null;
+                    }
 				}
 				break;
 		}

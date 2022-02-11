@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,4 +15,9 @@ public class LevelObjectController : MonoBehaviour {
 	public bool isWelcomeSeat;
 	public bool isChild;
 	public List<LevelObjectController> childs { get; private set; } = new List<LevelObjectController>();
+
+    public void RemoveChild(GameObject clickedGO) {
+		if (childs.Contains(clickedGO.GetComponent<LevelObjectController>()))
+			childs.Remove(clickedGO.GetComponent<LevelObjectController>());
+    }
 }
