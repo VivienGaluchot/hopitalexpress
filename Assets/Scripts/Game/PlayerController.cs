@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private Transform PlaceHolder;
 	private float speed;
 	private Rigidbody2D rb2D;
-	private CapsuleCollider2D detectionCollider;
+	private CircleCollider2D detectionCollider;
 	private float range;
 	private WalkController walk;
 
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
     private void Awake() {
 		action = Actions.nothing;
 		heldType = HeldTypes.none;
-		detectionCollider = GetComponent<CapsuleCollider2D>();
+		detectionCollider = GetComponent<CircleCollider2D>();
 		walk = GetComponent<WalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
 		range = Vector3.Distance(transform.position, detectionCollider.offset * 2);

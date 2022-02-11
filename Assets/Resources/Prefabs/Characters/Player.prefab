@@ -378,8 +378,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3508764698176005528}
   - component: {fileID: 2166465081157493619}
-  - component: {fileID: 3906777537559676649}
   - component: {fileID: 3508764698176005535}
+  - component: {fileID: 3906777537559676649}
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
   - component: {fileID: 7863798119591726448}
@@ -423,8 +423,8 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!58 &3906777537559676649
-CircleCollider2D:
+--- !u!70 &3508764698176005535
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -437,10 +437,10 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.25
---- !u!70 &3508764698176005535
-CapsuleCollider2D:
+  m_Size: {x: 0.5, y: 0.3}
+  m_Direction: 1
+--- !u!58 &3906777537559676649
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -453,8 +453,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.25}
-  m_Size: {x: 0.6, y: 0.6}
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!50 &3508764698176005534
 Rigidbody2D:
   serializedVersion: 4
