@@ -72,7 +72,7 @@ public class LevelEditorController : MonoBehaviour {
 		public string path;
 		public bool isSeat;
 		//public bool
-    }
+	}
 
 	public List<GameObject> ObjectsList { get; private set; }
 	private GameObject clickedGO;
@@ -139,8 +139,9 @@ public class LevelEditorController : MonoBehaviour {
 				clickedGO = null;
 			} else if (Input.GetMouseButton(0) && drawType == DrawType.none) {
 				clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
-
-				clickedGO.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(clickedGO.transform.position.y*-100);
+				if(clickedGO.GetComponent<LevelObjectController>().isChild) {
+					clickedGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(clickedGO.transform.localPosition.y * -100);
+				}
 			}
 		}
 		
@@ -636,9 +637,9 @@ public class LevelEditorController : MonoBehaviour {
 		// Adjust boxcollider2D size to sprite size and position
 		BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
 		bc2D.size = followerSR.size;
-        Vector2 pivot = new Vector2(followerSR.sprite.pivot.x / followerSR.sprite.rect.width, followerSR.sprite.pivot.y / followerSR.sprite.rect.height);
-        Vector2 offset = new Vector2(.5f, .5f) - pivot;
-        bc2D.offset = (Vector2)FollowerChild.transform.localPosition + offset*followerSR.size;
+		Vector2 pivot = new Vector2(followerSR.sprite.pivot.x / followerSR.sprite.rect.width, followerSR.sprite.pivot.y / followerSR.sprite.rect.height);
+		Vector2 offset = new Vector2(.5f, .5f) - pivot;
+		bc2D.offset = (Vector2)FollowerChild.transform.localPosition + offset*followerSR.size;
 
 		// If setChild is false or if there is no hit.collider, we use ObjectsParent. Otherwise we use the hit.collider
 		// We also want that the hit.collider is not already child from someone else, no imbrication please
@@ -654,7 +655,8 @@ public class LevelEditorController : MonoBehaviour {
 
 					// We add a child in the list of its parent, but not in the global ObjectsList
 					hit.collider.gameObject.GetComponent<LevelObjectController>().childs.Add(newGO.GetComponent<LevelObjectController>());
-					childForSprite.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(mousePos.y * -100);
+					childForSprite.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newGO.transform.localPosition.y * -100);
+					newGO.GetComponent<LevelObjectController>().isChild = true;
 					parentFound = true;
 					break;
 				}

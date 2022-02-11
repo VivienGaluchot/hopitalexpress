@@ -12,5 +12,6 @@ public class LevelObjectController : MonoBehaviour {
 	public string path { get; private set; }
 	public bool isSeat { get; private set; }
 	public bool isWelcomeSeat;
+	public bool isChild;
 	public List<LevelObjectController> childs { get; private set; } = new List<LevelObjectController>();
 }
