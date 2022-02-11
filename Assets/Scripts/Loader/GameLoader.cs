@@ -63,7 +63,7 @@ public class GameLoader : MonoBehaviour {
 				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
 
-			foreach (LevelObject lo in Data.LevelObjects) {
+			foreach (LevelObject lo in Data.loContainer.LevelObjects) {
 				GameObject newGO = Instantiate(Resources.Load<GameObject>(lo.path), lo.pos, Quaternion.identity, LevelObjectsParent);
 				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat)
 					WelcomeSeats.Add(newGO);
