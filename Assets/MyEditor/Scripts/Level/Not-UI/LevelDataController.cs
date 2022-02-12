@@ -28,14 +28,15 @@ public class LevelData {
 
 [Serializable]
 public class LevelObject {
-	public LevelObject(Vector3 pos, string path, bool isSeat, bool isWelcomeSeat, int sortingOrder, List<LevelObject> childs = null) 
-		{ this.pos = pos; this.path = path; this.isSeat = isSeat; this.isWelcomeSeat = isWelcomeSeat; 
-		this.sortingOrder = sortingOrder; this.childs = childs; }
+	public LevelObject(Vector3 pos, string path, string prefabTag, bool isWelcomeSeat, float containerTime, int sortingOrder, List<LevelObject> childs = null) 
+		{ this.pos = pos; this.path = path; this.prefabTag = prefabTag; this.isWelcomeSeat = isWelcomeSeat; 
+		this.containerTime = containerTime; this.sortingOrder = sortingOrder; this.childs = childs; }
 
 	public Vector3 pos;
 	public string path;
-	public bool isSeat;
+	public string prefabTag;
 	public bool isWelcomeSeat;
+	public float containerTime;
 	public int sortingOrder;
 	[NonSerialized] public List<LevelObject> childs;
 }
@@ -148,15 +149,15 @@ public class LevelDataController : DataController {
 
 		List<LevelObject> childs = new List<LevelObject>();
 		foreach (LevelObjectController child in loc.childs) {
-			LevelObject newLO = new LevelObject(child.transform.position, child.path, child.isSeat, child.isWelcomeSeat,
-			child.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder);
+			LevelObject newLO = new LevelObject(child.transform.position, child.path, child.prefabTag, child.isWelcomeSeat,
+			child.containerTime, child.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder);
 
 			childs.Add(newLO);
             container.ChildLevelObjects.Add(newLO);
 		}
 
-		LevelObject lo = new LevelObject(go.transform.position, loc.path, loc.isSeat, loc.isWelcomeSeat, 
-			go.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder, childs);
+		LevelObject lo = new LevelObject(go.transform.position, loc.path, loc.prefabTag, loc.isWelcomeSeat, 
+			loc.containerTime, go.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder, childs);
 
 		return lo;
     }
@@ -236,7 +237,7 @@ public class LevelDataController : DataController {
 		GameObject newGO = new GameObject(loaded.name, typeof(BoxCollider2D), typeof(LevelObjectController));
 		newGO.layer = LayerMask.NameToLayer("LevelObjects");
 		newGO.transform.position = lo.pos;
-		newGO.GetComponent<LevelObjectController>().SetParams(lo.path, lo.isSeat, lo.isWelcomeSeat);
+		newGO.GetComponent<LevelObjectController>().SetParams(lo.path, lo.prefabTag, lo.isWelcomeSeat, lo.containerTime);
 
 		// Create child to get spriterenderer (because we may want to offset it)
 		GameObject childForSprite = new GameObject("Sprite", typeof(SpriteRenderer));

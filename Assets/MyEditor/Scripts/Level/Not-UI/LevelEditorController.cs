@@ -68,9 +68,8 @@ public class LevelEditorController : MonoBehaviour {
 
 	public class objectsParams {
 		public objectsParams() { }
-		public objectsParams(string path, bool isSeat) { this.path = path; this.isSeat = isSeat; }
-		public string path;
-		public bool isSeat;
+		public objectsParams(string path, string prefabTag) { this.path = path; this.prefabTag = prefabTag; }
+		public string path, prefabTag;
 	}
 
 	public List<GameObject> ObjectsList { get; private set; }
@@ -78,7 +77,13 @@ public class LevelEditorController : MonoBehaviour {
 	private Vector3 clickedGOffset = Vector3.zero;
 	private bool isDragging;
 
-	[SerializeField] private InfosDisplayer Infos;
+	[SerializeField] private GameObject[] Infos;
+	private InfoType currentInfo;
+
+	public enum InfoType {
+		seat,
+		container
+    }
 
 	private void Awake() { 
 		instance = this;
@@ -118,7 +123,7 @@ public class LevelEditorController : MonoBehaviour {
 		followerParams = new objectsParams();
 
 		ObjectsList = new List<GameObject>();
-		Infos.gameObject.SetActive(false);
+		foreach (GameObject Info in Infos) Info.SetActive(false);
 	}
 	private void Start() { InitGrids(); }
 
@@ -126,7 +131,7 @@ public class LevelEditorController : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			UnsetFollower();
 			DrawMenuController.instance.Unclick();
-			Infos.gameObject.SetActive(false);
+			StopDisplayInfos();
 		}
 
 		if (clickedGO && drawType != DrawType.none) clickedGO = null;
@@ -203,6 +208,8 @@ public class LevelEditorController : MonoBehaviour {
 				}
 
 				if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !GlobalFunctions.DoesHitUI()) {
+					clickedGO = null;
+					StopDisplayInfos();
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (hit.collider) {
 						if(Input.GetMouseButtonDown(0)) {
@@ -211,25 +218,31 @@ public class LevelEditorController : MonoBehaviour {
 							isDragging = true;
 						} else {
 							LevelObjectController loc = hit.collider.gameObject.GetComponent<LevelObjectController>();
-							if (ObjectsList.Contains(hit.collider.gameObject)  && loc && loc.isSeat) {
-								Infos.GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
-								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
-								Infos.transform.position = Input.mousePosition;
-								Infos.gameObject.SetActive(true);
-								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
+							if (loc) {
+								if (loc.prefabTag == "Seat") {
+									currentInfo = InfoType.seat;
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
+									Infos[(int)currentInfo].transform.position = Input.mousePosition;
+									Infos[(int)currentInfo].SetActive(true);
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
+								} else if(loc.prefabTag == "Container") {
+									currentInfo = InfoType.container;
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().onValueChanged.RemoveAllListeners();
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().text = loc.containerTime.ToString();
+									Infos[(int)currentInfo].transform.position = Input.mousePosition;
+									Infos[(int)currentInfo].SetActive(true);
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().onValueChanged.AddListener((value) => { loc.containerTime = (value != "" ? Single.Parse(value) : 0f); });
+								}
 							}
 						}
-					} else {
-						//Clicked on nothing
-						clickedGO = null;
-                    }
+					}
 				}
 				break;
 		}
 	}
-
-	// -------------- SPAWNS
-	public void SetPlayerSpawn(Vector3 pos) {
+    // -------------- SPAWNS
+    public void SetPlayerSpawn(Vector3 pos) {
 		if (!PlayerSpawn.activeSelf)
 			PlayerSpawn.SetActive(true); 
 		PlayerSpawn.transform.position = pos; 
@@ -241,7 +254,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void DrawTypeToSpawn(int newDT) {
 		UnsetFollower();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 		drawType = (DrawType) newDT;
 	}
 	private void UnsetSpawns() {
@@ -606,13 +619,13 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
-	public void SetFollower(Sprite followerSprite, string path, bool isSeat, Vector3 childPos) {
-		Infos.gameObject.SetActive(false);
+	public void SetFollower(Sprite followerSprite, string path, string prefabTag, Vector3 childPos) {
+		StopDisplayInfos();
 		if (followerSR.sprite != followerSprite) {
 			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
-			followerParams = new objectsParams(path, isSeat);
+			followerParams = new objectsParams(path, prefabTag);
 			FollowerChild.transform.localPosition = childPos;
 			followerOffset = -childPos;
 		} else {
@@ -630,7 +643,7 @@ public class LevelEditorController : MonoBehaviour {
 		GameObject newGO = new GameObject(followerSR.sprite.name, typeof(BoxCollider2D), typeof(LevelObjectController));
 		newGO.layer = LayerMask.NameToLayer("LevelObjects");
 		newGO.transform.position = mousePos - FollowerChild.transform.localPosition;
-		newGO.GetComponent<LevelObjectController>().SetParams(followerParams.path, followerParams.isSeat);
+		newGO.GetComponent<LevelObjectController>().SetParams(followerParams.path, followerParams.prefabTag);
 
 		// Create child to get spriterenderer (because we may want to offset it)
 		GameObject childForSprite = Instantiate(FollowerChild, newGO.transform);
@@ -683,7 +696,7 @@ public class LevelEditorController : MonoBehaviour {
 			Destroy(go);
 		}
 		ObjectsList.Clear();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 	}
 	// -------------- END LEVEL OBJECTS
 	// -------------- MISC
@@ -696,10 +709,13 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void SetDrawType(DrawType newDT, int color = 0) {
 		UnsetFollower();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 		drawType = newDT;
 		// number of wall sprites per color? 16 I think
 		wallColor = color * 16;
+	}
+	private void StopDisplayInfos() {
+		Infos[(int)currentInfo].SetActive(false);
 	}
 	private void ResetCamera() {
 		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);

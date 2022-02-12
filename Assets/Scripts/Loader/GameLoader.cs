@@ -26,7 +26,7 @@ public class GameLoader : MonoBehaviour {
 		FetchFilesNames();
 
 		if(instantLoad)
-			LoadLevel(true);
+			LoadLevel();
 	}
 
 	private void FetchFilesNames() {
@@ -40,14 +40,10 @@ public class GameLoader : MonoBehaviour {
 		FileNamesDropdown.AddOptions(pathsList);
 	}
 
-	public void LoadLevel(bool random = false) {
+	public void LoadLevel() {
 		FileNamesDropdown.transform.parent.parent.gameObject.SetActive(false);
 
 		string filename = FileNamesDropdown.options[FileNamesDropdown.value].text + ".json";
-		if (random) {
-			filename = FileNamesDropdown.options[Random.Range(0, FileNamesDropdown.options.Count)].text + ".json";
-			Debug.Log("load : " + filename);
-		}
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
 
 		List<GameObject> WelcomeSeats = new List<GameObject>();
@@ -67,14 +63,16 @@ public class GameLoader : MonoBehaviour {
 			foreach (LevelObject lo in Data.loContainer.LevelObjects) {
 				GameObject newGO = Instantiate(Resources.Load<GameObject>(lo.path), lo.pos, Quaternion.identity, LevelObjectsParent);
 				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat) WelcomeSeats.Add(newGO);
+				if (newGO.GetComponent<ContainerController>()) newGO.GetComponent<ContainerController>().askedTime = lo.containerTime;
 
 				// Load childs
-				if(lo.childs != null && lo.childs.Count > 0) {
+				if (lo.childs != null && lo.childs.Count > 0) {
 					newGO.AddComponent<SortingGroup>();
 					newGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
 					foreach (LevelObject child in lo.childs) {
 						GameObject newChild = Instantiate(Resources.Load<GameObject>(child.path), child.pos, Quaternion.identity, newGO.transform);
 						if (newChild.GetComponent<SeatController>() && child.isWelcomeSeat) WelcomeSeats.Add(newChild);
+						if (newChild.GetComponent<ContainerController>()) newChild.GetComponent<ContainerController>().askedTime = child.containerTime;
 						newChild.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newChild.transform.position.y * -100);
 					}
 				}

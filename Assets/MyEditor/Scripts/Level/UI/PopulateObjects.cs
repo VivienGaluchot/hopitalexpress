@@ -33,7 +33,7 @@ public class PopulateObjects : MonoBehaviour {
 				go.transform.GetChild(0).GetComponent<Image>().sprite = sr.sprite;
 
 				string path = Path.Combine(s, p.name);
-				go.GetComponent<ObjectController>().SetInformations(sr.sprite, path, s.Split('/').Last() == "Seats", childPos);
+				go.GetComponent<ObjectController>().SetInformations(sr.sprite, path, p.tag, childPos);
 			}
 		}        
 	}
