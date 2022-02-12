@@ -4,7 +4,7 @@ using UnityEngine;
 public class TreatmentEditorController : MonoBehaviour {
 	public static TreatmentEditorController instance;
 
-	public string treatmentPath;
+	public string[] treatmentPaths;
 
 	public List<TreatmentItemController> TreatmentItems { get; private set; }
 	public List<TreatmentItemController> overTICs { get; set; }
@@ -20,7 +20,7 @@ public class TreatmentEditorController : MonoBehaviour {
 
 	public GameObject clickedObject { get; set; }
 
-	private GameObject Follower, FollowerPrefab; 
+	private GameObject Follower; 
 	private SpriteRenderer followerSR;
 	private bool hasFollower;
 
@@ -28,9 +28,14 @@ public class TreatmentEditorController : MonoBehaviour {
 
 	private void Awake() { 
 		instance = this;
-		Follower = new GameObject("Follower", typeof(SpriteRenderer));
+
+		Follower = new GameObject("Follower");
 		Follower.transform.SetParent(transform);
-		followerSR = Follower.GetComponent<SpriteRenderer>();
+		GameObject FollowerSprite = new GameObject("Sprite", typeof(SpriteRenderer));
+		followerSR = FollowerSprite.GetComponent<SpriteRenderer>();
+		followerSR.drawMode = SpriteDrawMode.Sliced;
+		FollowerSprite.transform.SetParent(Follower.transform);
+
 		overTICs = new List<TreatmentItemController>();
 		TreatmentItems = new List<TreatmentItemController>();
 	}
@@ -47,27 +52,35 @@ public class TreatmentEditorController : MonoBehaviour {
 			StopDrawLine();
 		}
 
-		bool GMBD0 = Input.GetMouseButtonDown(0);
-
-		if (hasFollower || GMBD0 || isDrawingLine) {
+		if (hasFollower || Input.GetMouseButtonDown(0) || isDrawingLine) {
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 
 			if (hasFollower)
 				Follower.transform.position = worldPos + new Vector3(0f, 0f, 10f);
 
-			if (GMBD0) {
+			if (Input.GetMouseButtonDown(0)) {
 				if(overTICs.Count == 0) {
 					if (isDrawingLine) {
 						StopDrawLine();
 					} else if (!GlobalFunctions.DoesHitUI() && hasFollower) {
 						GameObject newGo = Instantiate(TreatmentItemPrefab, worldPos, Quaternion.identity, transform);
-						Transform Parent = newGo.GetComponent<TreatmentItemController>().PlaceHolder;
-						GameObject icon = Instantiate(FollowerPrefab);
-						icon.transform.position = Parent.position;
-						icon.transform.SetParent(Parent);
 						newGo.GetComponent<TreatmentItemController>().path = followerPath;
 						TreatmentItems.Add(newGo.GetComponent<TreatmentItemController>());
-					}
+
+						Transform SpriteContainer = newGo.transform.Find("Sprite");
+
+						SpriteRenderer sr = SpriteContainer.GetComponent<SpriteRenderer>();
+						sr.sprite = followerSR.sprite;
+                        sr.drawMode = SpriteDrawMode.Sliced;
+                        if (sr.size.x > sr.size.y) sr.size = new Vector2(.6f, .6f * sr.size.y / sr.size.x);
+                        else sr.size = new Vector2(.6f * sr.size.x / sr.size.y, .6f);
+
+                        // Adapt position depending on pivot
+                        Vector2 pivot = new Vector2(sr.sprite.pivot.x / sr.sprite.rect.width, sr.sprite.pivot.y / sr.sprite.rect.height);
+                        Vector2 offset = pivot - new Vector2(.5f, .5f);
+						SpriteContainer.transform.localPosition += (Vector3)offset;
+
+                    }
 				}
 			} else if (isDrawingLine) {
 				myLineLR.SetPosition(1, worldPos);
@@ -85,12 +98,20 @@ public class TreatmentEditorController : MonoBehaviour {
 
 	// The follower is a gameobject which follow to mouse, used to display what we'll create if we click
 	public void NewFollower(GameObject follower, string path) {
-		Sprite newSprite = follower.GetComponent<SpriteRenderer>().sprite;
+		Sprite newSprite = follower.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
 		if (followerSR.sprite != newSprite) {
 			followerSR.sprite = newSprite;
 			hasFollower = true;
-			FollowerPrefab = follower;
 			followerPath = path;
+
+            Vector2 pivot = new Vector2(followerSR.sprite.pivot.x / followerSR.sprite.rect.width, followerSR.sprite.pivot.y / followerSR.sprite.rect.height);
+            Vector2 offset = pivot - new Vector2(.5f, .5f);
+            followerSR.transform.localPosition = (Vector3)offset;
+
+            // Resize sprite to what we want
+            if (followerSR.sprite.rect.width > followerSR.sprite.rect.height) followerSR.size = new Vector2(1f, followerSR.sprite.rect.height / followerSR.sprite.rect.width);
+			else followerSR.size = new Vector2(followerSR.sprite.rect.width / followerSR.sprite.rect.height, 1f);
+
 		} else {
 			UnsetFollower();
 		}
