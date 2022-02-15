@@ -13,6 +13,8 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public GameObject actionText;
 
+    public GameObject backText;
+
 
     public enum State {
         Off,
@@ -75,11 +77,11 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
         // blink
         blinkPeriod += Time.deltaTime;
-        if (blinkPeriod < 1) {
+        if (blinkPeriod < 1.5) {
             if (state != State.Ready) {
                 textToBlick.SetActive(true);
             }
-        } else if (blinkPeriod < 1.5) {
+        } else if (blinkPeriod < 2) {
             if (state != State.Ready) {
                 textToBlick.SetActive(false);
             }
@@ -107,6 +109,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         }
         textToBlick.SetActive(newState != State.Ready);
         actionText.SetActive(newState != State.Ready);
+        backText.SetActive(newState != State.Off);
         if (StateActionText.ContainsKey(newState)) {
             actionText.GetComponent<Text>().text = StateActionText[newState];
         }

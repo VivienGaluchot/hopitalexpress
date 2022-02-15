@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 96.167725, y: -47.789978}
+  m_AnchoredPosition: {x: 96.167725, y: -47.79004}
   m_SizeDelta: {x: 160, y: 58.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5656229
@@ -1041,6 +1041,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1790569980}
     m_Modifications:
+    - target: {fileID: 171855877453837564, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 171855877453837564, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2798
+      objectReference: {fileID: 0}
+    - target: {fileID: 1148000236759611672, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5814004715358958499, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
+    - target: {fileID: 1319350277983288037, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7207775556339184744, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
+    - target: {fileID: 2661923995402210637, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 97639857983031210, guid: b6c093ec731710f40a68d37371425784, type: 3}
+    - target: {fileID: 3049489015446425442, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8048877941678204944, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+    - target: {fileID: 4090822356332515683, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5684569543478847829, guid: 3d322fbe23119164d882d9d98e06c480, type: 3}
     - target: {fileID: 7915860443746082234, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
       propertyPath: m_Name
       value: PlayerSkinSelector
