@@ -79,11 +79,12 @@ public class Disease {
 		patient = parent;
 		isOver = false;
 
-		myInfos = GameController.instance.DiseasesAvailable[Random.Range(0, GameController.instance.DiseasesAvailable.Length)];
-
-		lifetime = myInfos._lifespan;
-		sickFace = Resources.Load<Sprite>("Sprites/Faces/" + myInfos._name + "Face");
-		currentStep = myInfos._firstStep;
+		if(GameController.instance.DiseasesAvailable != null) {
+			myInfos = GameController.instance.DiseasesAvailable[Random.Range(0, GameController.instance.DiseasesAvailable.Length)];
+			lifetime = myInfos._lifespan;
+			sickFace = Resources.Load<Sprite>("Sprites/Faces/" + myInfos._name + "Face");
+			currentStep = myInfos._firstStep;
+		}
 	}
 
 	public int GetFaceSkinIndex() {

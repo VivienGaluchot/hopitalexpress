@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294fc9c7467b48845b571ad391b03ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitForLoad: 0
+  waitForLoad: 1
   displayFirstNeed: 0
   levelTime: 180
   levelTimeImage: {fileID: 1180426685}
@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Patient: {fileID: 3508764698176005531, guid: 71dbca2b6c358b44c84812be69c687f5, type: 3}
-  spawnRate: 15
+  spawnRate: 10
   PatientQueueParent: {fileID: 1140363381}
   patientQueueSize: 5
   targetFrameRate: 120
@@ -314,7 +314,7 @@ MonoBehaviour:
   path: MyEditor/Data/Level
   FloorParent: {fileID: 37469948}
   WallsParent: {fileID: 1392861407}
-  LevelObjectsParent: {fileID: 0}
+  LevelObjectsParent: {fileID: 1311170925}
   FloorPrefabs:
   - {fileID: 92178083916861090, guid: ac80555003b645847a7f565ad127f229, type: 3}
   - {fileID: 92178083916861090, guid: ac80555003b645847a7f565ad127f229, type: 3}
@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 525836799943738224, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -4554386960479461837, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -124772053130453694, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
-  instantLoad: 0
+  instantLoad: 1
   loadLevel: 1
   loadSpawns: 1
   loadDiseases: 1
@@ -605,6 +605,7 @@ Transform:
   - {fileID: 1900080957}
   - {fileID: 37469948}
   - {fileID: 1392861407}
+  - {fileID: 1311170925}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -613,6 +614,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 496981438253708573, guid: ba4f1f29ed4180d4d9d57f38c1fb49b0, type: 3}
   m_PrefabInstance: {fileID: 6587437052040421911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1311170924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1311170925}
+  m_Layer: 0
+  m_Name: Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1311170925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311170924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242970548}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1390854299
 GameObject:
   m_ObjectHideFlags: 0

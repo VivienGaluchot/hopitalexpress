@@ -7,9 +7,11 @@ public class LevelCameraController : MonoBehaviour {
 
 	[SerializeField] private InputField camX;
 	[SerializeField] private InputField camY;
-	[SerializeField] private InputField camSize;
+    [SerializeField] private InputField camSize;
+    [SerializeField] private Image fixButton;
 
-	private Camera cam;
+
+    private Camera cam;
     private bool isFixed;
 
     private void Awake() {
@@ -28,6 +30,9 @@ public class LevelCameraController : MonoBehaviour {
     public void SetCamParams(float X, float Y, float size) {
         cam.transform.position = new Vector3(X, Y, -10f);
         cam.orthographicSize = size;
+
+        isFixed = true;
+        fixButton.color = Color.green;
     }
 
     public (float, float, float) GetCamParams() {
@@ -35,8 +40,8 @@ public class LevelCameraController : MonoBehaviour {
         return (x, y, size);
     }
 
-    public void FixCamParams(Image button) {
+    public void FixCamParams() {
         isFixed = !isFixed;
-        button.color = isFixed ? Color.green : Color.white;
+        fixButton.color = isFixed ? Color.green : Color.white;
     }
 }

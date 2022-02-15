@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2562048416023497580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.73099995, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4813458817209039267}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 056c0daed611cb64a9a410ca1f745fc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02570197f2307ca429566fd005a59070, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4149853021904160328}
   - component: {fileID: -1790730193496685055}
   m_Layer: 0
-  m_Name: SeringeGreenDispenser
+  m_Name: SeringeBlueDispenser
   m_TagString: Container
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   askedItem: {fileID: 1373370309606671891, guid: 20a35026ff2ebd841b52cf39cac2dbb6, type: 3}
-  givenItem: {fileID: 3424318588629070083, guid: f764c8f61541f7145a9d66fda0aafe02, type: 3}
+  givenItem: {fileID: 3424318588629070083, guid: c6e022a04eb012643a1d9b70a5f24256, type: 3}
   askedTime: 0
   TimeBar: {fileID: 2753402186686549131}
 --- !u!1001 &2003722859264482058
@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.3599999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -286,6 +286,10 @@ PrefabInstance:
     - target: {fileID: 5262861520512357961, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882407810255483111, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f772fbf46caf5448742c00e2edd398, type: 3}

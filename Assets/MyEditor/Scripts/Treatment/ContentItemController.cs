@@ -9,8 +9,20 @@ public class ContentItemController : MonoBehaviour {
     public void SetInformations(GameObject prefab, string path) {
         this.path = path;
         this.prefab = prefab;
-        if(prefab.GetComponent<SpriteRenderer>())
-            GetComponent<Image>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+
+        Transform SpriteTransform = prefab.transform.Find("Sprite");
+        if(!SpriteTransform) {
+            Debug.LogWarning("NO 'SPRITE' CHILD FOUND FROM " + path);
+            return;
+        }
+
+        SpriteRenderer sr = SpriteTransform.GetComponent<SpriteRenderer>();
+        if (!sr) {
+            Debug.LogWarning("UNABLE TO LOAD SPRITE FROM " + path);
+            return;
+        }
+
+        GetComponent<Image>().sprite = sr.sprite;
     }
 
     public void SendInformations() {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 using System;
 
 public enum DrawType {
@@ -29,6 +30,7 @@ public class LevelEditorController : MonoBehaviour {
 
 	[SerializeField] private InputField rowsIF;
 	[SerializeField] private InputField columnsIF;
+	public InputField levelTime;
 
 	public const float size = 2f;
 	public int rows { get; private set; }
@@ -62,13 +64,26 @@ public class LevelEditorController : MonoBehaviour {
 	private GameObject Follower, FollowerChild;
 	private Vector3 followerOffset;
 	private SpriteRenderer followerSR;
-	private LevelObjectController followerController;
-	public Dictionary<GameObject, LevelObjectController> ObjectsList { get; private set; }
+	private objectsParams followerParams;
+
+	public class objectsParams {
+		public objectsParams() { }
+		public objectsParams(string path, string prefabTag) { this.path = path; this.prefabTag = prefabTag; }
+		public string path, prefabTag;
+	}
+
+	public List<GameObject> ObjectsList { get; private set; }
 	private GameObject clickedGO;
 	private Vector3 clickedGOffset = Vector3.zero;
+	private bool isDragging;
 
-	//private bool infosDisplayed;
-	[SerializeField] private InfosDisplayer Infos;
+	[SerializeField] private GameObject[] Infos;
+	private InfoType currentInfo;
+
+	public enum InfoType {
+		seat,
+		container
+    }
 
 	private void Awake() { 
 		instance = this;
@@ -105,9 +120,10 @@ public class LevelEditorController : MonoBehaviour {
 		FollowerChild.transform.SetParent(Follower.transform);
 		followerSR = FollowerChild.GetComponent<SpriteRenderer>();
 		followerOffset = Vector3.zero;
+		followerParams = new objectsParams();
 
-		ObjectsList = new Dictionary<GameObject, LevelObjectController>();
-		Infos.gameObject.SetActive(false);
+		ObjectsList = new List<GameObject>();
+		foreach (GameObject Info in Infos) Info.SetActive(false);
 	}
 	private void Start() { InitGrids(); }
 
@@ -115,21 +131,13 @@ public class LevelEditorController : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			UnsetFollower();
 			DrawMenuController.instance.Unclick();
-			Infos.gameObject.SetActive(false);
+			StopDisplayInfos();
 		}
 
-		if(drawType == DrawType.levelObject) {
-			Follower.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + followerOffset;
-		}
+		if (clickedGO && drawType != DrawType.none) clickedGO = null;
 
-		if(clickedGO) {
-			if (Input.GetMouseButtonUp(0)) {
-				clickedGO = null;
-			} else if (Input.GetMouseButton(0) && drawType == DrawType.none) {
-				clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
-			}
-		}
-		
+		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+
 		switch (drawType) {
 			case DrawType.floor:
 			case DrawType.eraseFloor:
@@ -168,50 +176,64 @@ public class LevelEditorController : MonoBehaviour {
 			case DrawType.playerSpawn:
 			case DrawType.patientSpawn:
 				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
 					if (drawType == DrawType.playerSpawn) SetPlayerSpawn(worldMousePos);
 					else if (drawType == DrawType.patientSpawn) SetPatientSpawn(worldMousePos);
 				}
 				break;
 			case DrawType.levelObject:
+				Follower.transform.position = worldMousePos + followerOffset;
+				bool ctrled = Input.GetKey("left ctrl");
+				followerSR.sortingOrder = ctrled ? 10 : 0;
 				if (Input.GetMouseButtonDown(0) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
-					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
-					if (!hit.collider && drawType == DrawType.levelObject) {
-						GameObject newGO = new GameObject(followerSR.sprite.name, typeof(BoxCollider2D));
-						newGO.transform.SetParent(ObjectsParent);
-						newGO.layer = LayerMask.NameToLayer("LevelObjects");
-						newGO.transform.position = worldMousePos - FollowerChild.transform.localPosition;
-						GameObject childForSprite = Instantiate(FollowerChild, newGO.transform);
-						childForSprite.GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
-						childForSprite.transform.localPosition = FollowerChild.transform.localPosition;
-
-						// Adjust boxcollider2D size to sprite size and position
-						BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
-						bc2D.size = followerSR.size;
-						bc2D.offset = (Vector2)FollowerChild.transform.localPosition;
-
-						ObjectsList.Add(newGO, followerController);
-						followerController = new LevelObjectController(followerController);
+					RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
+					if (hits.Length == 0 || ctrled) {
+						CreateLevelObject(worldMousePos, ctrled, hits);
 					}
 				}
 				break;
 			case DrawType.none:
+				if (clickedGO) {
+					if (Input.GetKeyDown("delete")) {
+						DeleteClickedGO();
+					} else if (Input.GetMouseButtonUp(0)) {
+						isDragging = false;
+						// We dragged an object to the ui, I guess that mean we want to remove it
+						if (GlobalFunctions.DoesHitUI()) { DeleteClickedGO(); }
+					} else if (Input.GetMouseButton(0) && isDragging) {
+						clickedGO.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f) + clickedGOffset;
+						if (clickedGO.GetComponent<LevelObjectController>().isChild) {
+							clickedGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(clickedGO.transform.localPosition.y * -100);
+						}
+					}
+				}
+
 				if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !GlobalFunctions.DoesHitUI()) {
-					Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 10f);
+					clickedGO = null;
+					StopDisplayInfos();
 					RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Mathf.Infinity, LayerMask.GetMask("LevelObjects")); ;
 					if (hit.collider) {
 						if(Input.GetMouseButtonDown(0)) {
 							clickedGO = hit.collider.gameObject;
 							clickedGOffset = hit.transform.position - worldMousePos;
+							isDragging = true;
 						} else {
-							if (ObjectsList.TryGetValue(hit.collider.gameObject, out LevelObjectController loc) && loc.isSeat) {
-								Infos.GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
-								Infos.GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
-								Infos.transform.position = Input.mousePosition;
-								Infos.gameObject.SetActive(true);
-								//infosDisplayed = true;
-								Infos.GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
+							LevelObjectController loc = hit.collider.gameObject.GetComponent<LevelObjectController>();
+							if (loc) {
+								if (loc.prefabTag == "Seat") {
+									currentInfo = InfoType.seat;
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().isOn = loc.isWelcomeSeat;
+									Infos[(int)currentInfo].transform.position = Input.mousePosition;
+									Infos[(int)currentInfo].SetActive(true);
+									Infos[(int)currentInfo].GetComponentInChildren<Toggle>().onValueChanged.AddListener((value) => { loc.isWelcomeSeat = value; });
+								} else if(loc.prefabTag == "Container") {
+									currentInfo = InfoType.container;
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().onValueChanged.RemoveAllListeners();
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().text = loc.containerTime.ToString();
+									Infos[(int)currentInfo].transform.position = Input.mousePosition;
+									Infos[(int)currentInfo].SetActive(true);
+									Infos[(int)currentInfo].GetComponentInChildren<InputField>().onValueChanged.AddListener((value) => { loc.containerTime = (value != "" ? Single.Parse(value) : 0f); });
+								}
 							}
 						}
 					}
@@ -219,9 +241,8 @@ public class LevelEditorController : MonoBehaviour {
 				break;
 		}
 	}
-
-	// -------------- SPAWNS
-	public void SetPlayerSpawn(Vector3 pos) {
+    // -------------- SPAWNS
+    public void SetPlayerSpawn(Vector3 pos) {
 		if (!PlayerSpawn.activeSelf)
 			PlayerSpawn.SetActive(true); 
 		PlayerSpawn.transform.position = pos; 
@@ -233,7 +254,7 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void DrawTypeToSpawn(int newDT) {
 		UnsetFollower();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 		drawType = (DrawType) newDT;
 	}
 	private void UnsetSpawns() {
@@ -484,10 +505,9 @@ public class LevelEditorController : MonoBehaviour {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				floorGrid.Add((i, j), InitCell(i, j, FloorCellsParent, -2));
-				wallGrid.Add((i, j), InitCell(i, j, WallCellsParent, -1));
+				wallGrid.Add((i, j), InitCell(i, j, WallCellsParent));
 
 				GameObject newCell = new GameObject(i + "-" + j, typeof(SpriteRenderer));
-				newCell.GetComponent<SpriteRenderer>().sortingOrder = -1;
 				newCell.transform.SetParent(WallsParents[1]);
 				newCell.transform.position = new Vector3(j / size, -i / size, 0);
 				fullWallsGrid.Add((i, j), newCell);
@@ -496,7 +516,7 @@ public class LevelEditorController : MonoBehaviour {
 
 		ResetCamera();
 	}
-	private Cell InitCell(int i, int j, Transform parent, int order) {
+	private Cell InitCell(int i, int j, Transform parent, int order = 0) {
 		GameObject newGO = new GameObject(i + "-" + j, typeof(SpriteRenderer), typeof(BoxCollider2D));
 		newGO.layer = LayerMask.NameToLayer("Cell");
 		newGO.transform.SetParent(parent);
@@ -579,6 +599,8 @@ public class LevelEditorController : MonoBehaviour {
 
 		this.rows = rows;
 		this.columns = columns;
+		rowsIF.text = rows.ToString();
+		columnsIF.text = columns.ToString();
 		ResetCamera();
 	}
 	private void DeleteCells(int i, int j) {
@@ -597,13 +619,13 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	// -------------- END GRID MANAGEMENT
 	// -------------- LEVEL OBJECTS
-	public void SetFollower(Sprite followerSprite, string path, bool isSeat, Vector3 childPos) {
-		Infos.gameObject.SetActive(false);
+	public void SetFollower(Sprite followerSprite, string path, string prefabTag, Vector3 childPos) {
+		StopDisplayInfos();
 		if (followerSR.sprite != followerSprite) {
 			DrawMenuController.instance.Unclick();
 			drawType = DrawType.levelObject;
 			followerSR.sprite = followerSprite;
-			followerController = new LevelObjectController(path, isSeat, false);
+			followerParams = new objectsParams(path, prefabTag);
 			FollowerChild.transform.localPosition = childPos;
 			followerOffset = -childPos;
 		} else {
@@ -615,14 +637,68 @@ public class LevelEditorController : MonoBehaviour {
 		drawType = DrawType.none;
 		followerSR.sprite = null;
 	}
+	// if we want the level object to be the child of another, we say yes to setchild and we give the hits from raycasting to look for parent
+	public void CreateLevelObject(Vector3 mousePos, bool setChild, RaycastHit2D[] hits) {
+		// Create main object
+		GameObject newGO = new GameObject(followerSR.sprite.name, typeof(BoxCollider2D), typeof(LevelObjectController));
+		newGO.layer = LayerMask.NameToLayer("LevelObjects");
+		newGO.transform.position = mousePos - FollowerChild.transform.localPosition;
+		newGO.GetComponent<LevelObjectController>().SetParams(followerParams.path, followerParams.prefabTag);
+
+		// Create child to get spriterenderer (because we may want to offset it)
+		GameObject childForSprite = Instantiate(FollowerChild, newGO.transform);
+		childForSprite.name = "Sprite";
+		childForSprite.GetComponent<SpriteRenderer>().sprite = followerSR.sprite;
+		childForSprite.transform.localPosition = FollowerChild.transform.localPosition;
+
+		// Adjust boxcollider2D size to sprite size and position
+		BoxCollider2D bc2D = newGO.GetComponent<BoxCollider2D>();
+		bc2D.size = followerSR.size;
+		Vector2 pivot = new Vector2(followerSR.sprite.pivot.x / followerSR.sprite.rect.width, followerSR.sprite.pivot.y / followerSR.sprite.rect.height);
+		Vector2 offset = new Vector2(.5f, .5f) - pivot;
+		bc2D.offset = (Vector2)FollowerChild.transform.localPosition + offset*followerSR.size;
+
+		// If setChild is false or if there is no hit.collider, we use ObjectsParent. Otherwise we use the hit.collider
+		// We also want that the hit.collider is not already child from someone else, no imbrication please
+		bool parentFound = false;
+		if (setChild) {
+			foreach (RaycastHit2D hit in hits) {
+				if (ObjectsList.Contains(hit.collider.gameObject)) {
+					newGO.transform.SetParent(hit.collider.transform);
+					if (!hit.collider.gameObject.GetComponent<SortingGroup>()) {
+						hit.collider.gameObject.AddComponent<SortingGroup>();
+						hit.collider.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
+					}
+
+					// We add a child in the list of its parent, but not in the global ObjectsList
+					hit.collider.gameObject.GetComponent<LevelObjectController>().childs.Add(newGO.GetComponent<LevelObjectController>());
+					childForSprite.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newGO.transform.localPosition.y * -100);
+					newGO.GetComponent<LevelObjectController>().isChild = true;
+					parentFound = true;
+					break;
+				}
+			}
+		}
+		if (!parentFound) { 
+			newGO.transform.SetParent(ObjectsParent);
+			ObjectsList.Add(newGO);
+		}
+	}
+	private void DeleteClickedGO() {
+		LevelObjectController locParent = clickedGO.transform.parent.GetComponent<LevelObjectController>();
+		if (locParent) locParent.RemoveChild(clickedGO);
+		if (ObjectsList.Contains(clickedGO)) ObjectsList.Remove(clickedGO);
+		Destroy(clickedGO);
+		clickedGO = null;
+	}
 	public void ClearLevelObjects() {
-		foreach (KeyValuePair<GameObject, LevelObjectController> lo in ObjectsList) {
-			Destroy(lo.Key);
+		foreach (GameObject go in ObjectsList) {
+			Destroy(go);
 		}
 		ObjectsList.Clear();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 	}
-	// -------------- END GRID MANAGEMENT
+	// -------------- END LEVEL OBJECTS
 	// -------------- MISC
 	public void ClearAllLevel() {
 		UnsetSpawns();
@@ -633,10 +709,13 @@ public class LevelEditorController : MonoBehaviour {
 	}
 	public void SetDrawType(DrawType newDT, int color = 0) {
 		UnsetFollower();
-		Infos.gameObject.SetActive(false);
+		StopDisplayInfos();
 		drawType = newDT;
 		// number of wall sprites per color? 16 I think
 		wallColor = color * 16;
+	}
+	private void StopDisplayInfos() {
+		Infos[(int)currentInfo].SetActive(false);
 	}
 	private void ResetCamera() {
 		Camera.main.transform.position = new Vector3((columns - 1) / 2f / size, (1 - rows) / 2f / size, -10f);

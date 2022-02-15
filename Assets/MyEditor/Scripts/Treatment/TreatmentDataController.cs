@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Globalization;
@@ -65,9 +64,13 @@ public class StepContainer : ISerializationCallbackReceiver {
 
 public class TreatmentDataController : DataController {
 
+	private TreatmentEditorController tec;
+
+	void Start() { tec = TreatmentEditorController.instance; }
+
 	public override void SaveData() {
 		TreatmentItemController starter = null;
-		foreach (TreatmentItemController item in TreatmentEditorController.instance.TreatmentItems) {
+		foreach (TreatmentItemController item in tec.TreatmentItems) {
 			if (item.endingLines.Count == 0) {
 				starter = item;
 				break;
@@ -129,7 +132,7 @@ public class TreatmentDataController : DataController {
 			return;
 		}
 
-		TreatmentEditorController.instance.ClearScreen();
+		tec.ClearScreen();
 		string filename = FilesDropdown.options[FilesDropdown.value].text + ".json";
 		StepContainer Data = JsonUtility.FromJson<StepContainer>(ReadFromFile(filename));
 		FileNameInputField.text = Path.GetFileNameWithoutExtension(filename);
@@ -152,16 +155,30 @@ public class TreatmentDataController : DataController {
 		if (nodes.Count < layer + 1)
 			nodes.Add(new List<GameObject>());
 
-		GameObject newItem = Instantiate(TreatmentEditorController.instance.TreatmentItemPrefab, TreatmentEditorController.instance.transform);
-		TreatmentItemController tic = newItem.GetComponent<TreatmentItemController>();
+		GameObject newGo = Instantiate(tec.TreatmentItemPrefab, transform);
+		TreatmentItemController tic = newGo.GetComponent<TreatmentItemController>();
 		tic.path = data.path;
-		newItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<GameObject>(data.path).GetComponent<SpriteRenderer>().sprite;
-		TreatmentEditorController.instance.TreatmentItems.Add(tic);
+		tec.TreatmentItems.Add(tic);
 		tic.valueField.text = data.time.ToString();
+
+		Transform SpriteContainer = newGo.transform.Find("Sprite");
+		SpriteRenderer sr = SpriteContainer.GetComponent<SpriteRenderer>();
+
+		GameObject loaded = Resources.Load<GameObject>(data.path);
+
+		sr.sprite = loaded.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
+		sr.drawMode = SpriteDrawMode.Sliced;
+		if (sr.size.x > sr.size.y) sr.size = new Vector2(.6f, .6f * sr.size.y / sr.size.x);
+		else sr.size = new Vector2(.6f * sr.size.x / sr.size.y, .6f);
+
+		// Adapt position depending on pivot
+		Vector2 pivot = new Vector2(sr.sprite.pivot.x / sr.sprite.rect.width, sr.sprite.pivot.y / sr.sprite.rect.height);
+		Vector2 offset = pivot - new Vector2(.5f, .5f);
+		SpriteContainer.transform.localPosition += (Vector3)offset;
 
 		foreach(NextStepData nextStep in data.NextsList) {
 			GameObject nextItem = CreateGameObjectsFromStepData(nextStep.nextStep, layer + 1);
-			GameObject myLine = Instantiate(TreatmentEditorController.instance.LinePrefab, TreatmentEditorController.instance.transform);
+			GameObject myLine = Instantiate(tec.LinePrefab, tec.transform);
 			LineController lc = myLine.GetComponent<LineController>();
 			lc.Init();
 			lines.Add(lc);
@@ -170,9 +187,9 @@ public class TreatmentDataController : DataController {
 			tic.TryAddNext(lc, nextItem.GetComponent<TreatmentItemController>());
 		}
 
-		nodes[layer].Add(newItem);
+		nodes[layer].Add(newGo);
 
-		return newItem;
+		return newGo;
 	}
 
 	private void OrganizeTree(StepData first) {

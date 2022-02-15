@@ -9,11 +9,14 @@ public class PopulateGrid : MonoBehaviour {
     private void Start() { Populate(); }
 
     private void Populate() {
-        GameObject[] Prefabs = Resources.LoadAll<GameObject>(TreatmentEditorController.instance.treatmentPath);
-        foreach (GameObject p in Prefabs) {
-            GameObject go = Instantiate(Prefab, transform).transform.GetChild(0).gameObject;
-            string path = Path.Combine(TreatmentEditorController.instance.treatmentPath, p.name);
-            go.GetComponent<ContentItemController>().SetInformations(p, path);
+        foreach(string s in TreatmentEditorController.instance.treatmentPaths) {
+            GameObject[] Prefabs = Resources.LoadAll<GameObject>(s);
+            foreach (GameObject p in Prefabs) {
+                GameObject go = Instantiate(Prefab, transform).transform.Find("Sprite").gameObject;
+                string path = Path.Combine(s, p.name);
+                go.GetComponent<ContentItemController>().SetInformations(p, path);
+            }
         }
+        
     }
 }

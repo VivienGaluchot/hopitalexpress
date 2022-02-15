@@ -109,8 +109,10 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public void LeavingMachine() {
-		needDisplayed = true;
-		needBubble.SetActive(!doingAnim);
+		if(state == States.sick) {
+			needDisplayed = true;
+			needBubble.SetActive(!doingAnim);
+		}
 	}
 
 	// We used the machine during time, tell the disease about it!
@@ -136,6 +138,7 @@ public class PatientController : MonoBehaviour {
 		TimeBarImage.transform.parent.gameObject.SetActive(false);
 		face.GetComponent<SkinManager>().skinSelected = 4;
 		needBubble.SetActive(false);
+		needDisplayed = false;
 		state = States.cured;
 		if (initialClothesSkinIndex.isSet) {
 			clothes.GetComponent<SkinManager>().skinSelected = initialClothesSkinIndex.value;

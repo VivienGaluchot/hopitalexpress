@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using System.IO;
 
@@ -25,7 +26,7 @@ public class GameLoader : MonoBehaviour {
 		FetchFilesNames();
 
 		if(instantLoad)
-			LoadLevel(true);
+			LoadLevel();
 	}
 
 	private void FetchFilesNames() {
@@ -39,14 +40,10 @@ public class GameLoader : MonoBehaviour {
 		FileNamesDropdown.AddOptions(pathsList);
 	}
 
-	public void LoadLevel(bool random = false) {
+	public void LoadLevel() {
 		FileNamesDropdown.transform.parent.parent.gameObject.SetActive(false);
 
 		string filename = FileNamesDropdown.options[FileNamesDropdown.value].text + ".json";
-		if (random) {
-			filename = FileNamesDropdown.options[Random.Range(0, FileNamesDropdown.options.Count)].text + ".json";
-			Debug.Log("load : " + filename);
-		}
 		LevelData Data = JsonUtility.FromJson<LevelData>(ReadFromFile(Path.Combine(path, filename)));
 
 		List<GameObject> WelcomeSeats = new List<GameObject>();
@@ -63,13 +60,26 @@ public class GameLoader : MonoBehaviour {
 				newGO.transform.position = new Vector3(cell.y / LevelEditorController.size, -cell.x / LevelEditorController.size, 0f);
 			}
 
-			foreach (LevelObject lo in Data.LevelObjects) {
+			foreach (LevelObject lo in Data.loContainer.LevelObjects) {
 				GameObject newGO = Instantiate(Resources.Load<GameObject>(lo.path), lo.pos, Quaternion.identity, LevelObjectsParent);
-				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat)
-					WelcomeSeats.Add(newGO);
+				if (newGO.GetComponent<SeatController>() && lo.isWelcomeSeat) WelcomeSeats.Add(newGO);
+				if (newGO.GetComponent<ContainerController>()) newGO.GetComponent<ContainerController>().askedTime = lo.containerTime;
+
+				// Load childs
+				if (lo.childs != null && lo.childs.Count > 0) {
+					newGO.AddComponent<SortingGroup>();
+					newGO.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = -10000;
+					foreach (LevelObject child in lo.childs) {
+						GameObject newChild = Instantiate(Resources.Load<GameObject>(child.path), child.pos, Quaternion.identity, newGO.transform);
+						if (newChild.GetComponent<SeatController>() && child.isWelcomeSeat) WelcomeSeats.Add(newChild);
+						if (newChild.GetComponent<ContainerController>()) newChild.GetComponent<ContainerController>().askedTime = child.containerTime;
+						newChild.transform.Find("Sprite").GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(newChild.transform.position.y * -100);
+					}
+				}
 			}
 
-			Camera.main.transform.position = new Vector3((Data.columns - 1) / 2f / LevelEditorController.size, (1 - Data.rows) / 2f / LevelEditorController.size, -10f);
+			Camera.main.transform.position = new Vector3(Data.camX, Data.camY, -10f);
+			Camera.main.orthographicSize = Data.camSize;
 		}
 
 		if(loadDiseases) {
@@ -95,7 +105,7 @@ public class GameLoader : MonoBehaviour {
 		}
 		
 		if(loadSpawns)
-			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection, Data.patientQueueSize, 120f, WelcomeSeats);
+			GetComponent<GameController>().StartGame(Data.playerSpawn, Data.patientSpawn, Data.patientSpawnDirection, Data.patientQueueSize, Data.levelTime, WelcomeSeats);
 		else
 			GetComponent<GameController>().StartGame();
 	}
