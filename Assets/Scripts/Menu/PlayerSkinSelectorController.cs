@@ -9,6 +9,8 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public GameObject textToBlick;
 
+    public GameObject playerObject;
+
     public enum State {
         Off,
         NotReady,
@@ -31,19 +33,20 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     void Start() {
         textToBlick.SetActive(false);
+        SetState(State.Off);
     }
 
     void Update() {
         blinkPeriod += Time.deltaTime;
-        if (state == State.Off) {
-            if (blinkPeriod > 2) {
+        if (state != State.Ready) {
+            if (blinkPeriod > 1.5) {
                 textToBlick.SetActive(false);
                 blinkPeriod = 0;
             } else if (blinkPeriod > .5) {
                 textToBlick.SetActive(true);
             }
         } else {
-            textToBlick.SetActive(false);
+            textToBlick.SetActive(true);
         }
     }
 
@@ -56,16 +59,18 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public void SetReady(bool isReady) {
         if (isReady) {
-            foreach (GameObject button in buttons) {
-                button.SetActive(false);
-            }
-            state = State.Ready;
+            SetState(State.Ready);
         } else {
-            foreach (GameObject button in buttons) {
-                button.SetActive(true);
-            }
-            state = State.NotReady;
+            SetState(State.NotReady);
         }
+    }
+
+    private void SetState(State newState) {
+        playerObject.SetActive(newState != State.Off);
+        foreach (GameObject button in buttons) {
+            button.SetActive(newState == State.NotReady);
+        }
+        state = newState;
     }
 
 }
