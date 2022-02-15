@@ -489,6 +489,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1790569980}
     m_Modifications:
+    - target: {fileID: 1863303843098791864, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Text
+      value: Player 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7915860443746082234, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
       propertyPath: m_Name
       value: PlayerSkinSelector (2)
@@ -790,6 +794,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1790569980}
     m_Modifications:
+    - target: {fileID: 1863303843098791864, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Text
+      value: Player 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7915860443746082234, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
       propertyPath: m_Name
       value: PlayerSkinSelector (1)
@@ -857,6 +865,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1790569980}
     m_Modifications:
+    - target: {fileID: 1863303843098791864, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
+      propertyPath: m_Text
+      value: Player 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7915860443746082234, guid: e5ae846b451b07444beec2ef7607af11, type: 3}
       propertyPath: m_Name
       value: PlayerSkinSelector (3)
@@ -931,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790569979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 492471585}

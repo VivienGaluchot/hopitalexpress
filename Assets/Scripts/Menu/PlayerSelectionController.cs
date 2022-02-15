@@ -19,13 +19,13 @@ public class PlayerSelectionController : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Keyboard])) {
             NewPlayer(PlayerSkinSelectorController.PlayerInput.Keyboard);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7)) {
+        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Joystick1])) {
             NewPlayer(PlayerSkinSelectorController.PlayerInput.Joystick1);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick2Button7)) {
+        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Joystick2])) {
             NewPlayer(PlayerSkinSelectorController.PlayerInput.Joystick2);
         }
     }
@@ -44,11 +44,23 @@ public class PlayerSelectionController : MonoBehaviour {
     }
 
 
+    public void DisablePlayer(PlayerSkinSelectorController.PlayerInput playerInput) {
+        if (enabledPlayers.ContainsKey(playerInput)) {
+            enabledPlayers[playerInput].Disable();
+            enabledPlayers.Remove(playerInput);
+        }
+    }
+
     private void NewPlayer(PlayerSkinSelectorController.PlayerInput playerInput) {
         if (!enabledPlayers.ContainsKey(playerInput) && (enabledPlayers.Count < persoList.Count)) {
-            PlayerSkinSelectorController ctr = persoList[enabledPlayers.Count].GetComponent<PlayerSkinSelectorController>();
-            enabledPlayers.Add(playerInput, ctr);
-            ctr.Enable(playerInput);
+            foreach (GameObject perso in persoList) {
+                PlayerSkinSelectorController ctr = perso.GetComponent<PlayerSkinSelectorController>();
+                if (!enabledPlayers.ContainsValue(ctr)) {
+                    enabledPlayers.Add(playerInput, ctr);
+                    ctr.Enable(playerInput, this);
+                    break;
+                }
+            }
         }
     }
 }

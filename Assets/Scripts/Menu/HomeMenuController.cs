@@ -30,10 +30,20 @@ public class HomeMenuController : MonoBehaviour {
     }
 
     private void onNewGame() {
+        continueButton.GetComponent<Button>().interactable = false;
+        newGameButton.GetComponent<Button>().interactable = false;
+        editorButton.GetComponent<Button>().interactable = false;
+        optionButton.GetComponent<Button>().interactable = false;
+        quitButton.GetComponent<Button>().interactable = false;
         StartCoroutine(LoadAsync("PlayerSelectionScene"));
     }
 
     private void onEditor() {
+        continueButton.GetComponent<Button>().interactable = false;
+        newGameButton.GetComponent<Button>().interactable = false;
+        editorButton.GetComponent<Button>().interactable = false;
+        optionButton.GetComponent<Button>().interactable = false;
+        quitButton.GetComponent<Button>().interactable = false;
         StartCoroutine(LoadAsync("EditorScene"));
     }
 
@@ -46,11 +56,6 @@ public class HomeMenuController : MonoBehaviour {
     }
 
     private IEnumerator LoadAsync(string sceneName) {
-        continueButton.SetActive(false);
-        newGameButton.SetActive(false);
-        editorButton.SetActive(false);
-        optionButton.SetActive(false);
-        quitButton.SetActive(false);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         while (!asyncLoad.isDone) {
             yield return null;
