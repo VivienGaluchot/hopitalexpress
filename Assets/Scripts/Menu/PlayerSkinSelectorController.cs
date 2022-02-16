@@ -5,15 +5,36 @@ using UnityEngine.UI;
 
 public class PlayerSkinSelectorController : MonoBehaviour {
 
-    public List<GameObject> buttons;
+    public enum ActionWhen {
+        Hide,
+        Blink,
+        Show
+    };
 
-    public GameObject textToBlick;
+    [System.Serializable]
+    public struct ShowWhen {
+        public GameObject target;
+        public ActionWhen onOff;
+        public ActionWhen onNotReady;
+        public ActionWhen onReady;
+    };
+
+    public List<ShowWhen> showWhens;
 
     public GameObject playerObject;
 
-    public GameObject actionText;
+    public GameObject headPrev;
+    public GameObject headNext;
+    public GameObject skinPrev;
+    public GameObject skinNext;
+    public GameObject clothesPrev;
+    public GameObject clothesNext;
 
-    public GameObject backText;
+    private List<(Button prev, Button next)> rows;
+
+    private int rowSelect = 0;
+
+    private float lastSelect = 0;
 
 
     public enum State {
@@ -22,30 +43,8 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         Ready,
     };
 
-    static readonly Dictionary<State, string> StateActionText = new Dictionary<State, string>() {
-        {State.Off, "to join"},
-        {State.NotReady, "when ready"}
-    };
-
     public State state { get; private set; } = State.Off;
 
-    public enum PlayerInput {
-        Keyboard,
-        Joystick1,
-        Joystick2,
-    };
-
-    public static readonly Dictionary<PlayerInput, KeyCode> PlayerInputAction0 = new Dictionary<PlayerInput, KeyCode>() {
-        {PlayerInput.Keyboard, KeyCode.Return},
-        {PlayerInput.Joystick1, KeyCode.Joystick1Button0},
-        {PlayerInput.Joystick2, KeyCode.Joystick2Button0}
-    };
-
-    public static readonly Dictionary<PlayerInput, KeyCode> PlayerInputAction1 = new Dictionary<PlayerInput, KeyCode>() {
-        {PlayerInput.Keyboard, KeyCode.Backspace},
-        {PlayerInput.Joystick1, KeyCode.Joystick1Button1},
-        {PlayerInput.Joystick2, KeyCode.Joystick2Button1}
-    };
 
     private PlayerInput playerInput;
 
@@ -56,64 +55,122 @@ public class PlayerSkinSelectorController : MonoBehaviour {
     
 
     void Start() {
-        textToBlick.SetActive(false);
-        SetState(State.Off);
+        state = State.Off;
+        rows = new List<(Button prev, Button next)>() {
+            {(prev:headPrev.GetComponent<Button>(), next:headNext.GetComponent<Button>())},
+            {(prev:skinPrev.GetComponent<Button>(), next:skinNext.GetComponent<Button>())},
+            {(prev:clothesPrev.GetComponent<Button>(), next:clothesNext.GetComponent<Button>())}
+        };
     }
 
     void Update() {
         // change state on action
-        if (Input.GetKeyDown(PlayerInputAction0[playerInput])) {
+        lastSelect += Time.deltaTime;
+        if (playerInput != null) {
+            if (playerInput.GetAction0()) {
+                if (state == State.NotReady) {
+                    state = State.Ready;
+                }
+            }
+            if (playerInput.GetAction1()) {
+                if (state == State.NotReady) {
+                    selectionController.DisablePlayer(playerInput);
+                } else if (state == State.Ready) {
+                    state = State.NotReady;
+                }
+            }
+
             if (state == State.NotReady) {
-                SetState(State.Ready);
+                const float maxSelectFreq = .2f;
+                if (playerInput.GetY() > .5 && lastSelect > maxSelectFreq) {
+                    rowSelect -= 1;
+                    lastSelect = 0;
+                }
+                if (playerInput.GetY() < -.5 && lastSelect > maxSelectFreq) {
+                    rowSelect += 1;
+                    lastSelect = 0;
+                }
+                if (rowSelect < 0) {
+                    rowSelect = rows.Count - 1;
+                }
+                if (rowSelect >= rows.Count) {
+                    rowSelect = 0;
+                }
+                if (playerInput.GetX() > .5 && lastSelect > maxSelectFreq) {
+                    rows[rowSelect].next.GetComponent<Button>().onClick.Invoke();
+                    lastSelect = 0;
+                }
+                if (playerInput.GetX() < -.5 && lastSelect > maxSelectFreq) {
+                    rows[rowSelect].prev.GetComponent<Button>().onClick.Invoke();
+                    lastSelect = 0;
+                }
             }
         }
-        if (Input.GetKeyDown(PlayerInputAction1[playerInput])) {
-            if (state == State.NotReady) {
-                selectionController.DisablePlayer(playerInput);
-            } else if (state == State.Ready) {
-                SetState(State.NotReady);
+
+        // buttons selection for joystick
+        // TODO find out why this is not really working
+        if (playerInput != PlayerInput.Keyboard) {
+            for (int i = 0; i < rows.Count; i++) {
+                ColorBlock prevC = rows[i].prev.colors;
+                ColorBlock nextC = rows[i].next.colors;
+                if (i == rowSelect) {
+                    prevC.normalColor = Color.gray;
+                    nextC.normalColor = Color.gray;
+                } else {
+                    prevC.normalColor = Color.white;
+                    nextC.normalColor = Color.white;
+                }
+                rows[i].prev.colors = prevC;
+                rows[i].next.colors = nextC;
             }
         }
 
         // blink
         blinkPeriod += Time.deltaTime;
+        bool isBlinkOn = true;
         if (blinkPeriod < 1.5) {
             if (state != State.Ready) {
-                textToBlick.SetActive(true);
+                isBlinkOn = true;
             }
         } else if (blinkPeriod < 2) {
             if (state != State.Ready) {
-                textToBlick.SetActive(false);
+                isBlinkOn = false;
             }
         } else {
             blinkPeriod = 0;
+        }
+        
+        // update show whens
+        foreach (ShowWhen sh in showWhens) {
+            if (state == State.Off) {
+                sh.target.SetActive(sh.onOff == ActionWhen.Show || (sh.onOff == ActionWhen.Blink && isBlinkOn));
+            }
+            if (state == State.NotReady) {
+                sh.target.SetActive(sh.onNotReady == ActionWhen.Show || (sh.onNotReady == ActionWhen.Blink && isBlinkOn));
+            }
+            if (state == State.Ready) {
+                sh.target.SetActive(sh.onReady == ActionWhen.Show || (sh.onReady == ActionWhen.Blink && isBlinkOn));
+            }
         }
     }
 
     public void Enable(PlayerInput input, PlayerSelectionController controller) {
         if (state == State.Off) {
-            SetState(State.NotReady);
+            state = State.NotReady;
             playerInput = input;
             selectionController = controller;
+            
+            // only enable button for keyboard
+            // when enabled, the button can be clicked by the mouse
+            for (int i = 0; i < rows.Count; i++) {
+                rows[i].prev.enabled = playerInput == PlayerInput.Keyboard;
+                rows[i].next.enabled = playerInput == PlayerInput.Keyboard;
+            }
         }
     }
 
     public void Disable() {
-        SetState(State.Off);
-    }
-
-    private void SetState(State newState) {
-        playerObject.SetActive(newState != State.Off);
-        foreach (GameObject button in buttons) {
-            button.SetActive(newState == State.NotReady);
-        }
-        textToBlick.SetActive(newState != State.Ready);
-        actionText.SetActive(newState != State.Ready);
-        backText.SetActive(newState != State.Off);
-        if (StateActionText.ContainsKey(newState)) {
-            actionText.GetComponent<Text>().text = StateActionText[newState];
-        }
-        state = newState;
+        state = State.Off;
     }
 
 }

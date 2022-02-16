@@ -10,26 +10,21 @@ public class PlayerSelectionController : MonoBehaviour {
 
     public List<GameObject> persoList;
 
-    private Dictionary<PlayerSkinSelectorController.PlayerInput, PlayerSkinSelectorController> enabledPlayers;
+    private Dictionary<PlayerInput, PlayerSkinSelectorController> enabledPlayers;
 
 
     void Start() {
-        enabledPlayers = new Dictionary<PlayerSkinSelectorController.PlayerInput, PlayerSkinSelectorController>();
+        enabledPlayers = new Dictionary<PlayerInput, PlayerSkinSelectorController>();
         returnButton.GetComponent<Button>().onClick.AddListener(onReturn);
     }
 
     void Update() {
-        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Keyboard])) {
-            NewPlayer(PlayerSkinSelectorController.PlayerInput.Keyboard);
-        }
-        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Joystick1])) {
-            NewPlayer(PlayerSkinSelectorController.PlayerInput.Joystick1);
-        }
-        if (Input.GetKeyDown(PlayerSkinSelectorController.PlayerInputAction0[PlayerSkinSelectorController.PlayerInput.Joystick2])) {
-            NewPlayer(PlayerSkinSelectorController.PlayerInput.Joystick2);
+        foreach (PlayerInput input in PlayerInput.All) {
+            if (input.GetAction0()) {
+                TryNewPlayer(input);
+            }
         }
     }
-
 
     private void onReturn() {
         StartCoroutine(LoadAsync("HomeMenuScene"));
@@ -43,15 +38,14 @@ public class PlayerSelectionController : MonoBehaviour {
         }
     }
 
-
-    public void DisablePlayer(PlayerSkinSelectorController.PlayerInput playerInput) {
+    public void DisablePlayer(PlayerInput playerInput) {
         if (enabledPlayers.ContainsKey(playerInput)) {
             enabledPlayers[playerInput].Disable();
             enabledPlayers.Remove(playerInput);
         }
     }
 
-    private void NewPlayer(PlayerSkinSelectorController.PlayerInput playerInput) {
+    private void TryNewPlayer(PlayerInput playerInput) {
         if (!enabledPlayers.ContainsKey(playerInput) && (enabledPlayers.Count < persoList.Count)) {
             foreach (GameObject perso in persoList) {
                 PlayerSkinSelectorController ctr = perso.GetComponent<PlayerSkinSelectorController>();
