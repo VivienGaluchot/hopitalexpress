@@ -8,9 +8,14 @@ public class PlayerSelectionController : MonoBehaviour {
 
     public GameObject returnButton;
 
+    public GameObject loadBar;
+
     public List<GameObject> persoList;
 
+
     private Dictionary<PlayerInput, PlayerSkinSelectorController> enabledPlayers;
+
+    private bool isLocked = false;
 
 
     void Start() {
@@ -19,10 +24,25 @@ public class PlayerSelectionController : MonoBehaviour {
     }
 
     void Update() {
-        foreach (PlayerInput input in PlayerInput.All) {
-            if (input.GetAction0()) {
-                TryNewPlayer(input);
+        if (!loadBar.GetComponent<TimeBarController>().IsFull()) {
+            foreach (PlayerInput input in PlayerInput.All) {
+                if (input.GetAction0()) {
+                    TryNewPlayer(input);
+                }
             }
+
+            bool allReady = enabledPlayers.Count > 0;
+            foreach (var keyValue in enabledPlayers) {
+                allReady = allReady && keyValue.Value.state == PlayerSkinSelectorController.State.Ready;
+            }
+            loadBar.GetComponent<TimeBarController>().isLoading = allReady;
+
+        } else if (!isLocked) {
+            isLocked = true;
+            foreach (var perso in persoList) {
+                perso.GetComponent<PlayerSkinSelectorController>().Lock();
+            }
+            StartCoroutine(LoadAsync("LevelSelectionScene"));
         }
     }
 

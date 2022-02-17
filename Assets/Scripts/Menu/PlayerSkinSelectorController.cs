@@ -17,13 +17,27 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         public ActionWhen onOff;
         public ActionWhen onNotReady;
         public ActionWhen onReady;
+        public ActionWhen onLock;
     };
 
     public List<ShowWhen> showWhens;
 
-    public Color joysticUnselectedColor = new Color(1, 1, 1, .75f);
 
-    public GameObject playerObject;
+    public enum InputKind {
+        Keyboard,
+        Xbox
+    };
+
+    [System.Serializable]
+    public struct InputIcon {
+        public GameObject target;
+        public InputKind showFor;
+    };
+
+    public List<InputIcon> inputIcons;
+
+
+    public Color joysticUnselectedColor = new Color(1, 1, 1, .75f);
 
     public GameObject headPrev;
     public GameObject headNext;
@@ -31,6 +45,9 @@ public class PlayerSkinSelectorController : MonoBehaviour {
     public GameObject skinNext;
     public GameObject clothesPrev;
     public GameObject clothesNext;
+
+    public GameObject playerObject;
+
 
     private List<(Button prevBtn, Button nextBtn, Image prevImg, Image nextImg)> rows;
 
@@ -43,6 +60,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         Off,
         NotReady,
         Ready,
+        Locked,
     };
 
     public State state { get; private set; } = State.Off;
@@ -129,13 +147,9 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         blinkPeriod += Time.deltaTime;
         bool isBlinkOn = true;
         if (blinkPeriod < 1.5) {
-            if (state != State.Ready) {
-                isBlinkOn = true;
-            }
+            isBlinkOn = true;
         } else if (blinkPeriod < 2) {
-            if (state != State.Ready) {
-                isBlinkOn = false;
-            }
+            isBlinkOn = false;
         } else {
             blinkPeriod = 0;
         }
@@ -151,6 +165,11 @@ public class PlayerSkinSelectorController : MonoBehaviour {
             if (state == State.Ready) {
                 sh.target.SetActive(sh.onReady == ActionWhen.Show || (sh.onReady == ActionWhen.Blink && isBlinkOn));
             }
+            if (state == State.Locked) {
+                // when locked only show when the player input is set to hide unselected players
+                sh.target.SetActive(playerInput != null &&
+                    (sh.onLock == ActionWhen.Show || (sh.onLock == ActionWhen.Blink && isBlinkOn)));
+            }
         }
     }
 
@@ -165,11 +184,20 @@ public class PlayerSkinSelectorController : MonoBehaviour {
                 rows[i].prevBtn.enabled = playerInput == PlayerInput.Keyboard;
                 rows[i].nextBtn.enabled = playerInput == PlayerInput.Keyboard;
             }
+
+            InputKind showFor = playerInput == PlayerInput.Keyboard ? InputKind.Keyboard : InputKind.Xbox;
+            foreach (InputIcon inputIcon in inputIcons) {
+                inputIcon.target.SetActive(inputIcon.showFor == showFor);
+            }
         }
     }
 
     public void Disable() {
         state = State.Off;
+    }
+
+    public void Lock() {
+        state = State.Locked;
     }
 
 }
