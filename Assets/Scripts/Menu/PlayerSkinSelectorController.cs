@@ -21,6 +21,8 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public List<ShowWhen> showWhens;
 
+    public Color joysticUnselectedColor = new Color(1, 1, 1, .75f);
+
     public GameObject playerObject;
 
     public GameObject headPrev;
@@ -30,7 +32,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
     public GameObject clothesPrev;
     public GameObject clothesNext;
 
-    private List<(Button prev, Button next)> rows;
+    private List<(Button prevBtn, Button nextBtn, Image prevImg, Image nextImg)> rows;
 
     private int rowSelect = 0;
 
@@ -56,10 +58,13 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     void Start() {
         state = State.Off;
-        rows = new List<(Button prev, Button next)>() {
-            {(prev:headPrev.GetComponent<Button>(), next:headNext.GetComponent<Button>())},
-            {(prev:skinPrev.GetComponent<Button>(), next:skinNext.GetComponent<Button>())},
-            {(prev:clothesPrev.GetComponent<Button>(), next:clothesNext.GetComponent<Button>())}
+        rows = new List<(Button prevBtn, Button nextBtn, Image prevImg, Image nextImg)>() {
+            {(prevBtn:headPrev.GetComponent<Button>(), nextBtn:headNext.GetComponent<Button>(),
+              prevImg:headPrev.GetComponent<Image>(), nextImg:headNext.GetComponent<Image>())},
+            {(prevBtn:skinPrev.GetComponent<Button>(), nextBtn:skinNext.GetComponent<Button>(),
+              prevImg:skinPrev.GetComponent<Image>(), nextImg:skinNext.GetComponent<Image>())},
+            {(prevBtn:clothesPrev.GetComponent<Button>(), nextBtn:clothesNext.GetComponent<Button>(),
+              prevImg:clothesPrev.GetComponent<Image>(), nextImg:clothesNext.GetComponent<Image>())}
         };
     }
 
@@ -97,31 +102,26 @@ public class PlayerSkinSelectorController : MonoBehaviour {
                     rowSelect = 0;
                 }
                 if (playerInput.GetX() > .5 && lastSelect > maxSelectFreq) {
-                    rows[rowSelect].next.GetComponent<Button>().onClick.Invoke();
+                    rows[rowSelect].nextBtn.onClick.Invoke();
                     lastSelect = 0;
                 }
                 if (playerInput.GetX() < -.5 && lastSelect > maxSelectFreq) {
-                    rows[rowSelect].prev.GetComponent<Button>().onClick.Invoke();
+                    rows[rowSelect].prevBtn.onClick.Invoke();
                     lastSelect = 0;
                 }
             }
         }
 
         // buttons selection for joystick
-        // TODO find out why this is not really working
-        if (playerInput != PlayerInput.Keyboard) {
+        if (playerInput != null && playerInput != PlayerInput.Keyboard) {
             for (int i = 0; i < rows.Count; i++) {
-                ColorBlock prevC = rows[i].prev.colors;
-                ColorBlock nextC = rows[i].next.colors;
                 if (i == rowSelect) {
-                    prevC.normalColor = Color.gray;
-                    nextC.normalColor = Color.gray;
+                    rows[i].prevImg.color = Color.white;
+                    rows[i].nextImg.color = Color.white;
                 } else {
-                    prevC.normalColor = Color.white;
-                    nextC.normalColor = Color.white;
+                    rows[i].prevImg.color = joysticUnselectedColor;
+                    rows[i].nextImg.color = joysticUnselectedColor;
                 }
-                rows[i].prev.colors = prevC;
-                rows[i].next.colors = nextC;
             }
         }
 
@@ -160,11 +160,10 @@ public class PlayerSkinSelectorController : MonoBehaviour {
             playerInput = input;
             selectionController = controller;
             
-            // only enable button for keyboard
-            // when enabled, the button can be clicked by the mouse
+            // only enable button interaction for keyboard user
             for (int i = 0; i < rows.Count; i++) {
-                rows[i].prev.enabled = playerInput == PlayerInput.Keyboard;
-                rows[i].next.enabled = playerInput == PlayerInput.Keyboard;
+                rows[i].prevBtn.enabled = playerInput == PlayerInput.Keyboard;
+                rows[i].nextBtn.enabled = playerInput == PlayerInput.Keyboard;
             }
         }
     }
