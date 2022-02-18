@@ -284,14 +284,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryTakeFauteuil(GameObject target) {
-		target.GetComponent<FauteuilController>().SetHolder(transform.gameObject);
+		target.GetComponent<WalkFauteuilController>().SetHolder(transform.gameObject);
 		HeldGO = target;
 		heldType = HeldTypes.fauteuil;
 		return true;
 	}
 
 	private bool TryDropFauteuil() {
-		HeldGO.GetComponent<FauteuilController>().SetHolder(null);
+		HeldGO.GetComponent<WalkFauteuilController>().SetHolder(null);
 		HeldGO = null;
 		heldType = HeldTypes.none;
 		return true;
@@ -328,22 +328,22 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryTakeFromSeatToFauteuil(GameObject target) {
-		return target.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<FauteuilController>().seat);
+		return target.GetComponent<SeatController>().TryTansfertTo(HeldGO.GetComponent<WalkFauteuilController>().seat);
 	}
 
 	private bool TryPutFromFauteuilToSeat(GameObject target) {
-		return HeldGO.GetComponent<FauteuilController>().seat.TryTansfertTo(target.GetComponent<SeatController>());
+		return HeldGO.GetComponent<WalkFauteuilController>().seat.TryTansfertTo(target.GetComponent<SeatController>());
 	}
 
 	private bool TryTakePlayerToFauteuil(GameObject target) {
-		return HeldGO.GetComponent<FauteuilController>().seat.ReceiveHold(target);
+		return HeldGO.GetComponent<WalkFauteuilController>().seat.ReceiveHold(target);
 	}
 
 	private bool DropPlayerFromFauteuil() {
-		if (HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
-			var target = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
+		if (HeldGO.GetComponent<WalkFauteuilController>().seat.isHolding) {
+			var target = HeldGO.GetComponent<WalkFauteuilController>().seat.goHeld;
 			if (target.tag == "Player") {
-				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+				HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
 				return true;
 			}
 		}
@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutFromFauteuilToTrash(GameObject target) {
-		var patient = HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+		var patient = HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
 		if (patient) {
 			patient.GetComponent<PatientController>().Exited();
 			Destroy(patient);
@@ -362,10 +362,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientFromFauteuilToExit(GameObject target) {
-		if (HeldGO.GetComponent<FauteuilController>().seat.isHolding) {
-			var patient = HeldGO.GetComponent<FauteuilController>().seat.goHeld;
+		if (HeldGO.GetComponent<WalkFauteuilController>().seat.isHolding) {
+			var patient = HeldGO.GetComponent<WalkFauteuilController>().seat.goHeld;
 			if (patient.GetComponent<PatientController>().state == PatientController.States.cured) {
-				HeldGO.GetComponent<FauteuilController>().seat.GiveHold();
+				HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
 				patient.GetComponent<PatientController>().Exited();
 				Destroy(patient);
 				return true;

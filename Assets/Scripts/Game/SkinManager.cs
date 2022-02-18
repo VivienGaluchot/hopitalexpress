@@ -56,25 +56,13 @@ public class SkinManager : MonoBehaviour {
 		loadedSpritePath = null;
 		load();
 	}
+
 	private void Awake() {
 		Start();
 	}
+
 	private void OnValidate() {
 		Start();
-	}
-
-	public void NextSkinIndex() {
-		skinSelected=skinSelected+1;
-		if (skinSelected>skinMax) {
-			skinSelected=skinMin;
-		}
-	}
-
-	public void PreviousSkinIndex() {
-		skinSelected=skinSelected-1;
-		if (skinSelected<skinMin) {
-			skinSelected=skinMax;
-		}
 	}
 
 	public void Update() {
@@ -96,6 +84,39 @@ public class SkinManager : MonoBehaviour {
 	// Runs after the animation
 	private void LateUpdate() {
 		applyReplacement();
+	}
+
+
+	// --------------------------
+	// Skin switch
+	// --------------------------
+
+	public void NextSkinIndex() {
+		skinSelected = skinSelected + 1;
+		if (skinSelected > skinMax) {
+			skinSelected = skinMin;
+		}
+	}
+
+	public void PreviousSkinIndex() {
+		skinSelected = skinSelected - 1;
+		if (skinSelected < skinMin) {
+			skinSelected = skinMax;
+		}
+	}
+
+	public int GetSkinIndex() {
+		return skinSelected;
+	}
+
+	public void SetSkinIndex(int index) {
+		skinSelected = index;
+		if (skinSelected < skinMin) {
+			skinSelected = skinMax;
+		}
+		if (skinSelected > skinMax) {
+			skinSelected = skinMin;
+		}
 	}
 
 

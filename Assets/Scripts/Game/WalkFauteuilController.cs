@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FauteuilController : WalkController {
+public class WalkFauteuilController : WalkController {
 
 	private WalkController holder;
 	private FixedJoint2D holderJoint;

@@ -22,16 +22,10 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public List<ShowWhen> showWhens;
 
-
-    public enum InputKind {
-        Keyboard,
-        Xbox
-    };
-
     [System.Serializable]
     public struct InputIcon {
         public GameObject target;
-        public InputKind showFor;
+        public PlayerInput.Kind showFor;
     };
 
     public List<InputIcon> inputIcons;
@@ -39,8 +33,8 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public Color joysticUnselectedColor = new Color(1, 1, 1, .75f);
 
-    public GameObject headPrev;
-    public GameObject headNext;
+    public GameObject hairPrev;
+    public GameObject hairNext;
     public GameObject skinPrev;
     public GameObject skinNext;
     public GameObject clothesPrev;
@@ -77,13 +71,21 @@ public class PlayerSkinSelectorController : MonoBehaviour {
     void Start() {
         state = State.Off;
         rows = new List<(Button prevBtn, Button nextBtn, Image prevImg, Image nextImg)>() {
-            {(prevBtn:headPrev.GetComponent<Button>(), nextBtn:headNext.GetComponent<Button>(),
-              prevImg:headPrev.GetComponent<Image>(), nextImg:headNext.GetComponent<Image>())},
+            {(prevBtn:hairPrev.GetComponent<Button>(), nextBtn:hairNext.GetComponent<Button>(),
+              prevImg:hairPrev.GetComponent<Image>(), nextImg:hairNext.GetComponent<Image>())},
             {(prevBtn:skinPrev.GetComponent<Button>(), nextBtn:skinNext.GetComponent<Button>(),
               prevImg:skinPrev.GetComponent<Image>(), nextImg:skinNext.GetComponent<Image>())},
             {(prevBtn:clothesPrev.GetComponent<Button>(), nextBtn:clothesNext.GetComponent<Button>(),
               prevImg:clothesPrev.GetComponent<Image>(), nextImg:clothesNext.GetComponent<Image>())}
         };
+
+        var ctr = playerObject.GetComponent<WalkPlayerController>();
+        hairNext.GetComponent<Button>().onClick.AddListener(() => { ctr.hair.GetComponent<SkinManager>().NextSkinIndex(); });
+        hairPrev.GetComponent<Button>().onClick.AddListener(() => { ctr.hair.GetComponent<SkinManager>().PreviousSkinIndex(); });
+        skinNext.GetComponent<Button>().onClick.AddListener(() => { ctr.skin.GetComponent<SkinManager>().NextSkinIndex(); });
+        skinPrev.GetComponent<Button>().onClick.AddListener(() => { ctr.skin.GetComponent<SkinManager>().PreviousSkinIndex(); });
+        clothesNext.GetComponent<Button>().onClick.AddListener(() => { ctr.clothes.GetComponent<SkinManager>().NextSkinIndex(); });
+        clothesPrev.GetComponent<Button>().onClick.AddListener(() => { ctr.clothes.GetComponent<SkinManager>().PreviousSkinIndex(); });
     }
 
     void Update() {
@@ -131,7 +133,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         }
 
         // buttons selection for joystick
-        if (playerInput != null && playerInput != PlayerInput.Keyboard) {
+        if (playerInput != null && playerInput.kind != PlayerInput.Kind.Keyboard) {
             for (int i = 0; i < rows.Count; i++) {
                 if (i == rowSelect) {
                     rows[i].prevImg.color = Color.white;
@@ -178,16 +180,15 @@ public class PlayerSkinSelectorController : MonoBehaviour {
             state = State.NotReady;
             playerInput = input;
             selectionController = controller;
+
+            foreach (InputIcon inputIcon in inputIcons) {
+                inputIcon.target.SetActive(inputIcon.showFor == playerInput.kind);
+            }
             
             // only enable button interaction for keyboard user
             for (int i = 0; i < rows.Count; i++) {
-                rows[i].prevBtn.enabled = playerInput == PlayerInput.Keyboard;
-                rows[i].nextBtn.enabled = playerInput == PlayerInput.Keyboard;
-            }
-
-            InputKind showFor = playerInput == PlayerInput.Keyboard ? InputKind.Keyboard : InputKind.Xbox;
-            foreach (InputIcon inputIcon in inputIcons) {
-                inputIcon.target.SetActive(inputIcon.showFor == showFor);
+                rows[i].prevBtn.enabled = playerInput.kind == PlayerInput.Kind.Keyboard;
+                rows[i].nextBtn.enabled = playerInput.kind == PlayerInput.Kind.Keyboard;
             }
         }
     }
@@ -198,6 +199,10 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public void Lock() {
         state = State.Locked;
+        if (playerInput != null) {
+            Player.SkinData skin = playerObject.GetComponent<WalkPlayerController>().GetSkinData();
+            Player.All.Add(new Player(playerInput, skin));
+        }
     }
 
 }

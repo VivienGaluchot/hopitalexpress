@@ -1180,19 +1180,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860443323115721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 405868126596403788}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: NextSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7915860443497189329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,19 +1300,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860443497189332}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7565611460765100143}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: NextSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7915860443746082234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,8 +1392,8 @@ MonoBehaviour:
   - target: {fileID: 3970040400279315911}
     showFor: 0
   joysticUnselectedColor: {r: 1, g: 1, b: 1, a: 0.6}
-  headPrev: {fileID: 7915860443939227028}
-  headNext: {fileID: 7915860443780856506}
+  hairPrev: {fileID: 7915860443780856506}
+  hairNext: {fileID: 7915860443939227028}
   skinPrev: {fileID: 7915860444236118119}
   skinNext: {fileID: 7915860443497189329}
   clothesPrev: {fileID: 7915860444164397556}
@@ -1542,19 +1518,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860443780856505}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6466177993084599417}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: NextSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7915860443939227028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,19 +1638,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860443939227019}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6466177993084599417}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: PreviousSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7915860444164397556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,19 +1758,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860444164397547}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 405868126596403788}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: PreviousSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7915860444236118119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,19 +1878,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7915860444236118426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7565611460765100143}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
-        m_MethodName: PreviousSkinIndex
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8031347726384212584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,14 +1998,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 7915860443746082235}
     m_Modifications:
     - target: {fileID: 370626301214472289, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 370626301214472289, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinSelected
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 370626301214472289, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
       propertyPath: frameSelected
       value: 1
       objectReference: {fileID: 0}
@@ -2146,20 +2066,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3734436601919840759, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3734436601919840759, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
       propertyPath: frameSelected
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3775902709925309559, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMax
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 3775902709925309559, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMin
-      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3828187791805623832, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
       propertyPath: m_Enabled
@@ -2177,18 +2085,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -5814004715358958499, guid: ba98893a00b10c841b7a58784de4109b, type: 3}
-    - target: {fileID: 7528654956667568706, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMax
-      value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528654956667568706, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinMin
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528654956667568706, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: skinSelected
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 9193411668422994667, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2196,6 +2092,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3828187791805623832, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
+--- !u!1 &6731592563314079125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
+  m_PrefabInstance: {fileID: 7915860444261715982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8497837227167751218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744204554316385340, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
+  m_PrefabInstance: {fileID: 7915860444261715982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9128676911355505138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1402126273352743420, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
@@ -2206,54 +2112,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3508764698176005528, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   m_PrefabInstance: {fileID: 7915860444261715982}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6731592563314079125 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-  m_PrefabInstance: {fileID: 7915860444261715982}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7319920009616067226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 598799895565539988, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   m_PrefabInstance: {fileID: 7915860444261715982}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &405868126596403788 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7528654956667568706, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-  m_PrefabInstance: {fileID: 7915860444261715982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8497837227167751218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &8497837227167751218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1744204554316385340, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-  m_PrefabInstance: {fileID: 7915860444261715982}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7565611460765100143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 370626301214472289, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-  m_PrefabInstance: {fileID: 7915860444261715982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9128676911355505138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6466177993084599417 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3775902709925309559, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-  m_PrefabInstance: {fileID: 7915860444261715982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7319920009616067226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7915860444387517238
 MonoBehaviour:
   m_ObjectHideFlags: 0

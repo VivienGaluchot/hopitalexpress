@@ -140,8 +140,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 24
-  skinMin: 0
-  skinMax: 0
+  skinMin: 24
+  skinMax: 33
   spritePath: Illustrations/Perso/Hair
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -250,7 +250,7 @@ MonoBehaviour:
   framePerDirection: 5
   skinSelected: 2
   skinMin: 0
-  skinMax: 0
+  skinMax: 5
   spritePath: Illustrations/Perso/Skin
   perso: {fileID: 3508764698176005531}
   annexLayers:
@@ -358,8 +358,8 @@ MonoBehaviour:
   frameSelected: 0
   framePerDirection: 1
   skinSelected: 19
-  skinMin: 0
-  skinMax: 0
+  skinMin: 19
+  skinMax: 37
   spritePath: Illustrations/Perso/Clothes
   perso: {fileID: 3508764698176005531}
   annexLayers: []
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 3906777537559676649}
   - component: {fileID: 3508764698176005534}
   - component: {fileID: 6814037511771535448}
-  - component: {fileID: 7863798119591726448}
+  - component: {fileID: 306091631053666728}
   - component: {fileID: 3828187791805623832}
   - component: {fileID: 8789539806911905578}
   m_Layer: 0
@@ -495,7 +495,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7863798119591726448
+--- !u!114 &306091631053666728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -504,11 +504,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3508764698176005531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8abbf1d3a1f8844cbb775e2cc9cad9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 81ef92531187d9c4fabc7ced8f078811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
   isSeated: 0
+  hair: {fileID: 598799895565539988}
+  skin: {fileID: 1402126273352743420}
+  clothes: {fileID: 1744204554316385340}
+  speed: 4
 --- !u!114 &3828187791805623832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +833,7 @@ MonoBehaviour:
   framePerDirection: 5
   skinSelected: 2
   skinMin: 0
-  skinMax: 0
+  skinMax: 5
   spritePath: Illustrations/Perso/Hands
   perso: {fileID: 3508764698176005531}
   annexLayers: []
