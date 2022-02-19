@@ -12,7 +12,7 @@ public class ContainerController : MonoBehaviour {
 
 	private float elapsedTime;
 
-	private PlayerController target;
+	private PlayerActionController target;
 
 	private bool isGathering;
 
@@ -38,7 +38,7 @@ public class ContainerController : MonoBehaviour {
 		}
 	}
 
-	public (GameObject givenItem, bool gathering) StartGatherItem(PlayerController player, GameObject item = null)  {
+	public (GameObject givenItem, bool gathering) StartGatherItem(PlayerActionController player, GameObject item = null)  {
 		if (askedItem == null || item != null && item.GetComponent<ItemController>().itemType.ToString() == askedItemName) {
 			if (askedTime == 0f) {
 				return (Instantiate(givenItem), true);

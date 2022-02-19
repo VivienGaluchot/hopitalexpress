@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WalkPlayerController : WalkController {
+public class PlayerWalkController : WalkController {
 
 	public GameObject hair;
 
@@ -21,8 +21,8 @@ public class WalkPlayerController : WalkController {
 	protected virtual void FixedUpdate() {
 		if (GameController.instance == null || !GameController.instance.isPaused) {
 			bool isInAction = false;
-			if (GetComponent<PlayerController>() && GetComponent<PlayerController>().enabled) {
-				isInAction = GetComponent<PlayerController>().GetAction() != PlayerController.Actions.nothing;
+			if (GetComponent<PlayerActionController>() && GetComponent<PlayerActionController>().enabled) {
+				isInAction = GetComponent<PlayerActionController>().GetAction() != PlayerActionController.Actions.nothing;
 			}
 			if (playerInput != null && !isSeated && !isInAction) {
 				Vector3 input = Vector2.ClampMagnitude(new Vector2(playerInput.GetX(), playerInput.GetY()), 1);

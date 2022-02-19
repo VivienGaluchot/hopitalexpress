@@ -79,7 +79,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
               prevImg:clothesPrev.GetComponent<Image>(), nextImg:clothesNext.GetComponent<Image>())}
         };
 
-        var ctr = playerObject.GetComponent<WalkPlayerController>();
+        var ctr = playerObject.GetComponent<PlayerWalkController>();
         hairNext.GetComponent<Button>().onClick.AddListener(() => { ctr.hair.GetComponent<SkinManager>().NextSkinIndex(); });
         hairPrev.GetComponent<Button>().onClick.AddListener(() => { ctr.hair.GetComponent<SkinManager>().PreviousSkinIndex(); });
         skinNext.GetComponent<Button>().onClick.AddListener(() => { ctr.skin.GetComponent<SkinManager>().NextSkinIndex(); });
@@ -201,7 +201,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
     public void Lock() {
         state = State.Locked;
         if (playerInput != null) {
-            Player.SkinData skin = playerObject.GetComponent<WalkPlayerController>().GetSkinData();
+            Player.SkinData skin = playerObject.GetComponent<PlayerWalkController>().GetSkinData();
             Player.All.Add(new Player(playerInput, skin));
         }
     }

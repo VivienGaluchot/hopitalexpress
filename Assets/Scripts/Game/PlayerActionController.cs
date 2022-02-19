@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerActionController : MonoBehaviour {
 
 	[SerializeField] private Transform PlaceHolder;
 	private Rigidbody2D rb2D;
 	private CircleCollider2D detectionCollider;
 	private float range;
-	private WalkPlayerController walk;
+	private PlayerWalkController walk;
 
 	// Hold object
 
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 		action = Actions.nothing;
 		heldType = HeldTypes.none;
 		detectionCollider = GetComponent<CircleCollider2D>();
-		walk = GetComponent<WalkPlayerController>();
+		walk = GetComponent<PlayerWalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
 		range = Vector3.Distance(transform.position, detectionCollider.offset * 2);
 
@@ -324,17 +324,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool DropPlayerFromFauteuil() {
-		if (HeldGO.GetComponent<WalkFauteuilController>().seat.isHolding) {
-			var target = HeldGO.GetComponent<WalkFauteuilController>().seat.goHeld;
-			if (target.tag == "Player") {
-				HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
-				return true;
-			}
+		// check if player is held in fauteuil
+		if (HeldGO.GetComponent<WalkFauteuilController>()?.seat.goHeld?.GetComponent<PlayerActionController>() == null) {
+			return false;
 		}
-		return false;
+		var target = HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
+
+		return true;
 	}
 
 	private bool TryPutFromFauteuilToTrash(GameObject target) {
+		// check if patient is held in fauteuil
+		if (HeldGO.GetComponent<WalkFauteuilController>()?.seat.goHeld?.GetComponent<PatientController>() == null) {
+			return false;
+		}
 		var patient = HeldGO.GetComponent<WalkFauteuilController>().seat.GiveHold();
 		if (patient) {
 			patient.GetComponent<PatientController>().Exited();
@@ -346,6 +349,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientFromFauteuilToExit(GameObject target) {
+		// check if patient is held in fauteuil
+		if (HeldGO.GetComponent<WalkFauteuilController>()?.seat.goHeld?.GetComponent<PatientController>() == null) {
+			return false;
+		}
 		if (HeldGO.GetComponent<WalkFauteuilController>().seat.isHolding) {
 			var patient = HeldGO.GetComponent<WalkFauteuilController>().seat.goHeld;
 			if (patient.GetComponent<PatientController>().state == PatientController.States.cured) {

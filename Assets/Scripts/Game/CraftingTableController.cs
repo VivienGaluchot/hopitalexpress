@@ -32,7 +32,7 @@ public class CraftingTableController : MonoBehaviour {
 	private string path;
 	private int counter;
 
-	private PlayerController target;
+	private PlayerActionController target;
 	private bool isCrafting;
 	private float elapsedTime;
 	private CraftingRecipe craftedItem;
@@ -83,7 +83,7 @@ public class CraftingTableController : MonoBehaviour {
 		return false;
 	}
 
-	public (GameObject craftedItem, bool isCrafting) StartCraftingItem(PlayerController player) {
+	public (GameObject craftedItem, bool isCrafting) StartCraftingItem(PlayerActionController player) {
 		// Iterate over the recipes to find one who match our current items
 		bool craftableFound = false;
 		foreach (CraftingRecipe recipe in Recipes) {

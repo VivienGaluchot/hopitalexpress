@@ -24,18 +24,20 @@ public class WalkController : MonoBehaviour {
 	}
 
 	protected virtual void Update() {
-		if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
-			if (animator) {
-				animator.SetBool("isWalking", true);
-			}
-			SetDirection(AngleToDirection(rb2D.velocity));
-		} else {
-			if (animator) {
-				animator.SetBool("isWalking", false);
-			}
-			if (hasStoppedDirection) {
-				SetDirection(stoppedDirection);
-				hasStoppedDirection = false;
+		if (!isSeated) {
+			if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
+				if (animator) {
+					animator.SetBool("isWalking", true);
+				}
+				SetDirection(AngleToDirection(rb2D.velocity));
+			} else {
+				if (animator) {
+					animator.SetBool("isWalking", false);
+				}
+				if (hasStoppedDirection) {
+					SetDirection(stoppedDirection);
+					hasStoppedDirection = false;
+				}
 			}
 		}
 	}

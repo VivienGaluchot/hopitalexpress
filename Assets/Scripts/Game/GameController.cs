@@ -71,28 +71,11 @@ public class GameController : MonoBehaviour {
 
 		// spawn players
 		// TODO check is compatible with StartGame
-		int playerCount = 0;
-		if (Player.All.Count != 0) {
-			foreach (Player player in Player.All) {
-				GameObject obj = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
-				obj.GetComponent<WalkPlayerController>().SetupForPlayer(player);
-				playerCount++;
-			}
-		} else {
-			// spawn defauly player for tests
-			Player p1 = new Player(PlayerInput.All[0], new Player.SkinData());
-			GameObject o1 = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
-			o1.GetComponent<WalkPlayerController>().SetupForPlayer(p1);
-			playerCount++;
-			Player p2 = new Player(PlayerInput.All[2], new Player.SkinData());
-			GameObject o2 = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
-			o2.GetComponent<WalkPlayerController>().SetupForPlayer(p2);
-			playerCount++;
-		}
+		var players = Player.SpawnPlayers(playerPrefab, playerSpawn, true);
 
 		// The queue will try to advance each half second, starting now
 		InvokeRepeating("AdvancePatientQueue", 0f, .5f);
-		currentSpawnRate = spawnRate / ((playerCount + 1)/2f);
+		currentSpawnRate = spawnRate / ((players.Count + 1)/2f);
 		elapsedTime = currentSpawnRate;
 	}
 
