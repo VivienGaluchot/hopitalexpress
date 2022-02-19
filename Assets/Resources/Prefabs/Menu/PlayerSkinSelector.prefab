@@ -1997,10 +1997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7915860443746082235}
     m_Modifications:
-    - target: {fileID: 370626301214472289, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
-      propertyPath: frameSelected
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3508764698176005528, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
       propertyPath: m_RootOrder
       value: 0

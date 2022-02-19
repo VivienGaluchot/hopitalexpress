@@ -26,7 +26,7 @@ public class PlayerSelectionController : MonoBehaviour {
     void Update() {
         if (!loadBar.GetComponent<TimeBarController>().IsFull()) {
             foreach (PlayerInput input in PlayerInput.All) {
-                if (input.GetAction0()) {
+                if (input.GetAction2()) {
                     TryNewPlayer(input);
                 }
             }

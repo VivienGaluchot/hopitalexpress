@@ -92,7 +92,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         // change state on action
         lastSelect += Time.deltaTime;
         if (playerInput != null) {
-            if (playerInput.GetAction0()) {
+            if (playerInput.GetAction2()) {
                 if (state == State.NotReady) {
                     state = State.Ready;
                 }
@@ -195,6 +195,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
 
     public void Disable() {
         state = State.Off;
+        playerInput = null;
     }
 
     public void Lock() {

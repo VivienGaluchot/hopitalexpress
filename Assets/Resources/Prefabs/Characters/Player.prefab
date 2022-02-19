@@ -223,7 +223,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3150668318277133405, guid: 87047aad72891b3499beb624d13a8224, type: 3}
+  m_Sprite: {fileID: -8048877941678204944, guid: 87047aad72891b3499beb624d13a8224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameSelected: 0
+  frameSelected: 1
   framePerDirection: 5
   skinSelected: 2
   skinMin: 0
@@ -806,7 +806,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6877629330500538932, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
+  m_Sprite: {fileID: 7207775556339184744, guid: f147ddaa0b755ff4b9366a2b821aab4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8306507ca098364a8e1838c1284db83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameSelected: 0
+  frameSelected: 1
   framePerDirection: 5
   skinSelected: 2
   skinMin: 0

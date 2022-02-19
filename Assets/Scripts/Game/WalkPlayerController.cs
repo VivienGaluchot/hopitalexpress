@@ -11,25 +11,25 @@ public class WalkPlayerController : WalkController {
 	public float speed;
 
 
-	private PlayerInput playerInput;
+	protected PlayerInput playerInput;
 
 
     protected override void Start() {
 		base.Start();
 	}
 
-	void FixedUpdate() {
-		// TODO to test in level selection
-		// put in common with player controller to also work in game
-		if (GetComponent<PlayerController>() == null || !GetComponent<PlayerController>().enabled) {
-			if (playerInput != null) {
+	protected virtual void FixedUpdate() {
+		if (GameController.instance == null || !GameController.instance.isPaused) {
+			bool isInAction = false;
+			if (GetComponent<PlayerController>() && GetComponent<PlayerController>().enabled) {
+				isInAction = GetComponent<PlayerController>().GetAction() != PlayerController.Actions.nothing;
+			}
+			if (playerInput != null && !isSeated && !isInAction) {
 				Vector3 input = Vector2.ClampMagnitude(new Vector2(playerInput.GetX(), playerInput.GetY()), 1);
 				if (input.sqrMagnitude > (0.1 * 0.1)) {
 					SetStoppedDirection(input);
 				}
-				if (rb2D.simulated) {
-					rb2D.velocity = input * speed;
-				}
+				rb2D.velocity = input * speed;
 			}
 		}
 	}
@@ -47,6 +47,10 @@ public class WalkPlayerController : WalkController {
 		skinData.skinId = skin.GetComponent<SkinManager>().GetSkinIndex();
 		skinData.clothesId = clothes.GetComponent<SkinManager>().GetSkinIndex();
 		return skinData;
+	}
+
+	public PlayerInput GetInput() {
+		return playerInput;
 	}
 
 }

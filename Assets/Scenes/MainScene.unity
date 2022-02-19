@@ -311,7 +311,7 @@ MonoBehaviour:
   displayFirstNeed: 0
   levelTime: 180
   levelTimeImage: {fileID: 1180426685}
-  Player: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
+  playerPrefab: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   playerSpeed: 4
   WelcomeSeats:
   - {fileID: 1664077051}
@@ -348,7 +348,7 @@ MonoBehaviour:
   instantLoad: 1
   loadLevel: 0
   loadSpawns: 0
-  loadDiseases: 1
+  loadDiseases: 0
 --- !u!1 &1080036707
 GameObject:
   m_ObjectHideFlags: 0

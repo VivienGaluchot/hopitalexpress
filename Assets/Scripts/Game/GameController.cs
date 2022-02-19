@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private Image levelTimeImage;
 	private float currentLevelTime;
 
-	[SerializeField] private GameObject Player;
+	[SerializeField] private GameObject playerPrefab;
 	[SerializeField] private float playerSpeed;
 	
 	// new patient can only spawn on welcome seats
@@ -38,9 +38,7 @@ public class GameController : MonoBehaviour {
 	
 	private int counter;
 
-	private bool isLoaded, isPlaying;
-
-	private Dictionary<int, GameObject> Players;
+	private bool isLoaded;
 
 	private Vector3 playerSpawn;
 
@@ -57,8 +55,6 @@ public class GameController : MonoBehaviour {
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
 		isLoaded = false;
-		isPlaying = false;
-		Players = new Dictionary<int, GameObject>();
 		score = 0;
 		multiplicator = 1;
 		if (scoreText)
@@ -66,13 +62,38 @@ public class GameController : MonoBehaviour {
 		if (coin != null)
 			coinAnimator = coin.GetComponent<Animator>();
 
-
 		if (!waitForLoad) {
 			PatientQueue = new GameObject[patientQueueSize];
 			currentLevelTime = levelTime;
 		} else {
 			WelcomeSeats = new List<GameObject>();
 		}
+
+		// spawn players
+		// TODO check is compatible with StartGame
+		int playerCount = 0;
+		if (Player.All.Count != 0) {
+			foreach (Player player in Player.All) {
+				GameObject obj = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
+				obj.GetComponent<WalkPlayerController>().SetupForPlayer(player);
+				playerCount++;
+			}
+		} else {
+			// spawn defauly player for tests
+			Player p1 = new Player(PlayerInput.All[0], new Player.SkinData());
+			GameObject o1 = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
+			o1.GetComponent<WalkPlayerController>().SetupForPlayer(p1);
+			playerCount++;
+			Player p2 = new Player(PlayerInput.All[2], new Player.SkinData());
+			GameObject o2 = Instantiate(playerPrefab, playerSpawn, Quaternion.identity);
+			o2.GetComponent<WalkPlayerController>().SetupForPlayer(p2);
+			playerCount++;
+		}
+
+		// The queue will try to advance each half second, starting now
+		InvokeRepeating("AdvancePatientQueue", 0f, .5f);
+		currentSpawnRate = spawnRate / ((playerCount + 1)/2f);
+		elapsedTime = currentSpawnRate;
 	}
 
 	private const float clockStartHue = 100f / 255f;
@@ -84,18 +105,14 @@ public class GameController : MonoBehaviour {
 			PauseText.SetActive(isPaused);
 		if (!isPaused) {
 			if (isLoaded) {
-				CheckNewPlayers();
+				currentLevelTime -= Time.deltaTime;
+				UpdateClock(currentLevelTime);
 
-				if (isPlaying) {
-					currentLevelTime -= Time.deltaTime;
-					UpdateClock(currentLevelTime);
-
-					if (elapsedTime > currentSpawnRate) {
-						if (TrySpawnNewPatient())
-							elapsedTime -= currentSpawnRate;
-					} else
-						elapsedTime += Time.deltaTime;
-				}
+				if (elapsedTime > currentSpawnRate) {
+					if (TrySpawnNewPatient())
+						elapsedTime -= currentSpawnRate;
+				} else
+					elapsedTime += Time.deltaTime;
 			}
 		}
 	}
@@ -204,32 +221,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		return false;
-	}
-
-	private void CheckNewPlayers() {
-		if (Input.GetKeyDown(KeyCode.Return) && !Players.ContainsKey(0))
-			NewPlayer(0);
-
-		if (Input.GetKeyDown(KeyCode.Joystick1Button7) && !Players.ContainsKey(1))
-			NewPlayer(1);
-
-		if (Input.GetKeyDown(KeyCode.Joystick2Button7) && !Players.ContainsKey(2))
-			NewPlayer(2);
-	}
-
-	private void NewPlayer(int id) {
-		GameObject newPlayer = Instantiate(Player, playerSpawn, Quaternion.identity);
-		newPlayer.GetComponent<PlayerController>().Initialize(id, playerSpeed);
-		Players.Add(id, newPlayer);
-
-		if (!isPlaying) {
-			// The queue will try to advance each half second, starting now
-			InvokeRepeating("AdvancePatientQueue", 0f, .5f);
-			isPlaying = true;
-		}
-
-		currentSpawnRate = spawnRate / ((Players.Count + 1)/2f);
-		elapsedTime = currentSpawnRate;
 	}
 
 	public void PatientCured(int patientValue) {
