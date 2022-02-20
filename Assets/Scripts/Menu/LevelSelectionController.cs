@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LevelSelectionCtontroller : MonoBehaviour {
+public class LevelSelectionController : MonoBehaviour {
 
 	public GameObject playerPrefab;
 
