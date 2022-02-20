@@ -71,7 +71,8 @@ public class GameController : MonoBehaviour {
 
 		// spawn players
 		// TODO check is compatible with StartGame
-		var players = Player.SpawnPlayers(playerPrefab, playerSpawn, true);
+		var players = Player.GetPlayers();
+		Player.SpawnPlayers(players, playerPrefab, playerSpawn);
 
 		// The queue will try to advance each half second, starting now
 		InvokeRepeating("AdvancePatientQueue", 0f, .5f);

@@ -9,7 +9,7 @@ public class Player {
 
 	// Spawn
 
-	public static List<Player> SpawnPlayers(GameObject playerPrefab, GameObject playerSpawn, bool enableTestPlayersOnEmpty) {
+	public static List<Player> GetPlayers(bool enableTestPlayersOnEmpty=true) {
 		List<Player> players = Player.All;
 		if (Player.All.Count == 0 && enableTestPlayersOnEmpty) {
 			// fake players for testing
@@ -18,6 +18,10 @@ public class Player {
 				{ new Player(PlayerInput.All[1], new Player.SkinData()) }
 			};
 		}
+		return players;
+	}
+
+	public static void SpawnPlayers(List<Player> players, GameObject playerPrefab, GameObject playerSpawn) {
 		float spreadX = (players.Count - 1) * 1f;
 		int count = 0;
 		foreach (Player player in players) {
@@ -32,18 +36,9 @@ public class Player {
 			obj.GetComponent<PlayerWalkController>().SetupForPlayer(player);
 			count++;
 		}
-		return players;
 	}
 
-	public static List<Player> SpawnPlayers(GameObject playerPrefab, Vector3 playerSpawn, bool enableTestPlayersOnEmpty) {
-		List<Player> players = Player.All;
-		if (Player.All.Count == 0 && enableTestPlayersOnEmpty) {
-			// fake players for testing
-			players = new List<Player>() {
-				{ new Player(PlayerInput.All[0], new Player.SkinData()) },
-				{ new Player(PlayerInput.All[1], new Player.SkinData()) }
-			};
-		}
+	public static void SpawnPlayers(List<Player> players, GameObject playerPrefab, Vector3 playerSpawn) {
 		float spreadX = players.Count * .7f;
 		int count = 0;
 		foreach (Player player in players) {
@@ -58,7 +53,6 @@ public class Player {
 			obj.GetComponent<PlayerWalkController>().SetupForPlayer(player);
 			count++;
 		}
-		return players;
 	}
 
 

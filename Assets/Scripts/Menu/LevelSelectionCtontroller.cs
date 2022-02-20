@@ -10,25 +10,13 @@ public class LevelSelectionCtontroller : MonoBehaviour {
 
 	public GameObject playerSpawn;
 
-	public GameObject testButton;
-
 
 	void Start() {
-		Player.SpawnPlayers(playerPrefab, playerSpawn, true);
-		testButton.GetComponent<Button>().onClick.AddListener(() => {
-			StartCoroutine(LoadAsync("MainScene"));
-		});
+		Player.SpawnPlayers(Player.GetPlayers(), playerPrefab, playerSpawn);
 	}
 
 	void Update() {
 		
-	}
-
-	private IEnumerator LoadAsync(string sceneName) {
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-		while (!asyncLoad.isDone) {
-			yield return null;
-		}
 	}
 
 }

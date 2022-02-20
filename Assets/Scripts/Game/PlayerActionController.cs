@@ -25,13 +25,13 @@ public class PlayerActionController : MonoBehaviour {
 
 	public delegate bool TryTargetedAction(GameObject target);
 
-	HashSet<GameObject> targets = new HashSet<GameObject>();
+	private HashSet<GameObject> targets = new HashSet<GameObject>();
 
-	Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions;
+	private Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions;
 
 	public delegate bool TryUntargetedAction();
 
-	Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions;
+	private Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions;
 	
 
 	public enum Actions {
