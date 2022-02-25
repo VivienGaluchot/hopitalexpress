@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitForLoad: 0
-  displayFirstNeed: 0
+  displayFirstNeed: 1
   levelTime: 180
   levelTimeImage: {fileID: 1180426685}
   playerPrefab: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
@@ -348,7 +348,7 @@ MonoBehaviour:
   instantLoad: 1
   loadLevel: 0
   loadSpawns: 0
-  loadDiseases: 0
+  loadDiseases: 1
 --- !u!1 &1080036707
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419180824594411673, guid: 326eee399dec2bd448208db2a2e60e83, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 51
+      value: 51.00003
       objectReference: {fileID: 0}
     - target: {fileID: 3419180824594411673, guid: 326eee399dec2bd448208db2a2e60e83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -903,6 +903,14 @@ PrefabInstance:
     - target: {fileID: 3713404079251285716, guid: df257946a46870f4eafe1e01422b9089, type: 3}
       propertyPath: m_Name
       value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 5058817749554221359, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5058817749554221359, guid: df257946a46870f4eafe1e01422b9089, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df257946a46870f4eafe1e01422b9089, type: 3}

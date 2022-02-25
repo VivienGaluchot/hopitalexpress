@@ -73,7 +73,7 @@ public class PlayerInput {
     // space / A
     private readonly KeyCode action0;
 
-    // packspace / b
+    // backspace / B
     private readonly KeyCode action1;
 
     // enter / A

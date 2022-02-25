@@ -68,16 +68,6 @@ public class GameController : MonoBehaviour {
 		} else {
 			WelcomeSeats = new List<GameObject>();
 		}
-
-		// spawn players
-		// TODO check is compatible with StartGame
-		var players = Player.GetPlayers();
-		Player.SpawnPlayers(players, playerPrefab, playerSpawn);
-
-		// The queue will try to advance each half second, starting now
-		InvokeRepeating("AdvancePatientQueue", 0f, .5f);
-		currentSpawnRate = spawnRate / ((players.Count + 1)/2f);
-		elapsedTime = currentSpawnRate;
 	}
 
 	private const float clockStartHue = 100f / 255f;
@@ -116,6 +106,8 @@ public class GameController : MonoBehaviour {
 		isPaused = false;
 		playerSpawn = Vector3.zero;
 		patientQueueDirection = "UP";
+
+		SpawnPlayersAndStart();
 	}
 
 	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction, int queueSize, float levelTime, List<GameObject> welcomeSeats) {
@@ -128,6 +120,20 @@ public class GameController : MonoBehaviour {
 		foreach(GameObject seat in welcomeSeats)
 			if (seat.GetComponent<SeatController>() && !WelcomeSeats.Contains(seat))
 				WelcomeSeats.Add(seat);
+
+		SpawnPlayersAndStart();
+	}
+
+	private void SpawnPlayersAndStart() {
+		// spawn players
+		var players = Player.GetPlayers();
+		Player.SpawnPlayers(players, playerPrefab, playerSpawn);
+
+		// The queue will try to advance each half second, starting now
+		InvokeRepeating("AdvancePatientQueue", 0f, .5f);
+		currentSpawnRate = spawnRate / ((players.Count + 1)/2f);
+		elapsedTime = currentSpawnRate;
+
 	}
 
 	// One at a time

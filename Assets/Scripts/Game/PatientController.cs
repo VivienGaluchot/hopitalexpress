@@ -6,8 +6,8 @@ public class PatientController : MonoBehaviour {
 
 	[SerializeField] private GameObject face;
 	[SerializeField] private GameObject clothes;
-	//[SerializeField] private GameObject body;
 	[SerializeField] private GameObject needBubble;
+	[SerializeField] private GameObject needImage;
 	[SerializeField] private Image TimeBarImage;
 
 	private List<GameObject> PlayersNearby;
@@ -31,7 +31,6 @@ public class PatientController : MonoBehaviour {
 	public int patientValue { get; private set; }
 
 	private float periodWithoutDiseaseAnimation = 0;
-	private GameObject needIcon = null;
 
 	public float timeEffect;
 
@@ -74,15 +73,9 @@ public class PatientController : MonoBehaviour {
 	}
 
 	public void DisplayNextNeed() {
-		if (!needBubble.activeSelf) needBubble.SetActive(true);
-		if (needIcon) {
-			Destroy(needIcon);
-			needIcon = null;
-		}
-		GameObject icon = myDisease.GetNeedIcon();
-		if (icon != null)
-			needIcon = Instantiate(icon, needBubble.transform);
-
+		if (!needBubble.activeSelf)
+			needBubble.SetActive(true);
+		needImage.GetComponent<Image>().sprite = myDisease.GetNeedIcon();
 		needDisplayed = true;
 	}
 

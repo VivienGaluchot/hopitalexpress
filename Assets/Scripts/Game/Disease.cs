@@ -92,8 +92,8 @@ public class Disease {
 	}
 
 	// Return the sprite to display the current need
-	public GameObject GetNeedIcon() {
-		return currentStep._needPrefab;
+	public Sprite GetNeedIcon() {
+		return currentStep._needPrefab.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
 	}
 
 	// Say that we took this item

@@ -284,7 +284,7 @@ MonoBehaviour:
   displayFirstNeed: 0
   levelTime: 180
   levelTimeImage: {fileID: 1180426685}
-  Player: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
+  playerPrefab: {fileID: 3508764698176005531, guid: 712110d9ea6fe2a419d3e5fb6a23b80f, type: 3}
   playerSpeed: 4
   WelcomeSeats:
   - {fileID: 0}
@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 525836799943738224, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -4554386960479461837, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
   - {fileID: -124772053130453694, guid: 3aaf27d1b581b46418eb2d0ec1b1e581, type: 3}
-  instantLoad: 1
+  instantLoad: 0
   loadLevel: 1
   loadSpawns: 1
   loadDiseases: 1
@@ -861,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419180825073571507, guid: 326eee399dec2bd448208db2a2e60e83, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3419180825073571507, guid: 326eee399dec2bd448208db2a2e60e83, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
