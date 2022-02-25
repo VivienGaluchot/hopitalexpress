@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerSelectionController : MonoBehaviour {
 
@@ -42,20 +41,14 @@ public class PlayerSelectionController : MonoBehaviour {
             foreach (var perso in persoList) {
                 perso.GetComponent<PlayerSkinSelectorController>().Lock();
             }
-            StartCoroutine(LoadAsync("LevelSelectionScene"));
+            returnButton.GetComponent<Button>().interactable = false;
+            Scenes.LoadAsync(this, Scenes.GameScenes.LevelSelectionScene);
         }
     }
 
     private void onReturn() {
-        StartCoroutine(LoadAsync("HomeMenuScene"));
-    }
-
-    private IEnumerator LoadAsync(string sceneName) {
         returnButton.GetComponent<Button>().interactable = false;
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        while (!asyncLoad.isDone) {
-            yield return null;
-        }
+        Scenes.LoadAsync(this, Scenes.GameScenes.HomeMenuScene);
     }
 
     public void DisablePlayer(PlayerInput playerInput) {

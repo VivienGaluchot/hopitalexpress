@@ -19,7 +19,7 @@ public class PlayerWalkController : WalkController {
 	}
 
 	protected virtual void FixedUpdate() {
-		if (GameController.instance == null || !GameController.instance.isPaused) {
+		if (GameController.instance == null || GameController.instance.IsPlaying()) {
 			bool isInAction = false;
 			if (GetComponent<PlayerActionController>() && GetComponent<PlayerActionController>().enabled) {
 				isInAction = GetComponent<PlayerActionController>().GetAction() != PlayerActionController.Actions.nothing;

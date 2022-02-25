@@ -86,7 +86,7 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(GameController.instance == null || !GameController.instance.isPaused) {
+		if(GameController.instance == null || GameController.instance.IsPlaying()) {
 			if (action == Actions.gathering && walk.GetInput().GetAction0Up()) {
 				// Button released, we stop gathering
 				action = Actions.nothing;
@@ -105,7 +105,7 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	protected void FixedUpdate() {
-		if (GameController.instance == null || !GameController.instance.isPaused) {
+		if (GameController.instance == null || GameController.instance.IsPlaying()) {
 			Vector3 vDir = Vector3.down;
 			switch (walk.direction) {
 				case WalkController.Dir.Down:

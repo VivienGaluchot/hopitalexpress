@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HomeMenuController : MonoBehaviour {
 
@@ -18,6 +17,7 @@ public class HomeMenuController : MonoBehaviour {
 
 
     void Start() {
+        QualitySettings.vSyncCount = 0;
         continueButton.GetComponent<Button>().onClick.AddListener(onContinue);
         newGameButton.GetComponent<Button>().onClick.AddListener(onNewGame);
         editorButton.GetComponent<Button>().onClick.AddListener(onEditor);
@@ -35,7 +35,7 @@ public class HomeMenuController : MonoBehaviour {
         editorButton.GetComponent<Button>().interactable = false;
         optionButton.GetComponent<Button>().interactable = false;
         quitButton.GetComponent<Button>().interactable = false;
-        StartCoroutine(LoadAsync("PlayerSelectionScene"));
+        Scenes.LoadAsync(this, Scenes.GameScenes.PlayerSelectionScene);
     }
 
     private void onEditor() {
@@ -44,7 +44,7 @@ public class HomeMenuController : MonoBehaviour {
         editorButton.GetComponent<Button>().interactable = false;
         optionButton.GetComponent<Button>().interactable = false;
         quitButton.GetComponent<Button>().interactable = false;
-        StartCoroutine(LoadAsync("EditorScene"));
+        Scenes.LoadAsync(this, Scenes.GameScenes.EditorScene);
     }
 
     private void onOption() {
@@ -53,12 +53,5 @@ public class HomeMenuController : MonoBehaviour {
 
     private void onQuit() {
         Application.Quit();
-    }
-
-    private IEnumerator LoadAsync(string sceneName) {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        while (!asyncLoad.isDone) {
-            yield return null;
-        }
     }
 }

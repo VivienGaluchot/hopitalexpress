@@ -38,23 +38,41 @@ public class GameController : MonoBehaviour {
 	
 	private int counter;
 
-	private bool isLoaded;
-
 	private Vector3 playerSpawn;
 
 	public Infos[] DiseasesAvailable;
+	
+	[SerializeField] private GameObject PauseCanvas;
+	[SerializeField] private GameObject EndCanvas;
+	[SerializeField] private GameObject EndCanvasScoreText;
 
-	public bool isPaused { get; private set; }
-	[SerializeField] private GameObject PauseText;
+
+	// State management
+
+	public enum State {
+		NotLoaded,
+		Playing,
+		Paused,
+		Timeout
+	}
+
+	private State state = State.NotLoaded;
+
+	public State GetState() {
+		return state;
+	}
+
+	public bool IsPlaying() {
+		return state == State.Playing;
+	}
+
+
+	// Unity callbacks
 
 	private void Awake() {
 		instance = this;
-		isPaused = false;
-		PauseText.SetActive(isPaused);
 		patientsList = new List<PatientController>();
-		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = targetFrameRate;
-		isLoaded = false;
 		score = 0;
 		multiplicator = 1;
 		if (scoreText)
@@ -74,12 +92,21 @@ public class GameController : MonoBehaviour {
 	private const float clockEndHue = 0f;
 
 	private void Update() {
-		if (Input.GetKeyDown("escape"))
-			isPaused = !isPaused;
-			PauseText.SetActive(isPaused);
-		if (!isPaused) {
-			if (isLoaded) {
-				currentLevelTime -= Time.deltaTime;
+		if (Input.GetKeyDown("escape")) {
+			if (state == State.Playing) {
+				state = State.Paused;
+				PauseCanvas.SetActive(true);
+			} else if (state == State.Paused) {
+				state = State.Playing;
+				PauseCanvas.SetActive(false);
+			} else if (state == State.Timeout) {
+				ExitGame();
+			}
+		}
+
+		if (state == State.Playing) {
+			currentLevelTime -= Time.deltaTime;
+			if (currentLevelTime > 0) {
 				UpdateClock(currentLevelTime);
 
 				if (elapsedTime > currentSpawnRate) {
@@ -87,9 +114,63 @@ public class GameController : MonoBehaviour {
 						elapsedTime -= currentSpawnRate;
 				} else
 					elapsedTime += Time.deltaTime;
+			} else {
+				state = State.Timeout;
+				EndCanvasScoreText.GetComponent<Text>().text += score.ToString();
+				EndCanvas.SetActive(true);
 			}
 		}
 	}
+
+	// Loading
+
+	public void StartGame() {
+		playerSpawn = Vector3.zero;
+		patientQueueDirection = "UP";
+		SpawnPlayersAndStart();
+	}
+
+	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction, int queueSize, float levelTime, List<GameObject> welcomeSeats) {
+		this.playerSpawn = playerSpawn;
+		PatientQueueParent.position = patientSpawn;
+		patientQueueDirection = direction;
+		PatientQueue = new GameObject[queueSize];
+		currentLevelTime = levelTime;
+		foreach(GameObject seat in welcomeSeats)
+			if (seat.GetComponent<SeatController>() && !WelcomeSeats.Contains(seat))
+				WelcomeSeats.Add(seat);
+		SpawnPlayersAndStart();
+	}
+
+	public void ExitGame() {
+		// Go back to level selection
+		Scenes.LoadAsync(this, Scenes.GameScenes.LevelSelectionScene, () => {
+			instance = null;
+		});
+	}
+
+	// Scoring
+
+	public void PatientCured(int patientValue) {
+		score += patientValue * multiplicator++;
+		if (scoreText)
+			scoreText.text = score.ToString();
+		if (coin) {
+			coinAnimator.SetTrigger("addCoin");
+		}
+	}
+
+	public void PatientDead(int patientValue) {
+		score -= patientValue;
+		multiplicator = 1;
+		if (scoreText)
+			scoreText.text = score.ToString();
+		if (coin) {
+			coinAnimator.SetTrigger("removeCoin");
+		}
+	}
+
+	// Internal
 
 	private void UpdateClock(float currentTime) {
 		float ratio = Mathf.Max(currentTime / levelTime, 0);
@@ -99,29 +180,6 @@ public class GameController : MonoBehaviour {
 		H = clockEndHue + ratio * (clockStartHue - clockEndHue);
 		levelTimeImage.color = Color.HSVToRGB(newH, S, V);
 		levelTimeImage.fillAmount = ratio;
-	}
-
-	public void StartGame() {
-		isLoaded = true;
-		isPaused = false;
-		playerSpawn = Vector3.zero;
-		patientQueueDirection = "UP";
-
-		SpawnPlayersAndStart();
-	}
-
-	public void StartGame(Vector3 playerSpawn, Vector3 patientSpawn, string direction, int queueSize, float levelTime, List<GameObject> welcomeSeats) {
-		isLoaded = true;
-		this.playerSpawn = playerSpawn;
-		PatientQueueParent.position = patientSpawn;
-		patientQueueDirection = direction;
-		PatientQueue = new GameObject[queueSize];
-		currentLevelTime = levelTime;
-		foreach(GameObject seat in welcomeSeats)
-			if (seat.GetComponent<SeatController>() && !WelcomeSeats.Contains(seat))
-				WelcomeSeats.Add(seat);
-
-		SpawnPlayersAndStart();
 	}
 
 	private void SpawnPlayersAndStart() {
@@ -134,6 +192,7 @@ public class GameController : MonoBehaviour {
 		currentSpawnRate = spawnRate / ((players.Count + 1)/2f);
 		elapsedTime = currentSpawnRate;
 
+		state = State.Playing;
 	}
 
 	// One at a time
@@ -211,24 +270,5 @@ public class GameController : MonoBehaviour {
 		}
 
 		return false;
-	}
-
-	public void PatientCured(int patientValue) {
-		score += patientValue * multiplicator++;
-		if (scoreText)
-			scoreText.text = score.ToString();
-		if (coin) {
-			coinAnimator.SetTrigger("addCoin");
-		}
-	}
-
-	public void PatientDead(int patientValue) {
-		score -= patientValue;
-		multiplicator = 1;
-		if (scoreText)
-			scoreText.text = score.ToString();
-		if (coin) {
-			coinAnimator.SetTrigger("removeCoin");
-		}
 	}
 }
