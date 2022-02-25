@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 6663673547527717405}
   - component: {fileID: 7932379444378912382}
   - component: {fileID: 2589753505835681406}
+  - component: {fileID: 2203404137923373025}
   m_Layer: 0
   m_Name: Scanner
   m_TagString: Machine
@@ -231,6 +232,24 @@ PolygonCollider2D:
       - {x: 0.2613216, y: -0.747172}
       - {x: -0.25339398, y: -0.75306433}
       - {x: -0.26040077, y: -0.32650647}
+--- !u!255 &2203404137923373025
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663673547527717406}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!1001 &2568057263825615899
 PrefabInstance:
   m_ObjectHideFlags: 0

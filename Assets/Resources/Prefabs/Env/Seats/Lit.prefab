@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8483707085001100655}
   - component: {fileID: 8483707085001100654}
   - component: {fileID: 7948210976602163607}
+  - component: {fileID: 2402861202912055405}
   m_Layer: 0
   m_Name: Lit
   m_TagString: Seat
@@ -221,6 +222,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacerHolder: {fileID: 6756428239714682294}
   isSeatingPerso: 0
+--- !u!255 &2402861202912055405
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483707085001100563}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!1 &8483707085935464636
 GameObject:
   m_ObjectHideFlags: 0

@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3911864212793589820}
   - component: {fileID: 6181394274622440241}
   - component: {fileID: 4032919600854944897}
+  - component: {fileID: 2160195101951769298}
   m_Layer: 0
   m_Name: Fauteuil
   m_TagString: Fauteuil
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   isSeated: 0
+  releaseImpulse: 2
 --- !u!114 &4032919600854944897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +234,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacerHolder: {fileID: 3782346983457192508}
   isSeatingPerso: 1
+--- !u!255 &2160195101951769298
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085243115455294966}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!1 &4199172716486784791
 GameObject:
   m_ObjectHideFlags: 0

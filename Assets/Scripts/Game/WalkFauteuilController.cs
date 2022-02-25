@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class WalkFauteuilController : WalkController {
 
+	public float releaseImpulse = 1;
+
 	private WalkController holder;
 	private FixedJoint2D holderJoint;
 
@@ -24,31 +26,19 @@ public class WalkFauteuilController : WalkController {
 				holderJoint.enabled = true;
 			}
 		} else {
-			if (holder  != null) {
+			if (holder != null) {
 				holder = null;
 				holderJoint.connectedBody = null;
 				holderJoint.enabled = false;
 				holderJoint = null;
+				rb2D.velocity += DirToVect(direction) * releaseImpulse;
 			}
 		}
 	}
 
 	private void FixedUpdate() {
 		if (holder) {
-			switch (holder.direction) {
-				case Dir.Up:
-					holderJoint.anchor = .3f * Vector3.up;
-					break;
-				case Dir.Down:
-					holderJoint.anchor = .3f * Vector3.down;
-					break;
-				case Dir.Left:
-					holderJoint.anchor = .6f * Vector3.left;
-					break;
-				case Dir.Right:
-					holderJoint.anchor = .6f * Vector3.right;
-					break;
-			}
+			holderJoint.anchor = new Vector2(.6f, .3f) * DirToVect(holder.direction);
 		}
 	}
 

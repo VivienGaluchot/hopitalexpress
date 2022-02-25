@@ -12,16 +12,18 @@ public class SeatController : MonoBehaviour {
 
 	public GameObject goHeld { get; protected set; }
 	public bool isHolding { get; protected set; }
-	private (RigidbodyType2D, bool, Transform) holdGoData;
-	private bool holdIsSimulated;
 
 	protected static Vector3 epsilonY = new Vector3(0f, .0001f, 0f);
+
+	private FixedJoint2D joint;
+
+	private Transform goParent;
 
 
 	protected virtual void Start() {
 		gameObject.layer = seatLayer;
-		//gameObject.layer = LayerMask.NameToLayer("Seats");
 		isHolding = false;
+		joint = GetComponent<FixedJoint2D>();
 	}
 
     public virtual bool ReceiveHold(GameObject target) {
@@ -29,15 +31,12 @@ public class SeatController : MonoBehaviour {
 			isHolding = true;
 			goHeld = target;
 
-			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
-			holdGoData = (r2d.bodyType, r2d.simulated, goHeld.transform.parent);
-
+			goParent = goHeld.transform.parent;
+			joint.connectedBody = goHeld.GetComponent<Rigidbody2D>();
+			joint.enabled = true; 
+			joint.anchor = PlacerHolder.localPosition; 
+			joint.connectedAnchor = Vector2.zero;
 			goHeld.transform.parent = PlacerHolder;
-			goHeld.transform.position = PlacerHolder.position;
-			goHeld.transform.rotation = PlacerHolder.rotation;
-
-			r2d.bodyType = RigidbodyType2D.Kinematic;
-			r2d.simulated = false;
 			
 			var targetWc = target.GetComponent<WalkController>();
 			if (targetWc) {
@@ -59,17 +58,18 @@ public class SeatController : MonoBehaviour {
 
 	public virtual GameObject GiveHold() {
 		if(isHolding) {
-			Rigidbody2D r2d = goHeld.GetComponent<Rigidbody2D>();
-			r2d.bodyType = holdGoData.Item1;
-			r2d.simulated = holdGoData.Item2;
-			goHeld.transform.parent = holdGoData.Item3;
+			joint.connectedBody = null;
+			joint.enabled = false;
 			
 			if (isSeatingPerso) {
 				var targetWc = goHeld.GetComponent<WalkController>();
 				if (targetWc) {
 					targetWc.isSeated = false;
+					targetWc.SetStoppedDirection(Vector2.down);
 				}
+				targetWc.direction = WalkController.Dir.Down;
 			}
+			goHeld.transform.parent = goParent;
 
 			GameObject returnGO = goHeld;
 			goHeld = null;

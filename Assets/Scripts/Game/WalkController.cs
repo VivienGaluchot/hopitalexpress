@@ -6,8 +6,23 @@ public class WalkController : MonoBehaviour {
 		Down, Up, Left, Right
 	}
 
+	public static Vector2 DirToVect(Dir direction) {
+		switch (direction) {
+			case Dir.Down:
+				return Vector2.down;
+			case Dir.Up:
+				return Vector2.up;
+			case Dir.Left:
+				return Vector2.left;
+			case Dir.Right:
+				return Vector2.right;
+		}
+		return Vector2.zero;
+	}
+
 	public Dir direction = Dir.Down;
 	
+
 	public bool isSeated = false;
 
 	// direction to apply when the perso is not moving

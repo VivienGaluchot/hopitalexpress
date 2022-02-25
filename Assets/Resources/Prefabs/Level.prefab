@@ -1397,10 +1397,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fauteuil
       objectReference: {fileID: 0}
-    - target: {fileID: 4102819906301759874, guid: 40644ef0fda4c0347830f92c93a4f310, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -2856800196988325591, guid: 21272255296cf204e8f1fe57db30e0a7, type: 3}
     - target: {fileID: 6181394274622440241, guid: 40644ef0fda4c0347830f92c93a4f310, type: 3}
       propertyPath: direction
       value: 3
@@ -1449,10 +1445,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8673781310782243229, guid: 40644ef0fda4c0347830f92c93a4f310, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 3415002914758480385, guid: 8f15e7c1d1815014cbbcd58bbce99fd8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40644ef0fda4c0347830f92c93a4f310, type: 3}
 --- !u!4 &6155982602754393127 stripped
