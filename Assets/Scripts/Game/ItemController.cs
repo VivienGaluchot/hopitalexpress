@@ -10,11 +10,15 @@ public enum Items {
 	SeringueVerte,
 	SeringueRouge,
 	SeringueJaune,
-	PCR
+	Swab,
+	SwabUsed,
+	CovidResult
 }
 
 public class ItemController : MonoBehaviour {
 
 	public Items itemType;
+
+	public GameObject swapTo;
 
 }
