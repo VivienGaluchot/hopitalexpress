@@ -13,10 +13,12 @@ public class PlayerWalkController : WalkController {
 	public float speepRate = 1;
 
 
+	public Player playerData { get; protected set; }
+
 	protected PlayerInput playerInput;
 
 
-    protected override void Start() {
+	protected override void Start() {
 		base.Start();
 	}
 
@@ -37,10 +39,19 @@ public class PlayerWalkController : WalkController {
 	}
 
 	public void SetupForPlayer(Player playerData) {
+		this.playerData = playerData;
 		playerInput = playerData.input;
 		hair.GetComponent<SkinManager>().SetSkinIndex(playerData.skin.headId);
 		skin.GetComponent<SkinManager>().SetSkinIndex(playerData.skin.skinId);
 		clothes.GetComponent<SkinManager>().SetSkinIndex(playerData.skin.clothesId);
+		var select = transform.Find("SelectionCircle")?.GetComponent<SpriteRenderer>();
+		if (select) {
+			select.color = new Color(playerData.color.r, playerData.color.g, playerData.color.b, select.color.a);
+		}
+		var shade = transform.Find("Shade")?.GetComponent<SpriteRenderer>();
+		if (shade) {
+			shade.color = new Color(playerData.color.r, playerData.color.g, playerData.color.b, shade.color.a);
+		}
 	}
 
 	public Player.SkinData GetSkinData() {

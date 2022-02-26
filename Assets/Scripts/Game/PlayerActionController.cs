@@ -87,12 +87,12 @@ public class PlayerActionController : MonoBehaviour {
 			{ (HeldTypes.patient, "Exit"), new List<TryTargetedAction>() { TryPutPatientToExit } },
 
 			// fauteuil in hand
-			{ (HeldTypes.fauteuil, "Player"), new List<TryTargetedAction>() { TryTakePlayerToFauteuil } },
-			{ (HeldTypes.fauteuil, "Patient"), new List<TryTargetedAction>() { TryTakePatientToFauteuil } },
+			{ (HeldTypes.fauteuil, "Player"), new List<TryTargetedAction>() { TryTakeToFauteuil } },
+			{ (HeldTypes.fauteuil, "Patient"), new List<TryTargetedAction>() { TryTakeToFauteuil } },
 			{ (HeldTypes.fauteuil, "Seat"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
 			{ (HeldTypes.fauteuil, "Fauteuil"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
 			{ (HeldTypes.fauteuil, "Machine"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
-			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutFromFauteuilToTrash } },
+			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutPartientFromFauteuilToTrash } },
 			{ (HeldTypes.fauteuil, "Exit"), new List<TryTargetedAction>() { TryPutPatientFromFauteuilToExit } },
 		};
 		untargetedActions = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
@@ -103,7 +103,7 @@ public class PlayerActionController : MonoBehaviour {
 			{ HeldTypes.patient, new List<TryUntargetedAction>() { TryDropPatient } },
 
 			// fauteuil in hand
-			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { DropPlayerFromFauteuil, TryDropFauteuil } },
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFromFauteuil, TryDropFauteuil } },
 		};
 	}
 
@@ -340,6 +340,13 @@ public class PlayerActionController : MonoBehaviour {
 		heldGO = target;
 		heldType = HeldTypes.patient;
 		walk.speepRate = target.GetComponent<PatientController>().walkingSpeedRate;
+
+		var playerColor = walk.playerData.color;
+		var select = target.transform.Find("SelectionCircle")?.GetComponent<SpriteRenderer>();
+		if (select) {
+			select.color = new Color(playerColor.r, playerColor.g, playerColor.b, select.color.a);
+			select.enabled = true;
+		}
 	}
 
 	private void OnPatientRelease(GameObject target) {
@@ -348,6 +355,11 @@ public class PlayerActionController : MonoBehaviour {
 		heldGO = null;
 		heldType = HeldTypes.none;
 		walk.speepRate = 1;
+
+		var select = target.transform.Find("SelectionCircle")?.GetComponent<SpriteRenderer>();
+		if (select) {
+			select.enabled = false;
+		}
 	}
 
 	private bool TryTakePatient(GameObject target) {
@@ -360,7 +372,7 @@ public class PlayerActionController : MonoBehaviour {
 		}
 	}
 
-	private bool CheckPatientSpringDist() {
+	private bool CheckPatientIsCloseEnought() {
 		float dist = springJoint.distance * 2f;
 		if ((transform.position - patientHolder.held.transform.position).sqrMagnitude > (dist * dist)) {
 			return false;
@@ -368,20 +380,15 @@ public class PlayerActionController : MonoBehaviour {
 		return true;
 	}
 
-	private bool TryDropPatient() {
-		var target = patientHolder.Give();
-		return target != null;
-	}
-
 	private bool TryPutPatientToSeat(GameObject target) {
-		if (!CheckPatientSpringDist()) {
+		if (!CheckPatientIsCloseEnought()) {
 			return false;
 		}
 		return patientHolder.TryTansfertTo(target.GetComponent<SeatController>().holder);
 	}
 
 	private bool TryPutPatientToTrash(GameObject target) {
-		if (!CheckPatientSpringDist()) {
+		if (!CheckPatientIsCloseEnought()) {
 			return false;
 		}
 		var patient = patientHolder.Give();
@@ -395,16 +402,22 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientToExit(GameObject target) {
-		if (!CheckPatientSpringDist()) {
+		if (!CheckPatientIsCloseEnought()) {
 			return false;
 		}
-		var patient = patientHolder.Give();
-		if (patient != null ) {
+		var patient = patientHolder.held;
+		if (patient.GetComponent<PatientController>().state == PatientController.States.cured) {
+			patientHolder.Give();
 			patient.GetComponent<PatientController>().Exited();
 			Destroy(patient);
 			return true;
 		}
 		return false;
+	}
+
+	private bool TryDropPatient() {
+		var target = patientHolder.Give();
+		return target != null;
 	}
 
 	// fauteuil
@@ -423,7 +436,7 @@ public class PlayerActionController : MonoBehaviour {
 		return true;
 	}
 
-	private bool TryTakePatientToFauteuil(GameObject target) {
+	private bool TryTakeToFauteuil(GameObject target) {
 		var toHolder = heldGO.GetComponent<WalkFauteuilController>().seat.holder;
 		if (target.GetComponent<WalkController>().holderObject != null) {
 			// target already in a seat
@@ -446,20 +459,17 @@ public class PlayerActionController : MonoBehaviour {
 		return fromHolder.TryTansfertTo(toHolder);
 	}
 
-	private bool TryTakePlayerToFauteuil(GameObject target) {
-		return heldGO.GetComponent<WalkFauteuilController>().seat.holder.Receive(target);
-	}
-
-	private bool DropPlayerFromFauteuil() {
-		// check if player is held in fauteuil
-		if (heldGO.GetComponent<WalkFauteuilController>().seat.holder.held?.GetComponent<PlayerActionController>() == null) {
+	private bool TryDropFromFauteuil() {
+		// check if patient or player is held in fauteuil
+		if (heldGO.GetComponent<WalkFauteuilController>().seat.holder.held?.GetComponent<PatientController>() == null
+			&& heldGO.GetComponent<WalkFauteuilController>().seat.holder.held?.GetComponent<PlayerActionController>() == null) {
 			return false;
 		}
 		heldGO.GetComponent<WalkFauteuilController>().seat.holder.Give();
 		return true;
 	}
 
-	private bool TryPutFromFauteuilToTrash(GameObject target) {
+	private bool TryPutPartientFromFauteuilToTrash(GameObject target) {
 		// check if patient is held in fauteuil
 		if (heldGO.GetComponent<WalkFauteuilController>()?.seat.holder.held?.GetComponent<PatientController>() == null) {
 			return false;

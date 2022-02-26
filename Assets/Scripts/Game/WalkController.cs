@@ -60,7 +60,11 @@ public class WalkController : MonoBehaviour {
 	}
 
 	public void SetStoppedDirection(Vector2 dir) {
-		stoppedDirection = AngleToDirection(dir);
+		SetStoppedDirection(AngleToDirection(dir));
+	}
+
+	public void SetStoppedDirection(Dir dir) {
+		stoppedDirection = dir;
 		hasStoppedDirection = true;
 	}
 

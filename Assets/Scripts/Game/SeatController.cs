@@ -89,9 +89,9 @@ public class SeatController : MonoBehaviour {
 		var targetWc = target.GetComponent<WalkController>();
 		if (targetWc) {
 			if (GetComponent<WalkController>()) {
-				targetWc.direction = GetComponent<WalkController>().direction;
+				targetWc.SetStoppedDirection(GetComponent<WalkController>().direction);
 			} else {
-				targetWc.direction = WalkController.Dir.Down;
+				targetWc.SetStoppedDirection(WalkController.Dir.Down);
 			}
 			if (isSeatingPerso) {
 				targetWc.isSeated = true;

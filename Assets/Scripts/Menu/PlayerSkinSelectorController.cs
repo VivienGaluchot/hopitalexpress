@@ -202,7 +202,7 @@ public class PlayerSkinSelectorController : MonoBehaviour {
         state = State.Locked;
         if (playerInput != null) {
             Player.SkinData skin = playerObject.GetComponent<PlayerWalkController>().GetSkinData();
-            Player.All.Add(new Player(playerInput, skin));
+            Player.All.Add(new Player(playerInput, skin, Color.HSVToRGB(Random.Range(0f, 1f), .5f, .80f)));
         }
     }
 
