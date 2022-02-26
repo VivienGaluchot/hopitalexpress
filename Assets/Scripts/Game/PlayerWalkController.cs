@@ -8,7 +8,9 @@ public class PlayerWalkController : WalkController {
 
 	public GameObject clothes;
 
-	public float speed;
+	public float maxSpeed;
+
+	public float speepRate = 1;
 
 
 	protected PlayerInput playerInput;
@@ -29,7 +31,7 @@ public class PlayerWalkController : WalkController {
 				if (input.sqrMagnitude > (0.1 * 0.1)) {
 					SetStoppedDirection(input);
 				}
-				rb2D.velocity = input * speed;
+				rb2D.velocity = input * maxSpeed * speepRate;
 			}
 		}
 	}

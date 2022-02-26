@@ -22,8 +22,11 @@ public class Holder {
 
 	public bool Receive(GameObject target) {
 		if(!IsHolding()) {
-			onReceive(target);
 			held = target;
+			if (held.GetComponent<WalkController>()) {
+				held.GetComponent<WalkController>().holderObject = this;
+			}
+			onReceive(target);
 			return true;
 		}
 		return false;
@@ -31,9 +34,12 @@ public class Holder {
 
 	public GameObject Give() {
 		if(IsHolding()) {
-			onGive(held);
 			GameObject target = held;
 			held = null;
+			if (target.GetComponent<WalkController>()) {
+				target.GetComponent<WalkController>().holderObject = null;
+			}
+			onGive(target);
 			return target;
 		}
 		return null;

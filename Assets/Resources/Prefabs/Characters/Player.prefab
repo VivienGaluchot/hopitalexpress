@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 306091631053666728}
   - component: {fileID: 3828187791805623832}
   - component: {fileID: 8789539806911905578}
+  - component: {fileID: 4069485352061308822}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -512,7 +513,8 @@ MonoBehaviour:
   hair: {fileID: 598799895565539988}
   skin: {fileID: 1402126273352743420}
   clothes: {fileID: 1744204554316385340}
-  speed: 4
+  maxSpeed: 4
+  speepRate: 1
 --- !u!114 &3828187791805623832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +546,26 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!231 &4069485352061308822
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508764698176005531}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.5
+  m_DampingRatio: 0
+  m_Frequency: 1
 --- !u!1 &4392596379434537113
 GameObject:
   m_ObjectHideFlags: 0

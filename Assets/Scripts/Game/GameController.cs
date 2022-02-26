@@ -209,9 +209,6 @@ public class GameController : MonoBehaviour {
 		for (int i = 0; i < PatientQueue.Length; i++) {
 			if (PatientQueue[i] != null) {
 				if(emptySeat != null) {
-					PatientQueue[i].transform.parent = null;
-					PatientQueue[i].transform.position = emptySeat.transform.position;
-					PatientQueue[i].transform.rotation = emptySeat.transform.rotation;
 					emptySeat.GetComponent<SeatController>().holder.Receive(PatientQueue[i]);
 					emptySeat = null;
 					PatientQueue[i] = null;

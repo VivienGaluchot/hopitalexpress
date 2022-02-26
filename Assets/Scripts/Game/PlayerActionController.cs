@@ -24,6 +24,8 @@ public class PlayerActionController : MonoBehaviour {
 
 	private Holder patientHolder;
 
+	private SpringJoint2D springJoint;
+
 
 	// Actions
 
@@ -55,6 +57,7 @@ public class PlayerActionController : MonoBehaviour {
 		walk = GetComponent<PlayerWalkController>();
 		rb2D = GetComponent<Rigidbody2D>();
 		range = Vector3.Distance(transform.position, detectionCollider.offset * 2);
+		springJoint = GetComponent<SpringJoint2D>();
 
 		patientHolder = new Holder(OnPatientHold, OnPatientRelease);
 
@@ -64,15 +67,16 @@ public class PlayerActionController : MonoBehaviour {
 			{ (HeldTypes.none, "Container"), new List<TryTargetedAction>() { TryTakeFromContainer } },
 			{ (HeldTypes.none, "Item"), new List<TryTargetedAction>() { TryTakeItemFromGround } },
 			{ (HeldTypes.none, "Fauteuil"), new List<TryTargetedAction>() { TryTakeFauteuil } },
-			{ (HeldTypes.none, "CraftingTable"), new List<TryTargetedAction>() { TryTakeItemFromCraft } },
+			// { (HeldTypes.none, "CraftingTable"), new List<TryTargetedAction>() { TryTakeItemFromCraft } },
 			{ (HeldTypes.none, "Patient"), new List<TryTargetedAction>() { TryTakePatient } },
 
 			// item in hand
-			{ (HeldTypes.item, "Seat"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
-			{ (HeldTypes.item, "Fauteuil"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
-			{ (HeldTypes.item, "Machine"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
+			{ (HeldTypes.item, "Patient"), new List<TryTargetedAction>() { TryGiveItemToPatient } },
+			{ (HeldTypes.item, "Seat"), new List<TryTargetedAction>() { TryGiveItemToSeatedPatient } },
+			{ (HeldTypes.item, "Fauteuil"), new List<TryTargetedAction>() { TryGiveItemToSeatedPatient } },
+			{ (HeldTypes.item, "Machine"), new List<TryTargetedAction>() { TryGiveItemToSeatedPatient } },
 			{ (HeldTypes.item, "Container"), new List<TryTargetedAction>() { TryExchangeFromContainer } },
-			{ (HeldTypes.item, "CraftingTable"), new List<TryTargetedAction>() { TryPutItemInCraft } },
+			// { (HeldTypes.item, "CraftingTable"), new List<TryTargetedAction>() { TryPutItemInCraft } },
 			{ (HeldTypes.item, "Trash"), new List<TryTargetedAction>() { TryPutItemInTrash } },
 
 			// patient in hand
@@ -84,6 +88,7 @@ public class PlayerActionController : MonoBehaviour {
 
 			// fauteuil in hand
 			{ (HeldTypes.fauteuil, "Player"), new List<TryTargetedAction>() { TryTakePlayerToFauteuil } },
+			{ (HeldTypes.fauteuil, "Patient"), new List<TryTargetedAction>() { TryTakePatientToFauteuil } },
 			{ (HeldTypes.fauteuil, "Seat"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
 			{ (HeldTypes.fauteuil, "Fauteuil"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
 			{ (HeldTypes.fauteuil, "Machine"), new List<TryTargetedAction>() { TryTakeFromSeatToFauteuil, TryPutFromFauteuilToSeat } },
@@ -226,6 +231,13 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private bool TryGiveItemToPatient(GameObject target) {
+		target.GetComponent<PatientController>().TakeItem(heldGO);
+		heldGO = null;
+		heldType = HeldTypes.none;
+		return true;
+	}
+
+	private bool TryGiveItemToSeatedPatient(GameObject target) {
 		var patient = target.GetComponent<SeatController>().holder.held;
 		if (patient != null) {
 			patient.GetComponent<PatientController>().TakeItem(heldGO);
@@ -323,34 +335,55 @@ public class PlayerActionController : MonoBehaviour {
 	// patient
 
 	private void OnPatientHold(GameObject target) {
-		// todo setup spring
+		springJoint.connectedBody = target.GetComponent<Rigidbody2D>();
+		springJoint.enabled = true;
 		heldGO = target;
 		heldType = HeldTypes.patient;
+		walk.speepRate = target.GetComponent<PatientController>().walkingSpeedRate;
 	}
 
 	private void OnPatientRelease(GameObject target) {
-		// todo unsetup spring
+		springJoint.connectedBody = null;
+		springJoint.enabled = false;
 		heldGO = null;
 		heldType = HeldTypes.none;
+		walk.speepRate = 1;
 	}
 
 	private bool TryTakePatient(GameObject target) {
-		// will call OnPatientHold when the patient is held
-		return patientHolder.Receive(target);
+		if (target.GetComponent<WalkController>().holderObject != null) {
+			// target already in a seat
+			return target.GetComponent<WalkController>().holderObject.TryTansfertTo(patientHolder);
+		} else {
+			// target noy in a seat
+			return patientHolder.Receive(target);
+		}
+	}
+
+	private bool CheckPatientSpringDist() {
+		float dist = springJoint.distance * 2f;
+		if ((transform.position - patientHolder.held.transform.position).sqrMagnitude > (dist * dist)) {
+			return false;
+		}
+		return true;
 	}
 
 	private bool TryDropPatient() {
-		// will call OnPatientRelease when the patient is released
 		var target = patientHolder.Give();
 		return target != null;
 	}
 
 	private bool TryPutPatientToSeat(GameObject target) {
+		if (!CheckPatientSpringDist()) {
+			return false;
+		}
 		return patientHolder.TryTansfertTo(target.GetComponent<SeatController>().holder);
 	}
 
 	private bool TryPutPatientToTrash(GameObject target) {
-		// will call OnPatientRelease when the patient is released
+		if (!CheckPatientSpringDist()) {
+			return false;
+		}
 		var patient = patientHolder.Give();
 		if (patient != null ) {
 			patient.GetComponent<PatientController>().Exited();
@@ -362,7 +395,9 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private bool TryPutPatientToExit(GameObject target) {
-		// will call OnPatientRelease when the patient is released
+		if (!CheckPatientSpringDist()) {
+			return false;
+		}
 		var patient = patientHolder.Give();
 		if (patient != null ) {
 			patient.GetComponent<PatientController>().Exited();
@@ -386,6 +421,17 @@ public class PlayerActionController : MonoBehaviour {
 		heldGO = null;
 		heldType = HeldTypes.none;
 		return true;
+	}
+
+	private bool TryTakePatientToFauteuil(GameObject target) {
+		var toHolder = heldGO.GetComponent<WalkFauteuilController>().seat.holder;
+		if (target.GetComponent<WalkController>().holderObject != null) {
+			// target already in a seat
+			return target.GetComponent<WalkController>().holderObject.TryTansfertTo(toHolder);
+		} else {
+			// target noy in a seat
+			return toHolder.Receive(target);
+		}
 	}
 
 	private bool TryTakeFromSeatToFauteuil(GameObject target) {
