@@ -103,7 +103,7 @@ public class PlayerActionController : MonoBehaviour {
 			{ HeldTypes.patient, new List<TryUntargetedAction>() { TryDropPatient } },
 
 			// fauteuil in hand
-			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFromFauteuil, TryDropFauteuil } },
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFauteuil, TryDropFromFauteuil } },
 		};
 	}
 
@@ -223,7 +223,6 @@ public class PlayerActionController : MonoBehaviour {
 			if (containerAnswer.gathering) {
 				action = Actions.gathering;
 				containerGathered = target.GetComponent<ContainerController>();
-
 				return true;
 			}
 		}
@@ -231,19 +230,23 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private bool TryGiveItemToPatient(GameObject target) {
+		GameObject swapTo = null;
+		if (heldGO.GetComponent<ItemController>()) {
+			swapTo = heldGO.GetComponent<ItemController>().swapTo;
+		}
 		target.GetComponent<PatientController>().TakeItem(heldGO);
 		heldGO = null;
 		heldType = HeldTypes.none;
+		if (swapTo != null) {
+			ReceiveItemFromContainer(Instantiate(swapTo));
+		}
 		return true;
 	}
 
 	private bool TryGiveItemToSeatedPatient(GameObject target) {
 		var patient = target.GetComponent<SeatController>().holder.held;
 		if (patient != null) {
-			patient.GetComponent<PatientController>().TakeItem(heldGO);
-			heldGO = null;
-			heldType = HeldTypes.none;
-			return true;
+			return TryGiveItemToPatient(patient);
 		}
 		return false;
 	}
@@ -341,10 +344,8 @@ public class PlayerActionController : MonoBehaviour {
 		heldType = HeldTypes.patient;
 		walk.speepRate = target.GetComponent<PatientController>().walkingSpeedRate;
 
-		var playerColor = walk.playerData.color;
 		var select = target.transform.Find("SelectionCircle")?.GetComponent<SpriteRenderer>();
 		if (select) {
-			select.color = new Color(playerColor.r, playerColor.g, playerColor.b, select.color.a);
 			select.enabled = true;
 		}
 	}

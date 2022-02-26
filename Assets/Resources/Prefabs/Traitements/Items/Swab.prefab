@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 9
+  swapTo: {fileID: 1937063911249367467, guid: 96e4667580cbf494a80ec79cbe597ea8, type: 3}
 --- !u!50 &8550326303840648862
 Rigidbody2D:
   serializedVersion: 4
