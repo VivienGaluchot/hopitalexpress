@@ -48,8 +48,8 @@ public class WalkFauteuilController : WalkController {
 		} else {
 			base.Update();
 		}
-		if (seat.isHolding) {
-			seat.goHeld.GetComponent<WalkController>().direction = direction;
+		if (seat.holder.IsHolding()) {
+			seat.holder.held.GetComponent<WalkController>().direction = direction;
 		}
 	}
 
