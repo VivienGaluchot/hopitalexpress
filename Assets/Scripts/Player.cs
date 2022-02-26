@@ -14,8 +14,8 @@ public class Player {
 		if (Player.All.Count == 0 && enableTestPlayersOnEmpty) {
 			// fake players for testing
 			players = new List<Player>() {
-				{ new Player(PlayerInput.All[0], new Player.SkinData()) },
-				{ new Player(PlayerInput.All[1], new Player.SkinData()) }
+				{ new Player(PlayerInput.All[0], new Player.SkinData(), Color.HSVToRGB(Random.Range(0f, 1f), .5f, .80f)) },
+				{ new Player(PlayerInput.All[1], new Player.SkinData(), Color.HSVToRGB(Random.Range(0f, 1f), .5f, .80f)) }
 			};
 		}
 		return players;
@@ -69,9 +69,12 @@ public class Player {
 
 	public readonly SkinData skin;
 
-	public Player(PlayerInput input, SkinData skin) {
+	public readonly Color color;
+
+	public Player(PlayerInput input, SkinData skin, Color color) {
 		this.input = input;
 		this.skin = skin;
+		this.color = color;
 	}
 
 }

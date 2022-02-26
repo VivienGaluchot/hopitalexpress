@@ -24,6 +24,8 @@ public class WalkController : MonoBehaviour {
 	
 
 	public bool isSeated = false;
+	public Holder holderObject = null;
+
 
 	// direction to apply when the perso is not moving
 	protected Dir stoppedDirection = Dir.Down;
@@ -40,7 +42,7 @@ public class WalkController : MonoBehaviour {
 
 	protected virtual void Update() {
 		if (!isSeated) {
-			if (rb2D.velocity.sqrMagnitude > (0.1 * 0.1)) {
+			if (rb2D.velocity.sqrMagnitude > (0.2 * 0.2)) {
 				if (animator) {
 					animator.SetBool("isWalking", true);
 				}
@@ -58,7 +60,11 @@ public class WalkController : MonoBehaviour {
 	}
 
 	public void SetStoppedDirection(Vector2 dir) {
-		stoppedDirection = AngleToDirection(dir);
+		SetStoppedDirection(AngleToDirection(dir));
+	}
+
+	public void SetStoppedDirection(Dir dir) {
+		stoppedDirection = dir;
 		hasStoppedDirection = true;
 	}
 

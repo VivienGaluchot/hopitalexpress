@@ -200,7 +200,7 @@ public class GameController : MonoBehaviour {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
 		for (int i = 0; i < WelcomeSeats.Count; i++) {
-			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
+			if (!WelcomeSeats[i].GetComponent<SeatController>().holder.IsHolding()) {
 				emptySeat = WelcomeSeats[i];
 				break;
 			}
@@ -209,10 +209,7 @@ public class GameController : MonoBehaviour {
 		for (int i = 0; i < PatientQueue.Length; i++) {
 			if (PatientQueue[i] != null) {
 				if(emptySeat != null) {
-					PatientQueue[i].transform.parent = null;
-					PatientQueue[i].transform.position = emptySeat.transform.position;
-					PatientQueue[i].transform.rotation = emptySeat.transform.rotation;
-					emptySeat.GetComponent<SeatController>().ReceiveHold(PatientQueue[i]);
+					emptySeat.GetComponent<SeatController>().holder.Receive(PatientQueue[i]);
 					emptySeat = null;
 					PatientQueue[i] = null;
 				}
@@ -234,7 +231,7 @@ public class GameController : MonoBehaviour {
 		GameObject emptySeat = null;
 		// Looking for an empty welcome seat
 		for (int i = 0; i < WelcomeSeats.Count; i++) {
-			if (!WelcomeSeats[i].GetComponent<SeatController>().isHolding) {
+			if (!WelcomeSeats[i].GetComponent<SeatController>().holder.IsHolding()) {
 				emptySeat = WelcomeSeats[i];
 				break;
 			}
@@ -245,7 +242,7 @@ public class GameController : MonoBehaviour {
 		if (emptySeat != null) {
 			newPatient = Instantiate(Patient, emptySeat.transform.position, emptySeat.transform.rotation);
 			newPatient.name = "patient " + counter++;
-			emptySeat.GetComponent<SeatController>().ReceiveHold(newPatient);
+			emptySeat.GetComponent<SeatController>().holder.Receive(newPatient);
 
 			patientsList.Add(newPatient.GetComponent<PatientController>());
 

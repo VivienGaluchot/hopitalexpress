@@ -34,6 +34,9 @@ public class PatientController : MonoBehaviour {
 
 	public float timeEffect;
 
+	public float walkingSpeedRate = 0.5f;
+
+
 	private void Awake() {
 		state = States.sick;
 		needBubble.SetActive(false);
@@ -69,6 +72,9 @@ public class PatientController : MonoBehaviour {
 					doingAnim = true;
 				}
 			}
+		}
+		if (state == States.dead) {
+			needBubble.SetActive(false);
 		}
 	}
 
