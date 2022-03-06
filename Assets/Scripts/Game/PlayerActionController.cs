@@ -33,11 +33,13 @@ public class PlayerActionController : MonoBehaviour {
 
 	private HashSet<GameObject> targets = new HashSet<GameObject>();
 
-	private Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions;
+	private Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions0;
+	private Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions1;
 
 	public delegate bool TryUntargetedAction();
 
-	private Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions;
+	private Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions0;
+	private Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions1;
 	
 
 	public enum Actions {
@@ -62,7 +64,7 @@ public class PlayerActionController : MonoBehaviour {
 		patientHolder = new Holder(OnPatientHold, OnPatientRelease);
 
 		targets = new HashSet<GameObject>();
-		targetedActions = new Dictionary<(HeldTypes, string), List<TryTargetedAction>>() {
+		targetedActions0 = new Dictionary<(HeldTypes, string), List<TryTargetedAction>>() {
 			// nothing in hand
 			{ (HeldTypes.none, "Container"), new List<TryTargetedAction>() { TryTakeFromContainer } },
 			{ (HeldTypes.none, "Item"), new List<TryTargetedAction>() { TryTakeItemFromGround } },
@@ -95,7 +97,16 @@ public class PlayerActionController : MonoBehaviour {
 			{ (HeldTypes.fauteuil, "Trash"), new List<TryTargetedAction>() { TryPutPartientFromFauteuilToTrash } },
 			{ (HeldTypes.fauteuil, "Exit"), new List<TryTargetedAction>() { TryPutPatientFromFauteuilToExit } },
 		};
-		untargetedActions = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
+		untargetedActions0 = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
+			// fauteuil in hand
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFromFauteuil } },
+		};
+
+		targetedActions1 = new Dictionary<(HeldTypes, string), List<TryTargetedAction>>() { };
+		untargetedActions1 = new Dictionary<HeldTypes, List<TryUntargetedAction>>() {
+			// nothing in hand
+			{ HeldTypes.none, new List<TryUntargetedAction>() { TryQuitSeat } },
+
 			// item in hand
 			{ HeldTypes.item, new List<TryUntargetedAction>() { TryDropItem } },
 
@@ -103,7 +114,7 @@ public class PlayerActionController : MonoBehaviour {
 			{ HeldTypes.patient, new List<TryUntargetedAction>() { TryDropPatient } },
 
 			// fauteuil in hand
-			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFauteuil, TryDropFromFauteuil } },
+			{ HeldTypes.fauteuil, new List<TryUntargetedAction>() { TryDropFauteuil } },
 		};
 	}
 
@@ -121,7 +132,10 @@ public class PlayerActionController : MonoBehaviour {
 			}
 
 			if (walk.GetInput().GetAction0()) {
-				PerformAction();
+				PerformAction(targetedActions0, untargetedActions0);
+			}
+			if (walk.GetInput().GetAction1()) {
+				PerformAction(targetedActions1, untargetedActions1);
 			}
 		}
 	}
@@ -172,7 +186,7 @@ public class PlayerActionController : MonoBehaviour {
 		return action;
 	}
 
-	private void PerformAction() {
+	private void PerformAction(Dictionary<(HeldTypes, string), List<TryTargetedAction>> targetedActions, Dictionary<HeldTypes, List<TryUntargetedAction>> untargetedActions) {
 		// Targeted actions
 		List<GameObject> objects = new List<GameObject>();
 		foreach (GameObject go in targets) {
@@ -298,6 +312,14 @@ public class PlayerActionController : MonoBehaviour {
 		heldGO.GetComponent<Rigidbody2D>().simulated = true;
 		heldGO = null;
 		heldType = HeldTypes.none;
+		return true;
+	}
+
+	private bool TryQuitSeat() {
+		if (walk.holderObject == null) {
+			return false;
+		}
+		walk.holderObject.Give();
 		return true;
 	}
 
@@ -438,12 +460,18 @@ public class PlayerActionController : MonoBehaviour {
 	}
 
 	private bool TryTakeToFauteuil(GameObject target) {
+		// prevent taking player with item in hand
+		if (target.GetComponent<PlayerActionController>() != null
+			&& (target.GetComponent<PlayerActionController>().action != Actions.nothing
+			|| target.GetComponent<PlayerActionController>().heldType != HeldTypes.none)) {
+			return false;
+		}
 		var toHolder = heldGO.GetComponent<WalkFauteuilController>().seat.holder;
 		if (target.GetComponent<WalkController>().holderObject != null) {
 			// target already in a seat
 			return target.GetComponent<WalkController>().holderObject.TryTansfertTo(toHolder);
 		} else {
-			// target noy in a seat
+			// target not in a seat
 			return toHolder.Receive(target);
 		}
 	}

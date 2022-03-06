@@ -335,7 +335,7 @@ MonoBehaviour:
   fillImg: {fileID: 359983718145809335}
   loadTime: 3
   unloadTime: 0.5
-  sceneToLoad: MainScene
+  sceneToLoad: 
 --- !u!1 &3130346131718130699
 GameObject:
   m_ObjectHideFlags: 0

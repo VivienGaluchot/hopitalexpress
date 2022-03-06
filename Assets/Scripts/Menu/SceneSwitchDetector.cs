@@ -26,10 +26,11 @@ public class SceneSwitchDetector : MonoBehaviour {
 
 	void Start() {
 		players = Player.GetPlayers();
+		fillImg.GetComponent<Image>().fillAmount = 0;
 	}
 
 	void Update() {
-		if (!isLoading) {
+		if (sceneToLoad != "" && !isLoading) {
 			bool allInside = collidingPlayers.Count >= players.Count;
 			if (allInside) {
 				rate += Time.deltaTime / loadTime;
